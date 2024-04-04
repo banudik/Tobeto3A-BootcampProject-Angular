@@ -9,5 +9,6 @@ export const routes: Routes = [ {path:'',redirectTo:'homepage',pathMatch:'full'}
     {path:"",pathMatch:"full",component:BootcampListGroupComponent},
 ]},
 {path:'login',component:LoginComponent},
-{path:'sign-up',component:SignUpComponent}
+{path:'sign-up',component:SignUpComponent},
+{path:'bootcamps',component:BootcampListGroupComponent}
 ];

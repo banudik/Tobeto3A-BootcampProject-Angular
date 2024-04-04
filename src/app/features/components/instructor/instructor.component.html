@@ -1,0 +1,20 @@
+<div style="margin-top: 10px;" class="mb-3">
+    <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Hoca ara">
+</div>
+<div *ngIf="filterText" class="alert alert-success" style="opacity: 0.8;">
+ {{filterText}} aradınız.
+</div>
+
+<ul class="list-group" style="opacity: 0.8;">
+    <li routerLink="/home-page" [class]="getDefaultInstructorClass()">Hocalar</li>
+</ul>
+<div class="mb-3" style="opacity: 0.8;">
+    <select class="form-select" size="5" aria-label="size 3 select example">
+        <option style="background-color: rgb(252,251,245);" (click)="onSelectedInstructor(brand.id)"
+        [ngClass]="{
+            active:selectedInstructorId===brand.id
+        }"
+        [class]="getCurrentInstructorClass(brand)"
+        *ngFor="let brand of instructors " value="1">{{brand.firstName + brand.lastName}}</option>
+    </select>
+</div>
