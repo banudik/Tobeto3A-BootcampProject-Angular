@@ -17,20 +17,21 @@ import { FilterInstructorPipe } from '../../../../shared/pipes/filter-instructor
     imports: [CommonModule, HttpClientModule, InstructorComponent]
 })
 export class BootcampListGroupComponent implements OnInit {
-
+  dateNow = Date.now;
   currentPageNumber!: number;
   bootcampList: BootcampListItemDto = {
     index: 0,
+  
     size: 0,
     count: 0,
     hasNext: false,
     hasPrevious: false,
     pages: 0,
-    items: [],
-    instructorFirstName: '',
-    instructorLastName: ''
+    items: []
   };
-  constructor(private bootcampService: BootcampService, private activatedRoute: ActivatedRoute) { }
+ 
+  constructor(private bootcampService: BootcampService, private activatedRoute: ActivatedRoute) {
+   }
   readonly PAGE_SIZE = 6;
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
@@ -39,6 +40,12 @@ export class BootcampListGroupComponent implements OnInit {
       } else { this.getList({ page: 0, pageSize: this.PAGE_SIZE }) }
     })
 
+  }
+
+
+
+  isExpired(endDate: Date): boolean {
+    return new Date(endDate) < new Date(); // endDate, geçmiş bir tarihe sahipse true döndürür
   }
 
 

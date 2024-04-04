@@ -10,11 +10,11 @@
 </ul>
 <div class="mb-3" style="opacity: 0.8;">
     <select class="form-select" size="5" aria-label="size 3 select example">
-        <option style="background-color: rgb(252,251,245);" (click)="onSelectedInstructor(brand.id)"
+        <option style="background-color: rgb(252,251,245);" (click)="onSelectedInstructor(instructor.id)"
         [ngClass]="{
-            active:selectedInstructorId===brand.id
+            active:selectedInstructorId===instructor.id
         }"
-        [class]="getCurrentInstructorClass(brand)"
-        *ngFor="let brand of instructors " value="1">{{brand.firstName + brand.lastName}}</option>
+        [class]="getCurrentInstructorClass(instructor)"
+        *ngFor="let instructor of instructors.items " value="1">{{instructor.firstName +" "+ instructor.lastName}}</option>
     </select>
 </div>

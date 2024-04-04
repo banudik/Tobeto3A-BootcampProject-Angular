@@ -35,9 +35,7 @@ export class BootcampService extends BootcampBaseService {
           hasNext:response.hasNext,
           hasPrevious:response.hasPrevious,
           items:response.items,
-          pages:response.pages,
-          instructorFirstName:response.instructorFirstName,
-          instructorLastName:response.instructorLastName
+          pages:response.pages
         };
         return newResponse;
       })
@@ -63,9 +61,8 @@ export class BootcampService extends BootcampBaseService {
           hasNext:response.hasNext,
           hasPrevious:response.hasPrevious,
           items:response.items,
-          pages:response.pages,
-          instructorFirstName:response.instructorFirstName,
-          instructorLastName:response.instructorLastName
+          pages:response.pages
+
         };
         return newResponse;
       })

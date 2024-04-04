@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { GetListInstructorResponse } from '../../models/responses/instructor/get-list-instructor-response';
 import { InstructorService } from '../../services/concretes/instructor.service';
 import { SharedModule } from "../../../shared/shared.module";
+import { InstructorListItemDto } from '../../models/responses/instructor/instructor-list-item-dto';
 
 @Component({
     selector: 'app-instructor',
@@ -18,7 +19,7 @@ export class InstructorComponent implements OnInit{
 
   @Input() selectedInstructorId!:string; //seçilen markanın kimliği
   @Output() instructorSelected = new EventEmitter<string>(); //markalar yüklendiğinde olay yayınlayıcı
-  instructors!:GetListInstructorResponse[];
+  instructors!:InstructorListItemDto;
   currentInstructor!:GetListInstructorResponse;
   filterText="";
   constructor(private instructorService:InstructorService){}
@@ -34,7 +35,7 @@ export class InstructorComponent implements OnInit{
   }
 
   getInstructors(){
-     this.instructorService.getList().subscribe((response)=>{
+     this.instructorService.GetListAll().subscribe((response)=>{
       this.instructors=response;
      })
   }
