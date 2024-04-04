@@ -1,4 +1,4 @@
-import { GetListBootcampResponse } from './../../features/models/responses/bootcamp/get-list-bootcamp-response';
+import { GetListBootcampResponse } from '../../features/models/responses/bootcamp/get-list-bootcamp-response';
 import { Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({

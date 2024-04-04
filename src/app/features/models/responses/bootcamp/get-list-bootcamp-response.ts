@@ -8,4 +8,5 @@ export interface GetListBootcampResponse {
     endDate: Date;
     bootcampStateId: number;
     bootcampImageId: number;
+    imagePath: string;
 }

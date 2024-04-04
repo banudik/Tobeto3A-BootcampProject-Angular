@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { GetListBootcampResponse } from '../../models/responses/bootcamp/get-list-bootcamp-response';
-import { GetByIdBootcampResponse } from '../../models/responses/bootcamp/get-by-id-bootcamp-response';
+import { PageRequest } from '../../../core/models/page-request';
+import { BootcampListItemDto } from '../../models/responses/bootcamp/bootcamp-list-item-dto';
 
 @Injectable()
 export abstract class BootcampBaseService {
 
-  abstract getList():
-  Observable<GetListBootcampResponse[]>;
-  abstract getById():
-  Observable<GetByIdBootcampResponse>;
+  abstract getList(pageRequest:PageRequest):
+  Observable<BootcampListItemDto>;
+  /**abstract getById(pageRequest:PageRequest,id:string):Observable<GetByIdBootcampResponse[]>;**/
+  abstract getBootcampListByInstructorId(pageRequest:PageRequest,instructorId:string,instructorFirstName:string,instructorLastName:string):Observable<BootcampListItemDto>;
 }
