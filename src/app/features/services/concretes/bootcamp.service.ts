@@ -33,8 +33,7 @@ export class BootcampService extends BootcampBaseService {
           hasPrevious:response.hasPrevious,
           items:response.items,
           pages:response.pages,
-          instructorFirstName:response.instructorFirstName,
-          instructorLastName:response.instructorLastName
+        
         };
         return newResponse;
       })
@@ -42,13 +41,12 @@ export class BootcampService extends BootcampBaseService {
   }
   
 
-   override getBootcampListByInstructorId(pageRequest: PageRequest, instructorId: string, instructorFirstName: string, instructorLastName: string): Observable<BootcampListItemDto> {
+   override getBootcampListByInstructorId(pageRequest: PageRequest, instructorId: string): Observable<BootcampListItemDto> {
     const newRequest: {[key: string]: string | number} = {
       page: pageRequest.page,
       pageSize: pageRequest.pageSize,
       instructorId: instructorId,
-      instructorFirstName:instructorFirstName,
-      instructorLastName:instructorLastName
+      
     };
   
     return this.httpClient.get<BootcampListItemDto>(`${this.apiUrl}/getbootcampbyinstructor`, {
@@ -63,8 +61,7 @@ export class BootcampService extends BootcampBaseService {
           hasPrevious:response.hasPrevious,
           items:response.items,
           pages:response.pages,
-          instructorFirstName:response.instructorFirstName,
-          instructorLastName:response.instructorLastName
+          
         };
         return newResponse;
       })

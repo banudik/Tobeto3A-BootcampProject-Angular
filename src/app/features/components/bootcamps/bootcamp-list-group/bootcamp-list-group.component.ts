@@ -23,42 +23,34 @@ export class BootcampListGroupComponent implements OnInit {
     hasPrevious:false,
     pages:0,
     items:[],
-    instructorFirstName:'',
-    instructorLastName:'',
 
   }
   bootcamps: BootcampListItemDto[] = [];
   filteredBootcamps: BootcampListItemDto[] = []; // Filtrelenmiş bootcamp listesi
-  instructorFirstName: string = ''; // Eğitmenin adı
-  instructorLastName: string = ''; // Eğitmenin soyadı
+ 
 
   constructor(private bootcampService: BootcampService, private filterByInstructorPipe: FilterByInstructorPipe,private activatedRoute:ActivatedRoute) { } 
   readonly PAGE_SIZE=6;// Pipe'i burada enjekte edin
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params=>{
-      if(params["instructorId"],params["instructorFirstName"],params["instructorLastName"]){
-        this.getBootcampListByInstructorId({page:0,pageSize:this.PAGE_SIZE},params["instructorId"],params["instructorFirstName"],params ["instructorLastName"])
+      if(params["instructorId"]){
+        this.getBootcampListByInstructorId({page:0,pageSize:this.PAGE_SIZE},params["instructorId"])
       }else{this.getList({page:0,pageSize:this.PAGE_SIZE})}
     }) // Belirli bir eğitmenin bootcamp'lerini al
   }
 
-  getBootcampByInstructorId(instructorId: string,instructorFirstName:string,instructorLastName:string): void {
+  getBootcampByInstructorId(instructorId: string): void {
     const pageRequest: PageRequest = { page: 0, pageSize: 6 }; // Örnek sayfa isteği
-    this.bootcampService.getBootcampListByInstructorId(pageRequest, instructorId,instructorFirstName,instructorLastName).subscribe(
+    this.bootcampService.getBootcampListByInstructorId(pageRequest, instructorId).subscribe(
       bootcamps => {
         this.bootcampList = bootcamps; // Tüm bootcamp'leri al
-        this.filterBootcamps(); // Bootcamp'leri filtrele
+
       },
       error => {
         console.error('Error fetching bootcamps:', error);
       }
     );
-  }
-
-  filterBootcamps(): void {
-    // Pipe'i kullanarak bootcamp'leri filtrele
-    this.filteredBootcamps = this.filterByInstructorPipe.transform(this.bootcamps, this.instructorFirstName, this.instructorLastName);
   }
 
   getList(pageRequest:PageRequest){
@@ -68,8 +60,8 @@ export class BootcampListGroupComponent implements OnInit {
     })
     
   }
-  getBootcampListByInstructorId(pageRequest:PageRequest,instructorId:string,instructorFirstName:string,instructorLastName:string){
-    this.bootcampService.getBootcampListByInstructorId(pageRequest,instructorId,instructorFirstName,instructorLastName).subscribe((response)=>{
+  getBootcampListByInstructorId(pageRequest:PageRequest,instructorId:string){
+    this.bootcampService.getBootcampListByInstructorId(pageRequest,instructorId).subscribe((response)=>{
       this.bootcampList=response;
       this.updateCurrentPageNumber();
     })

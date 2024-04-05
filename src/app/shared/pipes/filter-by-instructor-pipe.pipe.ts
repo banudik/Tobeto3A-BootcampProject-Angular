@@ -1,18 +1,16 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { BootcampListItemDto } from '../../features/models/responses/bootcamp/bootcamp-list-item-dto';
+
+import { GetListInstructorResponse } from '../../features/models/responses/instructor/get-list-instructor-response';
 
 
 @Pipe({
   name: 'filterByInstructor'
 })
 export class FilterByInstructorPipe implements PipeTransform {
-    transform(bootcamps: BootcampListItemDto[], instructorFirstName: string, instructorLastName: string): BootcampListItemDto[] {
-      if (!bootcamps || !instructorFirstName || !instructorLastName) {
-        return bootcamps;
-      }
-  
-      return bootcamps.filter(bootcamp =>
-        bootcamp.instructorFirstName === instructorFirstName && bootcamp.instructorLastName === instructorLastName
-      );
-    }
+  transform(value: GetListInstructorResponse[],filterText:string):GetListInstructorResponse[] {
+    filterText=filterText?filterText.toLocaleLowerCase():""
+    return filterText?value.filter((m:GetListInstructorResponse)=>m.firstName.toLocaleLowerCase()
+    .indexOf(filterText)!==-1):value;
+}
+
   }

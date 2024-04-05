@@ -4,7 +4,5 @@ import { GetListBootcampResponse } from './get-list-bootcamp-response';
 
 export interface BootcampListItemDto extends PageResponse{
     items:GetListBootcampResponse[];
-    instructorFirstName:string;
-    instructorLastName:string;
 
 }
