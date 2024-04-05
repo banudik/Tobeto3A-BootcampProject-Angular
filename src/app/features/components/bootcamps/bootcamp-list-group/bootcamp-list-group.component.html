@@ -1,1 +1,25 @@
-
+<app-instructor></app-instructor>
+<div class="row" style="margin-top: 10px;">
+    <h3 *ngIf="!bootcampList">Araba Bulunamadı</h3>
+ <div *ngFor="let bootcamp of bootcampList.items" class="card" style="width: 16rem;margin:20px;opacity: 0.8;">
+ <img src="../../../../../assets/img/koyukaplama.png" class="card-img-top" alt="arabanın adı Image" height="150px" />
+ <div class="car-body">
+    <p class="card-text">Marka:<strong>{{bootcamp.name}}</strong></p>
+ </div>
+ <ul class="list-group list-group-flush">
+  <li class="list-group-item"><b>name:</b><span style="float:right;">{{bootcamp.name}}</span></li>
+  <li class="list-group-item"><b>Hoca:</b><span style="float:right;">{{bootcamp.instructorFirstName + " " + bootcamp.instructorLastName}}</span></li>
+  <li class="list-group-item"><b>startDate:</b><span style="float:right;">{{bootcamp.startDate}}</span></li>
+  <li class="list-group-item"><b>endDate:</b><span style="float:right;">{{bootcamp.endDate}}</span></li>
+  
+  <!-- <button *ngIf="isBeforeEnd(bootcamp.endDate)">Başvur</button> -->
+  <button class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" [ngClass]="{'expired': isExpired(bootcamp.endDate), 'notExpired': !isExpired(bootcamp.endDate)}">Başvur</button>
+ </ul>
+</div> 
+<button *ngIf="bootcampList.hasNext" type="button"
+     (click)="onViewMoreClicked()" [disabled]="!bootcampList.hasNext" class="btn border-0">
+     Sonraki Sayfa {{this.currentPageNumber}} {{bootcampList.hasNext}}</button>
+     <button *ngIf="bootcampList.hasPrevious" type="button"
+        (click)="onPreviousPageClicked()" [disabled]="!bootcampList.hasPrevious" class="btn border-0">
+        Önceki Sayfa {{this.currentPageNumber-1}} {{bootcampList.hasPrevious}}</button>
+</div>

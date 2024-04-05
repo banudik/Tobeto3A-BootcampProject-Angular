@@ -13,7 +13,10 @@ import { PageRequest } from '../../../core/models/page-request';
 })
 export class BootcampService extends BootcampBaseService {
   private readonly apiUrl:string = `${environment.API_URL}/bootcamps`
+
+  
   constructor(private httpClient:HttpClient) {super() }
+
 
   override getList(pageRequest: PageRequest): Observable<BootcampListItemDto> {
     const newRequest: {[key: string]: string | number} = {
@@ -32,8 +35,12 @@ export class BootcampService extends BootcampBaseService {
           hasNext:response.hasNext,
           hasPrevious:response.hasPrevious,
           items:response.items,
+<<<<<<< HEAD
           pages:response.pages,
         
+=======
+          pages:response.pages
+>>>>>>> 4fdfc8b74e336b5211824f8eea93dacfa9817e30
         };
         return newResponse;
       })
@@ -46,10 +53,13 @@ export class BootcampService extends BootcampBaseService {
       page: pageRequest.page,
       pageSize: pageRequest.pageSize,
       instructorId: instructorId,
+<<<<<<< HEAD
       
+=======
+>>>>>>> 4fdfc8b74e336b5211824f8eea93dacfa9817e30
     };
   
-    return this.httpClient.get<BootcampListItemDto>(`${this.apiUrl}/getbootcampbyinstructor`, {
+    return this.httpClient.get<BootcampListItemDto>(`${this.apiUrl}/getbootcampbyinstructorid`, {
       params: newRequest
     }).pipe(
       map((response)=>{
@@ -60,8 +70,13 @@ export class BootcampService extends BootcampBaseService {
           hasNext:response.hasNext,
           hasPrevious:response.hasPrevious,
           items:response.items,
+<<<<<<< HEAD
           pages:response.pages,
           
+=======
+          pages:response.pages
+
+>>>>>>> 4fdfc8b74e336b5211824f8eea93dacfa9817e30
         };
         return newResponse;
       })
