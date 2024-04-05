@@ -6,8 +6,11 @@ import { BootcampListGroupComponent } from './features/components/bootcamps/boot
 
 export const routes: Routes = [ {path:'',redirectTo:'homepage',pathMatch:'full'},
 {path:'homepage',component:HomepageComponent,children:[
-    {path:"",pathMatch:"full",component:BootcampListGroupComponent},
+    {path:"",pathMatch:"full",component:BootcampListGroupComponent}
+    //{path:"bootcamps/instructor/:instructorId",component:BootcampListGroupComponent}
 ]},
 {path:'login',component:LoginComponent},
-{path:'sign-up',component:SignUpComponent}
+{path:'sign-up',component:SignUpComponent},
+{path:'bootcamps',component:BootcampListGroupComponent},
+{path:"bootcamps/instructor/:instructorId",component:BootcampListGroupComponent}
 ];

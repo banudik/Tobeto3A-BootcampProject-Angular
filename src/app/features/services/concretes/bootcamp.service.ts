@@ -13,7 +13,10 @@ import { PageRequest } from '../../../core/models/page-request';
 })
 export class BootcampService extends BootcampBaseService {
   private readonly apiUrl:string = `${environment.API_URL}/bootcamps`
+
+  
   constructor(private httpClient:HttpClient) {super() }
+
 
   override getList(pageRequest: PageRequest): Observable<BootcampListItemDto> {
     const newRequest: {[key: string]: string | number} = {
@@ -32,9 +35,7 @@ export class BootcampService extends BootcampBaseService {
           hasNext:response.hasNext,
           hasPrevious:response.hasPrevious,
           items:response.items,
-          pages:response.pages,
-          instructorFirstName:response.instructorFirstName,
-          instructorLastName:response.instructorLastName
+          pages:response.pages
         };
         return newResponse;
       })
@@ -42,16 +43,14 @@ export class BootcampService extends BootcampBaseService {
   }
   
 
-   override getBootcampListByInstructorId(pageRequest: PageRequest, instructorId: string, instructorFirstName: string, instructorLastName: string): Observable<BootcampListItemDto> {
+   override getBootcampListByInstructorId(pageRequest: PageRequest, instructorId: string): Observable<BootcampListItemDto> {
     const newRequest: {[key: string]: string | number} = {
       page: pageRequest.page,
       pageSize: pageRequest.pageSize,
       instructorId: instructorId,
-      instructorFirstName:instructorFirstName,
-      instructorLastName:instructorLastName
     };
   
-    return this.httpClient.get<BootcampListItemDto>(`${this.apiUrl}/getbootcampbyinstructor`, {
+    return this.httpClient.get<BootcampListItemDto>(`${this.apiUrl}/getbootcampbyinstructorid`, {
       params: newRequest
     }).pipe(
       map((response)=>{
@@ -62,9 +61,8 @@ export class BootcampService extends BootcampBaseService {
           hasNext:response.hasNext,
           hasPrevious:response.hasPrevious,
           items:response.items,
-          pages:response.pages,
-          instructorFirstName:response.instructorFirstName,
-          instructorLastName:response.instructorLastName
+          pages:response.pages
+
         };
         return newResponse;
       })

@@ -1,0 +1,9 @@
+.expired {
+    background-color: #ff00ea; /* Geçmiş olanlar için kırmızı */
+    color: black;
+  }
+  
+  .notExpired {
+    background-color: #4169E1; /* Geçmemiş olanlar için yeşil */
+    color: black;
+  }
