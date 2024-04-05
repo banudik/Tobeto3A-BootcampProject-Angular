@@ -50,7 +50,7 @@ export class BootcampService extends BootcampBaseService {
       instructorId: instructorId,
     };
   
-    return this.httpClient.get<BootcampListItemDto>(`${this.apiUrl}/getbootcampbyinstructor`, {
+    return this.httpClient.get<BootcampListItemDto>(`${this.apiUrl}/getbootcampbyinstructorid`, {
       params: newRequest
     }).pipe(
       map((response)=>{

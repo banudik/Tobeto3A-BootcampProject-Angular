@@ -14,7 +14,11 @@
         [ngClass]="{
             active:selectedInstructorId===instructor.id
         }"
-        [class]="getCurrentInstructorClass(instructor)"
-        *ngFor="let instructor of instructors.items " value="1">{{instructor.firstName +" "+ instructor.lastName}}</option>
+        [class]="getCurrentInstructorClass(instructor)"routerLink="/bootcamps/instructor/{{instructor.id}}"
+        *ngFor="let instructor of instructors.items " value="instructor.id">{{instructor.firstName +" "+ instructor.lastName}}</option>
     </select>
-</div>
+</div>  
+
+
+
+
