@@ -18,4 +18,5 @@ import { InstructorComponent } from "./features/components/instructor/instructor
 })
 export class AppComponent {
   title = 'BootcampProject-FrontEnd';
+  
 }

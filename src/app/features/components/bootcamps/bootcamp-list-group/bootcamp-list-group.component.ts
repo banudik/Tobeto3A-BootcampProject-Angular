@@ -17,50 +17,6 @@ import { FilterInstructorPipe } from '../../../../shared/pipes/filter-instructor
     imports: [CommonModule, HttpClientModule, InstructorComponent]
 })
 export class BootcampListGroupComponent implements OnInit {
-<<<<<<< HEAD
-  currentPageNumber!:number;
-  bootcampList:BootcampListItemDto={
-    index:0,
-    size:0,
-    count:0,
-    hasNext:false,
-    hasPrevious:false,
-    pages:0,
-    items:[],
-
-  }
-  bootcamps: BootcampListItemDto[] = [];
-  filteredBootcamps: BootcampListItemDto[] = []; // Filtrelenmiş bootcamp listesi
- 
-
-  constructor(private bootcampService: BootcampService, private filterByInstructorPipe: FilterByInstructorPipe,private activatedRoute:ActivatedRoute) { } 
-  readonly PAGE_SIZE=6;// Pipe'i burada enjekte edin
-
-  ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params=>{
-      if(params["instructorId"]){
-        this.getBootcampListByInstructorId({page:0,pageSize:this.PAGE_SIZE},params["instructorId"])
-      }else{this.getList({page:0,pageSize:this.PAGE_SIZE})}
-    }) // Belirli bir eğitmenin bootcamp'lerini al
-  }
-
-  getBootcampByInstructorId(instructorId: string): void {
-    const pageRequest: PageRequest = { page: 0, pageSize: 6 }; // Örnek sayfa isteği
-    this.bootcampService.getBootcampListByInstructorId(pageRequest, instructorId).subscribe(
-      bootcamps => {
-        this.bootcampList = bootcamps; // Tüm bootcamp'leri al
-
-      },
-      error => {
-        console.error('Error fetching bootcamps:', error);
-      }
-    );
-  }
-
-  getList(pageRequest:PageRequest){
-    this.bootcampService.getList(pageRequest).subscribe((response)=>{
-      this.bootcampList=response;
-=======
   dateNow = Date.now;
   currentPageNumber!: number;
   bootcampList: BootcampListItemDto = {
@@ -96,21 +52,14 @@ export class BootcampListGroupComponent implements OnInit {
   getList(pageRequest: PageRequest) {
     this.bootcampService.getList(pageRequest).subscribe((response) => {
       this.bootcampList = response;
->>>>>>> 4fdfc8b74e336b5211824f8eea93dacfa9817e30
       this.updateCurrentPageNumber();
     })
 
   }
-<<<<<<< HEAD
-  getBootcampListByInstructorId(pageRequest:PageRequest,instructorId:string){
-    this.bootcampService.getBootcampListByInstructorId(pageRequest,instructorId).subscribe((response)=>{
-      this.bootcampList=response;
-=======
 
   getBootcampListByInstructor(pageRequest: PageRequest, instructorId: string) {
     this.bootcampService.getBootcampListByInstructorId(pageRequest, instructorId).subscribe((response) => {
       this.bootcampList = response;
->>>>>>> 4fdfc8b74e336b5211824f8eea93dacfa9817e30
       this.updateCurrentPageNumber();
     })
   }
