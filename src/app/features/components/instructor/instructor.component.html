@@ -10,6 +10,10 @@
 </ul>
 <div class="mb-3" style="opacity: 0.8;">
     <select class="form-select" size="5" aria-label="size 3 select example">
+        <option style="background-color: rgb(252,251,245);"
+        routerLink="/bootcamps"
+         >All Instructors</option>
+
         <option style="background-color: rgb(252,251,245);" (click)="onSelectedInstructor(instructor.id)"
         [ngClass]="{
             active:selectedInstructorId===instructor.id
