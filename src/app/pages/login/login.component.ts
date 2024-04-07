@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
       console.log("test1");
       let loginModel:UserForLoginRequest = Object.assign({},this.loginForm.value);
       this.authService.login(loginModel).subscribe(response=>{
-        alert(response.accessToken.expiration);
+        alert(response.accessToken.expiration.toString());
         this.router.navigate(['homepage'])
       }
       ,(error:any)=>{

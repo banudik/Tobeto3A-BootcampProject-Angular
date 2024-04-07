@@ -14,8 +14,18 @@
             <a href="#" class="text-gray-300 hover:bg-indigo-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Services</a>
             <a routerLink="bootcamps" class="text-gray-300 hover:bg-indigo-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Bootcamps</a>
             <a href="#" class="text-gray-300 hover:bg-indigo-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contact</a>
-            <a routerLink='/sign-up' class="text-gray-300 hover:bg-indigo-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sign up</a>
-            <a routerLink='/login' class="text-gray-300 hover:bg-indigo-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Log in</a>
+            <!-- <a routerLink='/sign-up' class="text-gray-300 hover:bg-indigo-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sign up</a>
+            <a routerLink='/login' class="text-gray-300 hover:bg-indigo-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Log in</a> -->
+                        <!-- Giriş yapıldığında -->
+                        <ng-container *ngIf="isLoggedIn; else loggedOut">
+                          <a (click)="logOut()" class="text-gray-300 hover:bg-indigo-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Log out</a>
+                          <a href="#" class="text-gray-300 hover:bg-indigo-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">My Profile</a>
+                        </ng-container>
+                        <!-- Giriş yapılmadığında -->
+                        <ng-template #loggedOut>
+                          <a routerLink='/sign-up' class="text-gray-300 hover:bg-indigo-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sign up</a>
+                          <a routerLink='/login' class="text-gray-300 hover:bg-indigo-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Log in</a>
+                        </ng-template>
             
           </div>
         </div>
@@ -23,4 +33,6 @@
     </div>
   </div>
 </nav>
+
+
 
