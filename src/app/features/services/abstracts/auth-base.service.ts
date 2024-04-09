@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
-import { UserForRegisterRequest } from "../../models/requests/users/user-for-register-request";
+import { ApplicantForRegisterRequest } from "../../models/requests/auth/applicant-for-register-request";
 import { Observable } from "rxjs";
-import { UserForRegisterResponse } from "../../models/responses/users/user-for-register-response";
+import { UserForRegisterResponse } from "../../models/responses/auth/user-for-register-response";
 
 @Injectable()
 export abstract class AuthBaseService{
-    abstract register(userforRegisterRequest:UserForRegisterRequest)
+    abstract registerApplicant(applicantforRegisterRequest:ApplicantForRegisterRequest)
                      :Observable<UserForRegisterResponse>
 }

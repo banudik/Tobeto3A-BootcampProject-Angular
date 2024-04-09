@@ -1,1 +1,43 @@
 <p>admin works!</p>
+<!-- app.component.html -->
+<div class="flex h-screen">
+    <!-- Sidebar -->
+    <aside class="bg-gray-800 text-white w-64">
+      <div class="p-4">
+        <h1 class="text-2xl font-bold">Admin Panel</h1>
+        <ul class="mt-6">
+          <li class="mb-4">
+            <a routerLink="/dashboard" routerLinkActive="text-blue-500" class="flex items-center">
+              <svg class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M3 10a1 1 0 0 1 1-1h5V5a1 1 0 0 1 2 0v4h5a1 1 0 0 1 0 2h-5v5a1 1 0 0 1-2 0v-5H4a1 1 0 0 1-1-1z" clip-rule="evenodd" />
+              </svg>
+              Dashboard
+            </a>
+          </li>
+          <li class="mb-4">
+            <a routerLink="/products" routerLinkActive="text-blue-500" class="flex items-center">
+              <svg class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M3 10a1 1 0 0 1 1-1h13a1 1 0 0 1 0 2H4a1 1 0 0 1-1-1zm0-7a1 1 0 0 1 1-1h4a1 1 0 0 1 0 2H4a1 1 0 0 1-1-1zm1 14h2a1 1 0 0 1 0 2H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h13a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 0-1 1v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1zm7 2a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" clip-rule="evenodd" />
+              </svg>
+              Products
+            </a>
+          </li>
+          <li class="mb-4">
+            <a routerLink="/orders" routerLinkActive="text-blue-500" class="flex items-center">
+              <svg class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M2 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4zm14 0a2 2 0 0 0-2-2h-2.586a1 1 0 1 0 0 2H16v2h-4.586a1 1 0 1 0 0 2H16v2h-2.586a1 1 0 1 0 0 2H16v2h-2.586a1 1 0 1 0 0 2H16a2 2 0 0 0 2-2V4z" clip-rule="evenodd" />
+              </svg>
+              Orders
+            </a>
+          </li>
+          <!-- Diğer menü öğeleri -->
+        </ul>
+      </div>
+    </aside>
+    
+    <!-- İçerik Alanı -->
+    <main class="flex-grow bg-gray-100 p-8">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+  

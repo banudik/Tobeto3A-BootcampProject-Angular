@@ -4,7 +4,7 @@ import { BootcampService } from '../../../services/concretes/bootcamp.service';
 //import { FilterByInstructorPipe } from '../../../../shared/pipes/filter-by-instructor-pipe.pipe';
 import { PageRequest } from '../../../../core/models/page-request';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { InstructorComponent } from "../../instructor/instructor.component";
 import { FilterInstructorPipe } from '../../../../shared/pipes/filter-instructor-pipe.pipe';
@@ -14,7 +14,7 @@ import { FilterInstructorPipe } from '../../../../shared/pipes/filter-instructor
     standalone: true,
     templateUrl: './bootcamp-list-group.component.html',
     styleUrl: './bootcamp-list-group.component.css',
-    imports: [CommonModule, HttpClientModule, InstructorComponent]
+    imports: [CommonModule, HttpClientModule, InstructorComponent,RouterModule]
 })
 export class BootcampListGroupComponent implements OnInit {
   dateNow = Date.now;
@@ -30,8 +30,7 @@ export class BootcampListGroupComponent implements OnInit {
     items: []
   };
  
-  constructor(private bootcampService: BootcampService, private activatedRoute: ActivatedRoute) {
-   }
+  constructor(private bootcampService: BootcampService, private activatedRoute: ActivatedRoute) {}
   readonly PAGE_SIZE = 6;
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
