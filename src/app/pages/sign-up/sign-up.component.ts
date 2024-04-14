@@ -13,6 +13,7 @@ import { AuthService } from '../../features/services/concretes/auth.service';
 })
 export class SignUpComponent implements OnInit {
 
+
   registerForm!:FormGroup
   constructor(private formBuilder:FormBuilder,private authService:AuthService,
     private router:Router){}
@@ -54,4 +55,6 @@ export class SignUpComponent implements OnInit {
       console.error('Form has validation errors!');
     }
   }
-}
+
+
+ 
