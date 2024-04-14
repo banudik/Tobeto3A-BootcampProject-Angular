@@ -6,7 +6,8 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, tap } from "rxjs";
-import { LoggerService } from "../../features/services/concretes/logger.service";
+import { LoggerService } from "../../../features/services/concretes/logger.service";
+
 
 @Injectable()
 export class LoggingInterceptor implements HttpInterceptor {
