@@ -1,8 +1,11 @@
+<!-- navbar.component.html -->
+
 <nav class="bg-black">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
       <div class="flex items-center">
         <a routerLink="/homepage">
+
         <div class="flex-shrink-0" >
           <img class="h-5" src="assets/img/logo.png.png" alt="Workflow">
         </div>
@@ -17,6 +20,11 @@
             <!-- <a routerLink='/sign-up' class="text-gray-300 hover:bg-indigo-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sign up</a>
             <a routerLink='/login' class="text-gray-300 hover:bg-indigo-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Log in</a> -->
                         <!-- Giriş yapıldığında -->
+            <div class="flex items-center">
+        <input *ngIf="showSearchInput" type="text" placeholder="Search" class="px-3 py-1 border border-gray-300 rounded-md mr-2 focus:outline-none">
+        <button class="text-white bg-gradient-to-r from-purple-500 via-indigo-500 to-blue-600 px-3 py-1 rounded-md text-sm font-medium hover:from-indigo-400 hover:to-purple-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" (click)="toggleSearch()">Search</button>
+       
+      </div>
                         <ng-container *ngIf="isLoggedIn; else loggedOut">
                           <a (click)="logOut()" class="text-gray-300 hover:bg-indigo-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Log out</a>
                           <a href="#" class="text-gray-300 hover:bg-indigo-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">My Profile</a>
@@ -26,13 +34,5 @@
                           <a routerLink='/sign-up' class="text-gray-300 hover:bg-indigo-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sign up</a>
                           <a routerLink='/login' class="text-gray-300 hover:bg-indigo-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Log in</a>
                         </ng-template>
-            
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</nav>
 
-
-
+          

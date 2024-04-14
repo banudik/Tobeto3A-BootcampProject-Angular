@@ -2,7 +2,7 @@
 <div class="row" style="margin-top: 10px;">
     <h3 *ngIf="!bootcampList">bootcamp Bulunamadı</h3>
  <div *ngFor="let bootcamp of bootcampList.items" class="card" style="width: 16rem;margin:20px;opacity: 0.8;">
- <img src="../../../../../assets/img/koyukaplama.png" class="card-img-top" alt="arabanın adı Image" height="150px" />
+ <img [src]="bootcamp.imagePath" class="card-img-top" alt="arabanın adı Image" height="150px" />
  <div class="car-body">
     <p class="card-text">Name:<strong>{{bootcamp.name}}</strong></p>
  </div>

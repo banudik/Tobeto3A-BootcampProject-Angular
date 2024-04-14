@@ -17,8 +17,8 @@ import { InstructorListItemDto } from '../../models/responses/instructor/instruc
 })
 export class InstructorComponent implements OnInit{
 
-  @Input() selectedInstructorId!:string; //seçilen markanın kimliği
-  @Output() instructorSelected = new EventEmitter<string>(); //markalar yüklendiğinde olay yayınlayıcı
+  @Input() selectedInstructorId!:string; 
+  @Output() instructorSelected = new EventEmitter<string>(); 
   instructors!:InstructorListItemDto;
   currentInstructor!:GetListInstructorResponse;
   filterText="";
