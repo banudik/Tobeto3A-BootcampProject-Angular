@@ -11,7 +11,7 @@ import { LoggerService } from "../../../features/services/concretes/logger.servi
 
 @Injectable()
 export class LoggingInterceptor implements HttpInterceptor {
-  constructor(private logger: LoggerService) {}
+  constructor(private logger: LoggerService) {} //
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const started = Date.now();
