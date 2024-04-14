@@ -1,20 +1,19 @@
-import { Component, NgModule, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BootcampListItemDto } from '../../../models/responses/bootcamp/bootcamp-list-item-dto';
 import { BootcampService } from '../../../services/concretes/bootcamp.service';
-//import { FilterByInstructorPipe } from '../../../../shared/pipes/filter-by-instructor-pipe.pipe';
 import { PageRequest } from '../../../../core/models/page-request';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { InstructorComponent } from "../../instructor/instructor.component";
-import { FilterInstructorPipe } from '../../../../shared/pipes/filter-instructor-pipe.pipe';
+import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-bootcamp-list-group',
     standalone: true,
     templateUrl: './bootcamp-list-group.component.html',
     styleUrl: './bootcamp-list-group.component.css',
-    imports: [CommonModule, HttpClientModule, InstructorComponent,RouterModule]
+    imports: [CommonModule, HttpClientModule, InstructorComponent,RouterModule,FormsModule]
 })
 export class BootcampListGroupComponent implements OnInit {
   dateNow = Date.now;
