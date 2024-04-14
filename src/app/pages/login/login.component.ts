@@ -1,9 +1,11 @@
 import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+
 import { FormGroup, Validators, ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { UserForLoginRequest } from '../../features/models/requests/auth/user-for-login-request';
 import { AuthService } from '../../features/services/concretes/auth.service';
+
 
 
 @Component({
@@ -34,7 +36,11 @@ export class LoginComponent implements OnInit {
       console.log("test1");
       let loginModel:UserForLoginRequest = Object.assign({},this.loginForm.value);
       this.authService.login(loginModel).subscribe(response=>{
+
+        alert(response.accessToken.expiration.toString());
+
         alert(response.accessToken.expiration);
+
         this.router.navigate(['homepage'])
       }
       ,(error:any)=>{
@@ -48,4 +54,5 @@ export class LoginComponent implements OnInit {
   }
 
 }  
+
 
