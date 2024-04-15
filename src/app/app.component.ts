@@ -16,7 +16,9 @@ import {Cloudinary, CloudinaryImage} from '@cloudinary/url-gen'
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
-    imports: [RouterOutlet, HttpClientModule, NavbarComponent, HomepageComponent, LoginComponent, SignUpComponent, SharedModule, BootcampListGroupComponent, InstructorComponent,CloudinaryModule]
+    imports: [RouterOutlet, HttpClientModule, NavbarComponent, HomepageComponent,
+       LoginComponent, SignUpComponent, SharedModule, BootcampListGroupComponent,
+        InstructorComponent,CloudinaryModule]
 })
 export class AppComponent /** implements OnInit**/ {
   title = 'BootcampProject-FrontEnd';
