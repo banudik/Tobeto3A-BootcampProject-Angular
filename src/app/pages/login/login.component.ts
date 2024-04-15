@@ -5,6 +5,9 @@ import { FormGroup, Validators, ReactiveFormsModule, FormBuilder } from '@angula
 import { Router, RouterModule } from '@angular/router';
 import { UserForLoginRequest } from '../../features/models/requests/auth/user-for-login-request';
 import { AuthService } from '../../features/services/concretes/auth.service';
+import { tap } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+
 
 
 
@@ -18,7 +21,7 @@ import { AuthService } from '../../features/services/concretes/auth.service';
 export class LoginComponent implements OnInit {
 
   loginForm!:FormGroup
-  constructor(private formBuilder:FormBuilder,private authService:AuthService,private router:Router){}
+  constructor(private formBuilder:FormBuilder,private authService:AuthService,private router:Router,private toastrService:ToastrService){}
 
   ngOnInit(): void {
     this.createLoginForm();
@@ -31,26 +34,40 @@ export class LoginComponent implements OnInit {
     })
   }
 
+  // login() {
+  //   if (this.loginForm.valid) {
+  //     let loginModel: UserForLoginRequest = { ...this.loginForm.value };
+      
+  //     this.authService.login(loginModel).pipe(
+  //       tap((response) => {
+  //         //alert(response.accessToken.expiration);
+  //         alert("Login Succesfull!");
+  //         this.toastrService.success("Başarılı!");
+  //         //this.router.navigate(['homepage']);
+  //       })
+  //     ).subscribe(
+  //       // Hata yönetimi
+  //       (error: any) => {
+  //         alert(error);
+  //       }
+  //     );
+  //   } 
   login(){
     if(this.loginForm.valid){
-      console.log("test1");
       let loginModel:UserForLoginRequest = Object.assign({},this.loginForm.value);
       this.authService.login(loginModel).subscribe(response=>{
 
-        alert(response.accessToken.expiration.toString());
-
-        alert(response.accessToken.expiration);
-
-        this.router.navigate(['homepage'])
+        alert('Login succesfull!');
+        this.toastrService.success('test');
+        //this.router.navigate(['homepage'])
       }
       ,(error:any)=>{
         alert(error.error)
       })
     }
-    else{
+    else {
       console.log("validation error");
     }
-    console.log("test2");
   }
 
 }  

@@ -38,7 +38,7 @@ export class NavbarComponent implements OnInit{
 
    logOut(){
     this.authService.logOut();
-    this.router.navigate(['home-page'])
+    this.router.navigate(['homepage'])
    }
    
    setUserLogged() :boolean{
@@ -66,6 +66,9 @@ export class NavbarComponent implements OnInit{
     if(this.authService.isAdmin()){
 
         this.isAdmin = true;
+    }
+    else{
+      this.isAdmin = false;
     }
    }
    

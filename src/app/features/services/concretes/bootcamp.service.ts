@@ -76,7 +76,7 @@ export class BootcampService extends BootcampBaseService {
 
   override getList(pageRequest: PageRequest): Observable<BootcampListItemDto> {
     const newRequest: {[key: string]: string | number} = {
-      page: pageRequest.page,
+      pageIndex: pageRequest.page,
       pageSize: pageRequest.pageSize
     };
 
@@ -93,6 +93,7 @@ export class BootcampService extends BootcampBaseService {
           items:response.items,
           pages:response.pages
         };
+        
         return newResponse;
       })
     )
@@ -101,7 +102,7 @@ export class BootcampService extends BootcampBaseService {
 
    override getBootcampListByInstructorId(pageRequest: PageRequest, instructorId: string): Observable<BootcampListItemDto> {
     const newRequest: {[key: string]: string | number} = {
-      page: pageRequest.page,
+      pageIndex: pageRequest.page,
       pageSize: pageRequest.pageSize,
       instructorId: instructorId,
     };

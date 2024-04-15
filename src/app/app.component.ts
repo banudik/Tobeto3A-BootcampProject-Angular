@@ -10,17 +10,22 @@ import { BootcampListGroupComponent } from './features/components/bootcamps/boot
 import { InstructorComponent } from "./features/components/instructor/instructor.component";
 import { CloudinaryModule } from '@cloudinary/ng';
 import {Cloudinary, CloudinaryImage} from '@cloudinary/url-gen'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-root',
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
-    imports: [RouterOutlet, HttpClientModule, NavbarComponent, HomepageComponent, LoginComponent, SignUpComponent, SharedModule, BootcampListGroupComponent, InstructorComponent,CloudinaryModule]
+
+    imports: [RouterOutlet, HttpClientModule, NavbarComponent, HomepageComponent, LoginComponent, SignUpComponent, SharedModule, BootcampListGroupComponent, InstructorComponent,CloudinaryModule],
+
 })
 export class AppComponent /** implements OnInit**/ {
   title = 'BootcampProject-FrontEnd';
   /**img: CloudinaryImage;
   ngOnInit() {
     const cld = new Cloudinary({cloud: {cloudName: 'day7jhbzi'}});**/
+    
 }
