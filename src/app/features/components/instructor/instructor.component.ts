@@ -42,12 +42,12 @@ export class InstructorComponent implements OnInit{
      })
   }
 
-  setCurrentInstructor(brand:GetListInstructorResponse){
-    this.currentInstructor=brand;
+  setCurrentInstructor(instructor:GetListInstructorResponse){
+    this.currentInstructor=instructor;
   }
 
-  getCurrentInstructorClass(brand:GetListInstructorResponse){
-    if(brand==this.currentInstructor){
+  getCurrentInstructorClass(instructor:GetListInstructorResponse){
+    if(instructor==this.currentInstructor){
       return "list-group-item active"
     }else{
      return "list-group-item"
