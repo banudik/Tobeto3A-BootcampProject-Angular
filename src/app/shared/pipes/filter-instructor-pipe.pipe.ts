@@ -6,11 +6,15 @@ import { GetListInstructorResponse } from "../../features/models/responses/instr
     name:'filterInstructorPipe'
 })
 export class FilterInstructorPipe implements PipeTransform{
+    transform(value: GetListInstructorResponse[], filterText: string): GetListInstructorResponse[] {
+        if (!value || !filterText) {
+            return value;
+        }
+        const searchText = filterText.toLowerCase();
+        return value.filter(instructor => {
+            const fullName = `${instructor.firstName} ${instructor.lastName}`.toLowerCase();
+            return fullName.includes(searchText);
+        });
 
-    transform(value: GetListInstructorResponse[],filterText:string):GetListInstructorResponse[] {
-        filterText=filterText?filterText.toLocaleLowerCase():""
-        return filterText?value.filter((m:GetListInstructorResponse)=>(m.firstName +" "+ m.lastName).toLocaleLowerCase()
-        .indexOf(filterText)!==-1):value;
-    }
-
+}
 }

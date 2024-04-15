@@ -10,6 +10,7 @@ import { AuthBaseService } from "../abstracts/auth-base.service";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { ApplicantForRegisterRequest } from "../../models/requests/auth/applicant-for-register-request";
 import { LocalStorageService } from "./local-storage.service";
+import { ToastrService } from "ngx-toastr";
 
 
 @Injectable({
@@ -24,7 +25,7 @@ import { LocalStorageService } from "./local-storage.service";
   
   
     private readonly apiUrl:string = `${environment.API_URL}/auth`
-    constructor(private httpClient:HttpClient,private storageService:LocalStorageService) {super() }
+    constructor(private httpClient:HttpClient,private storageService:LocalStorageService,private toastrService:ToastrService) {super() }
   
     override registerApplicant(userforRegisterRequest: ApplicantForRegisterRequest)
         :Observable<UserForRegisterResponse> {
@@ -38,7 +39,8 @@ import { LocalStorageService } from "./local-storage.service";
       return this.httpClient.post<AccessTokenModel<TokenModel>>(`${this.apiUrl}/login`,userLoginRequest)
       .pipe(map(response=>{
           this.storageService.setToken(response.accessToken.token);
-          alert("Giriş yapıldı");
+          this.toastrService.success('başarılı');
+          //alert("Giriş yapıldı");
           setTimeout(()=>{
             window.location.reload()
           },400)
@@ -91,7 +93,7 @@ import { LocalStorageService } from "./local-storage.service";
   
     logOut(){
       this.storageService.removeToken();
-      alert("Çıkış yapıldı");
+      this.toastrService.success('Succesfull Logout');
       setTimeout(function(){
         window.location.reload()
       },400)
