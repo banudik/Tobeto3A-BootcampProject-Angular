@@ -27,8 +27,10 @@
       </div>
                         <ng-container *ngIf="isLoggedIn; else loggedOut">
                           <a (click)="logOut()" class="text-gray-300 hover:bg-indigo-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Log out</a>
-                          <a href="#" class="text-gray-300 hover:bg-indigo-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">My Profile</a>
+                          <a routerLink='' class="text-gray-300 hover:bg-indigo-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">My Profile</a>
+                          <a *ngIf="isAdmin;" routerLink='/adminpanel' class="text-indigo-300 hover:bg-indigo-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Admin Panel</a>
                         </ng-container>
+
                         <!-- Giriş yapılmadığında -->
                         <ng-template #loggedOut>
                           <a routerLink='/sign-up' class="text-gray-300 hover:bg-indigo-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sign up</a>

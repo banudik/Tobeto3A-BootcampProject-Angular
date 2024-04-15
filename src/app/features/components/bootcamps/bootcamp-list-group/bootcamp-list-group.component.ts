@@ -18,6 +18,7 @@ import { FormsModule } from '@angular/forms';
 export class BootcampListGroupComponent implements OnInit {
   dateNow = Date.now;
   currentPageNumber!: number;
+  
   bootcampList: BootcampListItemDto = {
     index: 0,
   
@@ -48,6 +49,8 @@ export class BootcampListGroupComponent implements OnInit {
 
 
   getList(pageRequest: PageRequest) {
+    console.log(pageRequest.page +" " + pageRequest.pageSize);
+    
     this.bootcampService.getList(pageRequest).subscribe((response) => {
       this.bootcampList = response;
       this.updateCurrentPageNumber();
@@ -65,8 +68,11 @@ export class BootcampListGroupComponent implements OnInit {
   onViewMoreClicked(): void {
     const nextPageIndex = this.bootcampList.index + 1;
     const pageSize = this.bootcampList.size;
-
+    
     this.getList({ page: nextPageIndex, pageSize })
+    console.log(nextPageIndex);
+    console.log("size: " + pageSize);
+    
     this.updateCurrentPageNumber();
   }
 
@@ -74,11 +80,15 @@ export class BootcampListGroupComponent implements OnInit {
     const previousPageIndex = this.bootcampList.index - 1;
     const pageSize = this.bootcampList.size;
     this.getList({ page: previousPageIndex, pageSize });
-    this.updateCurrentPageNumber();
+    this.lowerCurrentPageNumber();
   }
 
   updateCurrentPageNumber(): void {
     this.currentPageNumber = this.bootcampList.index + 1;
+  }
+
+  lowerCurrentPageNumber(): void {
+    this.currentPageNumber = this.bootcampList.index - 1;
   }
 
 }

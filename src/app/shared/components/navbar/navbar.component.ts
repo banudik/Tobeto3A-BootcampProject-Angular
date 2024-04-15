@@ -67,6 +67,9 @@ export class NavbarComponent implements OnInit{
 
         this.isAdmin = true;
     }
+    else{
+      this.isAdmin = false;
+    }
    }
    
 
