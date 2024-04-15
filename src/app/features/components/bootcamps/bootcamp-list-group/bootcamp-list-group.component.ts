@@ -31,7 +31,7 @@ export class BootcampListGroupComponent implements OnInit {
   };
  
   constructor(private bootcampService: BootcampService, private activatedRoute: ActivatedRoute) {}
-  readonly PAGE_SIZE = 6;
+  readonly PAGE_SIZE = 8;
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       if (params["instructorId"]) {
@@ -49,8 +49,6 @@ export class BootcampListGroupComponent implements OnInit {
 
 
   getList(pageRequest: PageRequest) {
-    console.log(pageRequest.page +" " + pageRequest.pageSize);
-    
     this.bootcampService.getList(pageRequest).subscribe((response) => {
       this.bootcampList = response;
       this.updateCurrentPageNumber();
@@ -69,9 +67,13 @@ export class BootcampListGroupComponent implements OnInit {
     const nextPageIndex = this.bootcampList.index + 1;
     const pageSize = this.bootcampList.size;
     
-    this.getList({ page: nextPageIndex, pageSize })
-    console.log(nextPageIndex);
-    console.log("size: " + pageSize);
+    //this.getList({ page: nextPageIndex, pageSize })
+
+    this.activatedRoute.params.subscribe(params => {
+      if (params["instructorId"]) {
+        this.getBootcampListByInstructor({ page: nextPageIndex, pageSize: pageSize }, params["instructorId"])
+      } else { this.getList({ page: nextPageIndex, pageSize: pageSize }) }
+    })
     
     this.updateCurrentPageNumber();
   }
@@ -79,7 +81,13 @@ export class BootcampListGroupComponent implements OnInit {
   onPreviousPageClicked(): void {
     const previousPageIndex = this.bootcampList.index - 1;
     const pageSize = this.bootcampList.size;
-    this.getList({ page: previousPageIndex, pageSize });
+    //this.getList({ page: previousPageIndex, pageSize });
+
+    this.activatedRoute.params.subscribe(params => {
+      if (params["instructorId"]) {
+        this.getBootcampListByInstructor({ page: previousPageIndex, pageSize: pageSize }, params["instructorId"])
+      } else { this.getList({ page: previousPageIndex, pageSize: pageSize }) }
+    })
     this.lowerCurrentPageNumber();
   }
 

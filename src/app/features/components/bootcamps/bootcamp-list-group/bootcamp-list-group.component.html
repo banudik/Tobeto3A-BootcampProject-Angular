@@ -1,65 +1,49 @@
-<app-instructor></app-instructor>
-<!-- <div class="col-md-9">
-<div class="row" style="margin-top: 10px;">
-    <h3 *ngIf="!bootcampList">bootcamp Bulunamadı</h3>
- <div *ngFor="let bootcamp of bootcampList.items" class="card" style="width: 16rem;margin:20px;opacity: 0.8;">
- <img [src]="bootcamp.imagePath" class="card-img-top" alt="arabanın adı Image" height="150px" />
- <div class="car-body">
-    <p class="card-text">Name:<strong>{{bootcamp.name}}</strong></p>
+<div class="flex h-screen bg-gray-100" >
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white shadow-md">
+
+            <app-instructor></app-instructor>
+
+    </aside>
+    
+    <!-- Content -->
+    <div class="flex-grow p-8">
+        <div class="container mx-auto">
+            <h3 *ngIf="!bootcampList" class="text-center">Bootcamp Bulunamadı</h3>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-center">
+                <div *ngFor="let bootcamp of bootcampList.items" class="max-w-sm rounded overflow-hidden shadow-lg">
+                    <img src="https://i.pinimg.com/736x/4f/fa/74/4ffa7439fe6536e7e0f6532b2c4003f8.jpg" class="w-full h-48 object-cover" alt="arabanın adı Image">
+                    <div class="px-6 py-4">
+                        <div class="font-bold text-xl mb-2">{{bootcamp.name}}</div>
+                        <p class="text-gray-700 text-base"><b>Hoca:</b> {{bootcamp.instructorFirstName}} {{bootcamp.instructorLastName}}</p>
+                        <p class="text-gray-700 text-base"><b>Start Date:</b> {{ bootcamp.startDate | date: 'dd/MM/yyyy' }}</p>
+                        <p class="text-gray-700 text-base"><b>End Date:</b> {{bootcamp.endDate | date: 'dd/MM/yyyy'}}</p>
+                    </div>
+                    <div class="px-6 py-4">
+                        <button class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center"[ngClass]="{'expired': isExpired(bootcamp.endDate), 'notExpired': !isExpired(bootcamp.endDate)}"
+                        [routerLink]="['/bootcampdetail', bootcamp.id.toString()]">
+                            Detaya Git
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Buttons -->
+            <div class="flex flex-col items-center" *ngIf="bootcampList.hasNext || bootcampList.hasPrevious">
+                
+                <div class="inline-flex mt-2 xs:mt-0">
+                    <button *ngIf="bootcampList.hasPrevious || bootcampList.hasNext" type="button" [disabled]="!bootcampList.hasPrevious" (click)="onPreviousPageClicked()" class="btn border-0" class="flex items-center justify-center px-4 h-10 text-base font-medium text-white bg-gray-800 rounded-s hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                        Prev
+                    </button>
+                    <a class="flex items-center justify-center px-4 h-10 text-base font-medium text-white bg-gray-800 rounded-s hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white cursor-default">Page: {{ this.currentPageNumber }}</a>
+                    <button *ngIf="bootcampList.hasNext || bootcampList.hasPrevious" type="button" [disabled]="!bootcampList.hasNext" (click)="onViewMoreClicked()"   class="flex items-center justify-center px-4 h-10 text-base font-medium text-white bg-gray-800 border-0 border-s border-gray-700 rounded-e hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                        Next
+                    </button>
+                </div>
+              </div> 
+        </div>
+    </div>
  </div>
- <ul class="list-group list-group-flush">
-  <li class="list-group-item"><b>name:</b><span style="float:right;">{{bootcamp.name}}</span></li>
-  <li class="list-group-item"><b>Hoca:</b><span style="float:right;">{{bootcamp.instructorFirstName + " " + bootcamp.instructorLastName}}</span></li>
-  <li class="list-group-item"><b>startDate:</b><span style="float:right;">{{bootcamp.startDate}}</span></li>
-  <li class="list-group-item"><b>endDate:</b><span style="float:right;">{{bootcamp.endDate}}</span></li> -->
-  
-  <!-- <button *ngIf="isBeforeEnd(bootcamp.endDate)">Başvur</button> -->
-  <!-- <button class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" [ngClass]="{'expired': isExpired(bootcamp.endDate), 'notExpired': !isExpired(bootcamp.endDate)}"><a routerLink="/bootcamps/bootcamp.id">Detaya Git</a> </button> -->
-  <!-- <button class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-  [ngClass]="{'expired': isExpired(bootcamp.endDate), 'notExpired': !isExpired(bootcamp.endDate)}"
-  [routerLink]="['/bootcampdetail', bootcamp.id.toString()]">
-Detaya Git
-</button>
-</ul>
-
-</div> 
-<button *ngIf="bootcampList.hasNext" type="button"
-     (click)="onViewMoreClicked()" [disabled]="!bootcampList.hasNext" class="btn border-0">
-     Sonraki Sayfa {{this.currentPageNumber}} {{bootcampList.hasNext}}</button>
-     <button *ngIf="bootcampList.hasPrevious" type="button"
-        (click)="onPreviousPageClicked()" [disabled]="!bootcampList.hasPrevious" class="btn border-0">
-        Önceki Sayfa {{this.currentPageNumber-1}} {{bootcampList.hasPrevious}}</button>
-</div>
-</div> -->
-
-<div class="container mx-auto">
-   <h3 *ngIf="!bootcampList" class="text-center">Bootcamp Bulunamadı</h3>
    
-   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-center">
-       <div *ngFor="let bootcamp of bootcampList.items" class="max-w-sm rounded overflow-hidden shadow-lg">
-           <img [src]="bootcamp.imagePath" class="w-full h-48 object-cover" alt="arabanın adı Image">
-           <div class="px-6 py-4">
-               <div class="font-bold text-xl mb-2">{{bootcamp.name}}</div>
-               <p class="text-gray-700 text-base"><b>Hoca:</b> {{bootcamp.instructorFirstName}} {{bootcamp.instructorLastName}}</p>
-               <p class="text-gray-700 text-base"><b>Start Date:</b> {{bootcamp.startDate}}</p>
-               <p class="text-gray-700 text-base"><b>End Date:</b> {{bootcamp.endDate}}</p>
-           </div>
-           <div class="px-6 py-4">
-               <button class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center"[ngClass]="{'expired': isExpired(bootcamp.endDate), 'notExpired': !isExpired(bootcamp.endDate)}"
-               [routerLink]="['/bootcampdetail', bootcamp.id.toString()]">
-                   Detaya Git
-               </button>
-           </div>
-       </div>
-   </div>
-   
-   <div class="flex justify-center mt-4">
-       <button *ngIf="bootcampList.hasNext" type="button" (click)="onViewMoreClicked()" [disabled]="!bootcampList.hasNext" class="btn border-0 mr-2">
-           Sonraki Sayfa {{this.currentPageNumber}} {{bootcampList.hasNext}}
-       </button>
-       
-       <button *ngIf="bootcampList.hasPrevious" type="button" (click)="onPreviousPageClicked()" [disabled]="!bootcampList.hasPrevious" class="btn border-0">
-           Önceki Sayfa {{this.currentPageNumber-1}} {{bootcampList.hasPrevious}}
-       </button>
-   </div>
-</div>
+
+
