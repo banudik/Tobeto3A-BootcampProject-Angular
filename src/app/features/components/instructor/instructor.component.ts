@@ -8,6 +8,7 @@ import { InstructorService } from '../../services/concretes/instructor.service';
 import { SharedModule } from "../../../shared/shared.module";
 import { InstructorListItemDto } from '../../models/responses/instructor/instructor-list-item-dto';
 
+
 @Component({
     selector: 'app-instructor',
     standalone: true,
@@ -23,6 +24,7 @@ export class InstructorComponent implements OnInit{
   currentInstructor!:GetListInstructorResponse;
   filterText="";
   constructor(private instructorService:InstructorService){}
+  
   
   ngOnInit(): void {
     this.getInstructors();
