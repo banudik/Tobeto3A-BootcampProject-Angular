@@ -107,10 +107,12 @@ import { LocalStorageService } from "./local-storage.service";
     }
   
     isAdmin(){
-      if(this.claims.includes("admin")){
+      if(this.claims.includes("admin" && "Admin")){
         return true;
       }
-      return false;
+      else{
+        return false;
+      }
     }
   }
 

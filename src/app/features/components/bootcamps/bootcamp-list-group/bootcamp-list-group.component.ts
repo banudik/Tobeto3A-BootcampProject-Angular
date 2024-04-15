@@ -18,6 +18,7 @@ import { FormsModule } from '@angular/forms';
 export class BootcampListGroupComponent implements OnInit {
   dateNow = Date.now;
   currentPageNumber!: number;
+  
   bootcampList: BootcampListItemDto = {
     index: 0,
   
@@ -30,7 +31,7 @@ export class BootcampListGroupComponent implements OnInit {
   };
  
   constructor(private bootcampService: BootcampService, private activatedRoute: ActivatedRoute) {}
-  readonly PAGE_SIZE = 6;
+  readonly PAGE_SIZE = 8;
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       if (params["instructorId"]) {
@@ -65,20 +66,37 @@ export class BootcampListGroupComponent implements OnInit {
   onViewMoreClicked(): void {
     const nextPageIndex = this.bootcampList.index + 1;
     const pageSize = this.bootcampList.size;
+    
+    //this.getList({ page: nextPageIndex, pageSize })
 
-    this.getList({ page: nextPageIndex, pageSize })
+    this.activatedRoute.params.subscribe(params => {
+      if (params["instructorId"]) {
+        this.getBootcampListByInstructor({ page: nextPageIndex, pageSize: pageSize }, params["instructorId"])
+      } else { this.getList({ page: nextPageIndex, pageSize: pageSize }) }
+    })
+    
     this.updateCurrentPageNumber();
   }
 
   onPreviousPageClicked(): void {
     const previousPageIndex = this.bootcampList.index - 1;
     const pageSize = this.bootcampList.size;
-    this.getList({ page: previousPageIndex, pageSize });
-    this.updateCurrentPageNumber();
+    //this.getList({ page: previousPageIndex, pageSize });
+
+    this.activatedRoute.params.subscribe(params => {
+      if (params["instructorId"]) {
+        this.getBootcampListByInstructor({ page: previousPageIndex, pageSize: pageSize }, params["instructorId"])
+      } else { this.getList({ page: previousPageIndex, pageSize: pageSize }) }
+    })
+    this.lowerCurrentPageNumber();
   }
 
   updateCurrentPageNumber(): void {
     this.currentPageNumber = this.bootcampList.index + 1;
+  }
+
+  lowerCurrentPageNumber(): void {
+    this.currentPageNumber = this.bootcampList.index - 1;
   }
 
 }
