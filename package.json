@@ -22,6 +22,7 @@
     "@cloudinary/ng": "^2.0.2",
     "@cloudinary/url-gen": "^1.19.0",
     "bootstrap": "^5.3.3",
+    "cloudinary-angular": "^1.0.1",
     "core-js": "^3.36.1",
     "ngx-toastr": "^18.0.0",
     "primeng": "^17.12.0",

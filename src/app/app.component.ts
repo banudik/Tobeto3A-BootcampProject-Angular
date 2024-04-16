@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
@@ -12,14 +12,28 @@ import { CloudinaryModule } from '@cloudinary/ng';
 import {Cloudinary, CloudinaryImage} from '@cloudinary/url-gen'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
+import { FooterComponent } from './shared/components/footer/footer.component';
+import { AuthInterceptor } from './core/interceptors/auth/auth.interceptor';
+import { ErrorInterceptor } from './core/interceptors/error/error.interceptor';
 
 @Component({
     selector: 'app-root',
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
-
-    imports: [RouterOutlet, HttpClientModule, NavbarComponent, HomepageComponent, LoginComponent, SignUpComponent, SharedModule, BootcampListGroupComponent, InstructorComponent,CloudinaryModule],
+    providers: [
+      {
+        provide: HTTP_INTERCEPTORS,
+        useClass: ErrorInterceptor,
+        multi: true, 
+      },
+      {
+        provide: HTTP_INTERCEPTORS,
+        useValue: AuthInterceptor,
+        multi: true, // Birden fazla interceptor zincirlenmesine izin ver
+      }
+        ],
+    imports: [RouterOutlet, HttpClientModule, NavbarComponent, HomepageComponent, LoginComponent, SignUpComponent, SharedModule, BootcampListGroupComponent, InstructorComponent,CloudinaryModule,FooterComponent],
 
 })
 export class AppComponent /** implements OnInit**/ {
