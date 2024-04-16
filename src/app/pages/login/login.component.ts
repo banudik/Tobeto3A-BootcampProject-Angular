@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
       email:["",Validators.required],
       password:["",Validators.required]
     })
+    
   }
 
   // login() {
@@ -57,12 +58,13 @@ export class LoginComponent implements OnInit {
       let loginModel:UserForLoginRequest = Object.assign({},this.loginForm.value);
       this.authService.login(loginModel).subscribe(response=>{
 
-        alert('Login succesfull!');
-        this.toastrService.success('test');
+        //alert('Login succesfull!');
+        this.toastrService.success('Login succesfull!','Giriş işlemi',{ timeOut: 2000 });
         //this.router.navigate(['homepage'])
       }
       ,(error:any)=>{
         alert(error.error)
+        this.toastrService.error('Giriş Başarısız')
       })
     }
     else {

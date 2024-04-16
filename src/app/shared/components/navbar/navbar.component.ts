@@ -3,30 +3,28 @@ import { Router, RouterModule } from '@angular/router';
 import { LoginComponent } from '../../../pages/login/login.component';
 import { SignUpComponent } from '../../../pages/sign-up/sign-up.component';
 import { BootcampListGroupComponent } from '../../../features/components/bootcamps/bootcamp-list-group/bootcamp-list-group.component';
-
 import { MenuItem } from 'primeng/api';
 import { AuthService } from '../../../features/services/concretes/auth.service';
 import { MenubarModule } from 'primeng/menubar';
-
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-
 import { CommonModule } from '@angular/common';
+import { ProfileComponent } from '../../../pages/profile/profile.component';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-
-  imports: [LoginComponent,RouterModule,SignUpComponent,BootcampListGroupComponent,MenubarModule,CommonModule],
-
+  imports: [LoginComponent,RouterModule,SignUpComponent,BootcampListGroupComponent,MenubarModule,CommonModule,ProfileComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
+
 export class NavbarComponent implements OnInit{
   isLoggedIn!: boolean; 
   isAdmin!: boolean; 
   menuItems!:MenuItem[];
   userLogged!:boolean;
+  showLogoutModal = false;
   constructor(private authService:AuthService,private router:Router){}
 
    ngOnInit(): void {
