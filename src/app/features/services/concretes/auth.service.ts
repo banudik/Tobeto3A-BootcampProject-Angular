@@ -39,11 +39,11 @@ import { ToastrService } from "ngx-toastr";
       return this.httpClient.post<AccessTokenModel<TokenModel>>(`${this.apiUrl}/login`,userLoginRequest)
       .pipe(map(response=>{
           this.storageService.setToken(response.accessToken.token);
-          this.toastrService.success('başarılı');
+          // this.toastrService.success('başarılı');
           //alert("Giriş yapıldı");
           setTimeout(()=>{
             window.location.reload()
-          },400)
+          },1000)
           return response;
         }
        
@@ -96,7 +96,7 @@ import { ToastrService } from "ngx-toastr";
       this.toastrService.success('Succesfull Logout');
       setTimeout(function(){
         window.location.reload()
-      },400)
+      },1000)
     }
   
     getRoles():string[]{
