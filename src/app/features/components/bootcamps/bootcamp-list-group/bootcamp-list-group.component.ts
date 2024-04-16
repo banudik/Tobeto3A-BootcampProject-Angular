@@ -51,6 +51,7 @@ export class BootcampListGroupComponent implements OnInit {
   getList(pageRequest: PageRequest) {
     this.bootcampService.getList(pageRequest).subscribe((response) => {
       this.bootcampList = response;
+      console.log(this.bootcampList.items[0].bootcampImageImagePath);
       this.updateCurrentPageNumber();
     })
 
