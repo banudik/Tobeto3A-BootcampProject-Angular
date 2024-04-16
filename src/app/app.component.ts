@@ -15,6 +15,7 @@ import { CommonModule } from '@angular/common';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { AuthInterceptor } from './core/interceptors/auth/auth.interceptor';
 import { ErrorInterceptor } from './core/interceptors/error/error.interceptor';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @Component({
     selector: 'app-root',
@@ -33,7 +34,7 @@ import { ErrorInterceptor } from './core/interceptors/error/error.interceptor';
         multi: true, // Birden fazla interceptor zincirlenmesine izin ver
       }
         ],
-    imports: [RouterOutlet, HttpClientModule, NavbarComponent, HomepageComponent, LoginComponent, SignUpComponent, SharedModule, BootcampListGroupComponent, InstructorComponent,CloudinaryModule,FooterComponent],
+    imports: [RouterOutlet, HttpClientModule, NavbarComponent, HomepageComponent, LoginComponent, SignUpComponent, SharedModule, BootcampListGroupComponent, InstructorComponent,CloudinaryModule,FooterComponent,ProfileComponent],
 
 })
 export class AppComponent /** implements OnInit**/ {
