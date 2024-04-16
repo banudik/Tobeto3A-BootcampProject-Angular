@@ -7,5 +7,4 @@ export interface GetByIdApplicantResponse {
     dateOfBirth: Date;
     nationalIdentity:string;
     email:string;
-    password:string;
 }

@@ -7,5 +7,5 @@ export interface GetListApplicantResponse {
     dateOfBirth: Date;
     nationalIdentity:string;
     email:string;
-    password:string;
+    //password:string;
 }

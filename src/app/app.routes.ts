@@ -16,5 +16,5 @@ export const routes: Routes = [ {path:'',redirectTo:'homepage',pathMatch:'full'}
 {path:'bootcamps',component:BootcampListGroupComponent},
 {path:"bootcamps/instructor/:instructorId",component:BootcampListGroupComponent},
 {path:"bootcampdetail/:bootcampId",component:BootcampDetailsComponent},
-{path:"myprofile",component:ProfileComponent}
+{path:"myprofile/:userId",component:ProfileComponent}
 ];
