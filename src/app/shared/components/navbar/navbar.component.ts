@@ -25,6 +25,7 @@ export class NavbarComponent implements OnInit{
   menuItems!:MenuItem[];
   userLogged!:boolean;
   showLogoutModal = false;
+  userId!:string;
   constructor(private authService:AuthService,private router:Router){}
 
    ngOnInit(): void {
@@ -32,6 +33,7 @@ export class NavbarComponent implements OnInit{
      console.log(this.getUserName());
      console.log(this.getUserId())
      console.log(this.authService.getRoles())
+     this.getUserId();
    }
 
    logOut(){
@@ -48,6 +50,7 @@ export class NavbarComponent implements OnInit{
    }
 
    getUserId():string{
+    this.userId = this.authService.getCurrentUserId();
     return this.authService.getCurrentUserId();
    }
 

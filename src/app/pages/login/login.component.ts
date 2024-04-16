@@ -63,8 +63,8 @@ export class LoginComponent implements OnInit {
         //this.router.navigate(['homepage'])
       }
       ,(error:any)=>{
-        alert(error.error)
-        this.toastrService.error('Giriş Başarısız')
+        //alert(error.error)
+        this.toastrService.error('Giriş Başarısız ' + error.message)
       })
     }
     else {
