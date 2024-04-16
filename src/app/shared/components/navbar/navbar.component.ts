@@ -9,11 +9,12 @@ import { MenubarModule } from 'primeng/menubar';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ProfileComponent } from '../../../pages/profile/profile.component';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [LoginComponent,RouterModule,SignUpComponent,BootcampListGroupComponent,MenubarModule,CommonModule],
+  imports: [LoginComponent,RouterModule,SignUpComponent,BootcampListGroupComponent,MenubarModule,CommonModule,ProfileComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
@@ -23,6 +24,7 @@ export class NavbarComponent implements OnInit{
   isAdmin!: boolean; 
   menuItems!:MenuItem[];
   userLogged!:boolean;
+  showLogoutModal = false;
   constructor(private authService:AuthService,private router:Router){}
 
    ngOnInit(): void {
