@@ -8,6 +8,7 @@ import { InstructorService } from '../../services/concretes/instructor.service';
 import { SharedModule } from "../../../shared/shared.module";
 import { InstructorListItemDto } from '../../models/responses/instructor/instructor-list-item-dto';
 
+
 @Component({
     selector: 'app-instructor',
     standalone: true,
@@ -23,6 +24,7 @@ export class InstructorComponent implements OnInit{
   currentInstructor!:GetListInstructorResponse;
   filterText="";
   constructor(private instructorService:InstructorService){}
+  
   
   ngOnInit(): void {
     this.getInstructors();
@@ -40,12 +42,12 @@ export class InstructorComponent implements OnInit{
      })
   }
 
-  setCurrentInstructor(brand:GetListInstructorResponse){
-    this.currentInstructor=brand;
+  setCurrentInstructor(instructor:GetListInstructorResponse){
+    this.currentInstructor=instructor;
   }
 
-  getCurrentInstructorClass(brand:GetListInstructorResponse){
-    if(brand==this.currentInstructor){
+  getCurrentInstructorClass(instructor:GetListInstructorResponse){
+    if(instructor==this.currentInstructor){
       return "list-group-item active"
     }else{
      return "list-group-item"
@@ -59,5 +61,4 @@ export class InstructorComponent implements OnInit{
       return "list-group-item"
     }
   }
-
 }

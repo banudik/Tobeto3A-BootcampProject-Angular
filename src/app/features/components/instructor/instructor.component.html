@@ -1,28 +1,28 @@
-<div style="margin-top: 10px;" class="mb-3">
-    <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Hoca ara">
+<div class="bg-gray-100">
+    <div class="flex h-screen">
+        <aside class="w-64 bg-white shadow-md">
+            <div class="p-4">
+                <input type="text" [(ngModel)]="filterText" class="border border-gray-300 p-2 rounded-md w-full" placeholder="Eğitmen ara">
+            </div>
+            
+            <div *ngIf="filterText" class="p-4 bg-green-100 opacity-80">
+                {{ filterText }} aradınız.
+            </div>
+            
+            <div class="p-4">
+                <select class="form-select w-full" size="5" aria-label="size 3 select example">
+                    <option class="bg-gray-100" routerLink="/bootcamps">Tüm Eğitmenler</option>
+                    <ng-container *ngFor="let instructor of instructors.items | filterInstructorPipe: filterText">
+                        <option *ngIf="instructor.id" [ngClass]="{
+                                'bg-indigo-300': selectedInstructorId === instructor.id
+                            }" 
+                            (click)="onSelectedInstructor(instructor.id)" 
+                            routerLink="/bootcamps/instructor/{{instructor.id}}">
+                            {{ instructor.firstName }} {{ instructor.lastName }}
+                        </option>
+                    </ng-container>
+                </select>
+            </div>
+        </aside>
+    </div>
 </div>
-<div *ngIf="filterText" class="alert alert-success" style="opacity: 0.8;">
- {{filterText}} aradınız.
-</div>
-
-<ul class="list-group" style="opacity: 0.8;">
-    <li routerLink="/home-page" [class]="getDefaultInstructorClass()">Hocalar</li>
-</ul>
-<div class="mb-3" style="opacity: 0.8;">
-    <select class="form-select" size="5" aria-label="size 3 select example">
-        <option style="background-color: rgb(252,251,245);"
-        routerLink="/bootcamps"
-         >All Instructors</option>
-
-        <option style="background-color: rgb(252,251,245);" (click)="onSelectedInstructor(instructor.id)"
-        [ngClass]="{
-            active:selectedInstructorId===instructor.id
-        }"
-        [class]="getCurrentInstructorClass(instructor)"routerLink="/bootcamps/instructor/{{instructor.id}}"
-        *ngFor="let instructor of instructors.items " value="instructor.id">{{instructor.firstName +" "+ instructor.lastName}}</option>
-    </select>
-</div>  
-
-
-
-

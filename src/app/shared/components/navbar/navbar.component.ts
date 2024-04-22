@@ -3,30 +3,29 @@ import { Router, RouterModule } from '@angular/router';
 import { LoginComponent } from '../../../pages/login/login.component';
 import { SignUpComponent } from '../../../pages/sign-up/sign-up.component';
 import { BootcampListGroupComponent } from '../../../features/components/bootcamps/bootcamp-list-group/bootcamp-list-group.component';
-
 import { MenuItem } from 'primeng/api';
 import { AuthService } from '../../../features/services/concretes/auth.service';
 import { MenubarModule } from 'primeng/menubar';
-
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-
 import { CommonModule } from '@angular/common';
+import { ProfileComponent } from '../../../pages/profile/profile.component';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-
-  imports: [LoginComponent,RouterModule,SignUpComponent,BootcampListGroupComponent,MenubarModule,CommonModule],
-
+  imports: [LoginComponent,RouterModule,SignUpComponent,BootcampListGroupComponent,MenubarModule,CommonModule,ProfileComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
+
 export class NavbarComponent implements OnInit{
   isLoggedIn!: boolean; 
   isAdmin!: boolean; 
   menuItems!:MenuItem[];
   userLogged!:boolean;
+  showLogoutModal = false;
+  userId!:string;
   constructor(private authService:AuthService,private router:Router){}
 
    ngOnInit(): void {
@@ -34,11 +33,12 @@ export class NavbarComponent implements OnInit{
      console.log(this.getUserName());
      console.log(this.getUserId())
      console.log(this.authService.getRoles())
+     this.getUserId();
    }
 
    logOut(){
     this.authService.logOut();
-    this.router.navigate(['home-page'])
+    this.router.navigate(['homepage'])
    }
    
    setUserLogged() :boolean{
@@ -50,6 +50,7 @@ export class NavbarComponent implements OnInit{
    }
 
    getUserId():string{
+    this.userId = this.authService.getCurrentUserId();
     return this.authService.getCurrentUserId();
    }
 
@@ -66,6 +67,9 @@ export class NavbarComponent implements OnInit{
     if(this.authService.isAdmin()){
 
         this.isAdmin = true;
+    }
+    else{
+      this.isAdmin = false;
     }
    }
    

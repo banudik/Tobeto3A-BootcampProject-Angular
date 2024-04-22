@@ -10,6 +10,6 @@ export abstract class ApplicantBaseService {
   abstract getList(): 
   Observable<GetListApplicantResponse[]>;
 
-  abstract getById(): 
+  abstract getApplicantById(applicantId:string): 
   Observable<GetByIdApplicantResponse>;
 }
