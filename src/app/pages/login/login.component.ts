@@ -35,42 +35,28 @@ export class LoginComponent implements OnInit {
     
   }
 
-  // login() {
-  //   if (this.loginForm.valid) {
-  //     let loginModel: UserForLoginRequest = { ...this.loginForm.value };
-      
-  //     this.authService.login(loginModel).pipe(
-  //       tap((response) => {
-  //         //alert(response.accessToken.expiration);
-  //         alert("Login Succesfull!");
-  //         this.toastrService.success("Başarılı!");
-  //         //this.router.navigate(['homepage']);
-  //       })
-  //     ).subscribe(
-  //       // Hata yönetimi
-  //       (error: any) => {
-  //         alert(error);
-  //       }
-  //     );
-  //   } 
-  login(){
-    if(this.loginForm.valid){
-      let loginModel:UserForLoginRequest = Object.assign({},this.loginForm.value);
-      this.authService.login(loginModel).subscribe(response=>{
-
-        //alert('Login succesfull!');
-        this.toastrService.success('Login succesfull!','Giriş işlemi',{ timeOut: 2000 });
-        //this.router.navigate(['homepage'])
-      }
-      ,(error:any)=>{
-        //alert(error.error)
-        this.toastrService.error('Giriş Başarısız ' + error.message)
+  login() {
+    if (this.loginForm.valid) {
+      let loginModel: UserForLoginRequest = Object.assign({}, this.loginForm.value);
+      this.authService.login(loginModel).subscribe({
+        error:(error)=>{
+          this.toastrService.error('Giriş Başarısız ' + error.message)
+        },
+        complete:()=>{
+          this.toastrService.success('Giriş Başarılı','Giriş işlemi',{ timeOut: 2000 });
+          // setTimeout(()=>{
+          //   this.router.navigate(["/home-page"]);
+          // },2000)
+        }
       })
     }
-    else {
+    else{
       console.log("validation error");
     }
+    
   }
+
+
 
 }  
 
