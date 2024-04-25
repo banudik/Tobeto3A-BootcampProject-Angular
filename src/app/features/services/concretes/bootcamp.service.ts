@@ -19,33 +19,6 @@ export class BootcampService extends BootcampBaseService {
   
   constructor(private httpClient:HttpClient) {super() }
 
-  // override getBootcampById(BootcampId: number): Observable<GetByIdBootcampResponse> {
-  //   const newRequest: {[key: string]: string | number} = {
-  //     id: BootcampId
-  //   };
-
-  //   return this.httpClient.get<GetByIdBootcampResponse>(this.apiUrl, {
-  //     params: newRequest
-  //   }).pipe(
-  //     map((response)=>{
-  //       const newResponse:GetByIdBootcampResponse={
-  //         id : response.id,
-  //         name : response.name,
-  //         instructorId : response.instructorId,
-  //         instructorFirstName : response.instructorFirstName,
-  //         instructorLastName : response.instructorLastName,
-  //         startDate : response.startDate,
-  //         endDate : response.endDate,
-  //         bootcampStateId : response.bootcampStateId,
-  //         bootcampStateName : response.bootcampStateName,
-  //         bootcampImageId : response.bootcampImageId,
-  //         bootcampImageImagePath : response.bootcampImageImagePath
-  //       };
-  //       return newResponse;
-  //     })
-  //   )
-  // }
-
   override getBootcampById(bootcampId: number): Observable<GetByIdBootcampResponse> {
     const newRequest: {[key: string]: string | number} = {
       id: bootcampId
