@@ -15,16 +15,15 @@
             <a routerLink="/homepage" class="text-gray-300 hover:bg-indigo-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
             <a href="#" class="text-gray-300 hover:bg-indigo-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About</a>
             <a href="#" class="text-gray-300 hover:bg-indigo-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Services</a>
-            <a routerLink="bootcamps" class="text-gray-300 hover:bg-indigo-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Bootcamps</a>
+            <a routerLink="/bootcamps" class="text-gray-300 hover:bg-indigo-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Bootcamps</a>
             <a href="#" class="text-gray-300 hover:bg-indigo-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+            <a routerLink="/faq" class="text-gray-300 hover:bg-indigo-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+              FAQ
+            </a>
             <!-- <a routerLink='/sign-up' class="text-gray-300 hover:bg-indigo-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sign up</a>
             <a routerLink='/login' class="text-gray-300 hover:bg-indigo-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Log in</a> -->
                         <!-- Giriş yapıldığında -->
-            <div class="flex items-center">
-        <input *ngIf="showSearchInput" type="text" placeholder="Search" class="px-3 py-1 border border-gray-300 rounded-md mr-2 focus:outline-none">
-        <button class="text-white bg-gradient-to-r from-purple-500 via-indigo-500 to-blue-600 px-3 py-1 rounded-md text-sm font-medium hover:from-indigo-400 hover:to-purple-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" (click)="toggleSearch()">Search</button>
-       
-      </div>
+            
                         <!-- <ng-container *ngIf="isLoggedIn; else loggedOut">
                           <a (click)="logOut()" routerLink='/homepage' class="text-gray-300 hover:bg-indigo-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Log out</a>
                           <a routerLink='/myprofile' class="text-gray-300 hover:bg-indigo-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">My Profile</a>
@@ -55,5 +54,10 @@
                           <a routerLink='/sign-up' class="text-gray-300 hover:bg-indigo-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sign up</a>
                           <a routerLink='/login' class="text-gray-300 hover:bg-indigo-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Log in</a>
                         </ng-template>
+                        <div class="flex items-center">
+                          <input *ngIf="showSearchInput" type="text" placeholder="Search" class="px-3 py-1 border border-gray-300 rounded-md mr-2 focus:outline-none">
+                          <button class="text-white bg-gradient-to-r from-purple-500 via-indigo-500 to-blue-600 px-3 py-1 rounded-md text-sm font-medium hover:from-indigo-400 hover:to-purple-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" (click)="toggleSearch()">Search</button>
+                         
+                        </div>
 
           
