@@ -32,7 +32,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
       provide: HTTP_INTERCEPTORS,
       useValue: AuthInterceptor,
       multi: true, // Birden fazla interceptor zincirlenmesine izin ver
-    }
+    },
+    
   ],
   imports: [RouterOutlet, HttpClientModule, NavbarComponent, HomepageComponent, LoginComponent, SignUpComponent, SharedModule, BootcampListGroupComponent, InstructorComponent, CloudinaryModule, FooterComponent, ProfileComponent],
 
