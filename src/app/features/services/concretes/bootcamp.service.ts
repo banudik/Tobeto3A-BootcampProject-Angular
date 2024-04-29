@@ -35,6 +35,7 @@ export class BootcampService extends BootcampBaseService {
           instructorFirstName: response.instructorFirstName,
           instructorLastName: response.instructorLastName,
           startDate: response.startDate,
+          description: response.description,
           endDate: response.endDate,
           bootcampStateId: response.bootcampStateId,
           bootcampStateName: response.bootcampStateName,
