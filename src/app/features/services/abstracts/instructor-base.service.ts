@@ -8,7 +8,7 @@ import { InstructorListItemDto } from '../../models/responses/instructor/instruc
 export abstract class InstructorBaseService {
 
   abstract getList():
-  Observable<GetListInstructorResponse[]>;
+  Observable<InstructorListItemDto>;
   abstract getById():
   Observable<GetByIdInstructorResponse>;
   abstract GetListAll():

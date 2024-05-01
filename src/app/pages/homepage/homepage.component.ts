@@ -10,7 +10,7 @@ import { InstructorComponent } from "../../features/components/instructor/instru
     standalone: true,
     templateUrl: './homepage.component.html',
     styleUrl: './homepage.component.css',
-    imports: [RouterModule]
+    imports: []
 })
 export class HomepageComponent  {
 

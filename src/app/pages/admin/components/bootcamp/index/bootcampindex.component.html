@@ -1,0 +1,68 @@
+<div class="row">
+    <div class="col-lg-6">
+      <div class="card-style mb-30">
+        <h6 class="mb-10">Bootcamp State Index</h6>
+        <a routerLink='/adminpanel/bootcampcreate'><span class="text-success">Create New</span></a>
+        <div class="table-wrapper table-responsive">
+          <table class="table striped-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>
+                    <h6>Image</h6>
+                  </th>
+                <th>
+                  <h6>Bootcamp Name</h6>
+                </th>
+                <th>
+                    <h6>Instructor</h6>
+                  </th>
+                  <th>
+                    <h6>State</h6>
+                  </th>
+                <th>
+                  <h6>Start Date</h6>
+                </th>
+                <th>
+                    <h6>End Date</h6>
+                  </th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let items of bootcampList.items; let i = index">
+                <td>
+                  <div class="check-input-primary">
+                    <input class="form-check-input" type="checkbox" id="checkbox-{{i + 1}}" />
+                  </div>
+                </td>
+                <td>
+                    <img [src]="items.bootcampImageImagePath" width="100" height="100">
+                  </td>
+                <td>
+                  <p>{{ items.name }}</p>
+                </td>
+                <td>
+                    <p>{{ items.instructorFirstName + " " + items.instructorLastName }}</p>
+                  </td>
+                  <td>
+                    <p>{{ items.bootcampStateName }}</p>
+                  </td>
+                <td>
+                  <p>{{ items.startDate| date:'dd/MM/yyyy' }}</p>
+                </td>
+                <td>
+                    <p>{{ items.endDate| date:'dd/MM/yyyy' }}</p>
+                  </td>
+                <td>
+                  <a class="text-success" routerLink='/adminpanel/bootcampdetails/{{items.id}}'>details</a>  |
+                  <a class="text-warning" routerLink='/adminpanel/bootcampedit/{{items.id}}'>Edit</a>  |
+                  <a class="text-danger" routerLink='/adminpanel/bootcampdelete/{{items.id}}'>Delete</a> 
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>

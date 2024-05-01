@@ -14,7 +14,7 @@ import { ProfileComponent } from '../../../pages/profile/profile.component';
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [LoginComponent,RouterModule,SignUpComponent,BootcampListGroupComponent,MenubarModule,CommonModule,ProfileComponent],
+  imports: [MenubarModule,CommonModule,ProfileComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })

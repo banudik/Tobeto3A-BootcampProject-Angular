@@ -1,0 +1,44 @@
+<div class="row">
+    <div class="col-lg-6">
+      <div class="card-style mb-30">
+        <h6 class="mb-10">Bootcamp State Index</h6>
+        <a routerLink='/adminpanel/bootcampstatecreate'><span class="text-success">Create New</span></a>
+        <div class="table-wrapper table-responsive">
+          <table class="table striped-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>
+                  <h6>Bootcamp State Name</h6>
+                </th>
+                <th>
+                  <h6>Created Date</h6>
+                </th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let state of bootcampStateList.items; let i = index">
+                <td>
+                  <div class="check-input-primary">
+                    <input class="form-check-input" type="checkbox" id="checkbox-{{i + 1}}" />
+                  </div>
+                </td>
+                <td>
+                  <p>{{ state.name }}</p>
+                </td>
+                <td>
+                  <p>{{ state.createdDate | date:'dd/MM/yyyy' }}</p>
+                </td>
+                <td>
+                  <a class="text-success" routerLink='/adminpanel/bootcampstatedetails/{{state.id}}'>details</a>  |
+                  <a class="text-warning" routerLink='/adminpanel/bootcampstateedit/{{state.id}}'>Edit</a>  |
+                  <a class="text-danger" routerLink='/adminpanel/bootcampstatedelete/{{state.id}}'>Delete</a> 
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
