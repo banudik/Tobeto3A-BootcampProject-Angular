@@ -36,9 +36,12 @@ import { ProfileComponent } from './pages/profile/profile.component';
     },
     
   ],
+
   imports: [RouterOutlet, HttpClientModule,  SharedModule, CloudinaryModule,CommonModule],
+
 
 })
 export class AppComponent /** implements OnInit**/ {
   title = 'BootcampProject-FrontEnd';
+
 }
