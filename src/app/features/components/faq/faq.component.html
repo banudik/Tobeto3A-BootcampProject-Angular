@@ -1,9 +1,12 @@
-<div class="container mx-auto px-4 py-8">
-    <h1 class="text-3xl font-bold mb-8">Sıkça Sorulan Sorular</h1>
-    <div *ngFor="let faq of faqList" class="bg-indigo-200 rounded-lg shadow-md p-6 mb-6" (click)="toggleAnswer(faq)">
-      <h3 class="text-xl font-semibold mb-2">{{ faq.question }}</h3>
+<div class="min-h-screen bg-white dark:bg-black">
+  <div class="container mx-auto px-8 py-8 bg-white dark:bg-black">
+    <h1 class="text-3xl font-bold mb-8 text-black dark:text-white text-center">Sıkça Sorulan Sorular</h1>
+    <div *ngFor="let faq of faqList" class="bg-indigo-200 dark:bg-indigo-950 rounded-lg shadow-md p-6 mb-6" (click)="toggleAnswer(faq)">
+      <h3 class="text-xl font-semibold mb-2 text-black dark:text-white">{{ faq.question }}</h3>
 
-      <p *ngIf="faq.isOpen" class="text-lilac-500">{{ faq.answer }}</p>
+      <p *ngIf="faq.isOpen" class="text-black dark:text-white">{{ faq.answer }}</p>
     </div>
   </div>
+</div>
+
   

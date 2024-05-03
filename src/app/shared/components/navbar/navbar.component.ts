@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit,inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { LoginComponent } from '../../../pages/login/login.component';
 import { SignUpComponent } from '../../../pages/sign-up/sign-up.component';
@@ -10,11 +10,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ProfileComponent } from '../../../pages/profile/profile.component';
+import { DarkModeService } from '../../../features/services/dark-mode.service';
+
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [LoginComponent,RouterModule,SignUpComponent,BootcampListGroupComponent,MenubarModule,CommonModule,ProfileComponent],
+  imports: [MenubarModule,CommonModule,ProfileComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
   changeDetection:ChangeDetectionStrategy.OnPush,
@@ -89,5 +91,11 @@ export class NavbarComponent implements OnInit{
         }
       });
     }
+  }
+
+  darkModeService: DarkModeService = inject(DarkModeService);
+
+  toggleDarkMode() {
+    this.darkModeService.updateDarkMode();
   }
 }

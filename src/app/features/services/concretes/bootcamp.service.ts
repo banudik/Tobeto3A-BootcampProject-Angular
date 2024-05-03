@@ -7,17 +7,38 @@ import { GetByIdBootcampResponse } from '../../models/responses/bootcamp/get-by-
 import { environment } from '../../../../environments/environment';
 import { BootcampListItemDto } from '../../models/responses/bootcamp/bootcamp-list-item-dto';
 import { PageRequest } from '../../../core/models/page-request';
+import { CreateBootcampRequest } from '../../models/requests/bootcamp/create-bootcamp-request';
+import { UpdateBootcampRequest } from '../../models/requests/bootcamp/update-bootcamp-request';
+import { CreatedBootcampResponse } from '../../models/responses/bootcamp/created-bootcamp-response';
+import { DeletedBootcampResponse } from '../../models/responses/bootcamp/deleted-bootcamp-response';
+import { UpdatedBootcampResponse } from '../../models/responses/bootcamp/updated-bootcamp-response';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BootcampService extends BootcampBaseService {
-
-
+  
   private readonly apiUrl:string = `${environment.API_URL}/bootcamps`
 
   
   constructor(private httpClient:HttpClient) {super() }
+
+
+  override add(request: FormData): Observable<CreatedBootcampResponse> {
+    return this.httpClient.post<CreatedBootcampResponse>(this.apiUrl,request);
+  }
+
+
+  override update(request: UpdateBootcampRequest): Observable<UpdatedBootcampResponse> {
+    return this.httpClient.put<UpdatedBootcampResponse>(this.apiUrl,request);
+  }
+
+
+  override delete(id: number): Observable<DeletedBootcampResponse> {
+    return this.httpClient.delete<DeletedBootcampResponse>(`${this.apiUrl}/`+id)
+  }
+
+
 
   override getBootcampById(bootcampId: number): Observable<GetByIdBootcampResponse> {
     const newRequest: {[key: string]: string | number} = {
@@ -35,6 +56,7 @@ export class BootcampService extends BootcampBaseService {
           instructorFirstName: response.instructorFirstName,
           instructorLastName: response.instructorLastName,
           startDate: response.startDate,
+          description: response.description,
           endDate: response.endDate,
           bootcampStateId: response.bootcampStateId,
           bootcampStateName: response.bootcampStateName,

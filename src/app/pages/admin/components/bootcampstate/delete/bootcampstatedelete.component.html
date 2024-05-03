@@ -1,0 +1,23 @@
+<form>
+    <div class="card-style mb-30">
+        <h6 class="mb-25">Are you sure about deleting this bootcamp state ?</h6>
+        <div class="input-style-1">
+          <label for="nameInput" >Bootcamp State Name</label>
+          <input disabled id="nameInput" type="text"  value="{{currentBootcampState.name}}"/>
+        </div>
+        <div class="input-style-1">
+            <label for="createdDate" >Bootcamp State Created Date</label>
+            <input disabled id="createdDate" type="text"  [value]="currentBootcampState.createdDate | date : 'dd/MM/yyyy'"/>
+          </div>
+          <div class="input-style-1">
+            <label for="updatedDate" >Bootcamp State Updated Date</label>
+            <input disabled id="updatedDate" type="text"  [value]="currentBootcampState.updatedDate| date : 'dd/MM/yyyy'"/>
+          </div>
+      </div>
+      <br>
+      <div>
+        <a class="text-danger cursor-pointer" (click)="deleteBootcampState(currentBootcampState.id)" >Delete</a>  |
+        <a class="text-primary" routerLink="/adminpanel/bootcampstateindex">Back to List</a>
+    </div>
+    </form>
+    

@@ -1,5 +1,5 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { HomepageComponent } from './pages/homepage/homepage.component';
@@ -17,18 +17,15 @@ import { AuthInterceptor } from './core/interceptors/auth/auth.interceptor';
 import { ErrorInterceptor } from './core/interceptors/error/error.interceptor';
 import { ProfileComponent } from './pages/profile/profile.component';
 
+
 @Component({
   selector: 'app-root',
   standalone: true,
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  imports: [RouterOutlet, HttpClientModule, NavbarComponent, HomepageComponent, LoginComponent, SignUpComponent, SharedModule, BootcampListGroupComponent, InstructorComponent, CloudinaryModule, FooterComponent, ProfileComponent],
 
+  imports: [RouterOutlet, HttpClientModule, NavbarComponent, HomepageComponent, LoginComponent, SignUpComponent, SharedModule, BootcampListGroupComponent, InstructorComponent, CloudinaryModule, FooterComponent, ProfileComponent],
 })
 export class AppComponent /** implements OnInit**/ {
   title = 'BootcampProject-FrontEnd';
-  /**img: CloudinaryImage;
-  ngOnInit() {
-    const cld = new Cloudinary({cloud: {cloudName: 'day7jhbzi'}});**/
-
 }

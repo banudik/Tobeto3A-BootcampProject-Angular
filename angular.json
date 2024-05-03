@@ -30,11 +30,13 @@
             "inlineStyleLanguage": "css",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/assets/adminAssets/assets/js"
             ],
             "styles": [
               "src/styles.css",
               "node_modules/ngx-toastr/toastr.css"
+              
             ],
             "scripts": []
           },
@@ -100,7 +102,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/ngx-toastr/toastr.css"
+            
             ],
             "scripts": []
           }

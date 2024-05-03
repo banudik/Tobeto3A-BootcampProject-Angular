@@ -1,30 +1,30 @@
 
-<div class="min-h-screen flex items-center justify-center bg-gray-100">
-  <div class="max-w-md w-full p-6 bg-white shadow-lg rounded-lg">
-    <h2 class="text-2xl font-semibold text-center mb-4">Login</h2>
-    <form class="space-y-4" [formGroup]="loginForm" (ngSubmit)="login()">
+<div class="min-h-screen flex items-center justify-center bg-white dark:bg-black">
+  <div class="max-w-md w-full p-6 bg-black dark:bg-white shadow-lg rounded-lg">
+    <h2 class="text-2xl font-semibold text-center mb-4 text-white dark:text-black">Login</h2>
+    <form  class="space-y-4" [formGroup]="loginForm" (ngSubmit)="login()">
       <div>
-        <label for="email" class="block font-medium">Email</label>
+        <label for="email" class="block font-medium text-white dark:text-black">Email</label>
         <input type="email" id="email" formControlName="email" class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
       </div>
       <div>
-        <label for="password" class="block font-medium">Password</label>
+        <label for="password" class="block font-medium text-white dark:text-black">Password</label>
         <input type="password" id="password" formControlName="password" class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
       </div>
       <div class="flex items-center justify-between">
         <div class="flex items-center">
           <input type="checkbox" id="rememberMe" name="rememberMe" class="text-indigo-600 border-gray-300 rounded shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
-          <label for="rememberMe" class="ml-2 block text-sm text-gray-600">Remember me</label>
+          <label for="rememberMe" class="ml-2 block text-sm text-white dark:text-black">Remember me</label>
         </div>
         <div class="text-sm">
           <a href="#" class="text-indigo-600 hover:underline">Forgot your password?</a>
         </div>
       </div>
       <div>
-        <button type="submit" class="w-full bg-indigo-500 text-white font-semibold py-2 rounded-md hover:bg-indigo-600 transition duration-300">Login</button>
+        <button id="btn" type="submit" class="w-full text-white dark:text-black font-semibold">Login</button>
       </div>
       <div class="text-sm text-center">
-        <p class="text-gray-600">Don't have an account? <a routerLink="/sign-up" class="text-indigo-600 hover:underline">Sign up</a></p>
+        <p class="text-white dark:text-black">Don't have an account? <a routerLink="/sign-up" class="text-indigo-600 hover:underline">Sign up</a></p>
       </div>
     </form>
   </div>
