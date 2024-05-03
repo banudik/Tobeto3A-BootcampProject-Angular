@@ -66,9 +66,6 @@ export class BootcampcreateComponent  implements OnInit{
   add(){
     if(this.BootcampForm.valid){
       let bootcampModel:CreateBootcampRequest = Object.assign({},this.BootcampForm.value);
-      console.log(bootcampModel.file);
-      //console.log(fileInput);
-      
       
       let formData = new FormData();
       formData.append('name', bootcampModel.name);
@@ -78,8 +75,7 @@ export class BootcampcreateComponent  implements OnInit{
       formData.append('file', bootcampModel.file);
       formData.append('description', bootcampModel.description);
       formData.append('bootcampStateId', bootcampModel.bootcampStateId.toString());
-      console.log(formData.get('file'));
-      
+
       this.bootcampService.add(formData).subscribe({
         //next => observable'dan gelen veri yakaladığımız fonksiyon
         next:(response)=>{
