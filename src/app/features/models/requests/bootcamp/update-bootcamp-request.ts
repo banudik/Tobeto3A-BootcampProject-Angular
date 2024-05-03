@@ -5,5 +5,6 @@ export interface UpdateBootcampRequest {
     startDate: Date;
     endDate: Date;
     bootcampStateId: number;
-    bootcampImageId: number;
+    description:string;
+    file:File;
 }
