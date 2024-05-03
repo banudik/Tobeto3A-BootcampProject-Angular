@@ -1,5 +1,5 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { HomepageComponent } from './pages/homepage/homepage.component';
@@ -16,6 +16,7 @@ import { FooterComponent } from './shared/components/footer/footer.component';
 import { AuthInterceptor } from './core/interceptors/auth/auth.interceptor';
 import { ErrorInterceptor } from './core/interceptors/error/error.interceptor';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { DarkModeService } from './features/services/dark-mode.service';
 
 @Component({
   selector: 'app-root',
@@ -35,7 +36,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
     },
     
   ],
-  imports: [RouterOutlet, HttpClientModule, NavbarComponent, HomepageComponent, LoginComponent, SignUpComponent, SharedModule, BootcampListGroupComponent, InstructorComponent, CloudinaryModule, FooterComponent, ProfileComponent],
+  imports: [RouterOutlet, HttpClientModule, NavbarComponent, HomepageComponent, LoginComponent, SignUpComponent, SharedModule, BootcampListGroupComponent, InstructorComponent, CloudinaryModule, FooterComponent, ProfileComponent,CommonModule],
 
 })
 export class AppComponent /** implements OnInit**/ {
@@ -44,4 +45,5 @@ export class AppComponent /** implements OnInit**/ {
   ngOnInit() {
     const cld = new Cloudinary({cloud: {cloudName: 'day7jhbzi'}});**/
 
+    darkModeService:DarkModeService = inject(DarkModeService);
 }
