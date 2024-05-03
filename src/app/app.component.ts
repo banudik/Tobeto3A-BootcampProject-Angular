@@ -16,7 +16,7 @@ import { FooterComponent } from './shared/components/footer/footer.component';
 import { AuthInterceptor } from './core/interceptors/auth/auth.interceptor';
 import { ErrorInterceptor } from './core/interceptors/error/error.interceptor';
 import { ProfileComponent } from './pages/profile/profile.component';
-import { DarkModeService } from './features/services/dark-mode.service';
+
 
 @Component({
   selector: 'app-root',
@@ -36,7 +36,9 @@ import { DarkModeService } from './features/services/dark-mode.service';
     },
     
   ],
-  imports: [RouterOutlet, HttpClientModule, SignUpComponent, SharedModule, CloudinaryModule,CommonModule],
+
+  imports: [RouterOutlet, HttpClientModule,  SharedModule, CloudinaryModule,CommonModule],
+
 
 })
 export class AppComponent /** implements OnInit**/ {

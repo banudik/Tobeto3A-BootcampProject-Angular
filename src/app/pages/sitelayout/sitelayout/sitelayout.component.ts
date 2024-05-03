@@ -14,5 +14,6 @@ import { NavbarComponent } from '../../../shared/components/navbar/navbar.compon
     imports: [SharedModule, FooterComponent,RouterModule,CommonModule,NavbarComponent]
 })
 export class SitelayoutComponent {
+
     darkModeService:DarkModeService = inject(DarkModeService);
 }
