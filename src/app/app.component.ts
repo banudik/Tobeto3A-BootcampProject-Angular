@@ -23,25 +23,9 @@ import { ProfileComponent } from './pages/profile/profile.component';
   standalone: true,
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ErrorInterceptor,
-      multi: true,
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useValue: AuthInterceptor,
-      multi: true, // Birden fazla interceptor zincirlenmesine izin ver
-    },
-    
-  ],
 
-  imports: [RouterOutlet, HttpClientModule,  SharedModule, CloudinaryModule,CommonModule],
-
-
+  imports: [RouterOutlet, HttpClientModule, NavbarComponent, HomepageComponent, LoginComponent, SignUpComponent, SharedModule, BootcampListGroupComponent, InstructorComponent, CloudinaryModule, FooterComponent, ProfileComponent],
 })
 export class AppComponent /** implements OnInit**/ {
   title = 'BootcampProject-FrontEnd';
-
 }
