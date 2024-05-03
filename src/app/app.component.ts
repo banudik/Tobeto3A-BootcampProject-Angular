@@ -36,14 +36,10 @@ import { DarkModeService } from './features/services/dark-mode.service';
     },
     
   ],
-  imports: [RouterOutlet, HttpClientModule, NavbarComponent, HomepageComponent, LoginComponent, SignUpComponent, SharedModule, BootcampListGroupComponent, InstructorComponent, CloudinaryModule, FooterComponent, ProfileComponent,CommonModule],
+  imports: [RouterOutlet, HttpClientModule, SignUpComponent, SharedModule, CloudinaryModule,CommonModule],
 
 })
 export class AppComponent /** implements OnInit**/ {
   title = 'BootcampProject-FrontEnd';
-  /**img: CloudinaryImage;
-  ngOnInit() {
-    const cld = new Cloudinary({cloud: {cloudName: 'day7jhbzi'}});**/
 
-    darkModeService:DarkModeService = inject(DarkModeService);
 }
