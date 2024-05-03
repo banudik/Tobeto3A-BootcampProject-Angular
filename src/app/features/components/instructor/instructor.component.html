@@ -1,17 +1,17 @@
-<div class="bg-gray-100">
+<div class="bg-white">
     <div class="flex h-screen">
-        <aside class="w-64 bg-white shadow-md">
+        <aside class="w-64 bg-white dark:bg-black shadow-md">
             <div class="p-4">
-                <input type="text" [(ngModel)]="filterText" class="border border-gray-300 p-2 rounded-md w-full" placeholder="Eğitmen ara">
+                <input type="text" [(ngModel)]="filterText" class="border border-indigo-600 dark:border-indigo-600 p-2 rounded-md w-full" placeholder="Eğitmen ara">
             </div>
             
-            <div *ngIf="filterText" class="p-4 bg-green-100 opacity-80">
+            <div *ngIf="filterText" class="p-4 bg-indigo-300 dark:bg-indigo-300 opacity-80">
                 {{ filterText }} aradınız.
             </div>
             
             <div class="p-4">
                 <select class="form-select w-full" size="5" aria-label="size 3 select example">
-                    <option class="bg-gray-100" routerLink="/bootcamps">Tüm Eğitmenler</option>
+                    <option class="bg-white dark:bg-black dark:text-white" routerLink="/bootcamps">Tüm Eğitmenler</option>
                     <ng-container *ngFor="let instructor of instructors.items | filterInstructorPipe: filterText">
                         <option *ngIf="instructor.id" [ngClass]="{
                                 'bg-indigo-300': selectedInstructorId === instructor.id
