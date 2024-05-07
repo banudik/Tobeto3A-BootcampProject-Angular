@@ -1,48 +1,3 @@
-<!-- <div class="min-h-screen flex items-center justify-center bg-gray-100">
-    <div class="max-w-md w-full p-6 bg-white shadow-lg rounded-lg">
-      <h2 class="text-2xl font-semibold text-center mb-4">Sign Up</h2>
-      <form class="space-y-4" [formGroup]="registerForm">
-        <div>
-            <label for="username" class="block font-medium">Username</label>
-            <input type="text" id="username" name="username" class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
-          </div>
-        <div>
-          <label for="firstName" class="block font-medium">First Name</label>
-          <input type="text" id="firstName" name="firstName" class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
-        </div>
-        <div>
-          <label for="lastName" class="block font-medium">Last Name</label>
-          <input type="text" id="lastName" name="lastName" class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
-        </div>
-        <div>
-          <label for="dateOfBirth" class="block font-medium">Date of Birth</label>
-          <input type="date" id="dateOfBirth" name="dateOfBirth" class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
-        </div>
-        <div>
-          <label for="nationalIdentity" class="block font-medium">National Identity</label>
-          <input type="text" id="nationalIdentity" name="nationalIdentity" class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
-        </div>
-        <div>
-          <label for="email" class="block font-medium">Email</label>
-          <input type="email" id="email" name="email" class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
-        </div>
-        <div>
-          <label for="password" class="block font-medium">Password</label>
-          <input type="password" id="password" name="password" class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
-        </div>
-        <div>
-          <label for="about" class="block font-medium">about</label>
-          <input type="text" id="about" name="about" class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
-        </div>
-        <div>
-          <button (click)="register()" class="w-full bg-indigo-500 text-white font-semibold py-2 rounded-md hover:bg-indigo-600 transition duration-300">Sign Up</button>
-        </div>
-          <div class="text-sm text-center">
-            <p class="text-gray-600">Already have an account? <a routerLink='/login'  class="text-indigo-600 hover:underline">Log in</a></p>
-          </div>
-      </form>
-    </div>
-  </div> -->
 
   <div class="min-h-screen flex items-center justify-center bg-white dark:bg-black">
     <div class="max-w-md w-full p-6 bg-black dark:bg-white shadow-lg rounded-lg">
@@ -51,34 +6,59 @@
         <div>
           <label for="userName" class="block font-medium text-white dark:text-black">Username</label>
           <input type="text" id="userName" formControlName="userName" class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
+          <div class="text-danger" *ngIf="registerForm.controls['userName'].invalid && ( registerForm.controls['userName'].touched || registerForm.controls['userName'].dirty)">
+            <small *ngIf="registerForm.controls['userName'].errors?.['required']" class="text-red-500">Kullanıcı adı boş bırakılamaz</small>
+         </div>
         </div>
         <div>
           <label for="firstName" class="block font-medium text-white dark:text-black">First Name</label>
           <input type="text" id="firstName" formControlName="firstName" class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
+          <div class="text-danger" *ngIf="registerForm.controls['firstName'].invalid && ( registerForm.controls['firstName'].touched || registerForm.controls['firstName'].dirty)">
+            <small *ngIf="registerForm.controls['firstName'].errors?.['required']" class="text-red-500">Lütfen İsminizi Girin</small>
+         </div>
         </div>
         <div>
           <label for="lastName" class="block font-medium text-white dark:text-black">Last Name</label>
           <input type="text" id="lastName" formControlName="lastName" class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
+          <div class="text-danger" *ngIf="registerForm.controls['lastName'].invalid && ( registerForm.controls['lastName'].touched || registerForm.controls['lastName'].dirty)">
+            <small *ngIf="registerForm.controls['lastName'].errors?.['required']" class="text-red-500">Lütfen Soyisminizi Girin</small>
+         </div>
         </div>
         <div>
           <label for="dateOfBirth" class="block font-medium text-white dark:text-black">Date of Birth</label>
           <input type="date" id="dateOfBirth" formControlName="dateOfBirth" class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
+          <div *ngIf="registerForm.get('dateOfBirth')?.invalid && (registerForm.get('dateOfBirth')?.touched || registerForm.get('dateOfBirth')?.dirty)" class="text-red-500">
+            <small>Tarih gerekli.</small>
+          </div>
         </div>
         <div>
           <label for="nationalIdentity" class="block font-medium text-white dark:text-black">National Identity</label>
           <input type="text" id="nationalIdentity" formControlName="nationalIdentity" class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
+          <div class="text-danger" *ngIf="registerForm.controls['nationalIdentity'].invalid && ( registerForm.controls['nationalIdentity'].touched || registerForm.controls['nationalIdentity'].dirty)">
+            <small *ngIf="registerForm.controls['nationalIdentity'].errors?.['required']" class="text-red-500">Bu alan boş bırakılamaz</small>
+         </div>
         </div>
         <div>
           <label for="email" class="block font-medium text-white dark:text-black">Email</label>
           <input type="email" id="email" formControlName="email" class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
+          <div class="text-danger" *ngIf="registerForm.controls['email'].invalid && ( registerForm.controls['email'].touched || registerForm.controls['email'].dirty)">
+            <small *ngIf="registerForm.controls['email'].errors?.['required']" class="text-red-500">Lütfen Email Girin</small>
+         </div>
         </div>
         <div>
           <label for="password" class="block font-medium text-white dark:text-black">Password</label>
           <input type="password" id="password" formControlName="password" class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
+          <div *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.touched || registerForm.get('password')?.dirty)">
+            <small *ngIf="registerForm.get('password')?.hasError('required')" class="text-red-500">Şifre boş bırakılamaz.</small>
+            <small *ngIf="registerForm.get('password')?.hasError('pattern')" class="text-red-500">Şifre en az bir sayı, bir Büyük harf ve bir noktalama işaret içermeli.</small>
+          </div>
         </div>
         <div>
           <label for="about" class="block font-medium text-white dark:text-black">About</label>
           <input type="text" id="about" formControlName="about" class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
+          <div class="text-danger" *ngIf="registerForm.controls['about'].invalid && ( registerForm.controls['about'].touched || registerForm.controls['about'].dirty)">
+            <small *ngIf="registerForm.controls['about'].errors?.['required']" class="text-red-500">Hakkında Boş Bırakılamaz</small>
+         </div>
         </div>
         <div>
           <button id="btn" type="submit" class="w-full text-white dark:text-black font-semibold">Sign Up</button>
