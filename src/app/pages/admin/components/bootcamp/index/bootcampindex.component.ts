@@ -4,6 +4,8 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { BootcampService } from '../../../../../features/services/concretes/bootcamp.service';
 import { PageRequest } from '../../../../../core/models/page-request';
 import { CommonModule } from '@angular/common';
+import { InstructorListItemDto } from '../../../../../features/models/responses/instructor/instructor-list-item-dto';
+import { InstructorService } from '../../../../../features/services/concretes/instructor.service';
 
 @Component({
   selector: 'app-bootcampindex',
@@ -14,7 +16,6 @@ import { CommonModule } from '@angular/common';
 })
 export class BootcampindexComponent implements OnInit{
   dateNow = Date.now;
-  currentPageNumber!: number;
   
   bootcampList: BootcampListItemDto = {
     index: 0,
@@ -26,55 +27,116 @@ export class BootcampindexComponent implements OnInit{
     pages: 0,
     items: []
   };
+
+  instructors!:InstructorListItemDto;
   
-  constructor(private bootcampService: BootcampService, private activatedRoute: ActivatedRoute) {}
-  readonly PAGE_SIZE = 10;
+  constructor(private bootcampService: BootcampService, private activatedRoute: ActivatedRoute,private instructorService:InstructorService) {}
+  readonly PAGE_SIZE = 100000; //for api
+
+  currentPageNumber: number = 1;
+  pageSize: number = 5;
+  pageSizes: Array<number> = [5,10,20];
+  searchTermTmp:string = '';
+  instructorFilterTmp:string = '';
+  filteredBootcampList: BootcampListItemDto = this.bootcampList;
 
   ngOnInit(): void {
+    this.getInstructors();
     this.getList({ page: 0, pageSize: this.PAGE_SIZE })
+    this.visibleData();
+    this.pageNumbers();
   }
 
   getList(pageRequest: PageRequest) {
     this.bootcampService.getList(pageRequest).subscribe((response) => {
       this.bootcampList = response;
-      this.updateCurrentPageNumber();
-    })
-
-  }
-
-  getBootcampListByInstructor(pageRequest: PageRequest, instructorId: string) {
-    this.bootcampService.getBootcampListByInstructorId(pageRequest, instructorId).subscribe((response) => {
-      this.bootcampList = response;
-      this.updateCurrentPageNumber();
     })
   }
 
-  onViewMoreClicked(): void {
-    const nextPageIndex = this.bootcampList.index + 1;
-    const pageSize = this.bootcampList.size;
+  getInstructors(){
+    this.instructorService.GetListAll().subscribe((response)=>{
+     this.instructors=response;
+    })
+ }
 
-    this.getList({ page: nextPageIndex, pageSize: pageSize });
+  visibleData(){
+    let startIndex = (this.currentPageNumber - 1 )* this.pageSize;
+    let endIndex = startIndex + this.pageSize;
     
-    this.updateCurrentPageNumber();
+    if(this.filteredBootcampList.items.length == 0 && this.searchTermTmp == '' && this.instructorFilterTmp == ''){
+      return this.bootcampList.items.slice(startIndex,endIndex);
+    }
+    return this.filteredBootcampList.items.slice(startIndex,endIndex);
   }
 
-  onPreviousPageClicked(): void {
-    const previousPageIndex = this.bootcampList.index - 1;
-    const pageSize = this.bootcampList.size;
-    //this.getList({ page: previousPageIndex, pageSize });
+  nextPage(){
+    this.currentPageNumber++;
+    this.visibleData();
 
-    this.getList({ page: previousPageIndex, pageSize: pageSize });
-
-    this.lowerCurrentPageNumber();
   }
 
-  updateCurrentPageNumber(): void {
-    this.currentPageNumber = this.bootcampList.index + 1;
+  previousPage(){
+    this.currentPageNumber--;
+    this.visibleData();
   }
 
-  lowerCurrentPageNumber(): void {
-    this.currentPageNumber = this.bootcampList.index - 1;
+  pageNumbers(){
+    let totalPages:number;
+
+    if(this.filteredBootcampList.items.length == 0 && this.searchTermTmp == '' && this.instructorFilterTmp == ''){
+      totalPages = Math.ceil(this.bootcampList.items.length / this.pageSize);
+    }
+    else{
+      totalPages = Math.ceil(this.filteredBootcampList.items.length / this.pageSize);
+    }
+    
+    let pageNumArray = new Array(totalPages);
+    return pageNumArray;
   }
 
+  changePage(pageNumber:number){
+    this.currentPageNumber = pageNumber;
+    this.visibleData();
+  }
+
+  changePageSize(pageSize:any){
+    this.pageSize = pageSize;
+    this.visibleData();
+  }
+
+
+  filterData(searchTerm: string) {
+    this.searchTermTmp = searchTerm;
+    
+    if (this.instructorFilterTmp !== '') {
+      this.filteredBootcampList.items = this.bootcampList.items.filter((item) => {
+        return item.instructorId === this.instructorFilterTmp && Object.values(item).some((val) => {
+          return val.toString().toLowerCase().includes(searchTerm.toLowerCase());
+        });
+      });
+    } else {
+      this.filteredBootcampList.items = this.bootcampList.items.filter((item) => {
+        return Object.values(item).some((val) => {
+          return val.toString().toLowerCase().includes(searchTerm.toLowerCase());
+        });
+      });
+    }
+  
+    this.visibleData();
+  }
+
+  filterByInstructor(instructorId: string) {
+    this.instructorFilterTmp = instructorId;
+  
+    if (instructorId === '') {
+      this.filteredBootcampList.items = this.bootcampList.items;
+    } else {
+      this.filteredBootcampList.items = this.bootcampList.items.filter((item) => {
+        return item.instructorId === instructorId;
+      });
+    }
+  
+    this.visibleData();
+  }
 
 }
