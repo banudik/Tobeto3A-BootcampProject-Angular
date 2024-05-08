@@ -13,7 +13,7 @@ import { RouterModule } from '@angular/router';
   styleUrl: './bootcampstateindex.component.css'
 })
 export class BootcampstateindexComponent implements OnInit {
-  readonly PAGE_SIZE = 8;
+  readonly PAGE_SIZE = 10;
   currentPageNumber!: number;
 
   /**
@@ -31,6 +31,8 @@ export class BootcampstateindexComponent implements OnInit {
     pages: 0,
     items: []
   };
+
+
 
   ngOnInit(): void {
     this.getList({ page: 0, pageSize: this.PAGE_SIZE }) 
@@ -73,5 +75,13 @@ export class BootcampstateindexComponent implements OnInit {
 
   lowerCurrentPageNumber(): void {
     this.currentPageNumber = this.bootcampStateList.index - 1;
+  }
+
+  filterData(searchTerm: string) {
+    this.bootcampStateList.items = this.bootcampStateList.items.filter((item) => {
+      return Object.values(item).some((val) => {
+        return val.toString().toLowerCase().includes(searchTerm.toLowerCase());
+      });
+    });
   }
 }

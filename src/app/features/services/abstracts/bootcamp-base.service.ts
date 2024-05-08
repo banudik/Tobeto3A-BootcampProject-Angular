@@ -21,7 +21,7 @@ export abstract class BootcampBaseService {
 
   abstract add(request:FormData)
   :Observable<CreatedBootcampResponse>;
-  abstract update(request:UpdateBootcampRequest)
+  abstract update(request:FormData)
   :Observable<UpdatedBootcampResponse>;
 abstract delete(id:number)
   :Observable<DeletedBootcampResponse>;

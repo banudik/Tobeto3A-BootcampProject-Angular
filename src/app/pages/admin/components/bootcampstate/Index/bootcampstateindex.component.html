@@ -4,6 +4,12 @@
         <h6 class="mb-10">Bootcamp State Index</h6>
         <a routerLink='/adminpanel/bootcampstatecreate'><span class="text-success">Create New</span></a>
         <div class="table-wrapper table-responsive">
+          <div class="flex justify-between items-center mb-4 mt-4">
+            <input type="text" placeholder="Search" class="w-full border p-2 rounded-lg" #filter (keyup)="filterData(filter.value)">
+            <select class="border p-2 rounded-lg">
+              <option value="">Test</option>
+            </select>
+          </div>
           <table class="table striped-table">
             <thead>
               <tr>

@@ -6,7 +6,9 @@ import { BootcampstatedetailsComponent } from "./components/bootcampstate/detail
 import { BootcampstatedeleteComponent } from "./components/bootcampstate/delete/bootcampstatedelete.component";
 import { BootcampindexComponent } from "./components/bootcamp/index/bootcampindex.component";
 import { BootcampcreateComponent } from "./components/bootcamp/create/bootcampcreate.component";
-import { BootcampDetailsComponent } from "../../features/components/bootcamps/bootcamp-details/bootcamp-details.component";
+import { BootcampeditComponent } from "./components/bootcamp/edit/bootcampedit.component";
+import { BootcampdetailsComponent } from "./components/bootcamp/details/bootcampdetails.component";
+import { BootcampdeleteComponent } from "./components/bootcamp/delete/bootcampdelete.component";
 
 export const adminRoutes: Routes = [
 
@@ -20,5 +22,7 @@ export const adminRoutes: Routes = [
     //bootcamp
         { path: "bootcampindex", component: BootcampindexComponent },
         { path: "bootcampcreate", component: BootcampcreateComponent },
-        { path: "bootcampdetails/:bootcampId", component: BootcampDetailsComponent },
+        { path: "bootcampdetails/:bootcampId", component: BootcampdetailsComponent },
+        { path: "bootcampedit/:bootcampId", component: BootcampeditComponent },
+        { path: "bootcampdelete/:bootcampId", component: BootcampdeleteComponent },
     ];

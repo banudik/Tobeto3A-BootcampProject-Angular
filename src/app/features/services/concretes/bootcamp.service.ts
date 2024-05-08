@@ -29,7 +29,7 @@ export class BootcampService extends BootcampBaseService {
   }
 
 
-  override update(request: UpdateBootcampRequest): Observable<UpdatedBootcampResponse> {
+  override update(request: FormData): Observable<UpdatedBootcampResponse> {
     return this.httpClient.put<UpdatedBootcampResponse>(this.apiUrl,request);
   }
 

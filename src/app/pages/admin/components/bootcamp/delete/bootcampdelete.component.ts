@@ -4,15 +4,16 @@ import { FormBuilder } from '@angular/forms';
 import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { GetByIdBootcampResponse } from '../../../../../features/models/responses/bootcamp/get-by-id-bootcamp-response';
 import { BootcampService } from '../../../../../features/services/concretes/bootcamp.service';
+import { DeletedBootcampResponse } from '../../../../../features/models/responses/bootcamp/deleted-bootcamp-response';
 
 @Component({
-  selector: 'app-bootcampdetails',
+  selector: 'app-bootcampdelete',
   standalone: true,
   imports: [RouterModule,CommonModule],
-  templateUrl: './bootcampdetails.component.html',
-  styleUrl: './bootcampdetails.component.css'
+  templateUrl: './bootcampdelete.component.html',
+  styleUrl: './bootcampdelete.component.css'
 })
-export class BootcampdetailsComponent implements OnInit{
+export class BootcampdeleteComponent implements OnInit{
   currentBootcamp!:GetByIdBootcampResponse;
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: { [x: string]: number; }) => {
@@ -30,8 +31,6 @@ export class BootcampdetailsComponent implements OnInit{
     this.bootcampService.getBootcampById(id).subscribe(
       (response: GetByIdBootcampResponse) => {
         this.currentBootcamp = response;
-        console.log(this.currentBootcamp.name + " " + this.currentBootcamp.id);
-        
       },
       (error: any) => {
         console.error('Error fetching bootcamp:', error);
@@ -42,5 +41,20 @@ export class BootcampdetailsComponent implements OnInit{
       }
     );
 
+  }
+
+  deleteBootcamp(id:number){
+    this.bootcampService.delete(id).subscribe(
+      (response: DeletedBootcampResponse) => {
+        this.router.navigate(['/adminpanel/bootcampindex'])
+      },
+      (error: any) => {
+        console.error('Error fetching bootcamp:', error);
+        // Hata işleme mekanizmasını buraya ekleyebilirsiniz
+        setTimeout(()=>{
+          this.router.navigate(['/adminpanel/bootcampindex'])
+        },1)
+      }
+    );
   }
 }

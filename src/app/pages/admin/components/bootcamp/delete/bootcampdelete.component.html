@@ -1,6 +1,6 @@
 <form>
     <div class="card-style mb-30">
-        <h6 class="mb-25">Bootcamp Details</h6>
+        <h6 class="mb-25">Are you sure about deleting this bootcamp</h6>
         <div class="input-style-1">
             <label for="nameInput">Bootcamp Name</label>
             <input formControlName="name" id="nameInput" type="text" value="{{currentBootcamp.name}}" disabled />
@@ -37,7 +37,7 @@
     </div>
     <br>
     <div>
-        <a class="text-warning" routerLink='/adminpanel/bootcampedit/{{currentBootcamp.id}}'>Edit</a> |
+        <a class="text-danger cursor-pointer" (click)="deleteBootcamp(currentBootcamp.id)">Delete</a> |
         <a class="text-primary" routerLink="/adminpanel/bootcampindex">Back to List</a>
     </div>
 </form>
