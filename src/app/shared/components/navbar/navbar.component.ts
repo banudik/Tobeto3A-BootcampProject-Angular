@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit,inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { LoginComponent } from '../../../pages/login/login.component';
 import { SignUpComponent } from '../../../pages/sign-up/sign-up.component';
@@ -18,17 +18,19 @@ import { DarkModeService } from '../../../features/services/dark-mode.service';
   standalone: true,
   imports: [MenubarModule,CommonModule,ProfileComponent],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.scss'
+  styleUrl: './navbar.component.scss',
+  changeDetection:ChangeDetectionStrategy.OnPush,
 })
 
 export class NavbarComponent implements OnInit{
-  isLoggedIn!: boolean; 
+  isLoggedIn!: boolean;
   isAdmin!: boolean; 
   menuItems!:MenuItem[];
   userLogged!:boolean;
   showLogoutModal = false;
   userId!:string;
-  constructor(private authService:AuthService,private router:Router){}
+  
+  constructor(private authService:AuthService,private router:Router,private cdRef:ChangeDetectorRef){}
 
    ngOnInit(): void {
      this.getMenuItems();
@@ -36,6 +38,7 @@ export class NavbarComponent implements OnInit{
      console.log(this.getUserId())
      console.log(this.authService.getRoles())
      this.getUserId();
+     this.cdRef.detectChanges();
    }
 
    logOut(){
