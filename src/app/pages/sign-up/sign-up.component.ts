@@ -55,7 +55,6 @@ export class SignUpComponent implements OnInit {
       this.authService.registerApplicant(registerModel).subscribe((response:any)=>{
         //alert("Kayıt Başarılı")
         //this.router.navigate(['login']);
-        this.toastr.success('Kayıt Başarılı');
       }, (errorResponse: any) => { 
           errorResponse.error.Errors.forEach((error: any) => {
             console.error(`Property: ${error.Property}`);
@@ -77,9 +76,10 @@ export class SignUpComponent implements OnInit {
     // }, 3000);
   }
 
-  SendVerifyEmail() : Observable<any> { // Authenticate olan kullanıcıya mail gönderir, response döndürmez
-    return this.httpClient.get(this.apiUrl+'Auth/EnableEmailAuthenticator');
-  }
+  // mail gönderir
+  // SendVerifyEmail() : Observable<any> { // Authenticate olan kullanıcıya doğrulama maili gönderir, response döndürmez
+  //   return this.httpClient.get(this.apiUrl+'Auth/EnableEmailAuthenticator');
+  // }
 
 }
  

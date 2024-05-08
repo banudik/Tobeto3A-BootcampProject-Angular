@@ -26,6 +26,30 @@
       <div class="text-sm text-center">
         <p class="text-white dark:text-black">Don't have an account? <a routerLink="/sign-up" class="text-indigo-600 hover:underline">Sign up</a></p>
       </div>
+
+      <div *ngIf="showAuthenticatorCodeInput" class="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-75 flex items-center justify-center">
+        <div class="bg-white dark:bg-black p-6 rounded-lg shadow-lg relative"> 
+          <button class="absolute top-0 right-0 mr-4 mt-4 text-gray-600 dark:text-gray-400" (click)="onCancel()"> <!-- pop-up kapanması için çarpı işareti :) -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          <h2 class="text-2xl font-semibold text-center mb-4 text-black dark:text-white">İki Faktörlü Kimlik Doğrulama (2FA)</h2>
+          <p class="text-center mb-6 text-gray-700 dark:text-gray-300">Hesabınızı korumak için ekstra bir güvenlik katmanı ekliyoruz.</p>
+          <p class="text-center mb-6 text-gray-700 dark:text-gray-300">Doğrulama kodu için lütfen e-postanızı kontrol edin.</p>
+            <div class="mb-4">
+              <label for="verificationCode" class="block font-medium text-black dark:text-white mb-2">Doğrulama kodunu giriniz</label>
+              <input type="text" id="authenticatorCode" formControlName="authenticatorCode" class="w-full border border-black rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50" maxlength="6">
+            </div>
+            <div class="flex justify-center">
+              <button type="submit" id="btn" class="w-full text-white dark:text-black font-semibold" (click)="verifyCode()">Doğrula</button>
+            </div>
+          
+        </div> 
+      </div>
+      
+
+
     </form>
   </div>
 </div>
