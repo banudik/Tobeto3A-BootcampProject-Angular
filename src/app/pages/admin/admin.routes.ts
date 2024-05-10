@@ -9,6 +9,11 @@ import { BootcampcreateComponent } from "./components/bootcamp/create/bootcampcr
 import { BootcampeditComponent } from "./components/bootcamp/edit/bootcampedit.component";
 import { BootcampdetailsComponent } from "./components/bootcamp/details/bootcampdetails.component";
 import { BootcampdeleteComponent } from "./components/bootcamp/delete/bootcampdelete.component";
+import { ApplicationstateindexComponent } from "./components/applicationstate/index/applicationstateindex.component";
+import { ApplicationstatecreateComponent } from "./components/applicationstate/create/applicationstatecreate.component";
+import { ApplicationstatedeleteComponent } from "./components/applicationstate/delete/applicationstatedelete.component";
+import { ApplicationstatedetailsComponent } from "./components/applicationstate/details/applicationstatedetails.component";
+import { ApplicationstateeditComponent } from "./components/applicationstate/edit/applicationstateedit.component";
 
 export const adminRoutes: Routes = [
 
@@ -25,4 +30,11 @@ export const adminRoutes: Routes = [
         { path: "bootcampdetails/:bootcampId", component: BootcampdetailsComponent },
         { path: "bootcampedit/:bootcampId", component: BootcampeditComponent },
         { path: "bootcampdelete/:bootcampId", component: BootcampdeleteComponent },
+
+    //ApplicationState
+        { path: "applicationstateindex", component: ApplicationstateindexComponent },
+        { path: "applicationstatecreate", component: ApplicationstatecreateComponent },
+        { path: "applicationstatedetails/:applicationStateId", component: ApplicationstatedetailsComponent },
+        { path: "applicationstateedit/:applicationStateId", component: ApplicationstateeditComponent },
+        { path: "applicationstatedelete/:applicationStateId", component: ApplicationstatedeleteComponent },
     ];
