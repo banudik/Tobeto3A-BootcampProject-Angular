@@ -14,6 +14,10 @@ import { ApplicationstatecreateComponent } from "./components/applicationstate/c
 import { ApplicationstatedeleteComponent } from "./components/applicationstate/delete/applicationstatedelete.component";
 import { ApplicationstatedetailsComponent } from "./components/applicationstate/details/applicationstatedetails.component";
 import { ApplicationstateeditComponent } from "./components/applicationstate/edit/applicationstateedit.component";
+import { ApplicationdetailsComponent } from "./components/application/details/applicationdetails.component";
+import { ApplicationeditComponent } from "./components/application/edit/applicationedit.component";
+import { ApplicationindexComponent } from "./components/application/index/applicationindex.component";
+import { ApplicationdeleteComponent } from "./components/application/delete/applicationdelete.component";
 
 export const adminRoutes: Routes = [
 
@@ -37,4 +41,10 @@ export const adminRoutes: Routes = [
         { path: "applicationstatedetails/:applicationStateId", component: ApplicationstatedetailsComponent },
         { path: "applicationstateedit/:applicationStateId", component: ApplicationstateeditComponent },
         { path: "applicationstatedelete/:applicationStateId", component: ApplicationstatedeleteComponent },
+
+    //Application
+        { path: "applicationindex", component: ApplicationindexComponent },
+        { path: "applicationdetails/:applicationId", component: ApplicationdetailsComponent },
+        { path: "applicationedit/:applicationId", component: ApplicationeditComponent },
+        { path: "applicationdelete/:applicationId", component: ApplicationdeleteComponent },
     ];
