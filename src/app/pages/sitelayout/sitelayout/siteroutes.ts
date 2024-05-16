@@ -6,6 +6,7 @@ import { HomepageComponent } from "../../homepage/homepage.component";
 import { LoginComponent } from "../../login/login.component";
 import { ProfileComponent } from "../../profile/profile.component";
 import { SignUpComponent } from "../../sign-up/sign-up.component";
+import { ResetPasswordComponent } from "../../reset-password/reset-password.component";
 
 export const siteRoutes: Routes = [
     {path:'homepage',component:HomepageComponent},
@@ -15,6 +16,8 @@ export const siteRoutes: Routes = [
     {path:"bootcamps/instructor/:instructorId",component:BootcampListGroupComponent},
     {path:"bootcampdetail/:bootcampId",component:BootcampDetailsComponent},
     {path:"myprofile/:userId",component:ProfileComponent},
-    {path:'faq',component:FaqComponent}
+    {path:'faq',component:FaqComponent},
+    { path: 'reset-password', component: ResetPasswordComponent },
+
     
 ];
