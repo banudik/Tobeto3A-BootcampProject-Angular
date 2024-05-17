@@ -4,5 +4,6 @@ export interface CreateBootcampRequest {
     startDate: Date;
     endDate: Date;
     bootcampStateId: number;
-    bootcampImageId: number;
+    file: File;
+    description: string;
 }

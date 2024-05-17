@@ -17,8 +17,8 @@ export class InstructorService extends InstructorBaseService {
   apiGetByIdUrl=""
   constructor(private httpClient:HttpClient) {super() }
 
-  override getList(): Observable<GetListInstructorResponse[]> {
-    return this.httpClient.get<GetListInstructorResponse[]>(this.apiUrl);
+  override getList(): Observable<InstructorListItemDto> {
+    return this.httpClient.get<InstructorListItemDto>(this.apiUrl);
   }
 
   override getById(): Observable<GetByIdInstructorResponse> {
@@ -37,7 +37,7 @@ export class InstructorService extends InstructorBaseService {
       map((response)=>{
         const newResponse:InstructorListItemDto={
           index:0,
-          size:100,
+          size:100000,
           count:response.count,
           hasNext:response.hasNext,
           hasPrevious:response.hasPrevious,

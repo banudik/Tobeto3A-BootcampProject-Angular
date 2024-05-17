@@ -7,3 +7,8 @@
     background-color: #4169E1; /* Geçmemiş olanlar için yeşil */
     color: black;
   }
+  .grid-container {
+    position: relative;
+    z-index: 1;
+  }
+  
