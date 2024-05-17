@@ -6,13 +6,14 @@ import { SignUpComponent } from "../pages/sign-up/sign-up.component";
 import { FilterInstructorPipe } from "./pipes/filter-instructor-pipe.pipe";
 import { FaqComponent } from "../features/components/faq/faq.component";
 import { AboutUsComponent } from "../pages/about-us/about-us.component";
+import { FooterComponent } from "./components/footer/footer.component";
 
 
 
 @NgModule({
     declarations:[FilterBootcampPipe,FilterInstructorPipe,FaqComponent,AboutUsComponent],
     exports:[NavbarComponent,FilterBootcampPipe,FilterInstructorPipe],
-    imports:[CommonModule,NavbarComponent,SignUpComponent],
+    imports:[CommonModule,NavbarComponent,FooterComponent],
 
 })
 export class SharedModule{}

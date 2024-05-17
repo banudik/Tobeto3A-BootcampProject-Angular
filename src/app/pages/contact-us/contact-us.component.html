@@ -1,0 +1,61 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<section [ngClass]="{ 'dark-contact': darkModeService.darkModeSignal() === 'dark', 'light-contact': darkModeService.darkModeSignal() === 'light' }">
+    <div [ngClass]="{ 'dark-content': darkModeService.darkModeSignal() === 'dark', 'light-content': darkModeService.darkModeSignal() === 'light' }">
+        <h2>Contact Us</h2>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates, ad necessitatibus!</p>
+    </div>
+    <div [ngClass]="{ 'dark-container': darkModeService.darkModeSignal() === 'dark', 'light-container': darkModeService.darkModeSignal() === 'light' }">
+        <div [ngClass]="{ 'dark-contactInfo': darkModeService.darkModeSignal() === 'dark', 'light-contactInfo': darkModeService.darkModeSignal() === 'light' }">
+            <div [ngClass]="{ 'dark-box': darkModeService.darkModeSignal() === 'dark', 'light-box': darkModeService.darkModeSignal() === 'light' }">
+                <div [ngClass]="{ 'dark-icon': darkModeService.darkModeSignal() === 'dark', 'light-icon': darkModeService.darkModeSignal() === 'light' }"><b></b><i class="fa-solid fa-location-dot"></i></div>
+                <div [ngClass]="{ 'dark-text': darkModeService.darkModeSignal() === 'dark', 'light-text': darkModeService.darkModeSignal() === 'light' }">
+                    <h3>Address</h3>
+                    <p>asdasd cad. asdas sokak,<br>134324234324</p>
+                </div>
+            </div>
+            <div [ngClass]="{ 'dark-box': darkModeService.darkModeSignal() === 'dark', 'light-box': darkModeService.darkModeSignal() === 'light' }">
+                <div [ngClass]="{ 'dark-icon': darkModeService.darkModeSignal() === 'dark', 'light-icon': darkModeService.darkModeSignal() === 'light' }"><b></b><i class="fa-solid fa-phone"></i></div>
+                <div [ngClass]="{ 'dark-text': darkModeService.darkModeSignal() === 'dark', 'light-text': darkModeService.darkModeSignal() === 'light' }">
+                    <h3>Phone</h3>
+                    <p>0000-0000-0000</p>
+                </div>
+            </div>
+            <div [ngClass]="{ 'dark-box': darkModeService.darkModeSignal() === 'dark', 'light-box': darkModeService.darkModeSignal() === 'light' }">
+                <div [ngClass]="{ 'dark-icon': darkModeService.darkModeSignal() === 'dark', 'light-icon': darkModeService.darkModeSignal() === 'light' }"><b></b><i class="fa-solid fa-envelope"></i></div>
+                <div [ngClass]="{ 'dark-text': darkModeService.darkModeSignal() === 'dark', 'light-text': darkModeService.darkModeSignal() === 'light' }">
+                    <h3>Email</h3>
+                    <p>blablaEmail.com</p>
+                </div>
+            </div>
+
+            <h2 [ngClass]="{ 'dark-txt': darkModeService.darkModeSignal() === 'dark', 'light-txt': darkModeService.darkModeSignal() === 'light' }">Connect with us</h2>
+            <ul [ngClass]="{ 'dark-sci': darkModeService.darkModeSignal() === 'dark', 'light-sci': darkModeService.darkModeSignal() === 'light' }">
+                <li><a href=#><i class="fa-brands fa-facebook"></i></a></li>
+                <li><a href=#><i class="fa-brands fa-x-twitter"></i></a></li>
+                <li><a href=#><i class="fa-brands fa-instagram"></i></a></li>
+                <li><a href=#><i class="fa-brands fa-linkedin-in"></i></a></li>
+            </ul>
+        </div>
+        <div [ngClass]="{ 'dark-contactForm': darkModeService.darkModeSignal() === 'dark', 'light-contactForm': darkModeService.darkModeSignal() === 'light' }">
+            <form>
+                <h2>Send Message</h2>
+                <div [ngClass]="{ 'dark-inputBox': darkModeService.darkModeSignal() === 'dark', 'light-inputBox': darkModeService.darkModeSignal() === 'light' }">
+                    <input type="text" name="" required="required">
+                    <span>Full Name</span>
+                </div>
+                <div [ngClass]="{ 'dark-inputBox': darkModeService.darkModeSignal() === 'dark', 'light-inputBox': darkModeService.darkModeSignal() === 'light' }">
+                    <input type="text" name="" required="required">
+                    <span>Email</span>
+                </div>
+                <div [ngClass]="{ 'dark-inputBox': darkModeService.darkModeSignal() === 'dark', 'light-inputBox': darkModeService.darkModeSignal() === 'light' }">
+                    <textarea required="required"></textarea>
+                    <span>Type your message..</span>
+                </div>
+                <div [ngClass]="{ 'dark-inputBox': darkModeService.darkModeSignal() === 'dark', 'light-inputBox': darkModeService.darkModeSignal() === 'light' }">
+                    <input type="submit" value="Send">
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

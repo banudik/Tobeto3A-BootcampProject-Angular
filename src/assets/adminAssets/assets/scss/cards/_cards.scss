@@ -1,0 +1,546 @@
+/* ========== cards css =========== */
+
+/* card-style-1 */
+.card-style-1 {
+  background: $white;
+  border: 1px solid $light;
+  border-radius: 10px;
+  padding: 25px 0;
+  position: relative;
+  @include transition(0.3s);
+
+  &:hover {
+    @include box-shadow(0px 0px 5px rgba(0, 0, 0, 0.1));
+  }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 0 30px;
+
+    @media #{$xs} {
+      padding: 0 20px;
+    }
+
+    .image {
+      max-width: 40px;
+      width: 100%;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-right: 12px;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .text {
+      p {
+        color: $dark;
+
+        a {
+          color: inherit;
+
+          &:hover {
+            color: $primary;
+          }
+        }
+      }
+    }
+  }
+  .card-image {
+    border-radius: 10px;
+    margin-bottom: 25px;
+    overflow: hidden;
+
+    a {
+      display: block;
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .card-content {
+    padding: 0px 30px;
+
+    @media #{$xs} {
+      padding: 0px 20px;
+    }
+
+    h4 {
+      a {
+        color: inherit;
+        margin-bottom: 15px;
+        display: block;
+
+        &:hover {
+          color: $primary;
+        }
+      }
+    }
+  }
+}
+
+/* card-style-2 */
+.card-style-2 {
+  background: $white;
+  border: 1px solid $light;
+  border-radius: 4px;
+  padding: 20px;
+  @include transition(0.3s);
+
+  &:hover {
+    @include box-shadow(0px 0px 5px rgba(0, 0, 0, 0.1));
+  }
+
+  .card-image {
+    border-radius: 4px;
+    margin-bottom: 30px;
+    overflow: hidden;
+
+    a {
+      display: block;
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .card-content {
+    padding: 0px 10px;
+
+    @media #{$xs} {
+      padding: 0px;
+    }
+
+    h4 {
+      a {
+        color: inherit;
+        margin-bottom: 15px;
+        display: block;
+
+        &:hover {
+          color: $primary;
+        }
+      }
+    }
+  }
+}
+
+/* card-style-3 */
+.card-style-3 {
+  background: $white;
+  border: 1px solid $light;
+  border-radius: 4px;
+  padding: 25px 30px;
+  @include transition(0.3s);
+
+  &:hover {
+    @include box-shadow(0px 0px 5px rgba(0, 0, 0, 0.1));
+  }
+
+  .card-content {
+    h4 {
+      a {
+        color: inherit;
+        margin-bottom: 15px;
+        display: block;
+
+        &:hover {
+          color: $primary;
+        }
+      }
+    }
+
+    a.read-more {
+      font-weight: 500;
+      color: $dark;
+      margin-top: 20px;
+
+      &:hover {
+        color: $primary;
+        letter-spacing: 2px;
+      }
+    }
+  }
+}
+
+/* card-style-4 */
+.card-style-4 {
+  background: $white;
+  border: 1px solid $light;
+  border-radius: 4px;
+  padding: 20px 30px;
+  @include transition(0.3s);
+
+  &:hover {
+    @include box-shadow(0px 0px 5px rgba(0, 0, 0, 0.1));
+  }
+
+  .card-image {
+    border-radius: 50%;
+    margin: auto;
+    margin-bottom: 30px;
+    max-width: 250px;
+    width: 100%;
+    overflow: hidden;
+
+    a {
+      display: block;
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .card-content {
+    margin-bottom: 10px;
+
+    h4 {
+      a {
+        color: inherit;
+        margin-bottom: 15px;
+        display: block;
+
+        &:hover {
+          color: $primary;
+        }
+      }
+    }
+
+    a.read-more {
+      font-weight: 500;
+      color: $dark;
+      margin-top: 20px;
+
+      &:hover {
+        color: $primary;
+        letter-spacing: 2px;
+      }
+    }
+  }
+}
+
+/* card-style-5 */
+.card-style-5 {
+  background: $white;
+  border: 1px solid $light;
+  border-radius: 4px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  @include transition(0.3s);
+
+  &:hover {
+    @include box-shadow(0px 0px 5px rgba(0, 0, 0, 0.1));
+  }
+
+  @media #{$xs} {
+    display: block;
+  }
+  @media #{$sm} {
+    display: flex;
+  }
+
+  .card-image {
+    margin: auto;
+    margin-right: 20px;
+    border-radius: 4px;
+    max-width: 180px;
+    width: 100%;
+    overflow: hidden;
+
+    @media #{$xs} {
+      margin-right: auto;
+      margin-bottom: 20px;
+      max-width: 100%;
+    }
+    @media #{$sm} {
+      margin-right: 20px;
+      margin-bottom: 0px;
+      max-width: 180px;
+    }
+
+    a {
+      display: block;
+    }
+
+    img {
+      width: 100%;
+
+      @media #{$xs} {
+        width: 100%;
+      }
+    }
+  }
+
+  .card-content {
+    margin-bottom: 10px;
+
+    h4 {
+      a {
+        color: inherit;
+        margin-bottom: 15px;
+        display: block;
+
+        &:hover {
+          color: $primary;
+        }
+      }
+    }
+
+    .main-btn {
+      margin-top: 20px;
+    }
+  }
+}
+
+/* ======= card-style-6 ======== */
+.card-style-6 {
+  padding: 25px 30px;
+  background: $white;
+  border: 1px solid $light;
+  border-radius: 4px;
+  @include transition(0.3s);
+
+  &:hover {
+    @include box-shadow(0px 0px 5px rgba(0, 0, 0, 0.1));
+  }
+
+  @media #{$laptop, $xs} {
+    padding: 20px;
+  }
+
+  .card-image {
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 15px;
+
+    a {
+      display: block;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+  .card-action {
+    display: flex;
+
+    .action {
+      display: flex;
+      align-items: center;
+
+      a {
+        color: $gray;
+        font-size: 14px;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      button {
+        border: none;
+        background: none;
+        display: flex;
+        color: $dark;
+        margin-right: 10px;
+        font-size: 16px;
+
+        &:hover {
+          color: $primary;
+        }
+      }
+    }
+  }
+}
+
+/* ======= icon-card ======== */
+.icon-card {
+  display: flex;
+  align-items: center;
+  background: $white;
+  padding: 30px 20px;
+  box-shadow: 0px 12px 24px -4px rgba(145, 158, 171, 0.12), 0px 0px 2px 0px rgba(145, 158, 171, 0.20);
+  border-radius: 7px;
+
+  &.icon-card-3 {
+    display: block;
+    padding: 0px;
+
+    .card-content {
+      display: flex;
+      padding: 20px;
+      padding-bottom: 0;
+    }
+  }
+
+  &.icon-card-4 {
+    display: block;
+    padding: 30px;
+
+    .icon {
+      max-width: 50px;
+      height: 50px;
+      border-radius: 5px;
+      background: rgba(54, 92, 245, 0.08)
+    }
+
+    .text-danger-2 {
+      i {
+        @include transform(rotate(90deg));
+      }
+    }
+
+    .card-content {
+      margin-top: 18px;
+      
+    }
+  }
+
+  h6 {
+    @media #{$laptop} {
+      font-size: 15px;
+    }
+  }
+
+  h3 {
+    @media #{$laptop} {
+      font-size: 20px;
+    }
+  }
+
+  &.icon-card-2 {
+    display: block;
+
+    .progress {
+      height: 7px;
+
+      .progress-bar {
+        border-radius: 4px;
+      }
+    }
+  }
+
+  .icon {
+    max-width: 46px;
+    width: 100%;
+    height: 46px;
+    border-radius: 10px;
+    @include flex-center;
+    font-size: 24px;
+    margin-right: 20px;
+    background: rgba($primary, 0.1);
+    color: $primary;
+    font-weight: 700;
+
+    @media #{$laptop} {
+      margin-right: 10px;
+    }
+
+    &.purple {
+      background: rgba($purple, 0.1);
+      color: $purple;
+    }
+    &.success {
+      background: rgba($success, 0.1);
+      color: $success;
+    }
+    &.primary {
+      background: rgba($primary, 0.1);
+      color: $primary;
+    }
+    &.orange {
+      background: rgba($orange, 0.1);
+      color: $orange;
+    }
+      &.blue-light {
+        background: rgba($blue-light, 0.08);
+        color: $blue-light;
+      }
+
+    &.opacity-100 {
+      &.purple {
+        background: $purple;
+        color: $white;
+      }
+      &.success {
+        background: $success;
+        color: $white;
+      }
+      &.primary {
+        background: $primary;
+        color: $white;
+      }
+      &.orange {
+        background: $orange;
+        color: $white;
+      }
+      &.deep-blue {
+        background: $deep-blue;
+        color: $white;
+      }
+    }
+  }
+}
+
+.card-wrapper {
+  display: flex;
+  width: 100%;
+  overflow-x: auto;
+  padding: 25px 15px;
+
+  .single-card-wrapper {
+    padding: 0px 15px;
+  }
+
+  .single-card {
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    padding: 30px;
+    max-width: 330px;
+    min-width: 330px;
+    width: 100%;
+
+    .bg-shape {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    h3 {
+      font-weight: bold;
+      font-size: 24px;
+      color: $white;
+      margin-bottom: 36px;
+    }
+
+    .card-info {
+      display: flex;
+      align-items: center;
+
+      span {
+        font-weight: 500;
+        font-size: 12px;
+        color: rgba($white, 0.6);
+      }
+
+      p {
+        font-weight: 500;
+        font-size: 12px;
+        color: $white;
+      }
+    }
+  }
+}
