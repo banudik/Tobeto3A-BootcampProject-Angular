@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { FormGroup, Validators, ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
@@ -8,6 +8,7 @@ import { AuthService } from '../../features/services/concretes/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import { UserForLoginWithVerifyRequest } from '../../features/models/requests/auth/user-for-loginWithVerify-request';
+import { DarkModeService } from '../../features/services/dark-mode.service';
 
 
 
@@ -15,7 +16,7 @@ import { UserForLoginWithVerifyRequest } from '../../features/models/requests/au
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [HttpClientModule,ReactiveFormsModule,CommonModule],
+  imports: [HttpClientModule,ReactiveFormsModule,CommonModule,RouterModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -79,6 +80,7 @@ export class LoginComponent implements OnInit {
     this.showAuthenticatorCodeInput = false;
   }
 
+  darkModeService: DarkModeService = inject(DarkModeService);
 
 }  
 

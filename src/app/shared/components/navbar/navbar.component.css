@@ -1,31 +1,31 @@
 /* app.component.css */
 
-.container {
+/* .container {
     max-width: 1024px;
-  }
+  } */
   
  /* Buton şekli */
-span {
+/* span {
   display: inline-flex; /* Span'leri flex container olarak kullanarak içeriği hizalama */
-  align-items: center; /* İçeriği dikey olarak ortala */
-  padding: 8px 16px; /* İçeriğin etrafına boşluk ekler */
-  border-radius: 9999px; /* Yuvarlatılmış köşeler */
-  cursor: pointer; /* Fare üzerine gelindiğinde işaretçiyi değiştir */
-  border: 2px solid transparent; /* Kenarlık oluşturur, varsayılan olarak şeffaf */
-}
+ /* align-items: center; /* İçeriği dikey olarak ortala */
+  /*padding: 8px 16px; /* İçeriğin etrafına boşluk ekler */
+  /*border-radius: 9999px; /* Yuvarlatılmış köşeler */
+ /* cursor: pointer; /* Fare üzerine gelindiğinde işaretçiyi değiştir */
+ /* border: 2px solid transparent; /* Kenarlık oluşturur, varsayılan olarak şeffaf */
+/*} */
 
 /* Butonun etrafındaki border'ı belirginleştirme */
-span:hover {
+/* span:hover {
   border-color: #7C3AED; /* Fare butonun üzerine geldiğinde kenarlık rengi */
-}
+/*} */
 
 /* İkonun ortalanması */
-span svg {
+/* span svg {
   margin-right: 8px; /* İkonun sağına bir boşluk ekler */
-  margin-left:8px;
-}
+  /*margin-left:8px;
+} */
 
-button {
+/* button {
   text-decoration: none;
   position: relative;
   border: none;
@@ -41,14 +41,14 @@ button {
   background-size: 300%;
   border-radius: 30px;
   z-index: 1;
-}
+} */
 
-button:hover {
+/* button:hover {
   animation: ani 8s linear infinite;
   border: none;
-}
+} */
 
-@keyframes ani {
+/* @keyframes ani {
   0% {
     background-position: 0%;
   }
@@ -56,9 +56,9 @@ button:hover {
   100% {
     background-position: 400%;
   }
-}
+} */
 
-button:before {
+/* button:before {
   content: "";
   position: absolute;
   top: -5px;
@@ -70,15 +70,15 @@ button:before {
   background-size: 300%;
   border-radius: 35px;
   transition: 1s;
-}
+} */
 
-button:hover::before {
+/* button:hover::before {
   filter: blur(20px);
-}
+} */
 
-button:active {
+/* button:active {
   background: linear-gradient(32deg, #4cd1f3, #805bd1, #ffeb3b, #03a9f4);
-}
+} */
 
 nav {
   position: sticky;

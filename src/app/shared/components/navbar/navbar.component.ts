@@ -29,9 +29,11 @@ export class NavbarComponent implements OnInit{
   userLogged!:boolean;
   showLogoutModal = false;
   userId!:string;
+  showMenu:boolean = false;
   
   constructor(private authService:AuthService,private router:Router,private cdRef:ChangeDetectorRef){}
 
+  
    ngOnInit(): void {
      this.getMenuItems();
      console.log(this.getUserName());
@@ -40,6 +42,7 @@ export class NavbarComponent implements OnInit{
      this.getUserId();
      this.cdRef.detectChanges();
    }
+   
 
    logOut(){
     this.authService.logOut();
@@ -97,5 +100,9 @@ export class NavbarComponent implements OnInit{
 
   toggleDarkMode() {
     this.darkModeService.updateDarkMode();
+  }
+  
+  toggleMenu(): void {
+    this.showMenu = !this.showMenu;
   }
 }
