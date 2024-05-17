@@ -11,6 +11,8 @@ import { ApplicantForRegisterRequest } from "../../models/requests/auth/applican
 import { LocalStorageService } from "./local-storage.service";
 import { ToastrService } from "ngx-toastr";
 import { UserForLoginWithVerifyRequest } from "../../models/requests/auth/user-for-loginWithVerify-request";
+import { ResetPasswordRequest } from "../../models/requests/auth/reset-password-request";
+import { ForgotPasswordRequest } from "../../models/requests/auth/forgot-password-request";
 
 
 @Injectable({
@@ -52,7 +54,6 @@ import { UserForLoginWithVerifyRequest } from "../../models/requests/auth/user-f
         'Authorization': 'Bearer ' + localStorage.getItem('token'),
         'accept': 'application/json'
       });
-      // İsteği gerçekleştirin
       return this.httpClient.get(`${this.apiUrl}/EnableEmailAuthenticator`, { headers });
     }
   
@@ -92,8 +93,58 @@ import { UserForLoginWithVerifyRequest } from "../../models/requests/auth/user-f
       })
       )
     }
+
+    resetPassword(token: string, resetPasswordRequest: ResetPasswordRequest) {
+      var tokenn = token;
+      console.log(`Bearer ${tokenn}`)
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`, 
+        'accept': 'application/json'
+      });
+    
+      this.httpClient.post(`${this.apiUrl}/ResetPassword`, resetPasswordRequest, { headers }).pipe(
+        catchError(error => {
+          console.error('Şifre sıfırlama başarısız:', error);
+          return throwError(error);
+        })
+      )
+      .subscribe(
+        response => {
+          console.log('Şifre sıfırlama başarılı:', response);
+          // Başarılı yanıt işleme
+        },
+        error => {
+          console.error('Hata:', error);
+          // Hata işleme
+        }
+      );
+    }
+
+    sendForgotPasswordEmail(ForgotPasswordRequest: ForgotPasswordRequest) {
+      console.log("email servis", ForgotPasswordRequest);
+      
+      this.httpClient.post(`${this.apiUrl}/ForgotPassword`, ForgotPasswordRequest)
+        .pipe(
+          map(response => {
+            console.log("email servis", ForgotPasswordRequest.email);
+            this.toastrService.success('Şifremi unuttum e-postası başarıyla gönderildi.', 'Başarılı');
+            return response;
+          }),
+          catchError(responseError => {
+            throw responseError;
+          })
+        )
+        .subscribe( 
+          response => {
+            console.log('Başarılı yanıt:', response);
+          },
+          error => {
+            console.error('Hata:', error);
+          }
+        );
+    }
   
-  
+
     getDecodedToken(){
       try{
         this.token=this.storageService.getToken();
@@ -117,18 +168,11 @@ import { UserForLoginWithVerifyRequest } from "../../models/requests/auth/user-f
       return this.fullname=decoded[propUserName];
     }
   
-    // getUserName():string{
-    //   console.log(this.fullname)
-    //   return this.fullname;
-    // }
-    
-  
     getCurrentUserId():string{
       var decoded = this.getDecodedToken();
       var propUserId = Object.keys(decoded).filter(x=>x.endsWith("/nameidentifier"))[0]
       return this.userId=decoded[propUserId]
     }
-  
   
     logOut(){
       this.storageService.removeToken();

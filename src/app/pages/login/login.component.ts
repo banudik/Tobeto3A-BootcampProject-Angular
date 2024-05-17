@@ -9,6 +9,8 @@ import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import { UserForLoginWithVerifyRequest } from '../../features/models/requests/auth/user-for-loginWithVerify-request';
 import { DarkModeService } from '../../features/services/dark-mode.service';
+import { ForgotPasswordRequest } from '../../features/models/requests/auth/forgot-password-request';
+import { EmailService } from '../../features/services/concretes/email.service';
 
 
 
@@ -21,11 +23,13 @@ import { DarkModeService } from '../../features/services/dark-mode.service';
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit {
-
-  loginForm!:FormGroup
+  loginForm!:FormGroup;
   showAuthenticatorCodeInput:boolean = false;
+  showForgotPassword: boolean = false; 
+  forgotPasswordEmail!: ForgotPasswordRequest;
+  forgotPassword!:FormGroup;
 
-  constructor(private formBuilder:FormBuilder,private authService:AuthService,private router:Router,private toastrService:ToastrService){}
+  constructor(private formBuilder:FormBuilder,private authService:AuthService,private router:Router,private toastrService:ToastrService,private emailService:EmailService){}
 
   ngOnInit(): void {
     this.createLoginForm();
@@ -33,22 +37,29 @@ export class LoginComponent implements OnInit {
 
   createLoginForm(){
     this.loginForm=this.formBuilder.group({
-      email:["",Validators.required],
+      email:["",[Validators.required, Validators.email]],
       password:["",Validators.required],
       authenticatorCode:[null]
     })
   }
 
+  createForgotPasswordMail(){
+    this.forgotPassword=this.formBuilder.group({
+      email:["",[Validators.required, Validators.email]]})
+  }
+
+
+  // Kullanıcının girdiği bilgileri apiye post isteği atar (email,password olarak sadece 2 parametre gönderir) token dönmez veya dönen tokeni kaydetmez
   login() {
     if (this.loginForm.valid) {
       let loginModel: UserForLoginRequest = Object.assign({}, this.loginForm.value);
       this.authService.login(loginModel).subscribe({
         error:(error)=>{
-          this.toastrService.error('Giriş Başarısız');
+          this.toastrService.error('Giriş Başarısız','Giriş İşlemi');
           console.log(error.message);
         },
         complete:()=>{
-          this.toastrService.success('Doğrulama kodu mail adresinize gönderildi');
+          this.toastrService.success('Doğrulama kodu mail adresinize gönderildi','Doğrulama Kodu');
           this.showAuthenticatorCodeInput = true;
           // setTimeout(()=>{
           //   this.router.navigate(["/home-page"]);
@@ -58,9 +69,9 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  // girilen doğrulama kodunu apiye gönderir (email,password,activationKey olarak 3 parametre gönderir) başarılı olursa tokeni kaydeder
   verifyCode() {
       let loginModel: UserForLoginWithVerifyRequest = Object.assign({}, this.loginForm.value);
-      // Doğrulama kodu ve diğer giriş bilgileriyle tekrar giriş yap
       this.authService.loginWithVerify(loginModel).subscribe({
         complete:() => {
           this.toastrService.success('Giriş Başarılı', 'Giriş işlemi');
@@ -76,11 +87,37 @@ export class LoginComponent implements OnInit {
       });
   }
 
+  sendForgotPasswordEmail() {
+    if (this.forgotPassword.valid) {
+      let ForgotPasswordModel: ForgotPasswordRequest = Object.assign({}, this.forgotPassword.value);
+      this.authService.sendForgotPasswordEmail(ForgotPasswordModel);
+      console.log("if in içinde",ForgotPasswordModel);
+
+        }
+        console.log("if in dışında");
+      }
+
+
+
+
+  // Doğrulama kodu girilen pop-up'ı kapatır
   onCancel() {
     this.showAuthenticatorCodeInput = false;
   }
 
   darkModeService: DarkModeService = inject(DarkModeService);
+  // Şifremi unuttum Cardını açar Logini kapatır
+  showForgotPasswordForm() {
+    this.showForgotPassword = true;
+    this.createForgotPasswordMail();
+    this.loginForm.reset(); 
+  }
+
+  //Şifremi unuttum kısmından login ekranına geri döner
+  goBack() {
+    this.showForgotPassword = false;
+  }
+
 
 }  
 

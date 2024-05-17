@@ -2,6 +2,11 @@
   <div class="max-w-md w-full p-6 shadow-lg rounded-lg bg-white">
     <h2 class="text-2xl font-semibold text-center mb-4 text-black dark:text-black">Login</h2>
     <form class="space-y-4 bg-white" [formGroup]="loginForm" (ngSubmit)="login()">
+
+<div class="min-h-screen flex items-center justify-center bg-white dark:bg-black">
+  <div *ngIf="!showForgotPassword" class="max-w-md w-full p-6 bg-black dark:bg-white shadow-lg rounded-lg">
+    <h2 class="text-2xl font-semibold text-center mb-4 text-white dark:text-black">Giriş</h2>
+    <form  class="space-y-4" [formGroup]="loginForm" (ngSubmit)="login()">
       <div>
         <label for="email" class="block font-medium text-black dark:text-black">Email</label>
         <input type="email" id="email" formControlName="email"
@@ -17,9 +22,14 @@
           <input type="checkbox" id="rememberMe" name="rememberMe"
             class="text-indigo-600 border-gray-300 rounded shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
           <label for="rememberMe" class="ml-2 block text-sm text-black dark:text-black">Remember me</label>
+        <label for="password" class="block font-medium text-white dark:text-black">Şifre</label>
+        <input type="password" id="password" formControlName="password" class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
+      </div>
+      <div class="flex items-center justify-between">
+        <div class="flex items-center">
         </div>
         <div class="text-sm">
-          <a href="#" class="text-indigo-600 hover:underline">Forgot your password?</a>
+          <a (click)="showForgotPasswordForm()" class="text-indigo-600 hover:underline">Şifrenizi mi unuttunuz?</a>
         </div>
       </div>
       <div>
@@ -83,7 +93,58 @@
     <a routerLink="/sign-up">Sign up</a>
   </div>
   </form>
-</div>
+        <button id="btn" type="submit" class="w-full text-white dark:text-black font-semibold">Giriş</button>
+      </div>
+      <div class="text-sm text-center">
+        <p class="text-white dark:text-black">Hesabınız yok mu?<a routerLink="/sign-up" class="text-indigo-600 hover:underline">Kayıt ol</a></p>
+      </div>
+
+      <!-- Doğrulama Kodu -->
+      <div *ngIf="showAuthenticatorCodeInput" class="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-75 flex items-center justify-center">
+        <div class="bg-white dark:bg-black p-6 rounded-lg shadow-lg relative"> 
+          <button class="absolute top-0 right-0 mr-4 mt-4 text-gray-600 dark:text-gray-400" (click)="onCancel()"> <!-- pop-up kapanması için çarpı işareti :) -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          <h2 class="text-2xl font-semibold text-center mb-4 text-black dark:text-white">İki Faktörlü Kimlik Doğrulama (2FA)</h2>
+          <p class="text-center mb-6 text-gray-700 dark:text-gray-300">Hesabınızı korumak için ekstra bir güvenlik katmanı ekliyoruz.</p>
+          <p class="text-center mb-6 text-gray-700 dark:text-gray-300">Doğrulama kodu için lütfen e-postanızı kontrol edin.</p>
+          <div class="mb-4 w-full flex flex-col items-center">
+            <div class="mb-2"> 
+              <label for="verificationCode" class="block font-medium text-black dark:text-white mb-2">Doğrulama kodunu giriniz</label>
+            </div>
+            <div> 
+              <input type="text" id="authenticatorCode" formControlName="authenticatorCode" class="border border-black rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50 text-4xl font-semibold text-center" maxlength="6" style="width: 200px; height: 40px; text-align: center; color: #0556b9;">
+            </div>
+          </div>
+            <div class="flex justify-center">
+              <button type="submit" id="btn" class="w-full text-white dark:text-black font-semibold" (click)="verifyCode()">Doğrula</button>
+            </div>
+        </div> 
+      </div>
+  </div>
+  <!-- Şifremi Unuttum -->
+  <div *ngIf="showForgotPassword" class="p-6 bg-white dark:bg-black shadow-lg rounded-lg" style="width: 400px;">
+    <button (click)="goBack()" class="text-gray-600 dark:text-gray-400">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+      </svg>
+    </button>
+    <h2 class="text-2xl font-semibold text-center mb-4 text-black dark:text-white">Şifremi Unuttum</h2>
+    
+    <p class="mb-6">Şifrenizi unuttuysanız endişelenmeyin! E-posta adresinizi girin ve size şifrenizi sıfırlamanız için mail göndereceğiz.</p>
+    <form [formGroup]="forgotPassword" (ngSubmit)="sendForgotPasswordEmail()">
+      <div class="mb-4">
+        <label for="forgotPasswordEmail" class="block font-medium text-black dark:text-white">Email</label>
+        <input type="email" id="forgotPasswordEmail" formControlName="email" class="w-full mb-4 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
+      </div>
+      <div class="flex justify-center mt-4">
+        <button id="btn" type="submit" class="w-full text-white dark:text-black font-semibold">Gönder</button>
+      </div>
+    </form>
+    
+  </div>
 <span style="--i:0;"></span>
 <span style="--i:1;"></span>
 <span style="--i:2;"></span>
@@ -135,5 +196,4 @@
 <span style="--i:48;"></span>
 <span style="--i:49;"></span>
 
-</div>
 </body>
