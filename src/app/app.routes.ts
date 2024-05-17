@@ -6,6 +6,7 @@ import { BootcampListGroupComponent } from './features/components/bootcamps/boot
 import { BootcampDetailsComponent } from './features/components/bootcamps/bootcamp-details/bootcamp-details.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { FaqComponent } from './features/components/faq/faq.component';
+import { AboutUsComponent } from './pages/about-us/about-us.component';
 
 
 export const routes: Routes = [ {path:'',redirectTo:'homepage',pathMatch:'full'},
@@ -20,4 +21,5 @@ export const routes: Routes = [ {path:'',redirectTo:'homepage',pathMatch:'full'}
 {path:"bootcampdetail/:bootcampId",component:BootcampDetailsComponent},
 {path:"myprofile/:userId",component:ProfileComponent},
 {path:'faq',component:FaqComponent},
+{path:'about-us',component:AboutUsComponent},
 ];
