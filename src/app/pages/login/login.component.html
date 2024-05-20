@@ -1,13 +1,27 @@
+<!--<div class="min-h-screen flex items-center justify-center gradient-bg">
+  <div class="max-w-md w-full p-6 shadow-lg rounded-lg bg-white">
+    <h2 class="text-2xl font-semibold text-center mb-4 text-black dark:text-black">Login</h2>
+    <form class="space-y-4 bg-white" [formGroup]="loginForm" (ngSubmit)="login()">
 
 <div class="min-h-screen flex items-center justify-center bg-white dark:bg-black">
   <div *ngIf="!showForgotPassword" class="max-w-md w-full p-6 bg-black dark:bg-white shadow-lg rounded-lg">
     <h2 class="text-2xl font-semibold text-center mb-4 text-white dark:text-black">Giriş</h2>
     <form  class="space-y-4" [formGroup]="loginForm" (ngSubmit)="login()">
       <div>
-        <label for="email" class="block font-medium text-white dark:text-black">Email</label>
-        <input type="email" id="email" formControlName="email" class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
+        <label for="email" class="block font-medium text-black dark:text-black">Email</label>
+        <input type="email" id="email" formControlName="email"
+          class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
       </div>
       <div>
+        <label for="password" class="block font-medium text-black dark:text-black">Password</label>
+        <input type="password" id="password" formControlName="password"
+          class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
+      </div>
+      <div class="flex items-center justify-between">
+        <div class="flex items-center">
+          <input type="checkbox" id="rememberMe" name="rememberMe"
+            class="text-indigo-600 border-gray-300 rounded shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
+          <label for="rememberMe" class="ml-2 block text-sm text-black dark:text-black">Remember me</label>
         <label for="password" class="block font-medium text-white dark:text-black">Şifre</label>
         <input type="password" id="password" formControlName="password" class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
       </div>
@@ -19,6 +33,66 @@
         </div>
       </div>
       <div>
+        <button id="btn" type="submit" class="w-full text-white dark:text-white font-semibold">Login</button>
+      </div>
+      <div class="text-sm text-center">
+        <p class="text-black dark:text-black">Don't have an account? <a routerLink='/sign-up'
+            class="text-indigo-600 hover:underline">Sign up</a></p>
+      </div>
+
+      <div *ngIf="showAuthenticatorCodeInput"
+        class="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-75 flex items-center justify-center">
+        <div class="p-6 rounded-lg shadow-lg relative">
+          <button class="absolute top-0 right-0 mr-4 mt-4 text-gray-600 dark:text-gray-400" (click)="onCancel()">
+            <!-- pop-up kapanması için çarpı işareti :) -->
+            <!--<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          <h2 class="text-2xl font-semibold text-center mb-4 text-black dark:text-white">İki Faktörlü Kimlik Doğrulama
+            (2FA)</h2>
+          <p class="text-center mb-6 text-gray-700 dark:text-gray-300">Hesabınızı korumak için ekstra bir güvenlik
+            katmanı ekliyoruz.</p>
+          <p class="text-center mb-6 text-gray-700 dark:text-gray-300">Doğrulama kodu için lütfen e-postanızı kontrol
+            edin.</p>
+          <div class="mb-4">
+            <label for="verificationCode" class="block font-medium text-black dark:text-white mb-2">Doğrulama kodunu
+              giriniz</label>
+            <input type="text" id="authenticatorCode" formControlName="authenticatorCode"
+              class="w-full border border-black rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50"
+              maxlength="6">
+          </div>
+          <div class="flex justify-center">
+            <button type="submit" id="btn" class="w-full text-white dark:text-black font-semibold"
+              (click)="verifyCode()">Doğrula</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>-->
+<body [ngClass]="{ 'dark-body': darkModeService.darkModeSignal() === 'dark', 'light-body': darkModeService.darkModeSignal() === 'light' }">
+  <div [ngClass]="{ 'dark-container': darkModeService.darkModeSignal() === 'dark', 'light-container': darkModeService.darkModeSignal() === 'light' }">
+<div [ngClass]="{ 'dark-login-box': darkModeService.darkModeSignal() === 'dark', 'light-login-box': darkModeService.darkModeSignal() === 'light' }">
+  <h2 [ngClass]="{ 'dark-h2': darkModeService.darkModeSignal() === 'dark', 'light-h2': darkModeService.darkModeSignal() === 'light' }">Login</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
+    <div [ngClass]="{ 'dark-input-box': darkModeService.darkModeSignal() === 'dark', 'light-input-box': darkModeService.darkModeSignal() === 'light' }">
+    <input type="email" required formControlName="email">
+    <label>Email</label>
+  </div>
+  <div [ngClass]="{ 'dark-input-box': darkModeService.darkModeSignal() === 'dark', 'light-input-box': darkModeService.darkModeSignal() === 'light' }">
+    <input type="password" required formControlName="password">
+    <label>Password</label>
+  </div>
+  <div [ngClass]="{ 'dark-forgot-pass': darkModeService.darkModeSignal() === 'dark', 'light-forgot-pass': darkModeService.darkModeSignal() === 'light' }">
+    <a href="#">Forgot your password?</a>
+  </div>
+  <button type="submit" [ngClass]="{ 'dark-btn': darkModeService.darkModeSignal() === 'dark', 'light-btn': darkModeService.darkModeSignal() === 'light' }">Login</button>
+  <div [ngClass]="{ 'dark-signup-link': darkModeService.darkModeSignal() === 'dark', 'light-signup-link': darkModeService.darkModeSignal() === 'light' }">
+    <a routerLink="/sign-up">Sign up</a>
+  </div>
+  </form>
         <button id="btn" type="submit" class="w-full text-white dark:text-black font-semibold">Giriş</button>
       </div>
       <div class="text-sm text-center">
@@ -49,7 +123,6 @@
             </div>
         </div> 
       </div>
-    </form>
   </div>
   <!-- Şifremi Unuttum -->
   <div *ngIf="showForgotPassword" class="p-6 bg-white dark:bg-black shadow-lg rounded-lg" style="width: 400px;">
@@ -72,5 +145,55 @@
     </form>
     
   </div>
+<span style="--i:0;"></span>
+<span style="--i:1;"></span>
+<span style="--i:2;"></span>
+<span style="--i:3;"></span>
+<span style="--i:4;"></span>
+<span style="--i:5;"></span>
+<span style="--i:6;"></span>
+<span style="--i:7;"></span>
+<span style="--i:8;"></span>
+<span style="--i:9;"></span>
+<span style="--i:10;"></span>
+<span style="--i:11;"></span>
+<span style="--i:12;"></span>
+<span style="--i:13;"></span>
+<span style="--i:14;"></span>
+<span style="--i:15;"></span>
+<span style="--i:16;"></span>
+<span style="--i:17;"></span>
+<span style="--i:18;"></span>
+<span style="--i:19;"></span>
+<span style="--i:20;"></span>
+<span style="--i:21;"></span>
+<span style="--i:22;"></span>
+<span style="--i:23;"></span>
+<span style="--i:24;"></span>
+<span style="--i:25;"></span>
+<span style="--i:26;"></span>
+<span style="--i:27;"></span>
+<span style="--i:28;"></span>
+<span style="--i:29;"></span>
+<span style="--i:30;"></span>
+<span style="--i:31;"></span>
+<span style="--i:32;"></span>
+<span style="--i:33;"></span>
+<span style="--i:34;"></span>
+<span style="--i:35;"></span>
+<span style="--i:36;"></span>
+<span style="--i:37;"></span>
+<span style="--i:38;"></span>
+<span style="--i:39;"></span>
+<span style="--i:40;"></span>
+<span style="--i:41;"></span>
+<span style="--i:42;"></span>
+<span style="--i:43;"></span>
+<span style="--i:44;"></span>
+<span style="--i:45;"></span>
+<span style="--i:46;"></span>
+<span style="--i:47;"></span>
+<span style="--i:48;"></span>
+<span style="--i:49;"></span>
 
-</div>
+</body>

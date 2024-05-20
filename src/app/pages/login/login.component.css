@@ -1,4 +1,4 @@
-#btn {
+/* #btn {
     padding: 8px 8px;
     font-size: 20px;
     border: none;
@@ -19,5 +19,330 @@
     box-shadow: 3px 3px 15px 3px #5de7ff, -3px -3px 15px 3px #4b4bff;
 }
 
+.gradient-bg {
+    background: linear-gradient(-45deg,#94daff,#1f378f,#9a64f2,#4a2f7c);
+    background-size: 400% 400%;
+    -webkit-animation: gradient 15s ease infinite;
+    animation: gradient 15s ease infinite;
+  }
+  @-webkit-keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+ */
 
+ @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.dark-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background:rgb(17, 24, 39);
+}
+
+.dark-container {
+  position: relative;
+  width: 256px;
+  height:256px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dark-container span {
+  position: absolute;
+  left:0;
+  width: 32px;
+  height: 6px;
+  background:rgb(28, 41, 68);
+  border-radius: 8px;
+  transform-origin: 128px;
+  transform:scale(2.2) rotate(calc(var(--i) * (360deg / 50))) ;
+  animation: animateBlink 3s linear infinite;
+  animation-delay: calc(var(--i) * (3s / 50));
+}
+
+@keyframes animateBlink {
+  0% {
+    background: #8585ff;
+  }
+  25% {
+    background: rgb(28, 41, 68);
+  }
+}
+
+.dark-login-box {
+  position:absolute;
+  width:400px;
+}
+
+.dark-login-box form {
+  width:100%;
+  padding:0 50px;
+}
+
+.dark-h2 {
+  font-size: 2em;
+  color:#8585ff;
+  text-align: center;
+}
+
+.dark-input-box {
+  position: relative;
+  margin:25px 0;
+}
+
+.dark-input-box input {
+  width:100%;
+  height:50px;
+  background:transparent;
+  border:2px solid #2c4766;
+  outline: none;
+  border-radius: 40px;
+  font-size:1em;
+  color:#fff;
+  padding: 0 20px;
+  transition: .5s ease;
+}
+
+.dark-input-box input:focus,
+.dark-input-box input:valid {
+  border-color:#8585ff;
+
+}
+
+.dark-input-box label {
+  position:absolute;
+  top:50%;
+  left:20px;
+  transform: translateY(-50%);
+  font-size: 1em;
+  color:#fff;
+  pointer-events: none;
+  transition: .5s ease;
+}
+
+.dark-input-box input:focus ~ label,
+.dark-input-box input:valid ~ label {
+  top:1px;
+  font-size:.8em;
+  background:rgb(17, 24, 39);
+  padding:0 6px;
+  color:#8585ff;
+}
+
+.dark-forgot-pass {
+  margin:-15px 0 10px;
+  text-align: center;
+}
+
+.dark-forgot-pass a {
+  font-size: .85em;
+  color:#fff;
+  text-decoration: none;
+}
+
+.dark-forgot-pass a:hover {
+  text-decoration: underline;
+}
+
+.dark-btn {
+  width: 100%;
+  height: 45px;
+  background:#8585ff;
+  border:none;
+  outline:none;
+  border-radius: 40px;
+  cursor:pointer;
+  font-size:1em;
+  color:#fff;
+  font-weight: 600;
+}
+
+.dark-signup-link {
+  margin:20px 0 10px;
+  text-align: center;
+}
+
+.dark-signup-link a {
+  font-size:1em;
+  color:#8585ff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.dark-signup-link a:hover {
+  text-decoration: underline;
+}
+
+/*light mode için*/
+.light-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background:#fff;
+}
+
+.light-container {
+  position: relative;
+  width: 256px;
+  height:256px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.light-container span {
+  position: absolute;
+  left:0;
+  width: 32px;
+  height: 6px;
+  background:#d0e3f3;
+  border-radius: 8px;
+  transform-origin: 128px;
+  transform:scale(2.2) rotate(calc(var(--i) * (360deg / 50))) ;
+  animation: animateBlinkk 3s linear infinite;
+  animation-delay: calc(var(--i) * (3s / 50));
+}
+
+@keyframes animateBlinkk {
+  0% {
+    background: #4ab4fb;
+  }
+  25% {
+    background: rgb(225, 231, 246);
+  }
+}
+
+.light-login-box {
+  position:absolute;
+  width:400px;
+}
+
+.light-login-box form {
+  width:100%;
+  padding:0 50px;
+}
+
+.light-h2 {
+  font-size: 2em;
+  color:#4ab4fb;
+  text-align: center;
+}
+
+.light-input-box {
+  position: relative;
+  margin:25px 0;
+}
+
+.light-input-box input {
+  width:100%;
+  height:50px;
+  background:transparent;
+  border:2px solid #d0e3f3;
+  outline: none;
+  border-radius: 40px;
+  font-size:1em;
+  color:#2c4766;
+  padding: 0 20px;
+  transition: .5s ease;
+}
+
+.light-input-box input:focus,
+.light-input-box input:valid {
+  border-color:#4ab4fb;
+
+}
+
+.light-input-box label {
+  position:absolute;
+  top:50%;
+  left:20px;
+  transform: translateY(-50%);
+  font-size: 1em;
+  color:#2c4766;
+  pointer-events: none;
+  transition: .5s ease;
+}
+
+.light-input-box input:focus ~ label,
+.light-input-box input:valid ~ label {
+  top:1px;
+  font-size:.8em;
+  background:#fff;
+  padding:0 6px;
+  color:#4ab4fb;
+}
+
+.light-forgot-pass {
+  margin:-15px 0 10px;
+  text-align: center;
+}
+
+.light-forgot-pass a {
+  font-size: .85em;
+  color:#2c4766;
+  text-decoration: none;
+}
+
+.light-forgot-pass a:hover {
+  text-decoration: underline;
+}
+
+.light-btn {
+  width: 100%;
+  height: 45px;
+  background:#4ab4fb;
+  border:none;
+  outline:none;
+  border-radius: 40px;
+  cursor:pointer;
+  font-size:1em;
+  color:#fff;
+  font-weight: 600;
+}
+
+.light-signup-link {
+  margin:20px 0 10px;
+  text-align: center;
+}
+
+.light-signup-link a {
+  font-size:1em;
+  color:#4ab4fb;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.light-signup-link a:hover {
+  text-decoration: underline;
+}

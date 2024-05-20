@@ -6,6 +6,7 @@ import { HomepageComponent } from "../../homepage/homepage.component";
 import { LoginComponent } from "../../login/login.component";
 import { ProfileComponent } from "../../profile/profile.component";
 import { SignUpComponent } from "../../sign-up/sign-up.component";
+import { ContactUsComponent } from "../../contact-us/contact-us.component";
 import { ResetPasswordComponent } from "../../reset-password/reset-password.component";
 
 export const siteRoutes: Routes = [
@@ -17,7 +18,8 @@ export const siteRoutes: Routes = [
     {path:"bootcampdetail/:bootcampId",component:BootcampDetailsComponent},
     {path:"myprofile/:userId",component:ProfileComponent},
     {path:'faq',component:FaqComponent},
-    { path: 'reset-password', component: ResetPasswordComponent },
+    {path:'contact-us',component:ContactUsComponent},
+    {path: 'reset-password', component: ResetPasswordComponent },
 
     
 ];
