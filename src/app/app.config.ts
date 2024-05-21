@@ -1,11 +1,13 @@
-import { ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideRouter} from '@angular/router';
 import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideToastr } from 'ngx-toastr';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { AuthInterceptor } from './core/interceptors/auth/auth.interceptor';
-import { ErrorHadlerInterceptor } from './core/interceptors/error/globalError.interceptor';
+import { LoadingInterceptor } from './core/interceptors/loading/loading.interceptor';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { ErrorInterceptor } from './core/interceptors/error/error.interceptor';
 
 
 
@@ -14,8 +16,12 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimationsAsync(),
     provideToastr(),
-    provideHttpClient(withInterceptors([AuthInterceptor,ErrorHadlerInterceptor]))
-
+    provideHttpClient(withInterceptors([
+      AuthInterceptor,
+      ErrorInterceptor,
+      LoadingInterceptor
+    ])),
+    importProvidersFrom(NgxSpinnerModule.forRoot({ type: 'square-jelly-box' }))
   
   ]
 };
