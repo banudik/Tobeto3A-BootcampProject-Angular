@@ -34,8 +34,8 @@ export class NavbarComponent implements OnInit{
 
    ngOnInit(): void {
      this.getMenuItems();
-     console.log(this.getUserName());
-     console.log(this.getUserId())
+     //console.log(this.getUserName());
+     //console.log(this.getUserId())
      console.log(this.authService.getRoles())
      this.getUserId();
      this.cdRef.detectChanges();
@@ -61,8 +61,8 @@ export class NavbarComponent implements OnInit{
 
 
 
-   async getMenuItems(){
-    const isUserLoggedIn = await this.authService.loggedIn();
+   getMenuItems(){
+    const isUserLoggedIn = this.authService.loggedIn();
     if(isUserLoggedIn){
       this.isLoggedIn = true;
     }

@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, map, catchError, switchMap, tap, throwError } from "rxjs";
+import { Observable, map, catchError, switchMap, tap, throwError, of, BehaviorSubject } from "rxjs";
 import { environment } from "../../../../environments/environment";
 import { UserForLoginRequest } from "../../models/requests/auth/user-for-login-request";
 import { AccessTokenModel } from "../../models/responses/auth/access-token-model";
@@ -29,6 +29,7 @@ import { ForgotPasswordRequest } from "../../models/requests/auth/forgot-passwor
     private readonly apiUrl:string = `${environment.API_URL}/auth`
     constructor(private httpClient:HttpClient,private storageService:LocalStorageService,private toastrService:ToastrService) {super() }
   
+
     override registerApplicant(userforRegisterRequest: ApplicantForRegisterRequest): Observable<TokenModel> {
       return this.httpClient.post<TokenModel>(`${this.apiUrl}/registerapplicant`, userforRegisterRequest).pipe(
         switchMap((response: TokenModel) => {
@@ -58,21 +59,41 @@ import { ForgotPasswordRequest } from "../../models/requests/auth/forgot-passwor
     }
   
     //  email ve passwordu login olmak için gönderiyoruz, activationKey kısmı null olarak post ediliyor(aktivasyon kodu null gönderildiği takdirde backend'de AktivasyonKeyi generate ediliyoruz ve mail olarak gönderiliyoruz)
-    login(userLoginRequest:UserForLoginRequest)                     
-    {  
-      return this.httpClient.post(`${this.apiUrl}/login`,userLoginRequest)
-      .pipe(map(response=>{
-          // this.toastrService.success('başarılı');
-          //alert("Giriş yapıldı");
-          // setTimeout(()=>{
-          //   window.location.reload()
-          // },1000)
-          return response;
-        }
-      ),catchError(responseError=>{
-        throw responseError;
-      })
-      )
+    // login(userLoginRequest:UserForLoginRequest):Observable<AccessTokenModel<TokenModel>>                    
+    // {  
+    //   return this.httpClient.post<AccessTokenModel<TokenModel>>(`${this.apiUrl}/login`,userLoginRequest)
+    //   .pipe(map(response=>{
+    //       // this.toastrService.success('başarılı');
+    //       //alert("Giriş yapıldı");
+    //       // setTimeout(()=>{
+    //       //   window.location.reload()
+    //       // },1000)
+    //       return response;
+    //     }
+    //   ),catchError(responseError=>{
+    //     throw responseError;
+    //   })
+    //   )
+    // }
+
+    login(userLoginRequest: UserForLoginRequest): Observable<AccessTokenModel<TokenModel>> {
+      return this.httpClient.post<AccessTokenModel<TokenModel>>(`${this.apiUrl}/login`, userLoginRequest)
+        .pipe(
+          tap(response => {
+            if (response.accessToken) {
+              //this.storageService.setToken(response.accessToken.token);
+              this.toastrService.success('Giriş yapıldı');
+            }
+            else{
+              this.toastrService.info('Doğrulama Kodu Gönderildi');
+            }
+          }),
+          catchError(responseError => {
+            this.toastrService.error('Giriş başarısız buraa');
+            // Eğer responseError'u tekrar fırlatmazsanız, hata vermeden çalışmaya devam eder.
+            return of({} as AccessTokenModel<TokenModel>,responseError);  // Hata durumunda Observable<null> döndürülür.
+          })
+        );
     }
 
     // pop-up ekranında ki activationKey i alıp tekrar  mevcut email ve password ile post ediliyoruz başarılı olursa response'taki tokeni storage'a kayıt ediyoruz login işlemi bu metod ile bitiyor(kullanıcının tekrar emai ve password girmesi gerekmiyor)
@@ -88,9 +109,10 @@ import { ForgotPasswordRequest } from "../../models/requests/auth/forgot-passwor
           // },1000)
           return response;
         }
-      ),catchError(responseError=>{
-        throw responseError;
-      })
+      ),
+      // catchError(responseError=>{
+      //   throw responseError;
+      // })
       )
     }
 
@@ -111,40 +133,27 @@ import { ForgotPasswordRequest } from "../../models/requests/auth/forgot-passwor
       .subscribe(
         response => {
           console.log('Şifre sıfırlama başarılı:', response);
-          // Başarılı yanıt işleme
         },
-        error => {
-          console.error('Hata:', error);
-          // Hata işleme
-        }
+        // error => {
+        //   console.error('Hata:', error);
+        // }
       );
     }
 
     sendForgotPasswordEmail(ForgotPasswordRequest: ForgotPasswordRequest) {
-      console.log("email servis", ForgotPasswordRequest);
-      
       this.httpClient.post(`${this.apiUrl}/ForgotPassword`, ForgotPasswordRequest)
         .pipe(
           map(response => {
             console.log("email servis", ForgotPasswordRequest.email);
             this.toastrService.success('Şifremi unuttum e-postası başarıyla gönderildi.', 'Başarılı');
             return response;
-          }),
-          catchError(responseError => {
-            throw responseError;
-          })
-        )
-        .subscribe( 
+          }),).subscribe( 
           response => {
             console.log('Başarılı yanıt:', response);
           },
-          error => {
-            console.error('Hata:', error);
-          }
         );
     }
   
-
     getDecodedToken(){
       try{
         this.token=this.storageService.getToken();
@@ -159,7 +168,6 @@ import { ForgotPasswordRequest } from "../../models/requests/auth/forgot-passwor
       this.token=this.storageService.getToken();
       let isExpired = this.jwtHelper.isTokenExpired(this.token);
       return !isExpired;
-      
     }
   
     getUserName():string{
@@ -201,4 +209,4 @@ import { ForgotPasswordRequest } from "../../models/requests/auth/forgot-passwor
     }
   }
 
-
+  
