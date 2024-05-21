@@ -1,0 +1,44 @@
+<form *ngIf="!isLoading" [formGroup]="BlacklistForm" (ngSubmit)="onFormSubmit()">
+    <div *ngIf="formMessage">
+      <small>{{ formMessage }}</small>
+    </div>
+    <div class="card-style mb-30">
+      <h6 class="mb-25">Are you sure about blacklisting this user?</h6>
+      <div class="input-style-1">
+        <label for="firstNameInput">Applicant First Name</label>
+        <input disabled id="firstNameInput" type="text" value="{{ currentApplicant.firstName }}" />
+      </div>
+      <div class="input-style-1">
+        <label for="lastNameInput">Applicant Last Name</label>
+        <input disabled id="lastNameInput" type="text" value="{{ currentApplicant.lastName }}" />
+      </div>
+      <div class="input-style-1">
+        <label for="EmailInput">Applicant Email</label>
+        <input disabled id="EmailInput" type="text" value="{{ currentApplicant.email }}" />
+      </div>
+      <div class="input-style-1">
+        <label for="BirthInput">Applicant Date of Birth</label>
+        <input disabled id="BirthInput" type="text" value="{{ currentApplicant.dateOfBirth | date : 'dd/MM/yyyy' }}" />
+      </div>
+      <div class="input-style-1">
+        <label for="createdDate">Applicant Created Date</label>
+        <input disabled id="createdDate" type="text" value="{{ currentApplicant.createdDate | date : 'dd/MM/yyyy' }}" />
+      </div>
+      <input formControlName="applicantId" id="applicantIdInput" hidden type="text" value="{{ currentApplicant.id }}" />
+      <div class="input-style-1">
+        <label for="reasonInput">Blacklist reason</label>
+        <input formControlName="reason" id="reasonInput" type="text" placeholder="Blacklist reason" />
+      </div>
+      <div class="input-style-1">
+        <label for="dateInput">Blacklist until</label>
+        <input formControlName="date" id="dateInput" type="date" placeholder="Blacklist date" />
+      </div>
+    </div>
+    <br>
+    <div>
+      <button type="submit" class="text-danger">Blacklist applicant</button>
+      <br>
+      <a class="text-primary" routerLink="/adminpanel/applicantindex">Back to List</a>
+    </div>
+  </form>
+  

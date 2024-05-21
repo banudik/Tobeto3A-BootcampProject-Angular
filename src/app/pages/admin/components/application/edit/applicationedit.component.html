@@ -1,0 +1,33 @@
+<form [formGroup]="ApplicationForm" (ngSubmit)="onFormSubmit()" enctype="multipart/form-data">
+    <div>
+        <small *ngIf="formMessage">{{formMessage}}</small>
+    </div>
+    <div class="card-style mb-30">
+        <h6 class="mb-25">Input Fields</h6>
+        <div class="input-style-1">
+            <input formControlName="id" id="idInput" type="hidden" [value]="currentApplication.id" />
+            <label for="nameInput">Bootcamp Name</label>
+            <input id="nameInput" type="text" [value]="currentApplication.bootcampName"
+                [attr.disabled]="true" />
+        </div>
+        <div class="input-style-1">
+            <label for="applicantNameInput">Applicant Full Name</label>
+            <input id="applicantNameInput" type="text"
+                [value]="currentApplication.applicantFirstName + ' ' + currentApplication.applicantLastName"
+                [attr.disabled]="true" />
+        </div>
+
+        <div class="select-style-1">
+            <label for="applicationStateInformationSelect">Application State</label>
+            <div class="select-position">
+                <select formControlName="applicationStateInformationId" id="applicationStateInformationSelect" [value]="currentApplication.applicationStateInformationId">
+                    <option *ngFor="let states of applicationStates.items" [value]="states.id">{{ states.name }}
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="main-btn active-btn rounded-full btn-hover">Update Application</button>
+    <br>
+    <a routerLink='/adminpanel/applicationindex'><span class="main-btn dark-btn rounded-full btn-hover">Back</span></a>
+</form>

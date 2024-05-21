@@ -10,7 +10,7 @@ export const AdminPanelGuard: CanActivateFn = (route: ActivatedRouteSnapshot, st
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  if (authService.isAdmin()) {
+  if (authService.isAdmin() || authService.isInstructor() || authService.isEmployee()) {
     // Kullanıcı admin ise, erişime izin ver
     return true;
   } else {

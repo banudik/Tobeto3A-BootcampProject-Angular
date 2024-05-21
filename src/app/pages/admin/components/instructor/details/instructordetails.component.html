@@ -1,0 +1,49 @@
+<form>
+    <div class="card-style mb-30">
+        <h6 class="mb-25">Instructor Details</h6>
+        <div class="input-style-1">
+            <label for="firstNameInput">Instructor First Name</label>
+            <input disabled id="firstNameInput" type="text" value="{{currentInstructor.firstName}}" />
+        </div>
+        <div class="input-style-1">
+            <label for="lastNameInput">Instructor Last Name</label>
+            <input disabled id="lastNameInput" type="text" value="{{currentInstructor.lastName}}" />
+        </div>
+
+        <div class="input-style-1">
+            <label for="UserNameInput">Instructor User Name</label>
+            <input disabled id="UserNameInput" type="text" value="{{currentInstructor.userName}}" />
+        </div>
+        <div class="input-style-1">
+            <label for="EmailInput">Instructor Email</label>
+            <input disabled id="EmailInput" type="text" value="{{currentInstructor.email}}" />
+        </div>
+        <div class="input-style-1">
+            <label for="BirthInput">Instructor Date of Birth</label>
+            <input disabled id="BirthInput" type="text"
+                value="{{currentInstructor.dateOfBirth | date : 'dd/MM/yyyy'}}" />
+        </div>
+        <div class="input-style-1">
+            <label for="NationalInput">Instructor National Identity</label>
+            <input disabled id="NationalInput" type="text" value="{{currentInstructor.nationalIdentity}}" />
+        </div>
+        <div class="input-style-1">
+            <label for="AboutInput">Instructor Company</label>
+            <input disabled id="AboutInput" type="text" value="{{currentInstructor.companyName}}" />
+        </div>
+
+        <div class="input-style-1">
+            <label for="createdDate">Instructor Created Date</label>
+            <input disabled id="createdDate" type="text" [value]="currentInstructor.createdDate | date : 'dd/MM/yyyy'" />
+        </div>
+        <div class="input-style-1">
+            <label for="updatedDate">Instructor Updated Date</label>
+            <input disabled id="updatedDate" type="text" [value]="currentInstructor.updatedDate| date : 'dd/MM/yyyy'" />
+        </div>
+    </div>
+    <br>
+    <div>
+        <a class="text-warning" routerLink="/adminpanel/instructoredit/{{currentInstructor.id}}">Edit</a>
+        <a class="text-primary" routerLink="/adminpanel/instructorindex">Back to List</a>
+    </div>
+</form>

@@ -1,0 +1,49 @@
+<form>
+    <div class="card-style mb-30">
+        <h6 class="mb-25">Are you sure about deleting this applicant ?</h6>
+        <div class="input-style-1">
+            <label for="firstNameInput">Applicant First Name</label>
+            <input disabled id="firstNameInput" type="text" value="{{currentApplicant.firstName}}" />
+        </div>
+        <div class="input-style-1">
+            <label for="lastNameInput">Applicant Last Name</label>
+            <input disabled id="lastNameInput" type="text" value="{{currentApplicant.lastName}}" />
+        </div>
+
+        <div class="input-style-1">
+            <label for="UserNameInput">Applicant User Name</label>
+            <input disabled id="UserNameInput" type="text" value="{{currentApplicant.userName}}" />
+        </div>
+        <div class="input-style-1">
+            <label for="EmailInput">Applicant Email</label>
+            <input disabled id="EmailInput" type="text" value="{{currentApplicant.email}}" />
+        </div>
+        <div class="input-style-1">
+            <label for="BirthInput">Applicant Date of Birth</label>
+            <input disabled id="BirthInput" type="text"
+                value="{{currentApplicant.dateOfBirth | date : 'dd/MM/yyyy'}}" />
+        </div>
+        <div class="input-style-1">
+            <label for="NationalInput">Applicant National Identity</label>
+            <input disabled id="NationalInput" type="text" value="{{currentApplicant.nationalIdentity}}" />
+        </div>
+        <div class="input-style-1">
+            <label for="AboutInput">Applicant About</label>
+            <input disabled id="AboutInput" type="text" value="{{currentApplicant.about}}" />
+        </div>
+
+        <div class="input-style-1">
+            <label for="createdDate">Applicant Created Date</label>
+            <input disabled id="createdDate" type="text" [value]="currentApplicant.createdDate | date : 'dd/MM/yyyy'" />
+        </div>
+        <div class="input-style-1">
+            <label for="updatedDate">Applicant Updated Date</label>
+            <input disabled id="updatedDate" type="text" [value]="currentApplicant.updatedDate| date : 'dd/MM/yyyy'" />
+        </div>
+    </div>
+    <br>
+    <div>
+        <a class="text-danger cursor-pointer" (click)="deleteApplicant(currentApplicant.id)" >Delete</a>  |
+        <a class="text-primary" routerLink="/adminpanel/applicantindex">Back to List</a>
+    </div>
+</form>

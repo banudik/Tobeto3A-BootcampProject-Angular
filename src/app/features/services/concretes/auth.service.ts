@@ -11,6 +11,10 @@ import { ApplicantForRegisterRequest } from "../../models/requests/auth/applican
 import { LocalStorageService } from "./local-storage.service";
 import { ToastrService } from "ngx-toastr";
 import { UserForLoginWithVerifyRequest } from "../../models/requests/auth/user-for-loginWithVerify-request";
+import { CreateEmployeeRequest } from "../../models/requests/employee/create-employee-request";
+import { CreateInstructorRequest } from "../../models/requests/instructor/create-instructor-request";
+import { CreatedEmployeeResponse } from "../../models/responses/employee/created-employee-response";
+import { CreatedInstructorResponse } from "../../models/responses/instructor/created-instructor-response";
 import { ResetPasswordRequest } from "../../models/requests/auth/reset-password-request";
 import { ForgotPasswordRequest } from "../../models/requests/auth/forgot-password-request";
 
@@ -19,6 +23,10 @@ import { ForgotPasswordRequest } from "../../models/requests/auth/forgot-passwor
     providedIn: 'root'
   })
   export class AuthService extends AuthBaseService {
+
+
+
+
     fullname!:string;
     userId!:string;
     token:any;
@@ -29,6 +37,13 @@ import { ForgotPasswordRequest } from "../../models/requests/auth/forgot-passwor
     private readonly apiUrl:string = `${environment.API_URL}/auth`
     constructor(private httpClient:HttpClient,private storageService:LocalStorageService,private toastrService:ToastrService) {super() }
   
+    override registerEmployee(createEmployeeRequest: CreateEmployeeRequest): Observable<CreatedEmployeeResponse> {
+      return this.httpClient.post<CreatedEmployeeResponse>(`${this.apiUrl}/registeremployee`, createEmployeeRequest);
+    }
+    override registerInstructor(createInstructorRequest: CreateInstructorRequest): Observable<CreatedInstructorResponse> {
+      return this.httpClient.post<CreatedInstructorResponse>(`${this.apiUrl}/registerinstructor`, createInstructorRequest);
+    }
+
     override registerApplicant(userforRegisterRequest: ApplicantForRegisterRequest): Observable<TokenModel> {
       return this.httpClient.post<TokenModel>(`${this.apiUrl}/registerapplicant`, userforRegisterRequest).pipe(
         switchMap((response: TokenModel) => {
@@ -193,6 +208,26 @@ import { ForgotPasswordRequest } from "../../models/requests/auth/forgot-passwor
   
     isAdmin(){
       if(this.claims.includes("admin" && "Admin")){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+
+    isEmployee(){
+      if(this.claims.includes("Employees.EmployeeRole" && "Employees.EmployeeRole")){
+        console.log("true");
+        
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+
+    isInstructor(){
+      if(this.claims.includes("instructorRole" && "InstructorRole")){
         return true;
       }
       else{

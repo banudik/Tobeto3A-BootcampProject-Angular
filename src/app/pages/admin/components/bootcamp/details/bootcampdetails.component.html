@@ -1,1 +1,43 @@
-<p>bootcampdetails works!</p>
+<form>
+    <div class="card-style mb-30">
+        <h6 class="mb-25">Bootcamp Details</h6>
+        <div class="input-style-1">
+            <label for="nameInput">Bootcamp Name</label>
+            <input formControlName="name" id="nameInput" type="text" value="{{currentBootcamp.name}}" disabled />
+        </div>
+        <div class="input-style-1">
+            <label for="instructorSelect">Instructor</label>
+            <input formControlName="instructor" id="instructorSelect" type="text" disabled
+                value="{{currentBootcamp.instructorFirstName}} {{currentBootcamp.instructorLastName}}" />
+        </div>
+        <div class="input-style-1">
+            <label for="CurrentfileInput">Current Image</label>
+            <img src="{{currentBootcamp.bootcampImageImagePath}}" id="CurrentfileInput" width="500px" height="500px"
+                alt="{{currentBootcamp.name}}" >
+        </div>
+        <div class="input-style-1">
+            <label for="startDateInput">Start Date </label>
+            <input formControlName="startDate" id="startDateInput" type="text"
+                value="{{currentBootcamp.startDate | date:'dd-MM-yyyy' }}" disabled />
+        </div>
+        <div class="input-style-1">
+            <label for="endDateInput">End Date </label>
+            <input formControlName="endDate" id="endDateInput" type="text"
+                value="{{currentBootcamp.endDate | date:'dd-MM-yyyy' }}" disabled />
+        </div>
+        <div class="input-style-1">
+            <label for="descriptionInput">Description</label>
+            <textarea formControlName="description" disabled id="descriptionInput">{{currentBootcamp.description}}</textarea>
+        </div>
+        <div class="input-style-1">
+            <label for="BootcampStateSelect">BootcampState</label>
+            <input formControlName="BootcampState" id="BootcampStateSelect" type="text"
+                value="{{currentBootcamp.bootcampStateName}}" disabled/>
+        </div>
+    </div>
+    <br>
+    <div>
+        <a class="text-warning" routerLink='/adminpanel/bootcampedit/{{currentBootcamp.id}}'>Edit</a> |
+        <a class="text-primary" routerLink="/adminpanel/bootcampindex">Back to List</a>
+    </div>
+</form>
