@@ -7,5 +7,6 @@ export interface UpdateInstructorRequest {
     dateOfBirth: Date;
     nationalIdentity:string;
     email:string;
-    password:string;
+    password?:string;
+    description:string;
 }

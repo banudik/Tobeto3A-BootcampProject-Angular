@@ -1,0 +1,15 @@
+<form [formGroup]="ApplicationStateForm" (ngSubmit)="onFormSubmit()" >
+    @if(formMessage){
+        <small>{{formMessage}}</small>
+    }
+<div class="card-style mb-30">
+    <h6 class="mb-25">Input Fields</h6>
+    <div class="input-style-1">
+      <label for="nameInput" >Application State Name</label>
+      <input formControlName="name" id="nameInput" type="text" placeholder="Application State Name" />
+    </div>
+  </div>
+  <button type="submit" class="main-btn active-btn rounded-full btn-hover">Add</button>
+  <br>
+  <a routerLink='/adminpanel/applicationstateindex'><span class="main-btn dark-btn rounded-full btn-hover">Back</span></a>
+</form>

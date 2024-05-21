@@ -1,0 +1,22 @@
+<form>
+    <div class="card-style mb-30">
+        <h6 class="mb-25">Application State Details</h6>
+        <div class="input-style-1">
+          <label for="nameInput" >Application State Name</label>
+          <input disabled id="nameInput" type="text"  value="{{currentApplicationState.name}}"/>
+        </div>
+        <div class="input-style-1">
+            <label for="createdDate" >Application State Created Date</label>
+            <input disabled id="createdDate" type="text"  [value]="currentApplicationState.createdDate | date : 'dd/MM/yyyy'"/>
+          </div>
+          <div class="input-style-1">
+            <label for="updatedDate" >Application State Updated Date</label>
+            <input disabled id="updatedDate" type="text"  [value]="currentApplicationState.updatedDate| date : 'dd/MM/yyyy'"/>
+          </div>
+      </div>
+      <br>
+      <div>
+        <a class="text-warning" routerLink='/adminpanel/applicationstateedit/{{currentApplicationState.id}}' >Edit</a>  |
+        <a class="text-primary" routerLink="/adminpanel/applicationstateindex">Back to List</a>
+    </div>
+    </form>

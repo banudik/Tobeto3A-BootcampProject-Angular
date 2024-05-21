@@ -7,4 +7,6 @@ export interface GetByIdApplicantResponse {
     dateOfBirth: Date;
     nationalIdentity:string;
     email:string;
+    createdDate:Date;
+    updatedDate:Date;
 }

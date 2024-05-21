@@ -1,12 +1,21 @@
-<div class="min-h-screen bg-white dark:bg-black">
-  <div class="container mx-auto px-8 py-8 bg-white dark:bg-black">
-    <h1 class="text-3xl font-bold mb-8 text-black dark:text-white text-center">Sıkça Sorulan Sorular</h1>
-    <div *ngFor="let faq of faqList" class="bg-indigo-200 dark:bg-indigo-950 rounded-lg shadow-md p-6 mb-6" (click)="toggleAnswer(faq)">
-      <h3 class="text-xl font-semibold mb-2 text-black dark:text-white">{{ faq.question }}</h3>
+<body>
+<div class="min-h-screen bg-gray-100 dark:bg-neutral-800">
+  <div class="container mx-auto px-8 py-8 bg-gray-100 dark:bg-neutral-800">
+    <h1 class="text-3xl font-bold mb-8 text-black dark:text-white text-center">Frequently Asked Questions</h1>
+    <div *ngFor="let faq of faqList" class="bg-blue-300 dark:bg-indigo-400 rounded-lg shadow-md p-6 mb-6" (click)="toggleAnswer(faq)">
+      <h3 class="text-xl font-semibold mb-2 text-black dark:text-black">{{ faq.question }}</h3>
 
-      <p *ngIf="faq.isOpen" class="text-black dark:text-white">{{ faq.answer }}</p>
+      <p *ngIf="faq.isOpen" class="text-white dark:text-white">{{ faq.answer }}</p>
+    </div>
+    <div class="text-3xl font-bold mb-8 text-black dark:text-white text-center"><br><h3 >Still having questions?</h3><br>
+      <button [ngClass]="{ 'dark-button': darkModeService.darkModeSignal() === 'dark', 'light-button': darkModeService.darkModeSignal() === 'light' }">
+        <div [ngClass]="{ 'dark-button__int': darkModeService.darkModeSignal() === 'dark', 'light-button__int': darkModeService.darkModeSignal() === 'light' }">
+          <span [ngClass]="{ 'dark-button__span': darkModeService.darkModeSignal() === 'dark', 'light-button__span': darkModeService.darkModeSignal() === 'light' }" routerLink="/contact-us">Contact Us</span>
+        </div>
+      </button>
     </div>
   </div>
 </div>
+</body>
 
   

@@ -18,6 +18,8 @@ import { ErrorInterceptor } from './core/interceptors/error/error.interceptor';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { LoadingSpinnerComponent } from './shared/components/loading-spinner/loading-spinner.component';
 import { ContactUsComponent } from './pages/contact-us/contact-us.component';
+import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
+import { FaqComponent } from './features/components/faq/faq.component';
 
 
 
@@ -26,8 +28,7 @@ import { ContactUsComponent } from './pages/contact-us/contact-us.component';
   standalone: true,
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-
-  imports: [RouterOutlet, HttpClientModule, NavbarComponent, HomepageComponent, LoginComponent, SignUpComponent, SharedModule, BootcampListGroupComponent, InstructorComponent, CloudinaryModule, FooterComponent, ProfileComponent,LoadingSpinnerComponent,ContactUsComponent],
+  imports: [RouterOutlet, HttpClientModule, NavbarComponent, HomepageComponent, LoginComponent, SignUpComponent, SharedModule, BootcampListGroupComponent, InstructorComponent, CloudinaryModule, FooterComponent, ProfileComponent,PrivacyPolicyComponent,LoadingSpinnerComponent,ContactUsComponent,FaqComponent],
 
 })
 export class AppComponent /** implements OnInit**/ {

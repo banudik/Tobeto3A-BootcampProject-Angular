@@ -8,4 +8,5 @@ export interface GetListEmployeeResponse {
     nationalIdentity:string;
     email:string;
     password:string;
+    createdDate:Date;
 }

@@ -1,0 +1,56 @@
+<form [formGroup]="BootcampUpdateForm" (ngSubmit)="onFormSubmit()" enctype="multipart/form-data" *ngIf="BootcampUpdateForm">
+    <div>
+      @if(formMessage){
+          <small>{{formMessage}}</small>
+      }
+    </div>
+    <div class="card-style mb-30">
+      <h6 class="mb-25">Input Fields</h6>
+      <div class="input-style-1">
+        <input formControlName="id" id="idInput" type="hidden"  value="{{currentBootcamp.id}}"/>
+        <label for="nameInput">Bootcamp Name</label>
+        <input formControlName="name" id="nameInput" type="text" value="{{currentBootcamp.name}}" />
+      </div>
+        <div class="select-style-1">
+          <label for="instructorSelect">Instructor</label>
+          <div class="select-position">
+            <select formControlName="instructorId" id="instructorSelect" [value]="currentBootcamp.instructorId">
+                <option *ngFor="let instructor of instructors.items" [value]="instructor.id">{{ instructor.firstName + " " + instructor.lastName }}</option>
+            </select>
+          </div>
+    </div>
+    <div class="input-style-1">
+        <label for="CurrentfileInput">Current Image</label>
+        <img src="{{currentBootcamp.bootcampImageImagePath}}" id="CurrentfileInput" width="200px" height="200px" alt="{{currentBootcamp.name}}">
+      </div>
+      <div class="input-style-1">
+        <label for="fileInput">File</label>
+        <input type="file" name="file" formControlName="file" id="fileInput" (change)="onFileChange($event)">
+      </div>
+      <div class="input-style-1">
+        <label for="startDateInput">Start Date Current: {{currentBootcamp.startDate | date:'dd-MM-yyyy'}}</label>
+        <input formControlName="startDate" id="startDateInput" type="date" />
+      </div>
+      <div class="input-style-1">
+        <label for="endDateInput">End Date Current: {{currentBootcamp.endDate | date:'dd-MM-yyyy'}}</label>
+        <input formControlName="endDate" id="endDateInput" type="date" value="{{currentBootcamp.endDate | date:'dd-MM-yyyy' }}" />
+      </div>
+      <div class="input-style-1">
+        <label for="descriptionInput">Description</label>
+        <textarea formControlName="description" id="descriptionInput"></textarea>
+      </div>
+    <div class="select-style-1">
+        <label for="stateSelect">Bootcamp State</label>
+        <div class="select-position">
+          <select formControlName="bootcampStateId" id="stateSelect">
+            <option *ngFor="let state of bootcampStates.items" [value]="state.id">{{ state.name }}</option>
+          </select>
+        </div>
+    </div>
+</div>
+
+
+    <button type="submit" class="main-btn active-btn rounded-full btn-hover">Update Bootcamp</button>
+    <br>
+    <a routerLink='/adminpanel/bootcampindex'><span class="main-btn dark-btn rounded-full btn-hover">Back</span></a>
+  </form>

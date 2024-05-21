@@ -15,7 +15,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background: rgb(17, 24, 39);
+    background: #222;
 }
 
 .dark-contact .dark-content {
@@ -83,7 +83,7 @@
     content: '';
     position: absolute;
     inset: 2px;
-    background: rgb(17, 24, 39);
+    background: #222;
 }
 
 .dark-container .dark-contactInfo .dark-box .dark-icon b {
@@ -167,8 +167,8 @@
     content: '';
     position: absolute;
     inset: 2px;
-    border: 20px solid rgb(17, 24, 39);
-    background: rgb(24, 34, 56);
+    border: 20px solid #222;
+    background: #2a2634;
 
 }
 
@@ -283,7 +283,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background: #fff; /* Light background color */
+    background: #f9f6f6; /* Light background color */
 }
 
 .light-contact .light-content {
@@ -347,7 +347,7 @@
     content: '';
     position: absolute;
     inset: 2px;
-    background: #fff; 
+    background: #f9f6f6; 
 }
 
 .light-container .light-contactInfo .light-box .light-icon b {
@@ -431,7 +431,7 @@
     content: '';
     position: absolute;
     inset: 2px;
-    border: 20px solid #fff;
+    border: 20px solid #f9f6f6;
     background: #d0e3f3; 
 }
 
