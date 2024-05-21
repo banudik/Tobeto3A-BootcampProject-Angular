@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   forgotPasswordEmail!: ForgotPasswordRequest;
   forgotPassword!:FormGroup;
 
-  constructor(private formBuilder:FormBuilder,private authService:AuthService,private router:Router,private toastrService:ToastrService,private emailService:EmailService){}
+  constructor(private formBuilder:FormBuilder,private authService:AuthService,private router:Router,private toastrService:ToastrService){}
 
   ngOnInit(): void {
     this.createLoginForm();
@@ -50,24 +50,46 @@ export class LoginComponent implements OnInit {
 
 
   // Kullanıcının girdiği bilgileri apiye post isteği atar (email,password olarak sadece 2 parametre gönderir) token dönmez veya dönen tokeni kaydetmez
+  // login() {
+  //   if (this.loginForm.valid) {
+  //     let loginModel: UserForLoginRequest = Object.assign({}, this.loginForm.value);
+
+  //     this.authService.login(loginModel).subscribe({
+  //       error:(error)=>{
+  //         this.toastrService.error('Giriş Başarısız','Giriş İşlemi');
+  //       },
+  //       next:()=>{
+  //         if(!localStorage.getItem('token')){
+  //           this.toastrService.success('Doğrulama kodu mail adresinize gönderildi','Doğrulama Kodu');
+  //           this.showAuthenticatorCodeInput = true;
+  //         }
+  //       }
+  //     })
+  //   }
+  // }
+
   login() {
     if (this.loginForm.valid) {
       let loginModel: UserForLoginRequest = Object.assign({}, this.loginForm.value);
       console.log(loginModel.email + " " + loginModel.password);
       
       this.authService.login(loginModel).subscribe({
-        error:(error)=>{
-          this.toastrService.error('Giriş Başarısız','Giriş İşlemi');
-          console.log(error.message);
+        next: (response) => {
+          if (response.accessToken) {
+            localStorage.setItem('token', response.accessToken.token);
+            this.toastrService.success('Giriş Başarılı', 'Giriş İşlemi');
+            this.showAuthenticatorCodeInput = false;
+          } 
+          else {
+            this.toastrService.success('Doğrulama kodu mail adresinize gönderildi', 'Doğrulama Kodu');
+            this.showAuthenticatorCodeInput = true;
+          }
         },
-        complete:()=>{
-          this.toastrService.success('Doğrulama kodu mail adresinize gönderildi','Doğrulama Kodu');
-          this.showAuthenticatorCodeInput = true;
-          // setTimeout(()=>{
-          //   this.router.navigate(["/home-page"]);
-          // },2000)
-        }
-      })
+        error: (error) => {
+          this.toastrService.error('Giriş Başarısız', 'Giriş İşlemi');
+        },
+        complete: () => {}
+      });
     }
   }
 
@@ -75,17 +97,17 @@ export class LoginComponent implements OnInit {
   verifyCode() {
       let loginModel: UserForLoginWithVerifyRequest = Object.assign({}, this.loginForm.value);
       this.authService.loginWithVerify(loginModel).subscribe({
-        complete:() => {
+        next:()=>{
           this.toastrService.success('Giriş Başarılı', 'Giriş işlemi');
           this.onCancel();
-          // setTimeout(() => {
-          //   this.router.navigate(["/home-page"]);
-          // }, 2000);
         },
-        error: (error) => {
+        error:() => {
           this.toastrService.error('Giriş Başarısız');
-          console.log(error.message);
-        }
+          //console.log(error.message);
+        },
+        complete:() => {
+          this.onCancel();
+        },
       });
   }
 
@@ -93,14 +115,8 @@ export class LoginComponent implements OnInit {
     if (this.forgotPassword.valid) {
       let ForgotPasswordModel: ForgotPasswordRequest = Object.assign({}, this.forgotPassword.value);
       this.authService.sendForgotPasswordEmail(ForgotPasswordModel);
-      console.log("if in içinde",ForgotPasswordModel);
-
         }
-        console.log("if in dışında");
       }
-
-
-
 
   // Doğrulama kodu girilen pop-up'ı kapatır
   onCancel() {
@@ -119,8 +135,4 @@ export class LoginComponent implements OnInit {
   goBack() {
     this.showForgotPassword = false;
   }
-
-
 }  
-
-
