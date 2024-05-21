@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.dark-button {
+    background-image: linear-gradient(to right bottom, #8585ff, #8585ff, #8585ff, #4ab4fb, #4ab4fb);
+    border: none;
+    font-size: 1.2em;
+    border-radius: 1.5em;
+    padding: 4px;
+    transition: border-top-left-radius 0.2s ease-in, 
+    border-top-right-radius 0.2s ease-in 0.15s, 
+    border-bottom-right-radius 0.2s ease-in 0.3s,
+    border-bottom-left-radius 0.2s ease-in 0.45s, 
+    padding 0.2s ease-in;
+    position: relative;
+  }
+  
+  .dark-button__int {
+    background-color: #212121;
+    color: white;
+    border-radius: 1.3em;
+    padding: 10px 40px;
+    transition: all 0.2s ease-in,
+    border-top-left-radius 0.2s ease-in, 
+    border-top-right-radius 0.2s ease-in 0.15s, 
+    border-bottom-right-radius 0.2s ease-in 0.3s,
+    border-bottom-left-radius 0.2s ease-in 0.45s,
+    padding 0.2s ease-in;
+    font-weight: 600;
+    z-index: -1;
+    box-shadow: -15px -10px 30px -5px #8585ff,
+      15px -10px 30px -5px #8585ff,
+      15px 10px 30px -5px #4ab4fb,
+      -15px 10px 30px -5px #4ab4fb;
+  }
+  
+  .dark-button:active .dark-button__int {
+    padding: 10px 30px;
+  }
+  
+  .dark-button:hover {
+    border-radius: 0;
+  }
+  
+  .dark-button:hover .dark-button__int {
+    border-radius: 0;
+  }
+  
+  .dark-button:hover .dark-button__int {
+    box-shadow: -25px -10px 30px -5px #8585ff,
+      25px -10px 30px -5px #8585ff,
+      25px 10px 30px -5px #4ab4fb,
+      -25px 10px 30px -5px #4ab4fb;
+  }
+  
+  .light-button {
+    background-image: linear-gradient(to right bottom, #8585ff, #8585ff, #8585ff, #4ab4fb, #4ab4fb);
+    border: none;
+    font-size: 1.2em;
+    border-radius: 1.5em;
+    padding: 4px;
+    transition: border-top-left-radius 0.2s ease-in, 
+    border-top-right-radius 0.2s ease-in 0.15s, 
+    border-bottom-right-radius 0.2s ease-in 0.3s,
+    border-bottom-left-radius 0.2s ease-in 0.45s, 
+    padding 0.2s ease-in;
+    position: relative;
+  }
+  
+  .light-button__int {
+    background-color: rgb(243 244 246);
+    color: #212121;
+    border-radius: 1.3em;
+    padding: 10px 40px;
+    transition: all 0.2s ease-in,
+    border-top-left-radius 0.2s ease-in, 
+    border-top-right-radius 0.2s ease-in 0.15s, 
+    border-bottom-right-radius 0.2s ease-in 0.3s,
+    border-bottom-left-radius 0.2s ease-in 0.45s,
+    padding 0.2s ease-in;
+    font-weight: 600;
+    z-index: -1;
+    box-shadow: -15px -10px 30px -5px #8585ff,
+      15px -10px 30px -5px #8585ff,
+      15px 10px 30px -5px #4ab4fb,
+      -15px 10px 30px -5px #4ab4fb;
+  }
+  
+  .light-button:active .light-button__int {
+    padding: 10px 30px;
+  }
+  
+  .light-button:hover {
+    border-radius: 0;
+  }
+  
+  .light-button:hover .light-button__int {
+    border-radius: 0;
+  }
+  
+  .light-button:hover .light-button__int {
+    box-shadow: -25px -10px 30px -5px #8585ff,
+      25px -10px 30px -5px #8585ff,
+      25px 10px 30px -5px #4ab4fb,
+      -25px 10px 30px -5px #4ab4fb;
+  }

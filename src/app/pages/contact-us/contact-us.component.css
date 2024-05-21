@@ -1,0 +1,537 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.dark-contact {
+    position: relative;
+    min-height: 100vh;
+    padding: 50px 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: #222;
+}
+
+.dark-contact .dark-content {
+    max-width: 800px;
+    text-align: center;
+}
+
+.dark-contact .dark-content h2 {
+    font-size: 3em;
+    color: #fff;
+    font-weight: 500;
+}
+
+.dark-contact .dark-content p {
+    color: #fff;
+    font-size: 1em;
+    font-weight: 300;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    
+}
+
+.dark-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    margin-top: 30px;
+}
+
+.dark-container .dark-contactInfo {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.dark-container .dark-contactInfo .dark-box {
+    position: relative;
+    padding: 20px 0;
+    display: flex;
+    
+}
+
+.dark-container .dark-contactInfo .dark-box .dark-icon {
+    position: relative;
+    min-width: 60px;
+    height: 60px;
+    background: repeating-conic-gradient(from 27.5deg, #8585ff 0%, #8585ff 10%, transparent 10%, transparent 50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dark-container .dark-contactInfo .dark-box .dark-icon::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-conic-gradient(from 117.5deg, #8585ff 0%, #8585ff 10%, transparent 10%, transparent 50%);
+}
+
+.dark-container .dark-contactInfo .dark-box .dark-icon::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    background: #222;
+}
+
+.dark-container .dark-contactInfo .dark-box .dark-icon b {
+    position: absolute;
+    inset: 8px;
+    background: #8585ff;
+    z-index: 2;
+}
+
+.dark-container .dark-contactInfo .dark-box .dark-icon i {
+    position: relative;
+    z-index: 1000;
+    color: #fff;
+    font-size: 1.25em;
+}
+
+.dark-container .dark-contactInfo .dark-box .dark-text {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    font-size: 1.1em;
+    color: #fff;
+    font-family: 300;
+}
+
+.dark-container .dark-contactInfo .dark-box .dark-text h3 {
+    font-weight: 500;
+    color: #8585ff;
+}
+
+.dark-container .dark-contactInfo .dark-txt {
+    color: #fff;
+    margin-top: 50px;
+    font-weight: 500;
+    border-left: 50px solid #8585ff;
+    padding-left: 10px;
+    line-height: 1em;
+}
+
+.dark-container .dark-contactInfo .dark-sci {
+    position: relative;
+    display: flex;
+    gap: 30px;
+    margin: 20px 0;
+}
+
+.dark-container .dark-contactInfo .dark-sci li {
+    list-style: none;
+}
+
+.dark-container .dark-contactInfo .dark-sci li a {
+    color: #fff;
+    font-size: 1.5em;
+    transition: 0.25s,
+}
+
+.dark-container .dark-contactInfo .dark-sci li a:hover {
+    color: #8585ff;
+    filter: drop-shadow(0 0 5px #8585ff);
+}
+
+.dark-container .dark-contactForm {
+    position: relative;
+    width: 40%;
+    background: repeating-conic-gradient(from var(--a), #8585ff 0%, #8585ff 10%, transparent 10%, transparent 50%);
+    animation: animate 6s linear infinite;
+    padding: 60px;
+}
+
+.dark-container .dark-contactForm::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-conic-gradient(from var(--a), #8585ff 0%, #8585ff 10%, transparent 10%, transparent 50%);
+    animation: animate 6s linear infinite;
+    animation-delay: -1.5s;
+}
+
+.dark-container .dark-contactForm::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    border: 20px solid #222;
+    background: #2a2634;
+
+}
+
+@property --a {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0deg;
+}
+
+@keyframes animate {
+    0% {
+        --a: 0deg;
+    }
+
+    100% {
+        --a: 360deg;
+    }
+}
+
+.dark-container .dark-contactForm form {
+    position: relative;
+    z-index: 10;
+}
+
+.dark-container .dark-contactForm form h2 {
+    font-size: 2em;
+    color: #fff;
+    font-weight: 500;
+}
+
+.dark-container .dark-contactForm form .dark-inputBox {
+    position: relative;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.dark-container .dark-contactForm form .dark-inputBox input,
+.dark-container .dark-contactForm form .dark-inputBox textarea {
+    width: 100% !important;
+    padding: 5px 0;
+    font-size: 1.1em;
+    margin: 10px 0;
+    border: none;
+    background: transparent;
+    border-bottom: 2px solid #8585ff;
+    color: #fff;
+    outline: none;
+    resize: none;
+}
+
+.dark-container .dark-contactForm form .dark-inputBox span {
+    position: absolute;
+    left: 0;
+    pointer-events: none;
+    padding: 5px 0;
+    margin: 10px 0;
+    font-size: 1.1em;
+    color: #fff;
+    transition: 0.5s;
+}
+
+.dark-container .dark-contactForm form .dark-inputBox input:focus~span,
+.dark-container .dark-contactForm form .dark-inputBox textarea:focus~span,
+.dark-container .dark-contactForm form .dark-inputBox input:valid~span,
+.dark-container .dark-contactForm form .dark-inputBox textarea:valid~span {
+    color: #8585ff;
+    font-size: 0.9em;
+    transform: translateY(-24px);
+}
+
+.dark-container .dark-contactForm form .dark-inputBox input[type="submit"] {
+    width: 100%;
+    background: #8585ff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 1.1em;
+    font-weight: 500;
+
+}
+
+/* responsive.. */
+@media (max-width:991px) {
+    .dark-contact {
+        padding: 50px;
+    }
+
+    .dark-container {
+        flex-direction: column;
+    }
+
+    .dark-container .dark-contactInfo,
+    .dark-container .dark-contactForm {
+        width: 100%;
+    }
+    .dark-container .dark-contactForm {
+        padding:40px;
+    }
+    .dark-container .dark-contactForm form {
+        padding:10px;
+    }
+}
+
+/*light mode için*/
+
+.light-contact {
+    position: relative;
+    min-height: 100vh;
+    padding: 50px 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: #f9f6f6; /* Light background color */
+}
+
+.light-contact .light-content {
+    max-width: 800px;
+    text-align: center;
+}
+
+.light-contact .light-content h2 {
+    font-size: 3em;
+    color: #212529; /* Dark text color */
+    font-weight: 500;
+}
+
+.light-contact .light-content p {
+    color: #212529; /* Dark text color */
+    font-size: 1em;
+    font-weight: 300;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.light-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    margin-top: 30px;
+}
+
+.light-container .light-contactInfo {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.light-container .light-contactInfo .light-box {
+    position: relative;
+    padding: 20px 0;
+    display: flex;
+}
+
+.light-container .light-contactInfo .light-box .light-icon {
+    position: relative;
+    min-width: 60px;
+    height: 60px;
+    background: repeating-conic-gradient(from 27.5deg, #4ab4fb 0%, #4ab4fb 10%, transparent 10%, transparent 50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.light-container .light-contactInfo .light-box .light-icon::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-conic-gradient(from 117.5deg, #4ab4fb 0%, #4ab4fb 10%, transparent 10%, transparent 50%);
+}
+
+.light-container .light-contactInfo .light-box .light-icon::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    background: #f9f6f6; 
+}
+
+.light-container .light-contactInfo .light-box .light-icon b {
+    position: absolute;
+    inset: 8px;
+    background: #4ab4fb;
+    z-index: 2;
+}
+
+.light-container .light-contactInfo .light-box .light-icon i {
+    position: relative;
+    z-index: 1000;
+    color: #212529; 
+    font-size: 1.25em;
+}
+
+.light-container .light-contactInfo .light-box .light-text {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    font-size: 1.1em;
+    color: #212529; 
+    font-family: 300;
+}
+
+.light-container .light-contactInfo .light-box .light-text h3 {
+    font-weight: 500;
+    color: #4ab4fb;
+}
+
+.light-container .light-contactInfo .light-txt {
+    color: #212529; 
+    margin-top: 50px;
+    font-weight: 500;
+    border-left: 50px solid #4ab4fb;
+    padding-left: 10px;
+    line-height: 1em;
+}
+
+.light-container .light-contactInfo .light-sci {
+    position: relative;
+    display: flex;
+    gap: 30px;
+    margin: 20px 0;
+}
+
+.light-container .light-contactInfo .light-sci li {
+    list-style: none;
+}
+
+.light-container .light-contactInfo .light-sci li a {
+    color: #212529; 
+    font-size: 1.5em;
+    transition: 0.25s,
+}
+
+.light-container .light-contactInfo .light-sci li a:hover {
+    color: #4ab4fb;
+    filter: drop-shadow(0 0 5px #418ddf);
+}
+
+.light-container .light-contactForm {
+    position: relative;
+    width: 40%;
+    background: repeating-conic-gradient(from var(--a), #4ab4fb 0%, #4ab4fb 10%, transparent 10%, transparent 50%);
+    animation: animate 6s linear infinite;
+    padding: 60px;
+}
+
+.light-container .light-contactForm::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-conic-gradient(from var(--a), #4ab4fb 0%, #4ab4fb 10%, transparent 10%, transparent 50%);
+    animation: animate 6s linear infinite;
+    animation-delay: -1.5s;
+}
+
+.light-container .light-contactForm::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    border: 20px solid #f9f6f6;
+    background: #d0e3f3; 
+}
+
+@property --a {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0deg;
+}
+
+@keyframes animate {
+    0% {
+        --a: 0deg;
+    }
+
+    100% {
+        --a: 360deg;
+    }
+}
+
+.light-container .light-contactForm form {
+    position: relative;
+    z-index: 10;
+}
+
+.light-container .light-contactForm form h2 {
+    font-size: 2em;
+    color: #212529; 
+    font-weight: 500;
+}
+
+.light-container .light-contactForm form .light-inputBox {
+    position: relative;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.light-container .light-contactForm form .light-inputBox input,
+.light-container .light-contactForm form .light-inputBox textarea {
+    width: 100% !important;
+    padding: 5px 0;
+    font-size: 1.1em;
+    margin: 10px 0;
+    border: none;
+    background: transparent;
+    border-bottom: 2px solid #4ab4fb;
+    color: #212529; 
+    outline: none;
+    resize: none;
+}
+
+.light-container .light-contactForm form .light-inputBox span {
+    position: absolute;
+    left: 0;
+    pointer-events: none;
+    padding: 5px 0;
+    margin: 10px 0;
+    font-size: 1.1em;
+    color: #212529; 
+    transition: 0.5s;
+}
+
+.light-container .light-contactForm form .light-inputBox input:focus~span,
+.light-container .light-contactForm form .light-inputBox textarea:focus~span,
+.light-container .light-contactForm form .light-inputBox input:valid~span,
+.light-container .light-contactForm form .light-inputBox textarea:valid~span {
+    color: #4ab4fb;
+    font-size: 0.9em;
+    transform: translateY(-24px);
+}
+
+.light-container .light-contactForm form .light-inputBox input[type="submit"] {
+    width: 100%;
+    background: #4ab4fb;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 1.1em;
+    font-weight: 500;
+
+}
+
+/* responsive.. */
+@media (max-width:991px) {
+    .light-contact {
+        padding: 50px;
+    }
+
+    .light-container {
+        flex-direction: column;
+    }
+
+    .light-container .light-contactInfo,
+    .light-container .light-contactForm {
+        width: 100%;
+    }
+    .light-container .light-contactForm {
+        padding:40px;
+    }
+    .light-container .light-contactForm form {
+        padding:10px;
+    }
+}

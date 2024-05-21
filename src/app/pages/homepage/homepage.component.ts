@@ -1,7 +1,6 @@
 import { Component ,HostListener,OnInit} from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { BootcampListGroupComponent } from '../../features/components/bootcamps/bootcamp-list-group/bootcamp-list-group.component';
 import { HttpClientModule } from '@angular/common/http';
 import { InstructorComponent } from "../../features/components/instructor/instructor.component";
 
@@ -10,7 +9,7 @@ import { InstructorComponent } from "../../features/components/instructor/instru
     standalone: true,
     templateUrl: './homepage.component.html',
     styleUrl: './homepage.component.css',
-    imports: [CommonModule]
+    imports: [CommonModule,RouterModule]
 })
 export class HomepageComponent {
     
