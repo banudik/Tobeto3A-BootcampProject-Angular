@@ -28,13 +28,8 @@ import { FaqComponent } from './features/components/faq/faq.component';
   standalone: true,
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
+  imports: [RouterOutlet, HttpClientModule, NavbarComponent, HomepageComponent, LoginComponent, SignUpComponent, SharedModule, BootcampListGroupComponent, InstructorComponent, CloudinaryModule, FooterComponent, ProfileComponent,PrivacyPolicyComponent,LoadingSpinnerComponent,ContactUsComponent,FaqComponent],
 
-<<<<<<< HEAD
-  imports: [RouterOutlet, HttpClientModule, NavbarComponent, HomepageComponent, LoginComponent, SignUpComponent, SharedModule, BootcampListGroupComponent, InstructorComponent, CloudinaryModule, FooterComponent, ProfileComponent,ContactUsComponent,PrivacyPolicyComponent,FaqComponent],
-=======
-  imports: [RouterOutlet, HttpClientModule, NavbarComponent, HomepageComponent, LoginComponent, SignUpComponent, SharedModule, BootcampListGroupComponent, InstructorComponent, CloudinaryModule, FooterComponent, ProfileComponent,LoadingSpinnerComponent,ContactUsComponent],
-
->>>>>>> 95d2455fbd669d52d079e9cd2cfbfe6711d42d7a
 })
 export class AppComponent /** implements OnInit**/ {
   title = 'BootcampProject-FrontEnd';
