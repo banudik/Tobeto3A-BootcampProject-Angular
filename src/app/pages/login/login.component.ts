@@ -53,6 +53,8 @@ export class LoginComponent implements OnInit {
   login() {
     if (this.loginForm.valid) {
       let loginModel: UserForLoginRequest = Object.assign({}, this.loginForm.value);
+      console.log(loginModel.email + " " + loginModel.password);
+      
       this.authService.login(loginModel).subscribe({
         error:(error)=>{
           this.toastrService.error('Giriş Başarısız','Giriş İşlemi');

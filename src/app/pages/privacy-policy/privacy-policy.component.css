@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+
+.dark-body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    background-color: #333;
+  }
+  
+  .dark-container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    padding-top: 20px;
+  }
+  
+  .dark-header {
+    background: #181818;
+    color: #8585ff;
+    padding: 30px 0;
+    text-align: center;
+    border-radius: 8px;
+  }
+  
+  .dark-header h1 {
+    margin: 0;
+    font-size: 2.5em;
+  }
+  
+  .dark-header p {
+    margin: 0;
+    font-size: 1.2em;
+  }
+  
+  .dark-main {
+    background: #181818;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+  }
+  
+  .dark-main h2 {
+    color: #fff;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #eaeaea;
+    font-size:larger;
+  }
+  
+  .dark-main h3 {
+    color: #fff;
+    padding-bottom: 10px;
+    font-size:medium;
+  }
+  
+  .dark-main p, .dark-main ul, .dark-main li {
+    margin-bottom: 10px;
+  }
+  
+  .dark-main ul {
+    list-style-type: disc;
+    margin-left: 20px;
+  }
+  
+  .dark-main a {
+    color: #007BFF;
+    text-decoration: none;
+  }
+  
+  .dark-main a:hover {
+    text-decoration: underline;
+  }
+  
+  .light-body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: #edecec;
+  }
+  
+  .light-container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    padding-top: 20px;
+  }
+  
+  .light-header {
+    background: #f9f6f6;
+    color: #4ab4fb;
+    padding: 30px 0;
+    text-align: center;
+    border-radius: 8px;
+  }
+  
+  .light-header h1 {
+    margin: 0;
+    font-size: 2.5em;
+  }
+  
+  .light-header p {
+    margin: 0;
+    font-size: 1.2em;
+  }
+  
+  .light-main {
+    background: #f9f6f6;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+  }
+  
+  .light-main h2 {
+    color: #333;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #101010;
+    font-size:larger;
+  }
+  
+  .light-main h3 {
+    color: #333;
+    padding-bottom: 10px;
+    font-size:medium;
+  }
+  
+  .light-main p, .light-main ul, .light-main li {
+    margin-bottom: 10px;
+  }
+  
+  .light-main ul {
+    list-style-type: disc;
+    margin-left: 20px;
+  }
+  
+  .light-main a {
+    color: #007BFF;
+    text-decoration: none;
+  }
+  
+  .light-main a:hover {
+    text-decoration: underline;
+  }
+  

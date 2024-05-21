@@ -17,6 +17,8 @@ import { AuthInterceptor } from './core/interceptors/auth/auth.interceptor';
 import { ErrorInterceptor } from './core/interceptors/error/error.interceptor';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ContactUsComponent } from './pages/contact-us/contact-us.component';
+import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
+import { FaqComponent } from './features/components/faq/faq.component';
 
 
 @Component({
@@ -25,7 +27,7 @@ import { ContactUsComponent } from './pages/contact-us/contact-us.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 
-  imports: [RouterOutlet, HttpClientModule, NavbarComponent, HomepageComponent, LoginComponent, SignUpComponent, SharedModule, BootcampListGroupComponent, InstructorComponent, CloudinaryModule, FooterComponent, ProfileComponent,ContactUsComponent],
+  imports: [RouterOutlet, HttpClientModule, NavbarComponent, HomepageComponent, LoginComponent, SignUpComponent, SharedModule, BootcampListGroupComponent, InstructorComponent, CloudinaryModule, FooterComponent, ProfileComponent,ContactUsComponent,PrivacyPolicyComponent,FaqComponent],
 })
 export class AppComponent /** implements OnInit**/ {
   title = 'BootcampProject-FrontEnd';
