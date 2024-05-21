@@ -24,7 +24,7 @@ export class ApplicationStateInformationService extends ApplicationStateInformat
 
   override getList(pageRequest:PageRequest): Observable<ApplicationStateInformationListItemDto> {
     const newRequest: {[key: string]: string | number} = {
-      pageIndex: pageRequest.page,
+      pageIndex: pageRequest.pageIndex,
       pageSize: pageRequest.pageSize
     };
 
@@ -33,7 +33,7 @@ export class ApplicationStateInformationService extends ApplicationStateInformat
     }).pipe(
       map((response)=>{
         const newResponse:ApplicationStateInformationListItemDto={
-          index:pageRequest.page,
+          index:pageRequest.pageIndex,
           size:pageRequest.pageSize,
           count:response.count,
           hasNext:response.hasNext,

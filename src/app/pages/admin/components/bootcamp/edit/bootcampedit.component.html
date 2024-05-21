@@ -1,4 +1,4 @@
-<form [formGroup]="BootcampUpdateForm" (ngSubmit)="onFormSubmit()" enctype="multipart/form-data">
+<form [formGroup]="BootcampUpdateForm" (ngSubmit)="onFormSubmit()" enctype="multipart/form-data" *ngIf="BootcampUpdateForm">
     <div>
       @if(formMessage){
           <small>{{formMessage}}</small>

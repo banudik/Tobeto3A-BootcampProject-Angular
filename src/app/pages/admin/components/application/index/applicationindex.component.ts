@@ -42,7 +42,7 @@ export class ApplicationindexComponent implements OnInit {
 
   ngOnInit(): void {
     this.getApplicationStates();
-    this.getList({ page: 0, pageSize: this.PAGE_SIZE })
+    this.getList({ pageIndex: 0, pageSize: this.PAGE_SIZE })
     this.visibleData();
     this.pageNumbers();
   }
@@ -54,7 +54,7 @@ export class ApplicationindexComponent implements OnInit {
   }
 
   getApplicationStates() {
-    this.applicationStateService.getList({ page: 0, pageSize: this.PAGE_SIZE }).subscribe((response) => {
+    this.applicationStateService.getList({ pageIndex: 0, pageSize: this.PAGE_SIZE }).subscribe((response) => {
       this.applicationStates = response;
     })
   }
@@ -99,8 +99,8 @@ export class ApplicationindexComponent implements OnInit {
     this.visibleData();
   }
 
-  changePageSize(pageSize: any) {
-    this.pageSize = pageSize;
+  changePageSize(pageSize: string) {
+    this.pageSize = parseInt(pageSize, 10);
     this.visibleData();
   }
 

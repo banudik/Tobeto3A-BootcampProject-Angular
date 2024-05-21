@@ -32,7 +32,7 @@ export class ApplicationInformationService extends ApplicationInformationBaseSer
 
   override getList(pageRequest: PageRequest): Observable<ApplicationInformatinListItemDto> {
     const newRequest: {[key: string]: string | number} = {
-      pageIndex: pageRequest.page,
+      pageIndex: pageRequest.pageIndex,
       pageSize: pageRequest.pageSize
     };
 
@@ -41,7 +41,7 @@ export class ApplicationInformationService extends ApplicationInformationBaseSer
     }).pipe(
       map((response)=>{
         const newResponse:ApplicationInformatinListItemDto={
-          index:pageRequest.page,
+          index:pageRequest.pageIndex,
           size:pageRequest.pageSize,
           count:response.count,
           hasNext:response.hasNext,

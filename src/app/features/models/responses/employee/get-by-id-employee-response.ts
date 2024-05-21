@@ -7,5 +7,6 @@ export interface GetByIdEmployeeResponse {
     dateOfBirth: Date;
     nationalIdentity:string;
     email:string;
-    password:string;
+    createdDate:Date;
+    updatedDate:Date;
 }

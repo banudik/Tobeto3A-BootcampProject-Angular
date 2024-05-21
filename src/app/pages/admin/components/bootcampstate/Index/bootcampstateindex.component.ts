@@ -34,7 +34,7 @@ export class BootcampstateindexComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getList({ page: 0, pageSize: this.PAGE_SIZE }) 
+    this.getList({ pageIndex: 0, pageSize: this.PAGE_SIZE }) 
     //console.log("start " + this.bootcampStateList.items.length);
     this.visibleData();
     this.pageNumbers();
@@ -87,8 +87,8 @@ export class BootcampstateindexComponent implements OnInit {
     this.visibleData();
   }
 
-  changePageSize(pageSize:any){
-    this.pageSize = pageSize;
+  changePageSize(pageSize:string){
+    this.pageSize = parseInt(pageSize, 10);
     this.visibleData();
   }
 

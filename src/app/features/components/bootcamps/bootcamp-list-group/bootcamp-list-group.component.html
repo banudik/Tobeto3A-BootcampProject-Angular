@@ -1,30 +1,54 @@
-
-<div class="flex h-screen bg-white dark:bg-black" >
+<div class="flex h-screen bg-white dark:bg-black">
 
     <!-- Sidebar -->
-    <aside class="w-64 bg-white shadow-md dark:bg-black">
+    <!-- <aside class="w-64 bg-white shadow-md dark:bg-black">
 
             <app-instructor></app-instructor>
 
-    </aside>
-    
+    </aside> -->
+
     <!-- Content -->
     <div class="flex-grow p-8">
-        <div class="container mx-auto">
-            <h3 *ngIf="!bootcampList" class="text-center">Bootcamp Bulunamadı</h3>
-            
+        <div *ngIf="!isLoading" class="container mx-auto">
+            <h3 *ngIf="bootcampList.items == []" class="text-center">Bootcamp Bulunamadı</h3>
+
+            <div class="flex justify-between items-center mb-4 mt-4 input-style-1">
+                <input type="text" placeholder="Search" class="w-full border p-2 rounded-lg" #filter
+                    (submit)="filterData(filter.value)">
+                <button class="ml-2 border p-2 rounded-lg bg-blue-500 text-white" (click)="filterData(filter.value)">
+                    Search
+                </button>
+                <select class="border p-2 rounded-lg" #InstructorFilter
+                    (change)="filterByInstructor(InstructorFilter.value)">
+                    <option value="">All Instructors</option>
+                    <option *ngFor="let instructor of instructors?.items" [value]="instructor.id">{{ instructor.firstName
+                        }} {{ instructor.lastName }}</option>
+                </select>
+
+                <select class="border p-2 rounded-lg" #pageSize (change)="changePageSize(pageSize.value)">
+                    <option *ngFor="let size of pageSizes" [value]="size">Page Size: {{size}}</option>
+                </select>
+            </div>
+
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-center">
-                 <div *ngFor="let bootcamp of bootcampList.items" class="max-w-sm rounded overflow-hidden shadow-lg transition duration-500 ease-in-out transform hover:scale-105"> <!-- Mause üstüne geldiği zaman card büyür -->
+                <div *ngFor="let bootcamp of visibleData()"
+                    class="max-w-sm rounded overflow-hidden shadow-lg transition duration-500 ease-in-out transform hover:scale-105">
+                    <!-- Mause üstüne geldiği zaman card büyür -->
                     <img [src]="bootcamp.bootcampImageImagePath" class="w-full h-48 object-cover" alt="bootcamp image">
                     <div class="px-6 py-4">
                         <div class="font-bold text-xl mb-2">{{bootcamp.name}}</div>
-                        <p class="text-gray-700 text-base"><b>Hoca:</b> {{bootcamp.instructorFirstName}} {{bootcamp.instructorLastName}}</p>
-                        <p class="text-gray-700 text-base"><b>Start Date:</b> {{ bootcamp.startDate | date: 'dd/MM/yyyy' }}</p>
-                        <p class="text-gray-700 text-base"><b>End Date:</b> {{bootcamp.endDate | date: 'dd/MM/yyyy'}}</p>
+                        <p class="text-gray-700 text-base"><b>Hoca:</b> {{bootcamp.instructorFirstName}}
+                            {{bootcamp.instructorLastName}}</p>
+                        <p class="text-gray-700 text-base"><b>Start Date:</b> {{ bootcamp.startDate | date: 'dd/MM/yyyy'
+                            }}</p>
+                        <p class="text-gray-700 text-base"><b>End Date:</b> {{bootcamp.endDate | date: 'dd/MM/yyyy'}}
+                        </p>
                     </div>
                     <div class="px-6 py-4">
-                        <button class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center"[ngClass]="{'expired': isExpired(bootcamp.endDate), 'notExpired': !isExpired(bootcamp.endDate)}"
-                        [routerLink]="['/bootcampdetail', bootcamp.id.toString()]">
+                        <button
+                            class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center"
+                            [ngClass]="{'expired': isExpired(bootcamp.endDate), 'notExpired': !isExpired(bootcamp.endDate)}"
+                            [routerLink]="['/bootcampdetail', bootcamp.id.toString()]">
                             Detaya Git
                         </button>
                     </div>
@@ -32,20 +56,26 @@
             </div>
             <!-- Buttons -->
             <div class="flex flex-col items-center" *ngIf="bootcampList.hasNext || bootcampList.hasPrevious">
-                
+
                 <div class="inline-flex mt-2 xs:mt-0">
-                    <button *ngIf="bootcampList.hasPrevious || bootcampList.hasNext" type="button" [disabled]="!bootcampList.hasPrevious" (click)="onPreviousPageClicked()" class="btn border-0" class="flex items-center justify-center px-4 h-10 text-base font-medium text-white bg-gray-800 rounded-s hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                    <button *ngIf="bootcampList.hasPrevious || bootcampList.hasNext" type="button"
+                        [disabled]="!bootcampList.hasPrevious" (click)="onPreviousPageClicked()" class="btn border-0"
+                        class="flex items-center justify-center px-4 h-10 text-base font-medium text-white bg-gray-800 rounded-s hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                         Prev
                     </button>
-                    <a class="flex items-center justify-center px-4 h-10 text-base font-medium text-white bg-gray-800 rounded-s hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white cursor-default">Page: {{ this.currentPageNumber }}</a>
-                    <button *ngIf="bootcampList.hasNext || bootcampList.hasPrevious" type="button" [disabled]="!bootcampList.hasNext" (click)="onViewMoreClicked()"   class="flex items-center justify-center px-4 h-10 text-base font-medium text-white bg-gray-800 border-0 border-s border-gray-700 rounded-e hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                    <!-- <a
+                        class="flex items-center justify-center px-4 h-10 text-base font-medium text-white bg-gray-800 rounded-s hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white cursor-default">Page:
+                        {{ this.currentPageNumber}}</a> -->
+                        <button *ngFor="let pageNumber of pageNumbers(); let i = index" class="py-2 px-4 cursor-pointer"
+                        [class.bg-cyan-500]="i+1 == currentPageNumber" [class.text-white]="i+1 == currentPageNumber"
+                        (click)="changePage(i)">{{i+1}}</button>
+                    <button *ngIf="bootcampList.hasNext || bootcampList.hasPrevious" type="button"
+                        [disabled]="!bootcampList.hasNext" (click)="onViewMoreClicked()"
+                        class="flex items-center justify-center px-4 h-10 text-base font-medium text-white bg-gray-800 border-0 border-s border-gray-700 rounded-e hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                         Next
                     </button>
                 </div>
-            </div> 
+            </div>
         </div>
     </div>
- </div>
-   
-
-
+</div>

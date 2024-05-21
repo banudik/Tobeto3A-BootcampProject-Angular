@@ -6,7 +6,7 @@ import { PageRequest } from '../../../../../core/models/page-request';
 import { CommonModule } from '@angular/common';
 import { InstructorListItemDto } from '../../../../../features/models/responses/instructor/instructor-list-item-dto';
 import { InstructorService } from '../../../../../features/services/concretes/instructor.service';
-
+import { AuthService } from '../../../../../features/services/concretes/auth.service';
 @Component({
   selector: 'app-bootcampindex',
   standalone: true,
@@ -30,7 +30,7 @@ export class BootcampindexComponent implements OnInit{
 
   instructors!:InstructorListItemDto;
   
-  constructor(private bootcampService: BootcampService, private activatedRoute: ActivatedRoute,private instructorService:InstructorService) {}
+  constructor(private bootcampService: BootcampService, private activatedRoute: ActivatedRoute,private instructorService:InstructorService,private authService:AuthService) {}
   readonly PAGE_SIZE = 100000; //for api
 
   currentPageNumber: number = 1;
@@ -39,23 +39,38 @@ export class BootcampindexComponent implements OnInit{
   searchTermTmp:string = '';
   instructorFilterTmp:string = '';
   filteredBootcampList: BootcampListItemDto = this.bootcampList;
+  isLoading: boolean = false;
 
   ngOnInit(): void {
     this.getInstructors();
-    this.getList({ page: 0, pageSize: this.PAGE_SIZE })
+    this.getList({ pageIndex: 0, pageSize: this.PAGE_SIZE })
     this.visibleData();
     this.pageNumbers();
   }
 
   getList(pageRequest: PageRequest) {
-    this.bootcampService.getList(pageRequest).subscribe((response) => {
-      this.bootcampList = response;
-    })
+    this.isLoading = true;
+    if(this.authService.isInstructor()){
+      let instructorId = this.authService.getCurrentUserId();
+      this.bootcampService.getBootcampListByInstructorId(pageRequest,instructorId).subscribe((response) => {
+        this.bootcampList = response;
+        this.isLoading = false;
+      })
+    }
+    else{
+      this.bootcampService.getList(pageRequest).subscribe((response) => {
+        this.bootcampList = response;
+        this.isLoading = false;
+      })
+    }
+
   }
 
   getInstructors(){
+    this.isLoading = true;
     this.instructorService.GetListAll().subscribe((response)=>{
      this.instructors=response;
+     this.isLoading = false;
     })
  }
 
@@ -99,8 +114,9 @@ export class BootcampindexComponent implements OnInit{
     this.visibleData();
   }
 
-  changePageSize(pageSize:any){
-    this.pageSize = pageSize;
+  changePageSize(pageSize:string){
+    this.pageSize = parseInt(pageSize, 10);
+    this.currentPageNumber = 1;
     this.visibleData();
   }
 

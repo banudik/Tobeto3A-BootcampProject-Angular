@@ -5,6 +5,7 @@ import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { GetByIdBootcampResponse } from '../../../../../features/models/responses/bootcamp/get-by-id-bootcamp-response';
 import { BootcampService } from '../../../../../features/services/concretes/bootcamp.service';
 import { DeletedBootcampResponse } from '../../../../../features/models/responses/bootcamp/deleted-bootcamp-response';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-bootcampdelete',
@@ -22,7 +23,7 @@ export class BootcampdeleteComponent implements OnInit{
   }
 
   constructor(private formBuilder:FormBuilder,private bootcampService:BootcampService,
-    private router:Router,private change:ChangeDetectorRef, private activatedRoute:ActivatedRoute
+    private router:Router,private change:ChangeDetectorRef, private activatedRoute:ActivatedRoute,private toastr:ToastrService
   ){}
 
 
@@ -33,7 +34,7 @@ export class BootcampdeleteComponent implements OnInit{
         this.currentBootcamp = response;
       },
       (error: any) => {
-        console.error('Error fetching bootcamp:', error);
+        this.toastr.error('Error fetching bootcamp: ' + error.message);
         // Hata işleme mekanizmasını buraya ekleyebilirsiniz
         setTimeout(()=>{
           this.router.navigate(['/adminpanel/bootcampindex'])
@@ -46,10 +47,12 @@ export class BootcampdeleteComponent implements OnInit{
   deleteBootcamp(id:number){
     this.bootcampService.delete(id).subscribe(
       (response: DeletedBootcampResponse) => {
+        this.toastr.success("successfully Deleted!");
         this.router.navigate(['/adminpanel/bootcampindex'])
       },
       (error: any) => {
-        console.error('Error fetching bootcamp:', error);
+        this.toastr.error('Error fetching bootcamp: ' + error.message);
+        //console.error('Error fetching bootcamp:', error);
         // Hata işleme mekanizmasını buraya ekleyebilirsiniz
         setTimeout(()=>{
           this.router.navigate(['/adminpanel/bootcampindex'])

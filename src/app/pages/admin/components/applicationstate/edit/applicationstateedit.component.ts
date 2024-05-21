@@ -4,6 +4,8 @@ import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { GetByIdApplicationStateInformationResponse } from '../../../../../features/models/responses/application-state-information/get-by-id-application-state-information-response';
 import { ApplicationStateInformationService } from '../../../../../features/services/concretes/application-state-information.service';
 import { UpdateBootcampStateRequest } from '../../../../../features/models/requests/bootcamp-state/update-bootcamp-state-request';
+import { UpdateApplicationStateInformationRequest } from '../../../../../features/models/requests/application-state-information/update-application-state-information-request';
+import { ApplicationStateInformationListItemDto } from '../../../../../features/models/responses/application-state-information/application-state-information-list-item-dto';
 
 @Component({
   selector: 'app-applicationstateedit',
@@ -19,7 +21,7 @@ export class ApplicationstateeditComponent  implements OnInit{
   
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: { [x: string]: number; }) => {
-      this.getBootcampStateById(params["applicationStateId"])
+      this.getApplicationStateById(params["applicationStateId"])
   })
   }
 
@@ -27,7 +29,7 @@ export class ApplicationstateeditComponent  implements OnInit{
     private router:Router,private change:ChangeDetectorRef, private activatedRoute:ActivatedRoute
   ){}
 
-  getBootcampStateById(id:number){
+  getApplicationStateById(id:number){
     this.applicationStateService.getById(id).subscribe(
       (response: GetByIdApplicationStateInformationResponse) => {
         this.currentApplicationState = response;
@@ -44,6 +46,7 @@ export class ApplicationstateeditComponent  implements OnInit{
     );
 
   }
+  
 
   createForm(){
     this.ApplicationStateForm=this.formBuilder.group({
@@ -54,8 +57,8 @@ export class ApplicationstateeditComponent  implements OnInit{
 
   update(){
     if(this.ApplicationStateForm.valid){
-      let bootcampStateModel:UpdateBootcampStateRequest = Object.assign({},this.ApplicationStateForm.value);
-      this.applicationStateService.update(bootcampStateModel).subscribe({
+      let applicationStateModel:UpdateApplicationStateInformationRequest = Object.assign({},this.ApplicationStateForm.value);
+      this.applicationStateService.update(applicationStateModel).subscribe({
         //next => observable'dan gelen veri yakaladığımız fonksiyon
         next:(response)=>{
          console.log(response.name + " Updated");

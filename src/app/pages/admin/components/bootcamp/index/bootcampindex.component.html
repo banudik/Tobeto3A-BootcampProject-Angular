@@ -1,11 +1,11 @@
-<div class="row">
+<div *ngIf="!isLoading" class="row">
   <div class="col-lg-6">
     <div class="card-style mb-30">
       <h6 class="mb-10">Bootcamp State Index</h6>
       <a routerLink='/adminpanel/bootcampcreate'><span class="text-success">Create New</span></a>
       <div class="table-wrapper table-responsive">
 
-        <div class="flex justify-between items-center mb-4 mt-4 input-style-1">
+        <div *ngIf="!isLoading" class="flex justify-between items-center mb-4 mt-4 input-style-1">
           <input type="text" placeholder="Search" class="w-full border p-2 rounded-lg" #filter
             (keyup)="filterData(filter.value)">
 

@@ -8,6 +8,7 @@ import { environment } from '../../../environments/environment';
 import { LocalStorageService } from '../../features/services/concretes/local-storage.service';
 import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { ValidationHelper } from '../../core/helpers/validationtoastrmessagehelper';
 
 @Component({
   selector: 'app-sign-up',
@@ -22,7 +23,7 @@ export class SignUpComponent implements OnInit {
 
   registerForm!:FormGroup
   constructor(private formBuilder:FormBuilder,private authService:AuthService,
-    private router:Router,private httpClient:HttpClient,private localStorage:LocalStorageService,private toastr:ToastrService){}
+    private router:Router,private httpClient:HttpClient,private localStorage:LocalStorageService,private toastr:ToastrService,private validationHelper: ValidationHelper){}
 
   ngOnInit(): void {
     this.createRegisterForm();
