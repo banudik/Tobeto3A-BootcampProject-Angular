@@ -1,7 +1,7 @@
 <!-- navbar.component.html -->
 
-<nav class="bg-white dark:bg-black shadow dark:shadow-2x1 sticky top-0">
-  <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+<!--<nav class="bg-white dark:bg-gray-900 shadow dark:shadow-2x1 sticky top-0">
+  <div class="w-full max-w-screen-xl mx-auto p-1 md:py-1 sticky top-0">
     <div class="flex items-center justify-between h-16">
       <div class="flex items-center">
         <a routerLink="/homepage">
@@ -28,21 +28,21 @@
             <a routerLink="/faq"
               class="text-black hover:bg-indigo-400 hover:text-white dark:text-white px-3 py-2 rounded-md text-sm font-bold">
               FAQ
-            </a>
+            </a>-->
 
-            <!-- <a routerLink='/sign-up' class="text-black hover:bg-indigo-400 hover:text-white px-3 py-2 rounded-md text-sm font-bold">Sign up</a>
+<!-- <a routerLink='/sign-up' class="text-black hover:bg-indigo-400 hover:text-white px-3 py-2 rounded-md text-sm font-bold">Sign up</a>
             <a routerLink='/login' class="text-black hover:bg-indigo-400 hover:text-white dark:text-white px-3 py-2 rounded-md text-sm font-bold">Log in</a> -->
-            <!-- Giriş yapıldığında -->
+<!-- Giriş yapıldığında -->
 
-            <!-- <ng-container *ngIf="isLoggedIn; else loggedOut">
+<!-- <ng-container *ngIf="isLoggedIn; else loggedOut">
                           <a (click)="logOut()" routerLink='/homepage' class="text-black hover:bg-indigo-400 hover:text-white dark:text-white px-3 py-2 rounded-md text-sm font-bold">Log out</a>
                           <a routerLink='/myprofile' class="text-black hover:bg-indigo-400 hover:text-white dark:text-white px-3 py-2 rounded-md text-sm font-bold">My Profile</a>
                           <a *ngIf="isAdmin;" routerLink='/adminpanel' class="text-indigo-300 hover:bg-indigo-400 hover:text-white dark:text-white px-3 py-2 rounded-md text-sm font-bold">Admin Panel</a>
                         </ng-container> -->
 
-            <ng-container *ngIf="isLoggedIn; else loggedOut">
-              <!-- Logged In Durumu -->
-              <a (click)="showLogoutModal = true"
+<!--<ng-container *ngIf="isLoggedIn; else loggedOut">-->
+<!--Logged In Durumu-->
+<!--<a (click)="showLogoutModal = true"
                 class="cursor-pointer text-black hover:bg-indigo-400 hover:text-white dark:text-white px-3 py-2 rounded-md text-sm font-bold">Log
                 out</a>
               <a [routerLink]="['/myprofile', userId.toString()]"
@@ -51,10 +51,10 @@
               <a *ngIf="isAdmin" routerLink="/adminpanel"
                 class="text-indigo-300 hover:bg-indigo-400 hover:text-white dark:text-white px-3 py-2 rounded-md text-sm font-bold">Admin
                 Panel</a>
-            </ng-container>
+            </ng-container>-->
 
-            <!-- Log Out Pop-up Modal -->
-            <div *ngIf="showLogoutModal"
+<!-- Log Out Pop-up Modal -->
+<!--<div *ngIf="showLogoutModal"
               class="fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-50">
               <div class="bg-white p-8 rounded-lg shadow-lg">
                 <p class="text-lg font-semibold mb-4">Çıkış yapmak istediğinize emin misiniz?</p>
@@ -65,11 +65,11 @@
                     class="text-black dark:text-white bg-indigo-400 hover:bg-indigo-600 px-4 py-2 rounded-md">Çıkış Yap</button>
                 </div>
               </div>
-            </div>
+            </div>-->
 
 
-            <!-- Giriş yapılmadığında -->
-            <ng-template #loggedOut>
+<!-- Giriş yapılmadığında -->
+<!--<ng-template #loggedOut>
               <a routerLink='/sign-up'
                 class="text-black hover:bg-indigo-400 hover:text-white dark:text-white px-3 py-2 rounded-md text-sm font-bold">Sign
                 up</a>
@@ -79,23 +79,23 @@
             </ng-template>
             <div class="flex items-center">
               <input *ngIf="showSearchInput" type="text" placeholder="Search"
-                class="px-3 py-1 border border-gray-300 rounded-md mr-2 focus:outline-none">
+                class="px-3 py-1 border border-gray-300 rounded-md mr-4 focus:outline-none">
               <button
-                class="text-white bg-gradient-to-r from-purple-500 via-indigo-500 to-blue-600 px-3 py-1 rounded-md text-sm font-bold hover:from-indigo-400 hover:to-purple-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                class="text-white  px-3 py-1 rounded-md text-sm font-bold "
                 (click)="toggleSearch()">Search</button>
 
-            </div>
-            <div class="relative mt-4 md:mt-0">
+            </div>-->
+<!--<div class="relative mt-4 md:mt-0">
               <div class="flex items-center">
                 @if (darkModeService.darkModeSignal() === 'dark') {
                 <span (click)="toggleDarkMode()">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="w-6 h-6">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="w-4 h-4">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
                   </svg>
                   
                 </span>
                 }@else {
-                <span (click)="toggleDarkMode()"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <span (click)="toggleDarkMode()"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
                 </svg>
                 </span>
@@ -104,4 +104,140 @@
 
 
               </div>
+            </div>-->
+
+
+
+<nav class="bg-white border-gray-200 dark:bg-gray-900">
+  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+    <a routerLink="/homepage" class="flex items-center space-x-3 rtl:space-x-reverse">
+      <img src="assets/img/logo.png.png" class="h-6" alt="CodeStorm Logo" />
+    </a>
+    <div class="flex md:order-2">
+      <button type="button" data-collapse-toggle="navbar-search" aria-controls="navbar-search" aria-expanded="false"
+        class="md:hidden text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 me-1">
+        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.0"
+            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+        </svg>
+        <span class="sr-only">Search</span>
+      </button>
+      <button data-collapse-toggle="navbar-search" type="button"
+        class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+        aria-controls="navbar-search" aria-expanded="false" (click)="toggleMenu" >
+        <span class="sr-only">Open main menu</span>
+        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.0"
+            d="M1 1h15M1 7h15M1 13h15" />
+        </svg>
+      </button>
+
+      @if (darkModeService.darkModeSignal() === 'dark') {
+      <button
+        class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+        (click)="toggleDarkMode()">
+        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.0"
+          stroke="lightgray">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
+        </svg>
+
+      </button>
+      }@else {
+      <button
+        class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+        (click)="toggleDarkMode()"> <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+          viewBox="0 0 24 24" stroke-width="2.0" stroke="gray" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
+        </svg>
+      </button>
+      }
+
+    </div>
+    <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-search">
+      <div class="relative mt-3 md:hidden">
+        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+          <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+            fill="none" viewBox="0 0 20 20">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.0"
+              d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+          </svg>
+        </div>
+        <input type="text" id="search-navbar"
+          class="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
+          placeholder="Search...">
+      </div>
+      <ul
+        class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+
+        <li>
+          <a routerLink="/homepage"
+            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Home</a>
+        </li>
+        <li>
+          <a routerLink="/bootcamps"
+            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Bootcamps</a>
+        </li>
+        
+        <ng-container *ngIf="isLoggedIn; else loggedOut">
+          <!-- Logged In Durumu -->
+          <a (click)="showLogoutModal = true"
+            class="cursor-pointer block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Log
+            out</a>
+          <a [routerLink]="['/myprofile', userId.toString()]"
+            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">My
+            Profile</a>
+          <a *ngIf="isAdmin" routerLink="/adminpanel"
+            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Admin
+            Panel</a>
+        </ng-container>
+
+        <!-- Log Out Pop-up Modal -->
+        <div *ngIf="showLogoutModal"
+          class="fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-50">
+          <div class="bg-white p-8 rounded-lg shadow-lg">
+            <p class="text-lg font-semibold mb-4">Çıkış yapmak istediğinize emin misiniz?</p>
+            <div class="flex justify-end">
+              <button (click)="showLogoutModal = false"
+                class="text-black hover:text-gray-700 px-4 py-2 rounded-md mr-2">İptal</button>
+              <button (click)="logOut()"
+                class="text-black dark:text-white bg-indigo-400 hover:bg-indigo-600 px-4 py-2 rounded-md">Çıkış Yap</button>
             </div>
+          </div>
+        </div>
+
+
+        <!-- Giriş yapılmadığında -->
+        <ng-template #loggedOut>
+          <li>
+            <a routerLink="/sign-up"
+              class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Sign
+              Up/Login</a>
+          </li>
+        </ng-template>
+        <li>
+          @if (darkModeService.darkModeSignal() === 'dark') {
+          <button (click)="toggleDarkMode()">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white"
+              class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
+            </svg>
+
+          </button>
+          }@else {
+          <button (click)="toggleDarkMode()"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+              stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
+            </svg>
+          </button>
+          }
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+</nav>
+

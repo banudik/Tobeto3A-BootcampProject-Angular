@@ -1,5 +1,5 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../features/services/concretes/auth.service';
@@ -8,6 +8,7 @@ import { environment } from '../../../environments/environment';
 import { LocalStorageService } from '../../features/services/concretes/local-storage.service';
 import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { DarkModeService } from '../../features/services/dark-mode.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -81,5 +82,6 @@ export class SignUpComponent implements OnInit {
   //   return this.httpClient.get(this.apiUrl+'Auth/EnableEmailAuthenticator');
   // }
 
+  darkModeService: DarkModeService = inject(DarkModeService);
 }
  

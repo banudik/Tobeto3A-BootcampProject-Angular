@@ -1,52 +1,52 @@
-
-  <div class="min-h-screen flex items-center justify-center bg-white dark:bg-black">
-    <div class="max-w-md w-full p-6 bg-black dark:bg-white shadow-lg rounded-lg">
-      <h2 class="text-2xl font-semibold text-center mb-4 text-white dark:text-black">Sign Up</h2>
+<!-- 
+  <div class="min-h-screen flex items-center justify-center gradient-bg">
+    <div class="max-w-md w-full p-6 shadow-lg rounded-lg bg-white">
+      <h2 class="text-2xl font-semibold text-center mb-4 text-black dark:text-black">Sign Up</h2>
       <form class="space-y-4" [formGroup]="registerForm" (ngSubmit)="register()">
         <div>
-          <label for="userName" class="block font-medium text-white dark:text-black">Username</label>
+          <label for="userName" class="block font-medium text-black dark:text-black">Username</label>
           <input type="text" id="userName" formControlName="userName" class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
           <div class="text-danger" *ngIf="registerForm.controls['userName'].invalid && ( registerForm.controls['userName'].touched || registerForm.controls['userName'].dirty)">
             <small *ngIf="registerForm.controls['userName'].errors?.['required']" class="text-red-500">Kullanıcı adı boş bırakılamaz</small>
          </div>
         </div>
         <div>
-          <label for="firstName" class="block font-medium text-white dark:text-black">First Name</label>
+          <label for="firstName" class="block font-medium text-black dark:text-black">First Name</label>
           <input type="text" id="firstName" formControlName="firstName" class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
           <div class="text-danger" *ngIf="registerForm.controls['firstName'].invalid && ( registerForm.controls['firstName'].touched || registerForm.controls['firstName'].dirty)">
             <small *ngIf="registerForm.controls['firstName'].errors?.['required']" class="text-red-500">Lütfen İsminizi Girin</small>
          </div>
         </div>
         <div>
-          <label for="lastName" class="block font-medium text-white dark:text-black">Last Name</label>
+          <label for="lastName" class="block font-medium text-black dark:text-black">Last Name</label>
           <input type="text" id="lastName" formControlName="lastName" class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
           <div class="text-danger" *ngIf="registerForm.controls['lastName'].invalid && ( registerForm.controls['lastName'].touched || registerForm.controls['lastName'].dirty)">
             <small *ngIf="registerForm.controls['lastName'].errors?.['required']" class="text-red-500">Lütfen Soyisminizi Girin</small>
          </div>
         </div>
         <div>
-          <label for="dateOfBirth" class="block font-medium text-white dark:text-black">Date of Birth</label>
+          <label for="dateOfBirth" class="block font-medium text-black dark:text-black">Date of Birth</label>
           <input type="date" id="dateOfBirth" formControlName="dateOfBirth" class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
           <div *ngIf="registerForm.get('dateOfBirth')?.invalid && (registerForm.get('dateOfBirth')?.touched || registerForm.get('dateOfBirth')?.dirty)" class="text-red-500">
             <small>Tarih gerekli.</small>
           </div>
         </div>
         <div>
-          <label for="nationalIdentity" class="block font-medium text-white dark:text-black">National Identity</label>
+          <label for="nationalIdentity" class="block font-medium text-black dark:text-black">National Identity</label>
           <input type="text" id="nationalIdentity" formControlName="nationalIdentity" class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
           <div class="text-danger" *ngIf="registerForm.controls['nationalIdentity'].invalid && ( registerForm.controls['nationalIdentity'].touched || registerForm.controls['nationalIdentity'].dirty)">
             <small *ngIf="registerForm.controls['nationalIdentity'].errors?.['required']" class="text-red-500">Bu alan boş bırakılamaz</small>
          </div>
         </div>
         <div>
-          <label for="email" class="block font-medium text-white dark:text-black">Email</label>
+          <label for="email" class="block font-medium text-black dark:text-black">Email</label>
           <input type="email" id="email" formControlName="email" class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
           <div class="text-danger" *ngIf="registerForm.controls['email'].invalid && ( registerForm.controls['email'].touched || registerForm.controls['email'].dirty)">
             <small *ngIf="registerForm.controls['email'].errors?.['required']" class="text-red-500">Lütfen Email Girin</small>
          </div>
         </div>
         <div>
-          <label for="password" class="block font-medium text-white dark:text-black">Password</label>
+          <label for="password" class="block font-medium text-black dark:text-black">Password</label>
           <input type="password" id="password" formControlName="password" class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
           <small class="text-black-500">Harf, rakam ve sembolleri karışık kullanarak güçlü bir şifre oluşturun</small>
           <div *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.touched || registerForm.get('password')?.dirty)">
@@ -55,19 +55,176 @@
           </div>
         </div>
         <div>
-          <label for="about" class="block font-medium text-white dark:text-black">About</label>
+          <label for="about" class="block font-medium text-black dark:text-black">About</label>
           <input type="text" id="about" formControlName="about" class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
           <div class="text-danger" *ngIf="registerForm.controls['about'].invalid && ( registerForm.controls['about'].touched || registerForm.controls['about'].dirty)">
             <small *ngIf="registerForm.controls['about'].errors?.['required']" class="text-red-500">Hakkında Boş Bırakılamaz</small>
          </div>
         </div>
         <div>
-          <button id="btn" type="submit" class="w-full text-white dark:text-black font-semibold">Sign Up</button>
+          <button id="btn" type="submit" class="w-full text-white dark:text-white font-semibold">Sign Up</button>
         </div>
         <div class="text-sm text-center">
-          <p class="text-white dark:text-black">Already have an account? <a routerLink='/login' class="text-indigo-600 hover:underline">Log in</a></p>
+          <p class="text-black dark:text-black">Already have an account? <a routerLink='/login' class="text-indigo-600 hover:underline">Log in</a></p>
         </div>
       </form>
     </div>
   </div>
-  
+   -->
+
+<body
+  [ngClass]="{ 'dark-body': darkModeService.darkModeSignal() === 'dark', 'light-body': darkModeService.darkModeSignal() === 'light' }">
+  <div
+    [ngClass]="{ 'dark-container': darkModeService.darkModeSignal() === 'dark', 'light-container': darkModeService.darkModeSignal() === 'light' }">
+    <div
+      [ngClass]="{ 'dark-signup-box': darkModeService.darkModeSignal() === 'dark', 'light-signup-box': darkModeService.darkModeSignal() === 'light' }">
+      <h2 [ngClass]="{ 'dark-h2': darkModeService.darkModeSignal() === 'dark', 'light-h2': darkModeService.darkModeSignal() === 'light' }">Sign Up</h2>
+      <form id="form1" [formGroup]="registerForm" (ngSubmit)="register()">
+        <div
+          [ngClass]="{ 'dark-input-box': darkModeService.darkModeSignal() === 'dark', 'light-input-box': darkModeService.darkModeSignal() === 'light' }">
+          <input type="text" required>
+          <label>Username</label>
+        </div>
+        <div
+          [ngClass]="{ 'dark-input-box': darkModeService.darkModeSignal() === 'dark', 'light-input-box': darkModeService.darkModeSignal() === 'light' }">
+          <input type="email" required>
+          <label>Email</label>
+        </div>
+        <button type="button" id="next1"
+          [ngClass]="{ 'dark-btn': darkModeService.darkModeSignal() === 'dark', 'light-btn': darkModeService.darkModeSignal() === 'light' }">Next Step</button>
+      </form>
+    </div>
+      <div
+      [ngClass]="{ 'dark-signup-box': darkModeService.darkModeSignal() === 'dark', 'light-signup-box': darkModeService.darkModeSignal() === 'light' }">
+        <form id="form2" [formGroup]="registerForm" (ngSubmit)="register()">
+        <div
+          [ngClass]="{ 'dark-input-box': darkModeService.darkModeSignal() === 'dark', 'light-input-box': darkModeService.darkModeSignal() === 'light' }">
+          <input type="password" required>
+          <label>Password</label>
+        </div>
+        <div
+          [ngClass]="{ 'dark-input-box': darkModeService.darkModeSignal() === 'dark', 'light-input-box': darkModeService.darkModeSignal() === 'light' }">
+          <input type="text" required>
+          <label>About</label>
+        </div>
+        <button type="button" id="back1"
+          [ngClass]="{ 'dark-btn1': darkModeService.darkModeSignal() === 'dark', 'light-btn1': darkModeService.darkModeSignal() === 'light' }">Back Step</button>
+          <button type="button" id="next2"
+          [ngClass]="{ 'dark-btn1': darkModeService.darkModeSignal() === 'dark', 'light-btn1': darkModeService.darkModeSignal() === 'light' }">Next Step</button>
+      </form>
+      </div>
+      <div
+      [ngClass]="{ 'dark-signup-box': darkModeService.darkModeSignal() === 'dark', 'light-signup-box': darkModeService.darkModeSignal() === 'light' }">
+        <form id="form3" [formGroup]="registerForm" (ngSubmit)="register()">
+        <div
+          [ngClass]="{ 'dark-input-box': darkModeService.darkModeSignal() === 'dark', 'light-input-box': darkModeService.darkModeSignal() === 'light' }">
+          <input type="text" required>
+          <label>First Name</label>
+        </div>
+        <div
+          [ngClass]="{ 'dark-input-box': darkModeService.darkModeSignal() === 'dark', 'light-input-box': darkModeService.darkModeSignal() === 'light' }">
+          <input type="text" required>
+          <label>Last Name</label>
+        </div>
+        <button type="button" id="back2"
+          [ngClass]="{ 'dark-btn1': darkModeService.darkModeSignal() === 'dark', 'light-btn1': darkModeService.darkModeSignal() === 'light' }">Back Step</button>
+          <button type="button" id="next3"
+          [ngClass]="{ 'dark-btn1': darkModeService.darkModeSignal() === 'dark', 'light-btn1': darkModeService.darkModeSignal() === 'light' }">Next Step</button>
+        </form>
+      </div>
+        <div
+      [ngClass]="{ 'dark-signup-box': darkModeService.darkModeSignal() === 'dark', 'light-signup-box': darkModeService.darkModeSignal() === 'light' }">
+        <form id="form4" [formGroup]="registerForm" (ngSubmit)="register()">
+        <div
+          [ngClass]="{ 'dark-input-box': darkModeService.darkModeSignal() === 'dark', 'light-input-box': darkModeService.darkModeSignal() === 'light' }">
+          <input type="text" required>
+          <label>National Identity</label>
+        </div>
+        <div
+          [ngClass]="{ 'dark-input-box': darkModeService.darkModeSignal() === 'dark', 'light-input-box': darkModeService.darkModeSignal() === 'light' }">
+          <input type="date" required>
+          <label>Date of Birth</label>
+        </div>
+        <button type="button" id="back3"
+          [ngClass]="{ 'dark-btn1': darkModeService.darkModeSignal() === 'dark', 'light-btn1': darkModeService.darkModeSignal() === 'light' }">Back Step</button>
+        <button type="submit"
+          [ngClass]="{ 'dark-btn1': darkModeService.darkModeSignal() === 'dark', 'light-btn': darkModeService.darkModeSignal() === 'light' }">Sign
+          Up</button>
+        <div
+          [ngClass]="{ 'dark-login-link': darkModeService.darkModeSignal() === 'dark', 'light-login-link': darkModeService.darkModeSignal() === 'light' }">
+          <a routerLink="/login">Login</a>
+        </div>
+      </form>
+    </div>
+    <span style="--i:0;"></span>
+    <span style="--i:1;"></span>
+    <span style="--i:2;"></span>
+    <span style="--i:3;"></span>
+    <span style="--i:4;"></span>
+    <span style="--i:5;"></span>
+    <span style="--i:6;"></span>
+    <span style="--i:7;"></span>
+    <span style="--i:8;"></span>
+    <span style="--i:9;"></span>
+    <span style="--i:10;"></span>
+    <span style="--i:11;"></span>
+    <span style="--i:12;"></span>
+    <span style="--i:13;"></span>
+    <span style="--i:14;"></span>
+    <span style="--i:15;"></span>
+    <span style="--i:16;"></span>
+    <span style="--i:17;"></span>
+    <span style="--i:18;"></span>
+    <span style="--i:19;"></span>
+    <span style="--i:20;"></span>
+    <span style="--i:21;"></span>
+    <span style="--i:22;"></span>
+    <span style="--i:23;"></span>
+    <span style="--i:24;"></span>
+    <span style="--i:25;"></span>
+    <span style="--i:26;"></span>
+    <span style="--i:27;"></span>
+    <span style="--i:28;"></span>
+    <span style="--i:29;"></span>
+    <span style="--i:30;"></span>
+    <span style="--i:31;"></span>
+    <span style="--i:32;"></span>
+    <span style="--i:33;"></span>
+    <span style="--i:34;"></span>
+    <span style="--i:35;"></span>
+    <span style="--i:36;"></span>
+    <span style="--i:37;"></span>
+    <span style="--i:38;"></span>
+    <span style="--i:39;"></span>
+    <span style="--i:40;"></span>
+    <span style="--i:41;"></span>
+    <span style="--i:42;"></span>
+    <span style="--i:43;"></span>
+    <span style="--i:44;"></span>
+    <span style="--i:45;"></span>
+    <span style="--i:46;"></span>
+    <span style="--i:47;"></span>
+    <span style="--i:48;"></span>
+    <span style="--i:49;"></span>
+  </div>
+
+  <script>
+    var form1 = document.getElementById("form1");
+    var form2 = document.getElementById("form2");
+    var form3 = document.getElementById("form3");
+    var form4 = document.getElementById("form4");
+
+    var next1 = document.getElementById("next1");
+    var next2 = document.getElementById("next2");
+    var next3 = document.getElementById("next3");
+    var back1 = document.getElementById("back1");
+    var back2 = document.getElementById("back2");
+    var back3 = document.getElementById("back3");
+
+    next1.onclick = function(){
+      form1.style.left = "-450px";
+      form2.style.left = "40px"
+    }
+    </script>
+
+</body>
