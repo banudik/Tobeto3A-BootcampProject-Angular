@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../features/services/concretes/auth.service';
 import { ResetPasswordRequest } from '../../features/models/requests/auth/reset-password-request';
 import { Observable } from 'rxjs';
+import { DarkModeService } from '../../features/services/dark-mode.service';
 
 
 @Component({
@@ -20,11 +21,11 @@ export class ResetPasswordComponent implements OnInit {
   newPassword: string = '';
   token!:string;
   validations = [
-    { condition: this.newPassword.length >= 8, message: 'En az 8 karakter olmalıdır.' },
-    { condition: /[a-z]/.test(this.newPassword), message: 'En az bir küçük harf içermelidir.' },
-    { condition: /[A-Z]/.test(this.newPassword), message: 'En az bir büyük harf içermelidir.' },
-    { condition: /\d/.test(this.newPassword), message: 'En az bir rakam içermelidir.' },
-    { condition: /[!@#$%^&*(),.?":{}|<>]/.test(this.newPassword), message: 'En az bir özel karakter içermelidir.' }
+    { condition: this.newPassword.length >= 8, message: 'It must be at least 8 characters.' },
+    { condition: /[a-z]/.test(this.newPassword), message: 'It must contain at least one lowercase letter.' },
+    { condition: /[A-Z]/.test(this.newPassword), message: 'It must contain at least one uppercase letter.' },
+    { condition: /\d/.test(this.newPassword), message: 'It must contain at least one digit.' },
+    { condition: /[!@#$%^&*(),.?":{}|<>]/.test(this.newPassword), message: 'It must contain at least one special character.' }
   ];
 
   constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private authService: AuthService, private router: Router){}
@@ -102,4 +103,6 @@ export class ResetPasswordComponent implements OnInit {
 
     this.passwordForm.get('confirmPassword')?.setErrors({ passwordMismatch: newPasswordValue !== confirmPasswordValue });
   }
+
+  darkModeService: DarkModeService = inject(DarkModeService);
 }

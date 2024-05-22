@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
       color="#fff"
       type="square-jelly-box"
       [fullScreen]="true">
-      <p style="color: white">Bekleyin...</p>
+      <p style="color: white">Loading...</p>
     </ngx-spinner>
   `,
 })
