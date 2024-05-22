@@ -6,6 +6,14 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
+.text-green-500, .text-red-500 {
+  margin-right: 0.5rem;
+}
+
+.error-message .text-green-500, .error-message .text-red-500 {
+  margin-top: 10px;
+  display: inline-block;
+}
 
 .dark-body {
   display: flex;
@@ -127,6 +135,17 @@
   color:#fff;
   font-weight: 500;
   font-size: 1em;
+}
+.dark-valid {
+  color:#fff;
+  font-size: 0.8em;
+  margin-top: 15px;
+}
+
+.light-valid {
+  color:#252525;
+  font-size: 0.8em;
+  margin-top: 15px;
 }
 
 .dark-section .dark-content2 .dark-form .dark-inputBx i {

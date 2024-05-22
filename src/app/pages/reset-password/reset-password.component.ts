@@ -6,7 +6,9 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../features/services/concretes/auth.service';
 import { ResetPasswordRequest } from '../../features/models/requests/auth/reset-password-request';
 import { Observable } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 import { DarkModeService } from '../../features/services/dark-mode.service';
+
 
 
 @Component({
@@ -28,7 +30,7 @@ export class ResetPasswordComponent implements OnInit {
     { condition: /[!@#$%^&*(),.?":{}|<>]/.test(this.newPassword), message: 'It must contain at least one special character.' }
   ];
 
-  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private authService: AuthService, private router: Router){}
+  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private authService: AuthService, private router: Router,private toastr: ToastrService){}
 
   ngOnInit(): void {
     // url üzerinde gelen tokeni alır
@@ -52,27 +54,21 @@ export class ResetPasswordComponent implements OnInit {
     });
   }
 
-  // resetPassword() {
-  //   if (this.passwordForm.valid) {
-  //     const password = this.passwordForm.get('newPassword')?.value;
-  //     console.log(password,this.token);
-  //     this.authService.resetPassword(this.token, password).subscribe(
-  //       response => {
-  //         this.router.navigate(['/login']);
-  //         console.log('Şifre sıfırlama başarılı.');
-  //       },
-  //       error => {
-  //         console.error('Şifre sıfırlama başarısız:', error);
-  //       }
-  //     );
-  //   }
-  // }
-
   resetPassword() {
-    if (this.passwordForm.valid) {
+    const newPasswordControl = this.passwordForm.get('newPassword');
+    const confirmPasswordControl = this.passwordForm.get('confirmPassword');
+
+    const newPasswordValue = newPasswordControl?.value;
+    const confirmPasswordValue = confirmPasswordControl?.value;
+
+    if (this.passwordForm.valid && newPasswordValue==confirmPasswordValue) {
       let PasswordModel: ResetPasswordRequest = {password: this.passwordForm.get('newPassword')?.value};
       this.authService.resetPassword(this.token,PasswordModel);
+      this.toastr.success('Şifre Sıfırlama Başarılı')
       console.log(PasswordModel,this.token)
+        }
+        else{
+          this.toastr.error('Şifreler uyuşmuyor')
         }
       }
 
@@ -101,7 +97,13 @@ export class ResetPasswordComponent implements OnInit {
     // En az bir özel karakter içermeli
     this.validations[4].condition = /[!@#$%^&*(),.?":{}|<>]/.test(newPasswordValue);
 
-    this.passwordForm.get('confirmPassword')?.setErrors({ passwordMismatch: newPasswordValue !== confirmPasswordValue });
+    // this.passwordForm.get('confirmPassword')?.setErrors({ passwordMismatch: newPasswordValue !== confirmPasswordValue });
+    if (newPasswordValue !== confirmPasswordValue) {
+      confirmPasswordControl?.setErrors({ passwordMismatch: true });
+    } else {
+      confirmPasswordControl?.setErrors(null);
+    }
+
   }
 
   darkModeService: DarkModeService = inject(DarkModeService);
