@@ -1,6 +1,6 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit, inject } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../features/services/concretes/auth.service';
 import { CommonModule } from '@angular/common';
@@ -20,6 +20,15 @@ import { DarkModeService } from '../../features/services/dark-mode.service';
   styleUrl: './sign-up.component.css'
 })
 export class SignUpComponent implements OnInit {
+
+  password:string='';
+  validations = [
+    { condition: this.password.length >= 8, message: 'It must be at least 8 characters.' },
+    { condition: /[a-z]/.test(this.password), message: 'It must contain at least one lowercase letter.' },
+    { condition: /[A-Z]/.test(this.password), message: 'It must contain at least one uppercase letter.' },
+    { condition: /\d/.test(this.password), message: 'It must contain at least one digit.' },
+    { condition: /[!@#$%^&*(),.?":{}|<>]/.test(this.password), message: 'It must contain at least one special character.' }
+  ];
 
   private readonly apiUrl:string = `${environment.API_URL}/`
 
@@ -56,8 +65,9 @@ export class SignUpComponent implements OnInit {
       console.log(this.registerForm.value);
       let registerModel = Object.assign({},this.registerForm.value);
       this.authService.registerApplicant(registerModel).subscribe((response:any)=>{
-        //alert("Kayıt Başarılı")
-        //this.router.navigate(['login']);
+        setTimeout(() => {
+          this.router.navigate(['login']);
+        }, 1000);
       }, (errorResponse: any) => { 
           errorResponse.error.Errors.forEach((error: any) => {
             console.error(`Property: ${error.Property}`);
@@ -66,23 +76,62 @@ export class SignUpComponent implements OnInit {
             });
           });
         })
-    }else{
-      console.log(this.registerForm.value);
-      console.error('Form has validation errors!');
     }
-    // setTimeout(() => {
-    //   this.SendVerifyEmail().subscribe(() => {
-    //     console.log('Verify email sent successfully.');
-    //   }, error => {
-    //     console.error('Error sending verify email:', error);
-    //   });
-    // }, 3000);
   }
 
-  // mail gönderir
-  // SendVerifyEmail() : Observable<any> { // Authenticate olan kullanıcıya doğrulama maili gönderir, response döndürmez
-  //   return this.httpClient.get(this.apiUrl+'Auth/EnableEmailAuthenticator');
-  // }
+  validatePassword() {
+    const PasswordControl = this.registerForm.get('password');
+  
+    // Yeni şifre kontrolünün değeri
+    const newPasswordValue = PasswordControl?.value;
+  
+    // Şifre uzunluğu en az 8 karakter olmalı
+    this.validations[0].condition = newPasswordValue.length >= 8;
+  
+    // En az bir küçük harf içermeli
+    this.validations[1].condition = /[a-z]/.test(newPasswordValue);
+  
+    // En az bir büyük harf içermeli
+    this.validations[2].condition = /[A-Z]/.test(newPasswordValue);
+  
+    // En az bir rakam içermeli
+    this.validations[3].condition = /\d/.test(newPasswordValue);
+  
+    // En az bir özel karakter içermeli
+    this.validations[4].condition = /[!@#$%^&*(),.?":{}|<>]/.test(newPasswordValue);
+
+    // this.passwordForm.get('confirmPassword')?.setErrors({ passwordMismatch: newPasswordValue !== confirmPasswordValue });
+    // if (newPasswordValue !== confirmPasswordValue) {
+    //   confirmPasswordControl?.setErrors({ passwordMismatch: true });
+    // } else {
+    //   confirmPasswordControl?.setErrors(null);
+    // }
+
+  }
+
+  checkFormValidity() {
+    if (this.registerForm.invalid) {
+      this.showValidationError();
+    } else {
+      this.register();
+    }
+  }
+
+
+  showValidationError() {
+    Object.keys(this.registerForm.controls).forEach(field => {
+      const control = this.registerForm.get(field);
+      if (control instanceof FormControl) {
+        control.markAsTouched({ onlySelf: true });
+      }
+    });
+    this.toastr.warning('Please fill in all required fields.', 'Warning');
+  }
+
+  isFieldInvalid(field: string) {
+    const control = this.registerForm.get(field);
+    return control?.invalid && (control.dirty || control.touched);
+  }
 
   darkModeService: DarkModeService = inject(DarkModeService);
 }

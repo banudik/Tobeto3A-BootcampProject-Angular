@@ -10,11 +10,11 @@ import { CommonModule } from '@angular/common';
   template: `
     <ngx-spinner
       bdColor="rgba(0, 0, 0, 0.8)"
-      size="medium"
-      color="#fff"
+      size="large"
+      color="#1e90ff"
       type="square-jelly-box"
       [fullScreen]="true">
-      <p style="color: white">Bekleyin...</p>
+      <p style="color: white">Loading...</p>
     </ngx-spinner>
   `,
 })

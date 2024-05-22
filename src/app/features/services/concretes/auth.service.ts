@@ -23,24 +23,19 @@ import { ForgotPasswordRequest } from "../../models/requests/auth/forgot-passwor
     providedIn: 'root'
   })
   export class AuthService extends AuthBaseService {
-
-
-
-
     fullname!:string;
     userId!:string;
     token:any;
     jwtHelper:JwtHelperService = new JwtHelperService;
     claims:string[]=[]
   
-  
     private readonly apiUrl:string = `${environment.API_URL}/auth`
     constructor(private httpClient:HttpClient,private storageService:LocalStorageService,private toastrService:ToastrService) {super() }
   
-
     override registerEmployee(createEmployeeRequest: CreateEmployeeRequest): Observable<CreatedEmployeeResponse> {
       return this.httpClient.post<CreatedEmployeeResponse>(`${this.apiUrl}/registeremployee`, createEmployeeRequest);
     }
+    
     override registerInstructor(createInstructorRequest: CreateInstructorRequest): Observable<CreatedInstructorResponse> {
       return this.httpClient.post<CreatedInstructorResponse>(`${this.apiUrl}/registerinstructor`, createInstructorRequest);
     }
@@ -64,6 +59,8 @@ import { ForgotPasswordRequest } from "../../models/requests/auth/forgot-passwor
       );
     }
     
+
+    // kayıt olduktan sonra email doğrulama postası gönderir
     sendVerifyEmail(): Observable<any> {
 
       const headers = new HttpHeaders({
@@ -72,25 +69,13 @@ import { ForgotPasswordRequest } from "../../models/requests/auth/forgot-passwor
       });
       return this.httpClient.get(`${this.apiUrl}/EnableEmailAuthenticator`, { headers });
     }
-  
-    //  email ve passwordu login olmak için gönderiyoruz, activationKey kısmı null olarak post ediliyor(aktivasyon kodu null gönderildiği takdirde backend'de AktivasyonKeyi generate ediliyoruz ve mail olarak gönderiliyoruz)
-    // login(userLoginRequest:UserForLoginRequest):Observable<AccessTokenModel<TokenModel>>                    
-    // {  
-    //   return this.httpClient.post<AccessTokenModel<TokenModel>>(`${this.apiUrl}/login`,userLoginRequest)
-    //   .pipe(map(response=>{
-    //       // this.toastrService.success('başarılı');
-    //       //alert("Giriş yapıldı");
-    //       // setTimeout(()=>{
-    //       //   window.location.reload()
-    //       // },1000)
-    //       return response;
-    //     }
-    //   ),catchError(responseError=>{
-    //     throw responseError;
-    //   })
-    //   )
-    // }
 
+    // EmailVerify epostasındaki link üzerinden alınan ActivationKey gönderilir ve kullanıcının email adresi doğrulanmış olur
+    verifyEmail(activationKey: string): Observable<any> {
+      return this.httpClient.get(`${this.apiUrl}/Auth/VerifyEmailAuthenticator?ActivationKey=${encodeURIComponent(activationKey)}`);
+    }
+
+    //  email ve passwordu login olmak için gönderilir, activationKey kısmı null olarak post edilir(aktivasyon kodu null gönderildiği takdirde backend'de AktivasyonKeyi generate ediliyoruz ve mail olarak gönderiliyoruz) 2FA'i tetikler
     login(userLoginRequest: UserForLoginRequest): Observable<AccessTokenModel<TokenModel>> {
       return this.httpClient.post<AccessTokenModel<TokenModel>>(`${this.apiUrl}/login`, userLoginRequest)
         .pipe(
@@ -98,15 +83,20 @@ import { ForgotPasswordRequest } from "../../models/requests/auth/forgot-passwor
             if (response.accessToken) {
               //this.storageService.setToken(response.accessToken.token);
               this.toastrService.success('Giriş yapıldı');
+              console.log('servis if',response);
+
             }
             else{
               this.toastrService.info('Doğrulama Kodu Gönderildi');
+              console.log('servis else',response);
             }
           }),
           catchError(responseError => {
-            this.toastrService.error('Giriş başarısız buraa');
+            this.toastrService.error('Girmiyor kardeşim ');
+            console.log('servis error',responseError);
             // Eğer responseError'u tekrar fırlatmazsanız, hata vermeden çalışmaya devam eder.
-            return of({} as AccessTokenModel<TokenModel>,responseError);  // Hata durumunda Observable<null> döndürülür.
+            //return of({} as AccessTokenModel<TokenModel>);  // Hata durumunda Observable<null> döndürülür.
+            return throwError(responseError);
           })
         );
     }
@@ -117,21 +107,13 @@ import { ForgotPasswordRequest } from "../../models/requests/auth/forgot-passwor
       return this.httpClient.post<AccessTokenModel<TokenModel>>(`${this.apiUrl}/login`,UserWithActivationCode)
       .pipe(map(response=>{
         this.storageService.setToken(response.accessToken.token);
-          // this.toastrService.success('başarılı');
-          //alert("Giriş yapıldı");
-          // setTimeout(()=>{
-          //   window.location.reload()
-          // },1000)
           return response;
         }
-      ),
-      // catchError(responseError=>{
-      //   throw responseError;
-      // })
       )
+    )
     }
 
-    resetPassword(token: string, resetPasswordRequest: ResetPasswordRequest) {
+    resetPassword(token: string, resetPasswordRequest: ResetPasswordRequest){
       var tokenn = token;
       console.log(`Bearer ${tokenn}`)
       const headers = new HttpHeaders({
@@ -155,19 +137,35 @@ import { ForgotPasswordRequest } from "../../models/requests/auth/forgot-passwor
       );
     }
 
-    sendForgotPasswordEmail(ForgotPasswordRequest: ForgotPasswordRequest) {
-      this.httpClient.post(`${this.apiUrl}/ForgotPassword`, ForgotPasswordRequest)
-        .pipe(
-          map(response => {
-            console.log("email servis", ForgotPasswordRequest.email);
-            this.toastrService.success('Şifremi unuttum e-postası başarıyla gönderildi.', 'Başarılı');
-            return response;
-          }),).subscribe( 
-          response => {
-            console.log('Başarılı yanıt:', response);
-          },
-        );
+    // sendForgotPasswordEmail(ForgotPasswordRequest: ForgotPasswordRequest) {
+    //   this.httpClient.post(`${this.apiUrl}/ForgotPassword`, ForgotPasswordRequest)
+    //     .pipe(
+    //       map(response => {
+    //         console.log("email servis", ForgotPasswordRequest.email);
+    //         this.toastrService.success('Şifremi unuttum e-postası başarıyla gönderildi.', 'Başarılı');
+    //         return response;
+    //       }),).subscribe( 
+    //       response => {
+    //         console.log('Başarılı yanıt:', response);
+    //       },
+    //     );
+    // }
+
+    sendForgotPasswordEmail(ForgotPasswordRequest: ForgotPasswordRequest): Observable<any> {
+      return this.httpClient.post(`${this.apiUrl}/ForgotPassword`, ForgotPasswordRequest, { responseType: 'text' }).pipe(
+        map(response => {
+          this.toastrService.success('Şifremi unuttum e-postası başarıyla gönderildi.', 'Başarılı');
+          return response;
+        }),
+        catchError((error) => {
+          // Hatalar burada yalnızca yakalanır ve tekrar fırlatılır.
+          // ErrorHandlerInterceptor bu hataları yakalayacak ve işleyerek gösterecektir.
+          return throwError(error);
+        })
+      );
     }
+
+
   
     getDecodedToken(){
       try{
