@@ -7,5 +7,6 @@ export interface UpdateEmployeeRequest {
     dateOfBirth: Date;
     nationalIdentity:string;
     email:string;
-    password:string;
+    password?:string;
+    newPassword?:string;
 }

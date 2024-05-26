@@ -1,0 +1,82 @@
+<div *ngIf="!isLoading" class="row">
+    <div class="col-lg-6">
+      <div class="card-style mb-30">
+        <h6 class="mb-10">Comment Index</h6>
+        <div class="table-wrapper table-responsive">
+  
+          <div *ngIf="!isLoading" class="flex justify-between items-center mb-4 mt-4 input-style-1">
+            <!-- <input type="text" placeholder="Search" class="w-full border p-2 rounded-lg" #filter
+              (keyup)="filterData(filter.value)"> -->
+  
+              <select class="border p-2 rounded-lg" #StatusFilter (change)="filterByStatus(StatusFilter.value)">
+                <option value="false" >Unapproved Comments</option>
+                <option value="true">Approved Comments</option>
+                <option value="all" selected>All Comments</option>
+              </select>
+              
+            <select class="border p-2 rounded-lg" #pageSize (change)="changePageSize(pageSize.value)">
+              <option *ngFor="let size of pageSizes" [value]="size">Page Size: {{size}}</option>
+            </select>
+          </div>
+  
+          <table class="table striped-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>
+                  <h6>Bootcamp Name</h6>
+                </th>
+                <th>
+                  <h6>Chapter</h6>
+                </th>
+                <th>
+                  <h6>User Email</h6>
+                </th>
+                <th>
+                    <h6>Created Date</h6>
+                  </th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let items of visibleData(); let i = index">
+                <td>
+                  <div class="check-input-primary">
+                    <input class="form-check-input" type="checkbox" id="checkbox-{{i + 1}}" />
+                  </div>
+                </td>
+                <td>
+                  <p>{{ items.chapterBootcampName }}</p>
+                </td>
+                <td>
+                  <p>{{ items.chapterSort }}</p>
+                </td>
+                <td>
+                    <p>{{ items.userEmail }}</p>
+                  </td>
+                <td>
+                  <p>{{ items.createdDate | date:'dd/MM/yyyy' }}</p>
+                </td>
+                <td>
+                  <a class="text-success" routerLink='/adminpanel/commentdetails/{{items.id}}'>details</a> |
+                  <a class="text-warning" routerLink='/adminpanel/commentedit/{{items.id}}'>Edit</a> |
+                  <a class="text-danger" routerLink='/adminpanel/commentdelete/{{items.id}}'>Delete</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- pagination -->
+          <div class="mt-4 flex items-center justify-center">
+            <button (click)="previousPage()" [disabled]="currentPageNumber === 1"
+              class="text-cyan-500 border-4 py-2 px-4 rounded-l-lg cursor-pointer mr-5">Previous</button>
+  
+            <button *ngFor="let pageNumber of pageNumbers(); let i = index" class="py-2 px-4 cursor-pointer"
+              [class.bg-cyan-500]="i+1 == currentPageNumber" [class.text-white]="i+1 == currentPageNumber"
+              (click)="changePage(i+1)">{{i+1}}</button>
+            <button (click)="nextPage()" [disabled]="currentPageNumber === pageNumbers().length"
+              class="text-cyan-500 border-4 py-2 px-4 rounded-r-lg cursor-pointer ml-5">Next</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

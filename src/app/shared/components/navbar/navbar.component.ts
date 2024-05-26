@@ -72,6 +72,7 @@ export class NavbarComponent implements OnInit{
     else{
       this.isLoggedIn = false;
     }
+    
     if(this.authService.isAdmin() || this.authService.isEmployee() || this.authService.isInstructor()){
 
         this.isAdmin = true;
@@ -79,6 +80,7 @@ export class NavbarComponent implements OnInit{
     else{
       this.isAdmin = false;
     }
+    
    }
    
 

@@ -1,0 +1,60 @@
+<form [formGroup]="UserUpdateForm" (ngSubmit)="onFormSubmit()" *ngIf="UserUpdateForm">
+
+    <div class="card-style mb-30">
+      <h6 class="mb-25">Admin Edit</h6>
+      
+      <div class="input-style-1">
+        <label for="firstNameInput">Admin First Name</label>
+        <input formControlName="firstName" id="firstNameInput" type="text" placeholder="First Name" />
+      </div>
+  
+      <div class="input-style-1">
+        <label for="lastNameInput">Admin Last Name</label>
+        <input formControlName="lastName" id="lastNameInput" type="text" placeholder="Last Name" />
+      </div>
+  
+      <div class="input-style-1">
+        <label for="userNameInput">Admin User Name</label>
+        <input formControlName="userName" id="userNameInput" type="text" placeholder="User Name" />
+      </div>
+  
+
+  
+      <div class="input-style-1">
+        <label for="birthInput">Admin Date of Birth</label>
+        <input formControlName="dateOfBirth" id="birthInput" type="date" placeholder="Date of Birth" />
+      </div>
+  
+      <div class="input-style-1">
+        <label for="nationalIdentityInput">Admin National Identity</label>
+        <input formControlName="nationalIdentity" id="nationalIdentityInput" type="text" placeholder="National Identity" />
+      </div>
+      <hr>
+      <h6 class="mb-25">Mandatory Input Fields</h6>
+      <div class="input-style-1">
+        <label for="emailInput">Admin Email</label>
+        <input formControlName="email" id="emailInput" type="email" placeholder="Email" />
+      </div>
+      <div class="input-style-1">
+        <label for="passwordInput">Admin Current Password*</label>
+        <input formControlName="password" id="passwordInput" type="password" placeholder="Current Password" required="true"/>
+      </div>
+      <h6 class="mb-25">Update Password</h6>
+      <div class="input-style-1">
+        <label for="newPasswordInput">New Password</label>
+        <input formControlName="newPassword" id="newPasswordInput" type="password" placeholder="New Password"/>
+      </div>
+      <div class="input-style-1">
+        <label for="newPasswordRepeatInput">New Password Repeat</label>
+        <input formControlName="newPasswordRepeat" id="newPasswordRepeatInput" type="password" placeholder="New Password Repeat"/>
+      </div>
+
+    </div>
+  
+    <br>
+    <div>
+      <button type="submit" class="main-btn warning-btn rounded-full btn-hover">Update Admin</button> |
+      <a class="main-btn dark-btn rounded-full btn-hover" routerLink="/adminpanel/viewadminprofile/{{currentUser.id}}">Back</a>
+    </div>
+  </form>
+  

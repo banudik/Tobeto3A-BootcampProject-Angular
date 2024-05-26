@@ -1,1 +1,50 @@
-<p>employeeedit works!</p>
+<form [formGroup]="EmployeeUpdateForm" (ngSubmit)="onFormSubmit()" *ngIf="EmployeeUpdateForm">
+    <div *ngIf="formMessage">
+      <small>{{formMessage}}</small>
+    </div>
+    <div class="card-style mb-30">
+      <h6 class="mb-25">Employee Edit</h6>
+
+      <div class="input-style-1">
+        <label for="firstNameInput">Employee First Name</label>
+        <input formControlName="firstName" id="firstNameInput" type="text" placeholder="First Name" />
+      </div>
+  
+      <div class="input-style-1">
+        <label for="lastNameInput">Employee Last Name</label>
+        <input formControlName="lastName" id="lastNameInput" type="text" placeholder="Last Name" />
+      </div>
+  
+      <div class="input-style-1">
+        <label for="userNameInput">Employee User Name</label>
+        <input formControlName="userName" id="userNameInput" type="text" placeholder="User Name" />
+      </div>
+  
+      <div class="input-style-1">
+        <label for="emailInput">Employee Email</label>
+        <input formControlName="email" id="emailInput" type="email" placeholder="Email" />
+      </div>
+  
+      <div class="input-style-1">
+        <label for="birthInput">Employee Date of Birth</label>
+        <input formControlName="dateOfBirth" id="birthInput" type="date" placeholder="Date of Birth" />
+      </div>
+  
+      <div class="input-style-1">
+        <label for="nationalIdentityInput">Employee National Identity</label>
+        <input formControlName="nationalIdentity" id="nationalIdentityInput" type="text" placeholder="National Identity" />
+      </div>
+  
+      <div class="input-style-1">
+        <label for="positionInput">Employee Position</label>
+        <input formControlName="position" id="positionInput" type="text" placeholder="Position" />
+      </div>
+    </div>
+  
+    <br>
+    <div>
+      <button type="submit" class="main-btn warning-btn rounded-full btn-hover">Edit Employee</button> |
+      <a class="main-btn dark-btn rounded-full btn-hover" routerLink="/adminpanel/employeeindex">Back to List</a>
+    </div>
+  </form>
+  

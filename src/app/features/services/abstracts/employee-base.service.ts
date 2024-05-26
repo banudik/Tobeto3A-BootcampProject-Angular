@@ -19,7 +19,7 @@ export abstract class EmployeeBaseService {
   abstract getEmployeeById(employeeId: string):
     Observable<GetByIdEmployeeResponse>;
 
-  abstract delete(id: number)
+  abstract delete(id: string)
     : Observable<DeletedEmployeeResponse>;
 
     abstract update(updateEmployeeRequest: UpdateEmployeeRequest)

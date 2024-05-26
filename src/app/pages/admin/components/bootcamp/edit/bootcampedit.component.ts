@@ -25,7 +25,6 @@ export class BootcampeditComponent implements OnInit {
 
   currentBootcamp!: GetByIdBootcampResponse;
   BootcampUpdateForm!: FormGroup
-  formMessage: string | null = null;
   instructors!: InstructorListItemDto;
   bootcampStates!: BootcampStateListItemDto;
 
@@ -82,7 +81,6 @@ export class BootcampeditComponent implements OnInit {
         this.loadCurrentBootcamp();
       },
       (error: any) => {
-        this.toastr.error('Error fetching bootcamp:', error.message);
         // Hata işleme mekanizmasını buraya ekleyebilirsiniz
         this.toastr.error( "bootcamp could not be found!");
         setTimeout(() => {
@@ -147,8 +145,6 @@ export class BootcampeditComponent implements OnInit {
   }
 
   onFormSubmit() {
-    const nameControl = this.BootcampUpdateForm.get('name');
-
     this.validationHelper.checkValidation(this.BootcampUpdateForm);
 
     // Object.keys(this.BootcampUpdateForm.controls).forEach(key => {
@@ -172,8 +168,8 @@ export class BootcampeditComponent implements OnInit {
     // });
     
 
-    if (nameControl && nameControl.invalid) {
-      this.formMessage = "Lütfen gerekli alanları doldurun";
+    if (this.BootcampUpdateForm.invalid) {
+      this.toastr.error("Lütfen gerekli alanları doldurun");
       return;
     }
     if (this.checkIfInstructor()) {
@@ -187,7 +183,7 @@ export class BootcampeditComponent implements OnInit {
   checkIfInstructor(): boolean {
     if (this.authService.isInstructor()) {
       if (this.currentBootcamp.instructorId != this.authService.getCurrentUserId()) {
-        this.formMessage = "You can not edit other instructor's bootcamp!";
+        this.toastr.error("You can not edit other instructor's bootcamp!");
         setTimeout(() => {
           this.router.navigate(['/adminpanel/bootcampindex'])
         }, 2000)

@@ -1,4 +1,4 @@
-<form>
+<form *ngIf="currentApplicant">
     <div class="card-style mb-30">
         <h6 class="mb-25">Applicant Details</h6>
         <div class="input-style-1">
@@ -43,6 +43,6 @@
     </div>
     <br>
     <div>
-        <a class="text-primary" routerLink="/adminpanel/applicantindex">Back to List</a>
+        <a class="main-btn dark-btn rounded-full btn-hover" routerLink="/adminpanel/applicantindex">Back to List</a>
     </div>
 </form>

@@ -1,0 +1,45 @@
+<form *ngIf="currentUser">
+    <div class="card-style mb-30">
+        <h6 class="mb-25">Admin Details</h6>
+        <div class="input-style-1">
+            <label for="firstNameInput">Admin First Name</label>
+            <input disabled id="firstNameInput" type="text" value="{{currentUser.firstName}}" />
+        </div>
+        <div class="input-style-1">
+            <label for="lastNameInput">Admin Last Name</label>
+            <input disabled id="lastNameInput" type="text" value="{{currentUser.lastName}}" />
+        </div>
+
+        <div class="input-style-1">
+            <label for="UserNameInput">Admin User Name</label>
+            <input disabled id="UserNameInput" type="text" value="{{currentUser.userName}}" />
+        </div>
+        <div class="input-style-1">
+            <label for="EmailInput">Admin Email</label>
+            <input disabled id="EmailInput" type="text" value="{{currentUser.email}}" />
+        </div>
+        <div class="input-style-1">
+            <label for="BirthInput">Admin Date of Birth</label>
+            <input disabled id="BirthInput" type="text"
+                value="{{currentUser.dateOfBirth | date : 'dd/MM/yyyy'}}" />
+        </div>
+        <div class="input-style-1">
+            <label for="NationalInput">Admin National Identity</label>
+            <input disabled id="NationalInput" type="text" value="{{currentUser.nationalIdentity}}" />
+        </div>
+
+        <div class="input-style-1">
+            <label for="createdDate">Admin Created Date</label>
+            <input disabled id="createdDate" type="text" [value]="currentUser.createdDate | date : 'dd/MM/yyyy'" />
+        </div>
+        <div class="input-style-1">
+            <label for="updatedDate">Admin Updated Date</label>
+            <input disabled id="updatedDate" type="text" [value]="currentUser.updatedDate| date : 'dd/MM/yyyy'" />
+        </div>
+    </div>
+    <br>
+    <div>
+        <a class="main-btn warning-btn rounded-full btn-hover" routerLink="/adminpanel/editadminprofile/{{currentUser.id}}">Edit</a> |
+        <a class="main-btn dark-btn rounded-full btn-hover" routerLink="/adminpanel/">Back</a>
+    </div>
+</form>

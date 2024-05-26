@@ -1,0 +1,80 @@
+<form [formGroup]="UserUpdateForm" (ngSubmit)="onFormSubmit()" *ngIf="UserUpdateForm">
+
+    <div class="card-style mb-30">
+      <h6 class="mb-25">Employee Edit</h6>
+      
+      <div class="input-style-1">
+        <label for="firstNameInput">Employee First Name</label>
+        <input formControlName="firstName" id="firstNameInput" type="text" placeholder="First Name" />
+      </div>
+  
+      <div class="input-style-1">
+        <label for="lastNameInput">Employee Last Name</label>
+        <input formControlName="lastName" id="lastNameInput" type="text" placeholder="Last Name" />
+      </div>
+  
+      <div class="input-style-1">
+        <label for="userNameInput">Employee User Name</label>
+        <input formControlName="userName" id="userNameInput" type="text" placeholder="User Name" />
+      </div>
+  
+
+  
+      <div class="input-style-1">
+        <label for="birthInput">Employee Date of Birth</label>
+        <input formControlName="dateOfBirth" id="birthInput" type="date" placeholder="Date of Birth" />
+      </div>
+  
+      <div class="input-style-1">
+        <label for="nationalIdentityInput">Employee National Identity</label>
+        <input formControlName="nationalIdentity" id="nationalIdentityInput" type="text" placeholder="National Identity" />
+      </div>
+      <div class="input-style-1">
+        <label for="positionInput">Employee position</label>
+        <input formControlName="position" id="positionInput" type="text" placeholder="Position" />
+      </div>
+      <hr>
+      <h6 class="mb-25">Mandatory Input Fields</h6>
+      <div class="input-style-1">
+        <label for="emailInput">Employee Email</label>
+        <input formControlName="email" id="emailInput" type="email" placeholder="Email" />
+      </div>
+      <div class="input-style-1">
+        <label for="passwordInput">Employee Current Password*</label>
+        <input formControlName="password" id="passwordInput" type="password" placeholder="Current Password" required="true"/>
+      </div>
+      <h6 class="mb-25">Update Password</h6>
+      <div class="input-style-1">
+        <label for="newPasswordInput">New Password</label>
+        <input formControlName="newPassword" id="newPasswordInput" type="password" placeholder="New Password"/>
+      </div>
+      <div class="input-style-1">
+        <label for="newPasswordRepeatInput">New Password Repeat</label>
+        <input formControlName="newPasswordRepeat" id="newPasswordRepeatInput" type="password" placeholder="New Password Repeat"/>
+      </div>
+
+    </div>
+  
+    <br>
+    <div>
+      <button type="submit" class="main-btn warning-btn rounded-full btn-hover">Update Instructor</button> |
+      <a class="main-btn dark-btn rounded-full btn-hover" routerLink="/adminpanel/viewinstructorprofile/{{currentUser.id}}">Back</a> |
+      <a (click)="showDeleteModal = true" class="main-btn danger-btn rounded-full btn-hover">Delete Account</a>
+    </div>
+  </form>
+
+
+  <div *ngIf="showDeleteModal" class="fixed inset-0 z-10 flex items-center justify-center">
+    <div class="absolute inset-0 bg-black bg-opacity-0"></div> <!-- Arka planı kaplayacak element, tamamen saydam -->
+    <div class="bg-gray-200 p-8 rounded-lg shadow-lg z-20" style="width: 400px;height: 100px;">
+      <p class="text-lg font-semibold mb-4">Are you sure about deleting this account?</p>
+      <div class="flex justify-end">
+        <button (click)="showDeleteModal = false" class="text-black hover:text-gray-700 px-4 py-2 rounded-md mr-2">Cancel</button>
+        <a (click)="deleteAccount(currentUser.id)" class="main-btn danger-btn rounded-full btn-hover">Delete Account</a>
+      </div>
+    </div>
+  </div>
+  
+
+
+  

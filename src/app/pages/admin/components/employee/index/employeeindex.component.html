@@ -2,7 +2,7 @@
     <div class="col-lg-6">
         <div class="card-style mb-30">
             <h6 class="mb-10">Employee Index</h6>
-            <a routerLink='/adminpanel/employeecreate'><span class="text-success">Create New</span></a>
+            <a *ngIf="isAdmin" routerLink='/adminpanel/employeecreate'><span class="text-success">Create New</span></a>
             <div class="table-wrapper table-responsive">
 
                 <div class="flex justify-between items-center mb-4 mt-4 input-style-1">

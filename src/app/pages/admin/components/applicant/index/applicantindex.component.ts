@@ -6,6 +6,7 @@ import { ApplicantListItemDto } from '../../../../../features/models/responses/a
 import { ApplicantService } from '../../../../../features/services/concretes/applicant.service';
 import { BlacklistListItemDto } from '../../../../../features/models/responses/blacklist/blacklist-list-item-dto';
 import { BlacklistService } from '../../../../../features/services/concretes/blacklist.service';
+import { GetListBlacklistResponse } from '../../../../../features/models/responses/blacklist/get-list-blacklist-response';
 
 @Component({
   selector: 'app-applicantindex',
@@ -34,7 +35,7 @@ export class ApplicantindexComponent implements OnInit {
     items: []
   };
   filteredApplicantList: ApplicantListItemDto = this.applicantList;
-  blackList!:BlacklistListItemDto;
+  blackList!:GetListBlacklistResponse[];
 
   ngOnInit(): void {
     this.getList({ pageIndex: 0, pageSize: this.PAGE_SIZE }) 
@@ -56,14 +57,14 @@ export class ApplicantindexComponent implements OnInit {
   getBlackList(pageRequest: PageRequest): void {
     this.isLoading = true;
     this.blacklistService.getList(pageRequest).subscribe((response) => {
-      this.blackList = response;
+      this.blackList = response.items;
       this.isLoading = false;
     });
   }
 
   isBlackListed(state: string): boolean {
     this.isLoading = true;
-    if(this.blackList.items.find(item => item.applicantId === state)){
+    if(this.blackList.find(item => item.applicantId === state)){
       this.isLoading = false;
       return true;
     }

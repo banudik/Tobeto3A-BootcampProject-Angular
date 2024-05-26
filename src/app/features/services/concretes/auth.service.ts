@@ -215,6 +215,7 @@ import { ForgotPasswordRequest } from "../../models/requests/auth/forgot-passwor
     }
   
     isAdmin(){
+      this.getRoles();
       if(this.claims.includes("admin" && "Admin")){
         return true;
       }
@@ -224,9 +225,8 @@ import { ForgotPasswordRequest } from "../../models/requests/auth/forgot-passwor
     }
 
     isEmployee(){
+      this.getRoles();
       if(this.claims.includes("Employees.EmployeeRole" && "Employees.EmployeeRole")){
-        console.log("true");
-        
         return true;
       }
       else{
@@ -235,6 +235,7 @@ import { ForgotPasswordRequest } from "../../models/requests/auth/forgot-passwor
     }
 
     isInstructor(){
+      this.getRoles();
       if(this.claims.includes("instructorRole" && "InstructorRole")){
         return true;
       }

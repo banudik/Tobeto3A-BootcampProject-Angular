@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { FormGroup, Validators, ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 import { UserForLoginWithVerifyRequest } from '../../features/models/requests/auth/user-for-loginWithVerify-request';
 import { DarkModeService } from '../../features/services/dark-mode.service';
 import { ForgotPasswordRequest } from '../../features/models/requests/auth/forgot-password-request';
-import { EmailService } from '../../features/services/concretes/email.service';
+import { ValidationHelper } from '../../core/helpers/validationtoastrmessagehelper';
 
 
 
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   forgotPasswordEmail!: ForgotPasswordRequest;
   forgotPassword!:FormGroup;
 
-  constructor(private formBuilder:FormBuilder,private authService:AuthService,private router:Router,private toastrService:ToastrService){}
+  constructor(private formBuilder:FormBuilder,private authService:AuthService,private router:Router,private toastrService:ToastrService,private change:ChangeDetectorRef,private validationHelper:ValidationHelper){}
 
   ngOnInit(): void {
     this.createLoginForm();
@@ -79,6 +79,13 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('token', response.accessToken.token);
             this.toastrService.success('Giriş Başarılı', 'Giriş İşlemi');
             this.showAuthenticatorCodeInput = false;
+            window.location.reload();
+            this.change.detectChanges();
+            
+            setTimeout(()=>{
+              this.router.navigate(['homepage']);
+            },2000)
+            
           } 
           else {
             this.toastrService.success('Doğrulama kodu mail adresinize gönderildi', 'Doğrulama Kodu');
@@ -90,6 +97,9 @@ export class LoginComponent implements OnInit {
         },
         complete: () => {}
       });
+    }
+    else{
+      this.validationHelper.checkValidation(this.loginForm);
     }
   }
 

@@ -27,22 +27,49 @@ import { NotificationService } from '../../../features/services/concretes/notifi
 //   );
 // };
 
+// export const ErrorInterceptor: HttpInterceptorFn = (request, next) => {
+//   const notificationService = inject(NotificationService);
+
+//   return next(request).pipe(
+//     catchError((error: HttpErrorResponse) => {
+//       let errorMessage = 'Bir hata oluştu.';
+
+//       if (error.error instanceof ErrorEvent) {
+//         // İstemci tarafında olan hata
+//         errorMessage = `Hata: ${error.error.message}`;
+//       } else if (error.error && error.error.message) {
+//         // Sunucu tarafında özel hata mesajı
+//         errorMessage = `Hata: ${error.error.message}`;
+//       } else {
+//         // Sunucu tarafında genel hata
+//         //errorMessage = `Hata Kodu: ${error.status}, Mesaj: ${error.message}`;
+//       }
+
+//       notificationService.showError(errorMessage);
+//       return throwError(() => new Error(errorMessage));
+//     })
+//   );
+// };
+
 export const ErrorInterceptor: HttpInterceptorFn = (request, next) => {
   const notificationService = inject(NotificationService);
 
   return next(request).pipe(
     catchError((error: HttpErrorResponse) => {
-      let errorMessage = 'Bir hata oluştu.';
+      let errorMessage = 'An Error has occured.';
 
       if (error.error instanceof ErrorEvent) {
         // İstemci tarafında olan hata
-        errorMessage = `Hata: ${error.error.message}`;
-      } else if (error.error && error.error.message) {
+        errorMessage = `Error: ${error.error.message}`;
+      } else if (error.error && error.error.Detail) {
         // Sunucu tarafında özel hata mesajı
-        errorMessage = `Hata: ${error.error.message}`;
+        errorMessage = `Error: ${error.error.Detail}`;
+      } else if (error.error && error.error.message) {
+        // Sunucu tarafında alternatif hata mesajı (örneğin Exception mesajı)
+        errorMessage = `Error: ${error.error.message}`;
       } else {
         // Sunucu tarafında genel hata
-        //errorMessage = `Hata Kodu: ${error.status}, Mesaj: ${error.message}`;
+        errorMessage = `Error Status Code: ${error.status}, Message: ${error.message}`;
       }
 
       notificationService.showError(errorMessage);

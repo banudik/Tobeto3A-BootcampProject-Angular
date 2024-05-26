@@ -24,10 +24,10 @@ export class BlacklistService extends BlacklistBaseService {
   constructor(private httpClient:HttpClient) {super() }
 
   override delete(id: number): Observable<DeletedBlacklistResponse> {
-    throw new Error('Method not implemented.');
+    return this.httpClient.delete<DeletedBlacklistResponse>(`${this.apiUrl}/`+id);
   }
   override update(updateBlackListRequest: UpdateBlacklistRequest): Observable<UpdatedBlacklistResponse> {
-    throw new Error('Method not implemented.');
+    return this.httpClient.post<UpdatedBlacklistResponse>(this.apiUrl,updateBlackListRequest);
   }
   
   override getList(pageRequest:PageRequest): Observable<BlacklistListItemDto>  {
@@ -55,8 +55,8 @@ export class BlacklistService extends BlacklistBaseService {
     )
   }
 
-  override getById(): Observable<GetByIdBlacklistResponse> {
-    return this.httpClient.get<GetByIdBlacklistResponse>(this.apiUrl);
+  override getById(id:number): Observable<GetByIdBlacklistResponse> {
+    return this.httpClient.get<GetByIdBlacklistResponse>(`${this.apiUrl}/`+id);
   }
 
   override blackListApplicant(createBlackListRequest: CreateBlacklistRequest): Observable<CreatedBlacklistResponse> {
