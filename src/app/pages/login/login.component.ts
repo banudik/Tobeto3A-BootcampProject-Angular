@@ -80,10 +80,11 @@ export class LoginComponent implements OnInit {
       this.authService.login(loginModel).subscribe({
         next: (response) => {
           if (response.accessToken) {
-            localStorage.setItem('token', response.accessToken.token);
-            this.toastrService.success('Giriş Başarılı', 'Giriş İşlemi');
+            //localStorage.setItem('token', response.accessToken.token);
+            this.toastrService.success('Giriş Başarılı login', 'Giriş İşlemi');
             this.showAuthenticatorCodeInput = false;
             console.log('component if',response);
+            //this.authService.fetchRefreshTokenAfterLogin();
           } 
           else {
             this.toastrService.success('Doğrulama kodu mail adresinize gönderildi', 'Doğrulama Kodu');
@@ -93,8 +94,6 @@ export class LoginComponent implements OnInit {
         },
         error: (error) => {
           console.log('component error',error);
-          this.toastrService.error('Giriş Başarısız', 'Giriş İşlemi');
-          //this.showAuthenticatorCodeInput = false;
         }
       });
     }
@@ -102,17 +101,19 @@ export class LoginComponent implements OnInit {
 
   // girilen doğrulama kodunu apiye gönderir (email,password,activationKey olarak 3 parametre gönderir) başarılı olursa tokeni kaydeder
   verifyCode() {
-      let loginModel: UserForLoginWithVerifyRequest = Object.assign({}, this.loginForm.value);
-      this.authService.loginWithVerify(loginModel).subscribe({
+      let loginModel2: UserForLoginWithVerifyRequest = Object.assign({}, this.loginForm.value);
+      this.authService.loginWithVerify(loginModel2).subscribe({
         next:()=>{
-          this.toastrService.success('Giriş Başarılı', 'Giriş işlemi');
+          this.toastrService.success('Giriş Başarılı verifyCode', 'Giriş işlemi');
+          return console.log("LoginComponent Verify Success");
+
           this.onCancel();
         },
-        error:() => {
-          this.toastrService.error('Giriş Başarısız');
+        error:(error) => {
+          console.log("LoginComponent Verify error");
           this.onCancel();
 
-          //console.log(error.message);
+          return console.log(error);
         },
         complete:() => {
           this.onCancel();

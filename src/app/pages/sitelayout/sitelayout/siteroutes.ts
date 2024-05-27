@@ -11,7 +11,6 @@ import { ResetPasswordComponent } from "../../reset-password/reset-password.comp
 import { AboutUsComponent } from "../../about-us/about-us.component";
 import { PrivacyPolicyComponent } from "../../privacy-policy/privacy-policy.component";
 import { WelcomeComponent } from "../../welcome/welcome.component";
-import { NotFoundComponent } from "../../../shared/components/not-found/not-found.component";
 
 export const siteRoutes: Routes = [
     {path:'homepage',component:HomepageComponent},
