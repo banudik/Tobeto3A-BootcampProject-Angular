@@ -32,8 +32,7 @@ export const AuthInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: 
       console.log('AuthInterceptor caught an error:', error);
       console.log('Hata bu şekilde', error);
       console.log('Error status:', error.status);
-      console.log('Request URL:', req.url);
-      console.log('Error details:', error.error.detail);
+
         
 
 
