@@ -13,12 +13,11 @@ import { RouterModule } from '@angular/router';
   styleUrl: './bootcampstateindex.component.css'
 })
 export class BootcampstateindexComponent implements OnInit {
-  readonly PAGE_SIZE = 8;
-  currentPageNumber!: number;
-
-  /**
-   *
-   */
+  readonly PAGE_SIZE = 100000; //for api
+  currentPageNumber: number = 1;
+  pageSize: number = 5;
+  pageSizes: Array<number> = [5,10,20];
+  searchTermTmp:string = '';
   constructor(private bootcampStateService:BootcampStateService) {}
 
   bootcampStateList: BootcampStateListItemDto = {
@@ -31,47 +30,76 @@ export class BootcampstateindexComponent implements OnInit {
     pages: 0,
     items: []
   };
+  filteredBootcampStateList: BootcampStateListItemDto = this.bootcampStateList;
+
 
   ngOnInit(): void {
-    this.getList({ page: 0, pageSize: this.PAGE_SIZE }) 
+    this.getList({ pageIndex: 0, pageSize: this.PAGE_SIZE }) 
+    //console.log("start " + this.bootcampStateList.items.length);
+    this.visibleData();
+    this.pageNumbers();
   }
 
 
   getList(pageRequest: PageRequest) {
     this.bootcampStateService.getList(pageRequest).subscribe((response) => {
       this.bootcampStateList = response;
-      this.updateCurrentPageNumber();
     })
   }
 
-  onViewMoreClicked(): void {
-    const nextPageIndex = this.bootcampStateList.index + 1;
-    const pageSize = this.bootcampStateList.size;
+  visibleData(){
+    let startIndex = (this.currentPageNumber - 1 )* this.pageSize;
+    let endIndex = startIndex + this.pageSize;
     
-    //this.getList({ page: nextPageIndex, pageSize })
-
-
-    this.getList({ page: nextPageIndex, pageSize: pageSize }) 
-    
-    
-    this.updateCurrentPageNumber();
+    if(this.filteredBootcampStateList.items.length == 0 && this.searchTermTmp == ''){
+      return this.bootcampStateList.items.slice(startIndex,endIndex);
+    }
+    return this.filteredBootcampStateList.items.slice(startIndex,endIndex);
   }
 
-  onPreviousPageClicked(): void {
-    const previousPageIndex = this.bootcampStateList.index - 1;
-    const pageSize = this.bootcampStateList.size;
-    //this.getList({ page: previousPageIndex, pageSize });
+  nextPage(){
+    this.currentPageNumber++;
+    this.visibleData();
 
-    this.getList({ page: previousPageIndex, pageSize: pageSize }) 
+  }
+
+  previousPage(){
+    this.currentPageNumber--;
+    this.visibleData();
+  }
+
+  pageNumbers(){
+    let totalPages:number;
+
+    if(this.filteredBootcampStateList.items.length == 0 && this.searchTermTmp == ''){
+      totalPages = Math.ceil(this.bootcampStateList.items.length / this.pageSize);
+    }
+    else{
+      totalPages = Math.ceil(this.filteredBootcampStateList.items.length / this.pageSize);
+    }
     
-    this.lowerCurrentPageNumber();
+    let pageNumArray = new Array(totalPages);
+    return pageNumArray;
   }
 
-  updateCurrentPageNumber(): void {
-    this.currentPageNumber = this.bootcampStateList.index + 1;
+  changePage(pageNumber:number){
+    this.currentPageNumber = pageNumber;
+    this.visibleData();
   }
 
-  lowerCurrentPageNumber(): void {
-    this.currentPageNumber = this.bootcampStateList.index - 1;
+  changePageSize(pageSize:string){
+    this.pageSize = parseInt(pageSize, 10);
+    this.visibleData();
+  }
+
+
+  filterData(searchTerm: string) {
+    this.searchTermTmp = searchTerm;
+    this.filteredBootcampStateList.items = this.bootcampStateList.items.filter((item) => {
+      return Object.values(item).some((val) => {
+        return val.toString().toLowerCase().includes(searchTerm.toLowerCase());
+      });
+    });
+    this.visibleData();
   }
 }

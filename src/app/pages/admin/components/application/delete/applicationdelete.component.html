@@ -1,0 +1,29 @@
+<form>
+    <div class="card-style mb-30">
+        <h6 class="mb-25">Application Details</h6>
+        <div class="input-style-1">
+            <label for="nameInput">Bootcamp Name</label>
+            <input formControlName="name" id="nameInput" type="text" value="{{currentApplication.bootcampName}}" disabled />
+        </div>
+        <div class="input-style-1">
+            <label for="applicantSelect">Applicant Full Name</label>
+            <input formControlName="applicant" id="applicantSelect" type="text" disabled
+                value="{{currentApplication.applicantFirstName}} {{currentApplication.applicantLastName}}" />
+        </div>
+        <div class="input-style-1">
+            <label for="createdDateInput">Created Date </label>
+            <input formControlName="createdDate" id="createdDateInput" type="text"
+                value="{{currentApplication.createdDate| date:'dd-MM-yyyy' }}" disabled />
+        </div>
+        <div class="input-style-1">
+            <label for="applicationStateInformationNameInput">Application State </label>
+            <input formControlName="applicationStateInformationName" id="applicationStateInformationNameInput" type="text"
+                value="{{currentApplication.applicationStateInformationName}}" disabled />
+        </div>
+    </div>
+    <br>
+    <div>
+        <a class="text-danger cursor-pointer" (click)="deleteApplication(currentApplication.id)">Delete</a> |
+        <a class="text-primary" routerLink="/adminpanel/applicationindex">Back to List</a>
+    </div>
+</form>

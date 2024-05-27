@@ -8,4 +8,7 @@ export interface GetByIdInstructorResponse {
     nationalIdentity:string;
     email:string;
     password:string;
+    createdDate:Date;
+    updatedDate:Date;
+    description:string;
 }

@@ -21,6 +21,7 @@ export class AboutUsComponent implements OnInit {
     @Inject(DOCUMENT) private _document:Document
 ) { }
 ngOnInit() {
+  window.scrollTo(0,0);
     // Ana JS dosyalarını yükleme
     this.loadScript('assets/homepageAssets/js/jquery.min.js');
     this.loadScript('assets/homepageAssets/js/bootstrap.min.js');

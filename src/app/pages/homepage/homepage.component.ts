@@ -1,7 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { BootcampListGroupComponent } from '../../features/components/bootcamps/bootcamp-list-group/bootcamp-list-group.component';
 import { HttpClientModule } from '@angular/common/http';
 import { InstructorComponent } from "../../features/components/instructor/instructor.component";
 import { Component, Inject, OnInit, Renderer2 } from '@angular/core';
@@ -21,6 +20,7 @@ constructor(
     @Inject(DOCUMENT) private _document:Document
 ) { }
 ngOnInit() {
+  window.scrollTo(0,0);
     // Ana JS dosyalarını yükleme
     this.loadScript('assets/homepageAssets/js/jquery.min.js');
     this.loadScript('assets/homepageAssets/js/bootstrap.min.js');

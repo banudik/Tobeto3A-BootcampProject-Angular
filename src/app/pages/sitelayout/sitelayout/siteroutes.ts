@@ -9,6 +9,9 @@ import { SignUpComponent } from "../../sign-up/sign-up.component";
 import { ContactUsComponent } from "../../contact-us/contact-us.component";
 import { ResetPasswordComponent } from "../../reset-password/reset-password.component";
 import { AboutUsComponent } from "../../about-us/about-us.component";
+import { PrivacyPolicyComponent } from "../../privacy-policy/privacy-policy.component";
+import { TermsOfUseComponent } from "../../terms-of-use/terms-of-use.component";
+import { WelcomeComponent } from "../../welcome/welcome.component";
 
 export const siteRoutes: Routes = [
     {path:'homepage',component:HomepageComponent},
@@ -21,7 +24,8 @@ export const siteRoutes: Routes = [
     {path:'faq',component:FaqComponent},
     {path:'contact-us',component:ContactUsComponent},
     {path: 'reset-password', component: ResetPasswordComponent },
-    {path: 'about-us', component: AboutUsComponent },
-
-    
+    {path:'about-us',component:AboutUsComponent},
+    {path:'privacy-policy',component:PrivacyPolicyComponent},
+    {path:'terms-of-use',component:TermsOfUseComponent},
+    {path:'welcome',component:WelcomeComponent},
 ];
