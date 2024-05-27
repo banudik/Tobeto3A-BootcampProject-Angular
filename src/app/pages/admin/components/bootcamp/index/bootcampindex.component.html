@@ -1,68 +1,94 @@
-<div class="row">
-    <div class="col-lg-6">
-      <div class="card-style mb-30">
-        <h6 class="mb-10">Bootcamp State Index</h6>
-        <a routerLink='/adminpanel/bootcampcreate'><span class="text-success">Create New</span></a>
-        <div class="table-wrapper table-responsive">
-          <table class="table striped-table">
-            <thead>
-              <tr>
-                <th></th>
-                <th>
-                    <h6>Image</h6>
-                  </th>
-                <th>
-                  <h6>Bootcamp Name</h6>
-                </th>
-                <th>
-                    <h6>Instructor</h6>
-                  </th>
-                  <th>
-                    <h6>State</h6>
-                  </th>
-                <th>
-                  <h6>Start Date</h6>
-                </th>
-                <th>
-                    <h6>End Date</h6>
-                  </th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let items of bootcampList.items; let i = index">
-                <td>
-                  <div class="check-input-primary">
-                    <input class="form-check-input" type="checkbox" id="checkbox-{{i + 1}}" />
-                  </div>
-                </td>
-                <td>
-                    <img [src]="items.bootcampImageImagePath" width="100" height="100">
-                  </td>
-                <td>
-                  <p>{{ items.name }}</p>
-                </td>
-                <td>
-                    <p>{{ items.instructorFirstName + " " + items.instructorLastName }}</p>
-                  </td>
-                  <td>
-                    <p>{{ items.bootcampStateName }}</p>
-                  </td>
-                <td>
-                  <p>{{ items.startDate| date:'dd/MM/yyyy' }}</p>
-                </td>
-                <td>
-                    <p>{{ items.endDate| date:'dd/MM/yyyy' }}</p>
-                  </td>
-                <td>
-                  <a class="text-success" routerLink='/adminpanel/bootcampdetails/{{items.id}}'>details</a>  |
-                  <a class="text-warning" routerLink='/adminpanel/bootcampedit/{{items.id}}'>Edit</a>  |
-                  <a class="text-danger" routerLink='/adminpanel/bootcampdelete/{{items.id}}'>Delete</a> 
-                </td>
-              </tr>
-            </tbody>
-          </table>
+<div *ngIf="!isLoading" class="row">
+  <div class="col-lg-6">
+    <div class="card-style mb-30">
+      <h6 class="mb-10">Bootcamp State Index</h6>
+      <a routerLink='/adminpanel/bootcampcreate'><span class="text-success">Create New</span></a>
+      <div class="table-wrapper table-responsive">
+
+        <div *ngIf="!isLoading" class="flex justify-between items-center mb-4 mt-4 input-style-1">
+          <input type="text" placeholder="Search" class="w-full border p-2 rounded-lg" #filter
+            (keyup)="filterData(filter.value)">
+
+            <select class="border p-2 rounded-lg" #InstructorFilter (change)="filterByInstructor(InstructorFilter.value)">
+              <option value="">All Instructors</option>
+              <option *ngFor="let instructor of instructors.items" [value]="instructor.id">{{ instructor.firstName }} {{ instructor.lastName }}</option>
+            </select>
+            
+          <select class="border p-2 rounded-lg" #pageSize (change)="changePageSize(pageSize.value)">
+            <option *ngFor="let size of pageSizes" [value]="size">Page Size: {{size}}</option>
+          </select>
+        </div>
+
+        <table class="table striped-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>
+                <h6>Image</h6>
+              </th>
+              <th>
+                <h6>Bootcamp Name</h6>
+              </th>
+              <th>
+                <h6>Instructor</h6>
+              </th>
+              <th>
+                <h6>State</h6>
+              </th>
+              <th>
+                <h6>Start Date</h6>
+              </th>
+              <th>
+                <h6>End Date</h6>
+              </th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let items of visibleData(); let i = index">
+              <td>
+                <div class="check-input-primary">
+                  <input class="form-check-input" type="checkbox" id="checkbox-{{i + 1}}" />
+                </div>
+              </td>
+              <td>
+                <img [src]="items.bootcampImageImagePath" width="100" height="100">
+              </td>
+              <td>
+                <p>{{ items.name }}</p>
+              </td>
+              <td>
+                <p>{{ items.instructorFirstName + " " + items.instructorLastName }}</p>
+              </td>
+              <td>
+                <p>{{ items.bootcampStateName }}</p>
+              </td>
+              <td>
+                <p>{{ items.startDate| date:'dd/MM/yyyy' }}</p>
+              </td>
+              <td>
+                <p>{{ items.endDate| date:'dd/MM/yyyy' }}</p>
+              </td>
+              <td>
+                <a class="text-success" routerLink='/adminpanel/bootcampdetails/{{items.id}}'>details</a> |
+                <a class="text-warning" routerLink='/adminpanel/bootcampedit/{{items.id}}'>Edit</a> |
+                <a class="text-danger" routerLink='/adminpanel/bootcampdelete/{{items.id}}'>Delete</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- pagination -->
+        <div class="mt-4 flex items-center justify-center">
+          <button (click)="previousPage()" [disabled]="currentPageNumber === 1"
+            class="text-cyan-500 border-4 py-2 px-4 rounded-l-lg cursor-pointer mr-5">Previous</button>
+
+          <button *ngFor="let pageNumber of pageNumbers(); let i = index" class="py-2 px-4 cursor-pointer"
+            [class.bg-cyan-500]="i+1 == currentPageNumber" [class.text-white]="i+1 == currentPageNumber"
+            (click)="changePage(i+1)">{{i+1}}</button>
+          <button (click)="nextPage()" [disabled]="currentPageNumber === pageNumbers().length"
+            class="text-cyan-500 border-4 py-2 px-4 rounded-r-lg cursor-pointer ml-5">Next</button>
         </div>
       </div>
     </div>
   </div>
+</div>

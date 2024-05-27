@@ -49,7 +49,7 @@ export class BootcampStateService extends BootcampStateBaseService {
 
   override getList(pageRequest: PageRequest): Observable<BootcampStateListItemDto> {
     const newRequest: {[key: string]: string | number} = {
-      pageIndex: pageRequest.page,
+      pageIndex: pageRequest.pageIndex,
       pageSize: pageRequest.pageSize
     };
 
@@ -58,7 +58,7 @@ export class BootcampStateService extends BootcampStateBaseService {
     }).pipe(
       map((response)=>{
         const newResponse:BootcampStateListItemDto={
-          index:pageRequest.page,
+          index:pageRequest.pageIndex,
           size:pageRequest.pageSize,
           count:response.count,
           hasNext:response.hasNext,

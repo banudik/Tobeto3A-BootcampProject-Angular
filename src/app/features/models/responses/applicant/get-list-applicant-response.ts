@@ -7,5 +7,8 @@ export interface GetListApplicantResponse {
     dateOfBirth: Date;
     nationalIdentity:string;
     email:string;
+    createdDate:Date;
+    updatedDate:Date;
+    isBlackListed:boolean;
     //password:string;
 }

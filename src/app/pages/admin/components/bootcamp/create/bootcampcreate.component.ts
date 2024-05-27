@@ -8,6 +8,7 @@ import { InstructorService } from '../../../../../features/services/concretes/in
 import { InstructorListItemDto } from '../../../../../features/models/responses/instructor/instructor-list-item-dto';
 import { BootcampStateListItemDto } from '../../../../../features/models/responses/bootcamp-state/bootcampstate-list-item-dto';
 import { CommonModule } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-bootcampcreate',
@@ -22,7 +23,7 @@ export class BootcampcreateComponent  implements OnInit{
   formMessage:string | null=null;
   instructors!:InstructorListItemDto;
   bootcampStates!:BootcampStateListItemDto;
-
+  isloading:boolean = true;
   ngOnInit(): void {
     this.getInstructors();
     this.getBootcampStates();
@@ -31,7 +32,7 @@ export class BootcampcreateComponent  implements OnInit{
 
   constructor(private formBuilder:FormBuilder,private bootcampService:BootcampService,
     private router:Router,private change:ChangeDetectorRef, private bootcampStateService:BootcampStateService
-    , private instructorService:InstructorService
+    , private instructorService:InstructorService,private toastr:ToastrService
   ){}
 
   createForm(){
@@ -52,14 +53,18 @@ export class BootcampcreateComponent  implements OnInit{
   }
 
   getInstructors(){
+    this.isloading = true;
     this.instructorService.GetListAll().subscribe((response)=>{
      this.instructors=response;
+     this.isloading = false;
     })
  }
 
  getBootcampStates(){
-  this.bootcampStateService.getList({ page: 0, pageSize: 100000}).subscribe((response)=>{
+  this.isloading = true;
+  this.bootcampStateService.getList({ pageIndex: 0, pageSize: 100000}).subscribe((response)=>{
    this.bootcampStates=response;
+   this.isloading = false;
   })
 }
 
@@ -79,16 +84,15 @@ export class BootcampcreateComponent  implements OnInit{
       this.bootcampService.add(formData).subscribe({
         //next => observable'dan gelen veri yakaladığımız fonksiyon
         next:(response)=>{
-         alert(response.name)
         },
         error:(error)=>{
           console.log(bootcampModel);
           
-          this.formMessage="Eklenemedi" + error.message;
+          this.toastr.error("Failed to add: " +error.message);
           this.change.markForCheck();
         },
         complete:()=>{
-          this.formMessage="Başarıyla Eklendi";
+          this.toastr.success("Succesfully added!");
           this.BootcampForm.reset();
           this.change.markForCheck();
 

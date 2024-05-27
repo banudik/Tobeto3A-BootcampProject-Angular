@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NavbarComponent } from './navbar.component';
+import { InstructordeleteComponent } from './instructordelete.component';
 
-describe('NavbarComponent', () => {
-  let component: NavbarComponent;
-  let fixture: ComponentFixture<NavbarComponent>;
+describe('InstructordeleteComponent', () => {
+  let component: InstructordeleteComponent;
+  let fixture: ComponentFixture<InstructordeleteComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NavbarComponent]
+      imports: [InstructordeleteComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(NavbarComponent);
+    fixture = TestBed.createComponent(InstructordeleteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

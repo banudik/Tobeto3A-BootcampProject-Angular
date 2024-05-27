@@ -1,0 +1,55 @@
+<form [formGroup]="InstructorUpdateForm" (ngSubmit)="onFormSubmit()" *ngIf="InstructorUpdateForm">
+    <div *ngIf="formMessage">
+      <small>{{formMessage}}</small>
+    </div>
+    <div class="card-style mb-30">
+      <h6 class="mb-25">Instructor Edit</h6>
+
+      <div class="input-style-1">
+        <label for="firstNameInput">Instructor First Name</label>
+        <input formControlName="firstName" id="firstNameInput" type="text" placeholder="First Name" />
+      </div>
+  
+      <div class="input-style-1">
+        <label for="lastNameInput">Instructor Last Name</label>
+        <input formControlName="lastName" id="lastNameInput" type="text" placeholder="Last Name" />
+      </div>
+  
+      <div class="input-style-1">
+        <label for="userNameInput">Instructor User Name</label>
+        <input formControlName="userName" id="userNameInput" type="text" placeholder="User Name" />
+      </div>
+  
+      <div class="input-style-1">
+        <label for="emailInput">Instructor Email</label>
+        <input formControlName="email" id="emailInput" type="email" placeholder="Email" />
+      </div>
+
+      <div class="input-style-1">
+        <label for="descriptionInput">Instructor Description</label>
+        <input formControlName="description" id="descriptionInput" type="text" placeholder="Description" />
+      </div>
+  
+      <div class="input-style-1">
+        <label for="birthInput">Instructor Date of Birth</label>
+        <input formControlName="dateOfBirth" id="birthInput" type="date" placeholder="Date of Birth" />
+      </div>
+  
+      <div class="input-style-1">
+        <label for="nationalIdentityInput">Instructor National Identity</label>
+        <input formControlName="nationalIdentity" id="nationalIdentityInput" type="text" placeholder="National Identity" />
+      </div>
+  
+      <div class="input-style-1">
+        <label for="companyNameInput">Instructor Company</label>
+        <input formControlName="companyName" id="companyNameInput" type="text" placeholder="Company Name" />
+      </div>
+    </div>
+  
+    <br>
+    <div>
+      <button type="submit" class="main-btn active-btn rounded-full btn-hover">Edit Instructor</button> |
+      <a class="text-primary" routerLink="/adminpanel/instructorindex">Back to List</a>
+    </div>
+  </form>
+  

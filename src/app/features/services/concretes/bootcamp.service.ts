@@ -29,7 +29,7 @@ export class BootcampService extends BootcampBaseService {
   }
 
 
-  override update(request: UpdateBootcampRequest): Observable<UpdatedBootcampResponse> {
+  override update(request: FormData): Observable<UpdatedBootcampResponse> {
     return this.httpClient.put<UpdatedBootcampResponse>(this.apiUrl,request);
   }
 
@@ -71,7 +71,7 @@ export class BootcampService extends BootcampBaseService {
 
   override getList(pageRequest: PageRequest): Observable<BootcampListItemDto> {
     const newRequest: {[key: string]: string | number} = {
-      pageIndex: pageRequest.page,
+      pageIndex: pageRequest.pageIndex,
       pageSize: pageRequest.pageSize
     };
 
@@ -80,7 +80,34 @@ export class BootcampService extends BootcampBaseService {
     }).pipe(
       map((response)=>{
         const newResponse:BootcampListItemDto={
-          index:pageRequest.page,
+          index:pageRequest.pageIndex,
+          size:pageRequest.pageSize,
+          count:response.count,
+          hasNext:response.hasNext,
+          hasPrevious:response.hasPrevious,
+          items:response.items,
+          pages:response.pages
+        };
+        
+        return newResponse;
+      })
+    )
+  }
+
+  override getListByBootcampNameSearch(pageRequest: PageRequest,search:string,instructorId:string): Observable<BootcampListItemDto> {
+    const newRequest: {[key: string]: string | number} = {
+      pageIndex: pageRequest.pageIndex,
+      pageSize: pageRequest.pageSize,
+      search: search,
+      instructorId: instructorId
+    };
+
+    return this.httpClient.get<BootcampListItemDto>(`${this.apiUrl}/getbootcampListByBootcampNameSearch`, {
+      params: newRequest
+    }).pipe(
+      map((response)=>{
+        const newResponse:BootcampListItemDto={
+          index:pageRequest.pageIndex,
           size:pageRequest.pageSize,
           count:response.count,
           hasNext:response.hasNext,
@@ -97,7 +124,7 @@ export class BootcampService extends BootcampBaseService {
 
    override getBootcampListByInstructorId(pageRequest: PageRequest, instructorId: string): Observable<BootcampListItemDto> {
     const newRequest: {[key: string]: string | number} = {
-      pageIndex: pageRequest.page,
+      pageIndex: pageRequest.pageIndex,
       pageSize: pageRequest.pageSize,
       instructorId: instructorId,
     };
@@ -107,7 +134,7 @@ export class BootcampService extends BootcampBaseService {
     }).pipe(
       map((response)=>{
         const newResponse:BootcampListItemDto={
-          index:pageRequest.page,
+          index:pageRequest.pageIndex,
           size:pageRequest.pageSize,
           count:response.count,
           hasNext:response.hasNext,
