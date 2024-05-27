@@ -11,7 +11,7 @@ import { FooterComponent } from "./components/footer/footer.component";
 
 
 @NgModule({
-    declarations:[FilterBootcampPipe,FilterInstructorPipe,FaqComponent,AboutUsComponent],
+    declarations:[FilterBootcampPipe,FilterInstructorPipe,FaqComponent],
     exports:[NavbarComponent,FilterBootcampPipe,FilterInstructorPipe],
     imports:[CommonModule,NavbarComponent,FooterComponent],
 
