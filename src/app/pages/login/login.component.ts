@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.createLoginForm();
+    window.scrollTo(0,0);
   }
 
   createLoginForm(){

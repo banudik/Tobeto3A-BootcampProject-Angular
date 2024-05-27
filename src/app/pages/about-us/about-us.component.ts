@@ -7,6 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./about-us.component.css']
 })
 export class AboutUsComponent {
-
+  ngOnInit(): void {
+    window.scrollTo(0,0);
+  }
 
 }

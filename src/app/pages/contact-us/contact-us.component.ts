@@ -18,6 +18,9 @@ export class ContactUsComponent {
     message: ''
   };
 
+  ngOnInit(): void {
+    window.scrollTo(0,0);
+  }
   submitForm() {
     // İletişim formunun gönderim işlemleri burada yapılabilir
     console.log('Form submitted:', this.formData);

@@ -4,13 +4,13 @@ import { RouterModule } from '@angular/router';
 import { DarkModeService } from '../../features/services/dark-mode.service';
 
 @Component({
-  selector: 'app-privacy-policy',
+  selector: 'app-terms-of-use',
   standalone: true,
-  imports: [RouterModule,CommonModule],
-  templateUrl: './privacy-policy.component.html',
-  styleUrl: './privacy-policy.component.css'
+  imports: [CommonModule, RouterModule],
+  templateUrl: './terms-of-use.component.html',
+  styleUrl: './terms-of-use.component.css'
 })
-export class PrivacyPolicyComponent {
+export class TermsOfUseComponent {
 
   ngOnInit(): void {
     window.scrollTo(0,0);

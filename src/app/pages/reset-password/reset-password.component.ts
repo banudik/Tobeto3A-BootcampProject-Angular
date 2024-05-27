@@ -39,6 +39,8 @@ export class ResetPasswordComponent implements OnInit {
       if (!this.token) {
         this.router.navigate(['/homepage']);
       }
+        window.scrollTo(0,0);
+      
     });
 
     this.passwordForm = this.formBuilder.group({

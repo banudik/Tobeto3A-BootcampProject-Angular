@@ -70,7 +70,7 @@
 
 .dark-section .dark-signup {
   position: absolute;
-  width: 600px;
+  width: 500px;
   background: #222;
   z-index: 1000;
   display: flex;
@@ -91,91 +91,14 @@
   gap:40px;
 }
 
-.dark-section .dark-content2 {
-  position: relative;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap:40px;
-}
-.dark-section .dark-content2 h2 {
-  font-size:1.5em;
-  color:#8585ff;
-  text-transform: uppercase;
-}
-
-.dark-section .dark-content2 p {
-  font-size:1em;
-  color:#fff;
-  
-}
-
-.dark-section .dark-content2 .dark-form {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap:25px;
-}
-
-.dark-section .dark-content2 .dark-form .dark-inputBx {
-  position: relative;
-  width: 100%;
-}
-
-.dark-section .dark-content2 .dark-form .dark-inputBx input {
-  position: relative;
-  width: 100%;
-  background: #8585ff39;
-  border:none;
-  outline:none;
-  padding:25px 10px 7.5px;
-  border-radius: 4px;
-  color:#fff;
-  font-weight: 500;
-  font-size: 1em;
-}
 .dark-valid {
   color:#fff;
   font-size: 0.8em;
   margin-top: 15px;
 }
 
-.light-valid {
-  color:#252525;
-  font-size: 0.8em;
-  margin-top: 15px;
-}
 
-.dark-section .dark-content2 .dark-form .dark-inputBx i {
-  position: absolute;
-  left:0;
-  padding:15px 10px;
-  font-style: normal;
-  color:#8585ff;
-  transition: 0.5s;
-  pointer-events: none;
-  }
-  
-  .dark-section .dark-content2 .dark-form .dark-inputBx input:focus ~ i,
-  .dark-section .dark-content2 .dark-form .dark-inputBx input:valid ~ i {
-  transform: translateY(-7.5px);
-  font-size: 0.8em;
-  color:#8585ff;
-  }
-
-  .dark-section .dark-content2 .dark-form .dark-inputBx input[type="submit"] {
-    padding:10px;
-    background: #8585ff;
-    color:#fff;
-    font-weight: 600;
-    font-size: 1.25em;
-    letter-spacing: 0.05em;
-    cursor:pointer;
-  }
-
-  .dark-section .dark-signup .dark-content h2 {
+.dark-section .dark-signup .dark-content h2 {
   font-size:2em;
   color:#8585ff;
   text-transform: uppercase;
@@ -244,7 +167,18 @@ color:#8585ff;
   text-decoration: none;
 }
 
-.dark-section .dark-signup .dark-content .dark-form .dark-inputBx input[type="submit"] {
+
+.dark-button[type="submit"] {
+  padding:10px;
+  background: #8585ff;
+  color:#fff;
+  font-weight: 600;
+  font-size: 1.25em;
+  letter-spacing: 0.05em;
+  cursor:pointer;
+}
+
+.dark-button[type="button"] {
   padding:10px;
   background: #8585ff;
   color:#fff;
@@ -284,9 +218,6 @@ color:#8585ff;
     width: 100%;
   }
 
-  .dark-section .dark-signup .dark-content .dark-form .dark-inputBx input[type="submit"] {
-    width: 100%;
-  }
 }
 
 @media (max-width: 480px) {
@@ -308,9 +239,6 @@ color:#8585ff;
     width: 100%;
   }
 
-  .dark-section .dark-signup .dark-content .dark-form .dark-inputBx input[type="submit"] {
-    width: 100%;
-  }
 }
 
 @media (max-width: 320px) {
@@ -334,11 +262,6 @@ color:#8585ff;
     font-size: 0.9em;
   }
 
-  .dark-section .dark-signup .dark-content .dark-form .dark-inputBx input[type="submit"] {
-    width: 100%;
-    padding: 8px;
-    font-size: 1em;
-  }
 }
 
 @media (max-width: 900px) {
@@ -415,9 +338,9 @@ color:#8585ff;
 
 .light-section .light-signup {
   position: absolute;
-  width: 600px;
+  width: 500px;
   background: #f9f6f6;
-  z-index: 1000;
+  z-index: 200;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -436,78 +359,12 @@ color:#8585ff;
   gap:40px;
 }
 
-.light-section .light-content2 {
-  position: relative;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap:40px;
-}
-.light-section .light-content2 h2 {
-  font-size:1.5em;
-  color:#4ab4fb;
-  text-transform: uppercase;
-}
-
-.light-section .light-content2 p {
-  font-size:1em;
+.light-valid {
   color:#252525;
-  
-}
-
-.light-section .light-content2 .light-form {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap:25px;
-}
-
-.light-section .light-content2 .light-form .light-inputBx {
-  position: relative;
-  width: 100%;
-}
-
-.light-section .light-content2 .light-form .light-inputBx input {
-  position: relative;
-  width: 100%;
-  background: #4ab4fb3d;
-  border:none;
-  outline:none;
-  padding:25px 10px 7.5px;
-  border-radius: 4px;
-  color:#252525;
-  font-weight: 500;
-  font-size: 1em;
-}
-
-.light-section .light-content2 .light-form .light-inputBx i {
-  position: absolute;
-  left:0;
-  padding:15px 10px;
-  font-style: normal;
-  color:#4ab4fb;
-  transition: 0.5s;
-  pointer-events: none;
-  }
-  
-  .light-section .light-content2 .light-form .light-inputBx input:focus ~ i,
-  .light-section .light-content2 .light-form .light-inputBx input:valid ~ i {
-  transform: translateY(-7.5px);
   font-size: 0.8em;
-  color:#4ab4fb;
-  }
-
-  .light-section .light-content2 .light-form .light-inputBx input[type="submit"] {
-    padding:10px;
-    background: #4ab4fb;
-    color:#fff;
-    font-weight: 600;
-    font-size: 1.25em;
-    letter-spacing: 0.05em;
-    cursor:pointer;
-  }
+  margin-top: 15px;
+}
+  
 
   .light-section .light-signup .light-content h2 {
   font-size:2em;
@@ -578,7 +435,18 @@ color:#4ab4fb;
   text-decoration: none;
 }
 
-.light-section .light-signup .light-content .light-form .light-inputBx input[type="submit"] {
+
+.light-button[type="submit"] {
+  padding:10px;
+  background: #4ab4fb;
+  color:#fff;
+  font-weight: 600;
+  font-size: 1.25em;
+  letter-spacing: 0.05em;
+  cursor:pointer;
+}
+
+.light-button[type="button"] {
   padding:10px;
   background: #4ab4fb;
   color:#fff;
@@ -608,9 +476,6 @@ color:#4ab4fb;
     width: 100%;
   }
 
-  .light-section .light-signup .light-content .light-form .light-inputBx input[type="submit"] {
-    width: 100%;
-  }
 }
 
 @media (max-width: 480px) {
@@ -632,9 +497,6 @@ color:#4ab4fb;
     width: 100%;
   }
 
-  .light-section .light-signup .light-content .light-form .light-inputBx input[type="submit"] {
-    width: 100%;
-  }
 }
 
 @media (max-width: 320px) {
@@ -658,11 +520,6 @@ color:#4ab4fb;
     font-size: 0.9em;
   }
 
-  .light-section .light-signup .light-content .light-form .light-inputBx input[type="submit"] {
-    width: 100%;
-    padding: 8px;
-    font-size: 1em;
-  }
 }
 
 @media (max-width: 900px) {

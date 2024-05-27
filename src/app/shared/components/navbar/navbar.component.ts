@@ -41,6 +41,7 @@ export class NavbarComponent implements OnInit{
      console.log(this.authService.getRoles())
      this.getUserId();
      this.cdRef.detectChanges();
+     this.menuClick();
    }
    
 
@@ -105,4 +106,17 @@ export class NavbarComponent implements OnInit{
   toggleMenu(): void {
     this.showMenu = !this.showMenu;
   }
+
+  menuClick(): void {
+    const menu: HTMLElement | null = document.querySelector('#menu-icon');
+    const navbar: HTMLElement | null = document.querySelector('.navbar');
+
+    if (menu && navbar) {
+      menu.onclick = (): void => {
+        menu.classList.toggle('bx-x');
+        navbar.classList.toggle('open');
+      };
+    }
+  }
 }
+

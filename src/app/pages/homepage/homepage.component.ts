@@ -12,7 +12,9 @@ import { InstructorComponent } from "../../features/components/instructor/instru
     imports: [CommonModule,RouterModule]
 })
 export class HomepageComponent {
-    
+  ngOnInit(): void {
+    window.scrollTo(0,0);
+  }
 constructor() { }
 
 @HostListener('window:scroll', [])
