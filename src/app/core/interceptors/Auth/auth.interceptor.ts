@@ -7,7 +7,7 @@ import { AuthService } from '../../../features/services/concretes/auth.service';
 import { TokenModel } from '../../../features/models/responses/auth/token-model';
 
 export const AuthInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: HttpHandlerFn) => {
-    const storageService = inject(LocalStorageService);
+  const storageService = inject(LocalStorageService);
   const authService = inject(AuthService);
   let isRefreshing = false;
   const refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
