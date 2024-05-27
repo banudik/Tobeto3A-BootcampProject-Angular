@@ -47,6 +47,7 @@ export class NavbarComponent implements OnInit{
    logOut(){
     this.authService.logOut();
     this.router.navigate(['homepage'])
+    this.showLogoutModal = false;
    }
    
    setUserLogged() :boolean{
