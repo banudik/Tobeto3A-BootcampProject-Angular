@@ -8,7 +8,7 @@ import { AuthService } from '../../features/services/concretes/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import { UserForLoginWithVerifyRequest } from '../../features/models/requests/auth/user-for-loginWithVerify-request';
-import { DarkModeService } from '../../features/services/dark-mode.service';
+import { DarkModeService } from '../../features/services/concretes/dark-mode.service';
 import { ForgotPasswordRequest } from '../../features/models/requests/auth/forgot-password-request';
 import { EmailService } from '../../features/services/concretes/email.service';
 

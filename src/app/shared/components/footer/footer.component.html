@@ -20,14 +20,14 @@
     <i class="bx bx-up-arrow-alt"></i>
 </div>
         <!-- Start EduMim Footer Area -->
-        <footer class="edu-footer-area">
+        <footer [ngClass]="{ 'dark-edu-footer-area': darkModeService.darkModeSignal() === 'dark', 'light-edu-footer-area': darkModeService.darkModeSignal() === 'light' }">
             <div class="container">
-                <div class="footer-top-area ptb-100">
+                <div class="ptb-100" [ngClass]="{ 'dark-footer-top-area': darkModeService.darkModeSignal() === 'dark', 'light-footer-top-area': darkModeService.darkModeSignal() === 'light' }">
                     <div class="row">
                         <div class="col-lg-4 col-md-6 col-sm-6 ">
-                            <div class="single-footer-widget ">
+                            <div [ngClass]="{ 'dark-single-footer-widget': darkModeService.darkModeSignal() === 'dark', 'light-single-footer-widget': darkModeService.darkModeSignal() === 'light' }">
                                 <a href="index.html" class="logo">
-                                    <img src="../../../assets/img/logo.png.png" class="footer-logo" alt="image" >
+                                    <img src="../../../assets/img/logo.png.png"  [ngClass]="{ 'dark-footer-logo': darkModeService.darkModeSignal() === 'dark', 'light-footer-logo': darkModeService.darkModeSignal() === 'light' }"  alt="image" >
                                 </a>
                                 <ul class="social-links">
                                     <li><a href="#" target="_blank"><i class='bx bxl-facebook'></i></a></li>
@@ -38,31 +38,31 @@
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="single-footer-widget pl-5 footer-link">
+                            <div class="pl-5 footer-link" [ngClass]="{ 'dark-single-footer-widget': darkModeService.darkModeSignal() === 'dark', 'light-single-footer-widget': darkModeService.darkModeSignal() === 'light' }">
                                 <h3>Site Map</h3>
                                 <ul class="links-list">
                                     <li><a routerLink="/homepage">Home</a></li>
                                     <li><a routerLink="/about-us">About Us</a></li>
-                                    <li><a href="services-details.html">Courses</a></li>
-                                    <li><a href="services-details.html">Contact Us</a></li>
+                                    <li><a routerLink="/bootcamps">Courses</a></li>
+                                    <li><a routerLink="/contact-us">Contact Us</a></li>
                                 </ul>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="single-footer-widget pl-5 footer-link">
+                            <div class="pl-5 footer-link" [ngClass]="{ 'dark-single-footer-widget': darkModeService.darkModeSignal() === 'dark', 'light-single-footer-widget': darkModeService.darkModeSignal() === 'light' }">
                                 <h3>Legal</h3>
                                 <ul class="links-list">
-                                    <li><a href="about.html">Terms of Use</a></li>
-                                    <li><a href="contact.html">Privacy Policy</a></li>
+                                    <li><a routerLink="/terms-of-use">Terms of Use</a></li>
+                                    <li><a routerLink="/privacy-policy">Privacy Policy</a></li>
                                 </ul>
                             </div>
                         </div>
                         
                     </div>
                 </div>
-                <div class="pr-line"></div>
-                <div class="footer-bottom-area">
-                    <p>© Copyright 2023 | <a href="#" target="_blank">Edumim Template</a>  | All Rights Reserved is Proudly </p>
+                <div [ngClass]="{ 'dark-pr-line': darkModeService.darkModeSignal() === 'dark', 'light-pr-line': darkModeService.darkModeSignal() === 'light' }"></div>
+                <div [ngClass]="{ 'dark-footer-bottom-area': darkModeService.darkModeSignal() === 'dark', 'light-footer-bottom-area': darkModeService.darkModeSignal() === 'light' }">
+                    <p>© CodeStorm 2024 | <a routerLink="/homepage">CodeStorm</a>  | All Rights is Reserved</p>
                 </div>
             </div>
         </footer>

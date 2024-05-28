@@ -30,8 +30,19 @@ import { VerifyEmailRequest } from "../../models/requests/auth/verify-email-requ
     jwtHelper:JwtHelperService = new JwtHelperService;
     claims:string[]=[]
   
+    private isLoggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private isAdminSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
     private readonly apiUrl:string = `${environment.API_URL}/auth`
     constructor(private httpClient:HttpClient,private storageService:LocalStorageService,private toastrService:ToastrService) {super() }
+
+    get isLoggedIn$(): Observable<boolean> {
+      return this.isLoggedInSubject.asObservable();
+    }
+  
+    get isAdmin$(): Observable<boolean> {
+      return this.isAdminSubject.asObservable();
+    }
   
     override registerEmployee(createEmployeeRequest: CreateEmployeeRequest): Observable<CreatedEmployeeResponse> {
       return this.httpClient.post<CreatedEmployeeResponse>(`${this.apiUrl}/registeremployee`, createEmployeeRequest);
@@ -78,24 +89,25 @@ import { VerifyEmailRequest } from "../../models/requests/auth/verify-email-requ
 
     //  email ve passwordu login olmak için gönderilir, activationKey kısmı null olarak post edilir(aktivasyon kodu null gönderildiği takdirde backend'de AktivasyonKeyi generate ediliyoruz ve mail olarak gönderiliyoruz) 2FA'i tetikler
     login(userLoginRequest: UserForLoginRequest): Observable<AccessTokenModel<TokenModel>> {
-      return this.httpClient.post<AccessTokenModel<TokenModel>>(`${this.apiUrl}/login`, userLoginRequest, {withCredentials: true})
-        .pipe(
-          tap(response => {
-            if (response.accessToken) {
-              this.storageService.setToken(response.accessToken.token);//
-              this.toastrService.success('Giriş yapıldı');
-              console.log('servis if',response);
-            }
-            else{
-              this.toastrService.info('Doğrulama Kodu Gönderildi');
-              console.log('servis else',response);
-            }
-          }),
-          // catchError({
-          //   return console.log('servis error',responseError);
-          // })
-        );
-    }
+    return this.httpClient.post<AccessTokenModel<TokenModel>>(`${this.apiUrl}/login`, userLoginRequest, { withCredentials: true })
+      .pipe(
+        tap(response => {
+          if (response.accessToken) {
+            this.storageService.setToken(response.accessToken.token);
+            this.isLoggedInSubject.next(true);
+            this.isAdminSubject.next(this.isAdmin());
+            this.toastrService.success('Giriş yapıldı');
+          } else {
+            this.toastrService.info('Doğrulama Kodu Gönderildi');
+          }
+        }),
+        catchError(error => {
+          console.error('Hata:', error);
+          this.toastrService.error('Giriş yapılamadı. Lütfen tekrar deneyin.');
+          return throwError(error);
+        })
+      );
+  }
 
     // pop-up ekranında ki activationKey i alıp tekrar  mevcut email ve password ile post ediliyoruz başarılı olursa response'taki tokeni storage'a kayıt ediyoruz login işlemi bu metod ile bitiyor(kullanıcının tekrar emai ve password girmesi gerekmiyor)
     loginWithVerify(UserWithActivationCode:UserForLoginWithVerifyRequest):Observable<AccessTokenModel<TokenModel>>
@@ -210,6 +222,8 @@ import { VerifyEmailRequest } from "../../models/requests/auth/verify-email-requ
       // setTimeout(function(){
       //   window.location.reload()
       // },1000)
+      this.isLoggedInSubject.next(false);
+      this.isAdminSubject.next(false);
     }
 
     logout(): void {

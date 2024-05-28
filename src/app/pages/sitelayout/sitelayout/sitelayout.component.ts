@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { SharedModule } from "../../../shared/shared.module";
 import { FooterComponent } from "../../../shared/components/footer/footer.component";
 import { RouterModule } from '@angular/router';
-import { DarkModeService } from '../../../features/services/dark-mode.service';
+import { DarkModeService } from '../../../features/services/concretes/dark-mode.service';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../../../shared/components/navbar/navbar.component';
 

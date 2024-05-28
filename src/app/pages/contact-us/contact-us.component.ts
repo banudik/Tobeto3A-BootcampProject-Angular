@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { DarkModeService } from '../../features/services/dark-mode.service';
+import { DarkModeService } from '../../features/services/concretes/dark-mode.service';
 
 @Component({
   selector: 'app-contact-us',

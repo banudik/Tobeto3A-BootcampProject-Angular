@@ -10,21 +10,21 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ProfileComponent } from '../../../pages/profile/profile.component';
-import { DarkModeService } from '../../../features/services/dark-mode.service';
+import { DarkModeService } from '../../../features/services/concretes/dark-mode.service';
 
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [MenubarModule,CommonModule,ProfileComponent],
+  imports: [MenubarModule,CommonModule,ProfileComponent,RouterModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
   changeDetection:ChangeDetectionStrategy.OnPush,
 })
 
 export class NavbarComponent implements OnInit{
-  isLoggedIn!: boolean;
-  isAdmin!: boolean; 
+  isLoggedIn: boolean = false;
+  isAdmin: boolean = false; 
   menuItems!:MenuItem[];
   userLogged!:boolean;
   showLogoutModal = false;
@@ -35,6 +35,18 @@ export class NavbarComponent implements OnInit{
 
   
    ngOnInit(): void {
+    this.authService.isLoggedIn$.subscribe(isLoggedIn => {
+      this.isLoggedIn = isLoggedIn;
+      this.cdRef.detectChanges(); // Değişiklik algılansın ve template güncellensin
+      this.router.navigate(['homepage']);
+    });
+
+    this.authService.isAdmin$.subscribe(isAdmin => {
+      this.isAdmin = isAdmin;
+      this.cdRef.detectChanges(); // Değişiklik algılansın ve template güncellensin
+      this.router.navigate(['homepage']);
+    });
+  
      this.getMenuItems();
      //console.log(this.getUserName());
      //console.log(this.getUserId())
@@ -42,14 +54,16 @@ export class NavbarComponent implements OnInit{
      this.getUserId();
      this.cdRef.detectChanges();
      this.menuClick();
+     
    }
    
 
-   logOut(){
+   logOut() {
     this.authService.logOut();
-    this.router.navigate(['homepage'])
     this.showLogoutModal = false;
-   }
+    this.cdRef.detectChanges(); // Değişikliklerin algılanması ve güncellenmesi
+    this.router.navigate(['homepage']);
+}
    
    setUserLogged() :boolean{
     return this.userLogged=this.authService.loggedIn()
@@ -66,37 +80,19 @@ export class NavbarComponent implements OnInit{
 
 
 
-   getMenuItems(){
-    const isUserLoggedIn = this.authService.loggedIn();
-    if(isUserLoggedIn){
-      this.isLoggedIn = true;
-    }
-    else{
-      this.isLoggedIn = false;
-    }
-    if(this.authService.isAdmin() || this.authService.isEmployee() || this.authService.isInstructor()){
-
-        this.isAdmin = true;
-    }
-    else{
-      this.isAdmin = false;
-    }
-   }
-   
-
-  showSearchInput: boolean = false;
-
-  toggleSearch() {
-    this.showSearchInput = !this.showSearchInput;
-    if (this.showSearchInput) {
-      setTimeout(() => {
-        const inputElement = document.getElementById('searchInput');
-        if (inputElement) {
-          inputElement.focus();
-        }
-      });
-    }
+   getMenuItems(): void {
+    this.authService.isLoggedIn$.subscribe(isLoggedIn => {
+      if (isLoggedIn) {
+        this.isLoggedIn = true;
+        this.isAdmin = this.authService.isAdmin();
+      } else {
+        this.isLoggedIn = false;
+        this.isAdmin = false;
+      }
+      this.cdRef.detectChanges(); // Değişiklik algılansın ve template güncellensin
+    });
   }
+   
 
   darkModeService: DarkModeService = inject(DarkModeService);
 
@@ -111,13 +107,14 @@ export class NavbarComponent implements OnInit{
   menuClick(): void {
     const menu: HTMLElement | null = document.querySelector('#menu-icon');
     const navbar: HTMLElement | null = document.querySelector('.navbar');
-
+  
     if (menu && navbar) {
-      menu.onclick = (): void => {
+      menu.addEventListener('click', (): void => {
         menu.classList.toggle('bx-x');
         navbar.classList.toggle('open');
-      };
+      });
     }
   }
+  
 }
 

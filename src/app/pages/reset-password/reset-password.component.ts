@@ -7,7 +7,7 @@ import { AuthService } from '../../features/services/concretes/auth.service';
 import { ResetPasswordRequest } from '../../features/models/requests/auth/reset-password-request';
 import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-import { DarkModeService } from '../../features/services/dark-mode.service';
+import { DarkModeService } from '../../features/services/concretes/dark-mode.service';
 
 
 
