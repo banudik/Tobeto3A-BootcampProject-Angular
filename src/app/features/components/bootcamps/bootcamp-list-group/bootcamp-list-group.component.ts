@@ -51,6 +51,9 @@ export class BootcampListGroupComponent implements OnInit {
   ngOnInit(): void {
     this.getInstructors();
     this.getList({ pageIndex: 0, pageSize: this.PAGE_SIZE });
+    
+      window.scrollTo(0,0);
+    
   }
 
   getInstructors() {

@@ -32,7 +32,8 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/assets/adminAssets/assets/js"
+              "src/assets/adminAssets/assets/js",
+              "src/assets/homepageAssets/js"
             ],
             "styles": [
               "src/styles.css",
@@ -40,7 +41,8 @@
               "node_modules/ngx-spinner/animations/square-jelly-box.css"
               
             ],
-            "scripts": []
+            "scripts": ["node_modules/jquery/dist/jquery.min.js"]
+
           },
           "configurations": {
             "production": {

@@ -1,0 +1,75 @@
+<body
+    [ngClass]="{ 'dark-body': darkModeService.darkModeSignal() === 'dark', 'light-body': darkModeService.darkModeSignal() === 'light' }">
+    <div
+        [ngClass]="{ 'dark-container': darkModeService.darkModeSignal() === 'dark', 'light-container': darkModeService.darkModeSignal() === 'light' }">
+        <header
+            [ngClass]="{ 'dark-header': darkModeService.darkModeSignal() === 'dark', 'light-header': darkModeService.darkModeSignal() === 'light' }">
+            <h1>Terms of Use</h1>
+            <p>Updated Date: [01.06.2024]</p>
+        </header>
+        <main
+            [ngClass]="{ 'dark-main': darkModeService.darkModeSignal() === 'dark', 'light-main': darkModeService.darkModeSignal() === 'light' }">
+            <section>
+                <h2>1. Introduction</h2>
+                <p>Welcome to CodeStorm. Please read these Terms of Use carefully before using our website, <a
+                        href="http://www.codestorm.com">www.codestorm.com</a> (the "Site"). By accessing or using the
+                    Site, you agree to be bound by these Terms of Use and our Privacy Policy. If you do not agree to
+                    all of these terms, please do not access or use the Site.</p>
+            </section>
+            <section>
+                <h2>2. Use License</h2>
+                <p>Permission is granted to temporarily download one copy of the materials (information or software) on
+                    CodeStorm's website for personal, non-commercial transitory viewing only. This is the grant of a
+                    license, not a transfer of title, and under this license you may not:</p>
+                <ul>
+                    <li>Modify or copy the materials;</li>
+                    <li>Use the materials for any commercial purpose, or for any public display (commercial or
+                        non-commercial);</li>
+                    <li>Attempt to decompile or reverse engineer any software contained on CodeStorm's website;</li>
+                    <li>Remove any copyright or other proprietary notations from the materials; or</li>
+                    <li>Transfer the materials to another person or "mirror" the materials on any other server.</li>
+                </ul>
+                <p>This license shall automatically terminate if you violate any of these restrictions and may be
+                    terminated by CodeStorm at any time. Upon terminating your viewing of these materials or upon the
+                    termination of this license, you must destroy any downloaded materials in your possession whether
+                    in electronic or printed format.</p>
+            </section>
+            <section>
+                <h2>3. Disclaimer</h2>
+                <p>The materials on CodeStorm's website are provided on an 'as is' basis. CodeStorm makes no warranties,
+                    expressed or implied, and hereby disclaims and negates all other warranties including, without
+                    limitation, implied warranties or conditions of merchantability, fitness for a particular purpose,
+                    or non-infringement of intellectual property or other violation of rights.</p>
+            </section>
+            <section>
+                <h2>4. Limitations</h2>
+                <p>In no event shall CodeStorm or its suppliers be liable for any damages (including, without limitation,
+                    damages for loss of data or profit, or due to business interruption) arising out of the use or
+                    inability to use the materials on CodeStorm's website, even if CodeStorm or a CodeStorm authorized
+                    representative has been notified orally or in writing of the possibility of such damage. Because
+                    some jurisdictions do not allow limitations on implied warranties, or limitations of liability for
+                    consequential or incidental damages, these limitations may not apply to you.</p>
+            </section>
+            <section>
+                <h2>5. Revisions and Errata</h2>
+                <p>The materials appearing on CodeStorm's website could include technical, typographical, or
+                    photographic errors. CodeStorm does not warrant that any of the materials on its website are
+                    accurate, complete, or current. CodeStorm may make changes to the materials contained on its website
+                    at any time without notice. CodeStorm does not, however, make any commitment to update the
+                    materials.</p>
+            </section>
+            <section>
+                <h2>6. Governing Law</h2>
+                <p>These terms and conditions are governed by and construed in accordance with the laws of Turkey and you
+                    irrevocably submit to the exclusive jurisdiction of the courts in that State or location.</p>
+            </section>
+            <section>
+                <h2>7. Contact Us</h2>
+                <p>If you have any questions about these Terms of Use, please <a routerLink="/contact-us">contact us</a>.</p>
+                <p><strong>Email: </strong> <a href="mailto:codestormpair6@gmail.com
+                    ">codestormpair6&#64;gmail.com
+                </a></p>
+                <p><strong>Address:</strong> CodeStorm, [TURKEY/ISTANBUL, 34000]</p>
+            </section>
+        </main>
+    </div>

@@ -7,6 +7,9 @@ export class LocalStorageService {
 
   constructor() { }
 
+  private tokenKey = 'token';
+  private refreshTokenKey = 'refreshToken';
+
   set(key:string,data:any){
     localStorage.setItem(key,data);
   }
@@ -21,7 +24,7 @@ export class LocalStorageService {
   }
 
 
-  setToken(token:string){
+  setToken(token:string)  {
     localStorage.setItem("token",token);
   }
 
@@ -29,8 +32,21 @@ export class LocalStorageService {
     localStorage.removeItem("token")
   }
 
-  getToken(){
+  getToken(): string | null {
    return localStorage.getItem("token")
+  }
+
+  getRefreshToken(): string | null {
+    return localStorage.getItem(this.refreshTokenKey);
+  }
+
+  setRefreshToken(refreshToken: string) {
+    localStorage.setItem("refreshToken", refreshToken);
+  }
+
+  clearTokens() {
+    localStorage.removeItem(this.tokenKey);
+    localStorage.removeItem(this.refreshTokenKey);
   }
 
 }

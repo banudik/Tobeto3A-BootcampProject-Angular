@@ -5,7 +5,7 @@
     <div *ngFor="let faq of faqList" class="bg-blue-300 dark:bg-indigo-400 rounded-lg shadow-md p-6 mb-6" (click)="toggleAnswer(faq)">
       <h3 class="text-xl font-semibold mb-2 text-black dark:text-black">{{ faq.question }}</h3>
 
-      <p *ngIf="faq.isOpen" class="text-white dark:text-white">{{ faq.answer }}</p>
+      <p *ngIf="faq.isOpen" class="text-black dark:text-black">{{ faq.answer }}</p>
     </div>
     <div class="text-3xl font-bold mb-8 text-black dark:text-white text-center"><br><h3 >Still having questions?</h3><br>
       <button [ngClass]="{ 'dark-button': darkModeService.darkModeSignal() === 'dark', 'light-button': darkModeService.darkModeSignal() === 'light' }">

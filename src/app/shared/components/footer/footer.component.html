@@ -1,32 +1,82 @@
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Links of CSS files -->
+    <link rel="stylesheet" href="../../../../assets/homepageAssets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../../assets/homepageAssets/css/boxicons.min.css">
+    <link rel="stylesheet" href="../../../../assets/homepageAssets/css/odometer.min.css">
+    <link rel="stylesheet" href="../../../../assets/homepageAssets/css/nice-select.min.css">
+    <link rel="stylesheet" href="../../../../assets/homepageAssets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../../../../assets/homepageAssets/css/meanmenu.min.css">
+    <link rel="stylesheet" href="../../../../assets/homepageAssets/css/magnific-popup.min.css">
+    <link rel="stylesheet" href="../../../../assets/homepageAssets/css/style.css">
+    <link rel="stylesheet" href="../../../../assets/homepageAssets/css/responsive.css">
 
 
+</head>
+<div class="go-top active">
+    <i class="bx bx-up-arrow-alt"></i>
+</div>
+        <!-- Start EduMim Footer Area -->
+        <footer [ngClass]="{ 'dark-edu-footer-area': darkModeService.darkModeSignal() === 'dark', 'light-edu-footer-area': darkModeService.darkModeSignal() === 'light' }">
+            <div class="container">
+                <div class="ptb-100" [ngClass]="{ 'dark-footer-top-area': darkModeService.darkModeSignal() === 'dark', 'light-footer-top-area': darkModeService.darkModeSignal() === 'light' }">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-sm-6 ">
+                            <div [ngClass]="{ 'dark-single-footer-widget': darkModeService.darkModeSignal() === 'dark', 'light-single-footer-widget': darkModeService.darkModeSignal() === 'light' }">
+                                <a href="index.html" class="logo">
+                                    <img src="../../../assets/img/logo.png.png"  [ngClass]="{ 'dark-footer-logo': darkModeService.darkModeSignal() === 'dark', 'light-footer-logo': darkModeService.darkModeSignal() === 'light' }"  alt="image" >
+                                </a>
+                                <ul class="social-links">
+                                    <li><a href="#" target="_blank"><i class='bx bxl-facebook'></i></a></li>
+                                    <li><a href="#" target="_blank"><i class='bx bxl-twitter'></i></a></li>
+                                    <li><a href="#" target="_blank"><i class='bx bxl-linkedin'></i></a></li>
+                                    <li><a href="#" target="_blank"><i class='bx bxl-instagram'></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="pl-5 footer-link" [ngClass]="{ 'dark-single-footer-widget': darkModeService.darkModeSignal() === 'dark', 'light-single-footer-widget': darkModeService.darkModeSignal() === 'light' }">
+                                <h3>Site Map</h3>
+                                <ul class="links-list">
+                                    <li><a routerLink="/homepage">Home</a></li>
+                                    <li><a routerLink="/about-us">About Us</a></li>
+                                    <li><a routerLink="/bootcamps">Courses</a></li>
+                                    <li><a routerLink="/contact-us">Contact Us</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="pl-5 footer-link" [ngClass]="{ 'dark-single-footer-widget': darkModeService.darkModeSignal() === 'dark', 'light-single-footer-widget': darkModeService.darkModeSignal() === 'light' }">
+                                <h3>Legal</h3>
+                                <ul class="links-list">
+                                    <li><a routerLink="/terms-of-use">Terms of Use</a></li>
+                                    <li><a routerLink="/privacy-policy">Privacy Policy</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div [ngClass]="{ 'dark-pr-line': darkModeService.darkModeSignal() === 'dark', 'light-pr-line': darkModeService.darkModeSignal() === 'light' }"></div>
+                <div [ngClass]="{ 'dark-footer-bottom-area': darkModeService.darkModeSignal() === 'dark', 'light-footer-bottom-area': darkModeService.darkModeSignal() === 'light' }">
+                    <p>© CodeStorm 2024 | <a routerLink="/homepage">CodeStorm</a>  | All Rights is Reserved</p>
+                </div>
+            </div>
+        </footer>
 
-<footer class="bg-white dark:bg-neutral-900 shadow dark:shadow-2x1 py-1">
-    <div class="w-full max-w-screen-xl mx-auto p-2 md:py-4">
-        <div class="sm:flex sm:items-center sm:justify-between">
-            <a href="/homepage" class="flex items-center mb-4 sm:mb-0 h-15 w-15 space-x-3 rtl:space-x-reverse">
-                <img src="assets/img/logo.png.png "class="h-6" alt="CodeStorm Logo" />
-                
-            </a>
-            <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-black sm:mb-0 dark:text-white">
-                <li>
-                    <a routerLink="/about-us" class="me-4 md:me-6 block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About Us</a>
-                </li>
-                <li>
-                    <a routerLink="/privacy-policy" class="me-4 md:me-6 block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Privacy Policy</a>
-                </li>
-                <li>
-                    <a routerLink="/faq" class="me-4 md:me-6 block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">FAQs</a>
-                </li>
-                <li>
-                    <a routerLink='/contact-us' class="me-4 md:me-6 block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact Us</a>
-                </li>
-                
-            </ul>
-        </div>
-        <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
-        <span class="block text-sm text-black sm:text-center dark:text-white">© 2024 
-            <a routerLink="/homepage" class="hover:underline">CodeStorm™</a>. All Rights Reserved.</span>
-    </div>
-</footer>
-
+                <script src="../../../../assets/homepageAssets/js/jquery.min.js"></script>
+                <script src="../../../../assets/homepageAssets/js/bootstrap.min.js"></script>
+                <script src="../../../../assets/homepageAssets/js/magnific-popup.min.js"></script>
+                <script src="../../../../assets/homepageAssets/js/nice-select.min.js"></script>
+                <script src="../../../../assets/homepageAssets/js/jquery.mixitup.min.js"></script>
+                <script src="../../../../assets/homepageAssets/js/appear.min.js"></script>
+                <script src="../../../../assets/homepageAssets/js/sticky-sidebar.min.js"></script>
+                <script src="../../../../assets/homepageAssets/js/odometer.min.js"></script>
+                <script src="../../../../assets/homepageAssets/js/owl.carousel.min.js"></script>
+                <script src="../../../../assets/homepageAssets/js/meanmenu.min.js"></script>
+                <script src="../../../../assets/homepageAssets/js/wow.min.js"></script>
+                <script src="../../../../assets/homepageAssets/js/main.js"></script>
+        

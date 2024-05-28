@@ -49,7 +49,7 @@
 
 .dark-container .dark-contactInfo {
     width: 50%;
-    display: flex;
+    display:grid;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -59,6 +59,7 @@
     position: relative;
     padding: 20px 0;
     display: flex;
+    
     
 }
 
@@ -77,6 +78,7 @@
     position: absolute;
     inset: 0;
     background: repeating-conic-gradient(from 117.5deg, #8585ff 0%, #8585ff 10%, transparent 10%, transparent 50%);
+    
 }
 
 .dark-container .dark-contactInfo .dark-box .dark-icon::after {
@@ -316,8 +318,10 @@
 
 .light-container .light-contactInfo {
     width: 50%;
-    display: flex;
+    display: grid;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .light-container .light-contactInfo .light-box {

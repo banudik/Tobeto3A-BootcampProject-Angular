@@ -8,11 +8,9 @@ import { AuthService } from '../../features/services/concretes/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import { UserForLoginWithVerifyRequest } from '../../features/models/requests/auth/user-for-loginWithVerify-request';
-import { DarkModeService } from '../../features/services/dark-mode.service';
+import { DarkModeService } from '../../features/services/concretes/dark-mode.service';
 import { ForgotPasswordRequest } from '../../features/models/requests/auth/forgot-password-request';
 import { ValidationHelper } from '../../core/helpers/validationtoastrmessagehelper';
-
-
 
 
 @Component({
@@ -33,6 +31,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.createLoginForm();
+    window.scrollTo(0,0);
   }
 
   createLoginForm(){
@@ -48,26 +47,9 @@ export class LoginComponent implements OnInit {
       email:["",[Validators.required, Validators.email]]})
   }
 
-
-  // Kullanıcının girdiği bilgileri apiye post isteği atar (email,password olarak sadece 2 parametre gönderir) token dönmez veya dönen tokeni kaydetmez
-  // login() {
-  //   if (this.loginForm.valid) {
-  //     let loginModel: UserForLoginRequest = Object.assign({}, this.loginForm.value);
-
-  //     this.authService.login(loginModel).subscribe({
-  //       error:(error)=>{
-  //         this.toastrService.error('Giriş Başarısız','Giriş İşlemi');
-  //       },
-  //       next:()=>{
-  //         if(!localStorage.getItem('token')){
-  //           this.toastrService.success('Doğrulama kodu mail adresinize gönderildi','Doğrulama Kodu');
-  //           this.showAuthenticatorCodeInput = true;
-  //         }
-  //       }
-  //     })
-  //   }
-  // }
-
+  // Kullanıcının girdiği bilgileri apiye post isteği atar (email,password olarak sadece 2 parametre gönderir)
+  // Kullanıcın EmailVerify yaptığı durumlarda token dönmez 2FA pop-up açılır ve kullanıcıya mail gönderilir
+  // EmailVerify yapılmadı ise response olarak accesstoken döner
   login() {
     if (this.loginForm.valid) {
       let loginModel: UserForLoginRequest = Object.assign({}, this.loginForm.value);
@@ -76,26 +58,26 @@ export class LoginComponent implements OnInit {
       this.authService.login(loginModel).subscribe({
         next: (response) => {
           if (response.accessToken) {
-            localStorage.setItem('token', response.accessToken.token);
-            this.toastrService.success('Giriş Başarılı', 'Giriş İşlemi');
+            //localStorage.setItem('token', response.accessToken.token);
+            this.toastrService.success('Giriş Başarılı login', 'Giriş İşlemi');
             this.showAuthenticatorCodeInput = false;
-            window.location.reload();
-            this.change.detectChanges();
-            
+
             setTimeout(()=>{
               this.router.navigate(['homepage']);
             },2000)
-            
+
+            console.log('component if',response);
+            //this.authService.fetchRefreshTokenAfterLogin();
           } 
           else {
             this.toastrService.success('Doğrulama kodu mail adresinize gönderildi', 'Doğrulama Kodu');
             this.showAuthenticatorCodeInput = true;
+            console.log('component else',response);
           }
         },
         error: (error) => {
-          this.toastrService.error('Giriş Başarısız', 'Giriş İşlemi');
-        },
-        complete: () => {}
+          console.log('component error',error);
+        }
       });
     }
     else{
@@ -105,15 +87,18 @@ export class LoginComponent implements OnInit {
 
   // girilen doğrulama kodunu apiye gönderir (email,password,activationKey olarak 3 parametre gönderir) başarılı olursa tokeni kaydeder
   verifyCode() {
-      let loginModel: UserForLoginWithVerifyRequest = Object.assign({}, this.loginForm.value);
-      this.authService.loginWithVerify(loginModel).subscribe({
+      let loginModel2: UserForLoginWithVerifyRequest = Object.assign({}, this.loginForm.value);
+      this.authService.loginWithVerify(loginModel2).subscribe({
         next:()=>{
-          this.toastrService.success('Giriş Başarılı', 'Giriş işlemi');
+          this.toastrService.success('Giriş Başarılı verifyCode', 'Giriş işlemi');
           this.onCancel();
+          return console.log("LoginComponent Verify Success");
         },
-        error:() => {
-          this.toastrService.error('Giriş Başarısız');
-          //console.log(error.message);
+        error:(error) => {
+          console.log("LoginComponent Verify error");
+          this.onCancel();
+
+          return console.log(error);
         },
         complete:() => {
           this.onCancel();
@@ -123,11 +108,18 @@ export class LoginComponent implements OnInit {
 
   sendForgotPasswordEmail() {
     if (this.forgotPassword.valid) {
-      let ForgotPasswordModel: ForgotPasswordRequest = Object.assign({}, this.forgotPassword.value);
-      this.authService.sendForgotPasswordEmail(ForgotPasswordModel);
+      const forgotPasswordModel: ForgotPasswordRequest = Object.assign({}, this.forgotPassword.value);
+      this.authService.sendForgotPasswordEmail(forgotPasswordModel).subscribe({
+        next: (response) => {
+          console.log('Mail gönderildi');
         }
-      }
-
+      });
+    } else {
+      // Eğer form geçerli değilse toastr ile uyarı göster
+      this.toastrService.error('Lütfen geçerli bir e-posta adresi girin.', 'Hata');
+    }
+  }
+  
   // Doğrulama kodu girilen pop-up'ı kapatır
   onCancel() {
     this.showAuthenticatorCodeInput = false;
