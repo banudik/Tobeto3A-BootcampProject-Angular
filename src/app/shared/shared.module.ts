@@ -12,9 +12,9 @@ import { BootcampListGroupComponent } from "../features/components/bootcamps/boo
 
 
 @NgModule({
-    declarations:[FilterBootcampPipe,FilterInstructorPipe,AboutUsComponent],
+    declarations:[FilterBootcampPipe,FilterInstructorPipe],
     exports:[NavbarComponent,FilterBootcampPipe,FilterInstructorPipe],
-    imports:[CommonModule,NavbarComponent,FooterComponent,BootcampListGroupComponent],
+    imports:[CommonModule,NavbarComponent,FooterComponent,BootcampListGroupComponent,AboutUsComponent],
 
 })
 export class SharedModule{}

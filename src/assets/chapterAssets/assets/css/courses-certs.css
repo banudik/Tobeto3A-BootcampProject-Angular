@@ -1,0 +1,72 @@
+:root {
+    --tangerine: #f2911e;
+    --greyish-teal: #57bdaf;
+    --brownish-grey: #646464;
+    --brown-grey: #b1b1b1;
+    --golden-yellow: #f2bf26;
+    --white: #ffffff;
+    --light-pink: #f3f1f2;
+    --very-light-pink: #e3e3e3;
+    --bright-orange: #ff6c00;
+    --black: #000000;
+    --duck-egg-blue: #d2ebe8;
+    --dark-blue-figma: #0a142f;
+}
+
+
+* {
+    font-family: 'Poppins',sans-serif;
+}
+
+.course-heading {
+    font-size: 22px;
+    color: var(--white);
+    line-height: 33px;
+}
+
+.change-color.active {
+    background-color: var(--dark-blue-figma); /*var(--greyish-teal);*/
+    transition: .3s all ease;
+}
+
+.tabs a {
+    color: var(--brown-grey);
+    font-size: 16px;
+    line-height: 25px;
+    padding-bottom: 3px;
+    margin-bottom: 30px;
+    margin-right: 20px;
+}
+
+.tabs a:hover {
+    color: var(--bright-orange) !important;
+}
+
+.tabs a.active {
+    color: var(--bright-orange);
+    border-bottom: 2px solid var(--bright-orange);
+}
+
+.grid-container {
+    opacity: 0;
+    visibility: hidden;
+    transition: .3s all ease;
+    height: 0;
+}
+
+
+    .grid-container.active {
+        opacity: 1;
+        visibility: visible;
+        height: auto;
+        transition: .3s all ease;
+    }
+
+.course:hover {
+    border: 1px solid var(--bright-orange);
+    transition: .3s all ease;
+}
+
+.course-bottom p {
+    font-weight: 600;
+}

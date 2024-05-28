@@ -1,7 +1,4 @@
 <form *ngIf="!isLoading" [formGroup]="BlacklistForm" (ngSubmit)="onFormSubmit()">
-    <div *ngIf="formMessage">
-      <small>{{ formMessage }}</small>
-    </div>
     <div class="card-style mb-30">
       <h6 class="mb-25">Are you sure about blacklisting this user?</h6>
       <div class="input-style-1">
@@ -36,9 +33,8 @@
     </div>
     <br>
     <div>
-      <button type="submit" class="text-danger">Blacklist applicant</button>
-      <br>
-      <a class="text-primary" routerLink="/adminpanel/applicantindex">Back to List</a>
+      <button type="submit" class="main-btn danger-btn rounded-full btn-hover">Blacklist applicant</button> |
+      <a class="main-btn dark-btn rounded-full btn-hover" routerLink="/adminpanel/applicantindex">Back to List</a>
     </div>
   </form>
   

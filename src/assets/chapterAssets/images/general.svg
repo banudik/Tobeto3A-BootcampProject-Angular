@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="13" height="3" viewBox="0 0 13 3">
+    <defs>
+        <style>
+            .prefix__cls-1{fill:#dd4e1d}
+        </style>
+    </defs>
+    <g id="prefix__Group_1789" data-name="Group 1789" transform="translate(-175 -378)">
+        <circle id="prefix__Ellipse_5" cx="1.5" cy="1.5" r="1.5" class="prefix__cls-1" data-name="Ellipse 5" transform="translate(185 378)"/>
+        <circle id="prefix__Ellipse_6" cx="1.5" cy="1.5" r="1.5" class="prefix__cls-1" data-name="Ellipse 6" transform="translate(180 378)"/>
+        <circle id="prefix__Ellipse_7" cx="1.5" cy="1.5" r="1.5" class="prefix__cls-1" data-name="Ellipse 7" transform="translate(175 378)"/>
+    </g>
+</svg>

@@ -10,7 +10,10 @@ import { ContactUsComponent } from "../../contact-us/contact-us.component";
 import { ResetPasswordComponent } from "../../reset-password/reset-password.component";
 import { AboutUsComponent } from "../../about-us/about-us.component";
 import { PrivacyPolicyComponent } from "../../privacy-policy/privacy-policy.component";
+import { ChapterComponent } from "../../chapter/chapter.component";
+import { TermsOfUseComponent } from "../../terms-of-use/terms-of-use.component";
 import { WelcomeComponent } from "../../welcome/welcome.component";
+
 
 export const siteRoutes: Routes = [
     {path:'homepage',component:HomepageComponent},
@@ -25,5 +28,7 @@ export const siteRoutes: Routes = [
     {path: 'reset-password', component: ResetPasswordComponent },
     {path:'about-us',component:AboutUsComponent},
     {path:'privacy-policy',component:PrivacyPolicyComponent},
+    {path:'chapter/:chapterId',component:ChapterComponent},
+    {path:'terms-of-use',component:TermsOfUseComponent},
     {path:'welcome',component:WelcomeComponent},
 ];

@@ -28,8 +28,6 @@ export class BootcampstatedetailsComponent implements OnInit{
     this.bootcampStateService.getById(id).subscribe(
       (response: GetByIdBootcampStateResponse) => {
         this.currentBootcampState = response;
-        console.log(this.currentBootcampState.name + " " + this.currentBootcampState.id);
-        
       },
       (error: any) => {
         console.error('Error fetching bootcampState:', error);

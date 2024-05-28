@@ -21,6 +21,8 @@ export class ValidationHelper {
                             return `Minimum length is ${controlErrors[errorKey].requiredLength}`;
                         case 'maxlength':
                             return `Maximum length is ${controlErrors[errorKey].requiredLength}`;
+                        case 'pattern':
+                            return `Needs special symbols ${controlErrors[errorKey].pattern}`;
                         // Diğer hata türlerini buraya ekleyin
                         default:
                             return `Unknown error: ${errorKey}`;

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="84" height="84" viewBox="0 0 84 84">
+    <defs>
+        <style>
+            .prefix__cls-2{fill:#01a8ba}
+        </style>
+    </defs>
+    <g id="prefix__Group_1868" data-name="Group 1868" transform="translate(-185 -1044)">
+        <g id="prefix__Rectangle_231" data-name="Rectangle 231" transform="translate(185 1044)" style="stroke:#01a8ba;stroke-width:2px;fill:none">
+            <rect width="84" height="84" rx="15" style="stroke:none"/>
+            <rect width="82" height="82" x="1" y="1" rx="14" style="fill:none"/>
+        </g>
+        <g id="prefix__Group_1937" data-name="Group 1937">
+            <path id="prefix__Path_553" d="M33.9 9.7a1 1 0 011.6.8v15a1 1 0 01-1.6.8l-10.5-7.5a1.041 1.041 0 010-1.6zm-.4 2.7L25.7 18l7.8 5.6z" class="prefix__cls-2" data-name="Path 553" transform="translate(209.5 1068.5)"/>
+            <path id="prefix__Path_554" d="M3.3 6.682C4.118 6.427 3.085 6.5 21 6.5a4 4 0 014 4v15a4 4 0 01-4 4H4.5a4 4 0 01-4-4C.5 9.315.422 10.134.682 9.3A4.007 4.007 0 013.3 6.682zm.6 1.909A2.007 2.007 0 002.591 9.9c-.131.42-.091-.72-.091 15.6a2 2 0 002 2H21a2 2 0 002-2v-15a2 2 0 00-2-2c-17.964 0-16.683-.039-17.1.091z" class="prefix__cls-2" data-name="Path 554" transform="translate(209.5 1068.5)"/>
+        </g>
+    </g>
+</svg>

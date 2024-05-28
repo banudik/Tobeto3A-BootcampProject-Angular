@@ -1,0 +1,23 @@
+<form *ngIf="currentAnnouncement">
+    <div class="card-style mb-30">
+        <h6 class="mb-25">Are you sure about deleting this announcement</h6>
+        <div class="input-style-1">
+            <label for="headerInput">Announcement Header</label>
+            <input disabled id="headerInput" type="text" value="{{currentAnnouncement.header}}" />
+        </div>
+        <div class="input-style-1">
+            <label for="descriptionInput">Announcement Description</label>
+            <textarea disabled id="descriptionInput" type="text" value="{{currentAnnouncement.description}}" ></textarea>
+        </div>
+
+        <div class="input-style-1">
+            <label for="createdDate">Announcement Created Date</label>
+            <input disabled id="createdDate" type="text" [value]="currentAnnouncement.createdDate | date : 'dd/MM/yyyy'" />
+        </div>
+    </div>
+    <br>
+    <div>
+        <a class="main-btn danger-btn rounded-full btn-hover" (click)="deleteAnnouncement(currentAnnouncement.id)" >Delete</a>  |
+        <a class="main-btn dark-btn rounded-full btn-hover" routerLink="/adminpanel/announcementindex">Back to List</a>
+    </div>
+</form>

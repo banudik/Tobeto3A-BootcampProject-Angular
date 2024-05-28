@@ -305,81 +305,96 @@
     <span></span>
     <span></span>
 
-    <div [ngClass]="{ 'dark-signup': darkModeService.darkModeSignal() === 'dark', 'light-signup': darkModeService.darkModeSignal() === 'light' }">
-      <div [ngClass]="{ 'dark-content': darkModeService.darkModeSignal() === 'dark', 'light-content': darkModeService.darkModeSignal() === 'light' }">
-        <h2>Sign Up</h2>
-        <form [ngClass]="{ 'dark-form': darkModeService.darkModeSignal() === 'dark', 'light-form': darkModeService.darkModeSignal() === 'light' }" [formGroup]="registerForm" (ngSubmit)="checkFormValidity()">
-          <div [ngClass]="{ 'dark-inputBx': darkModeService.darkModeSignal() === 'dark', 'light-inputBx': darkModeService.darkModeSignal() === 'light' }">
-            <input type="text" id="userName" formControlName="userName" required>
+   <div [ngSwitch]="currentStep" [ngClass]="{ 'dark-signup': darkModeService.darkModeSignal() === 'dark', 'light-signup': darkModeService.darkModeSignal() === 'light' }">
+    <div [ngClass]="{ 'dark-content': darkModeService.darkModeSignal() === 'dark', 'light-content': darkModeService.darkModeSignal() === 'light' }">
+      <h2>Sign Up</h2>
+    <form *ngSwitchCase="1" [formGroup]="step1Form" (ngSubmit)="nextStep()" [ngClass]="{ 'dark-form': darkModeService.darkModeSignal() === 'dark', 'light-form': darkModeService.darkModeSignal() === 'light' }">
+      <div [ngClass]="{ 'dark-inputBx': darkModeService.darkModeSignal() === 'dark', 'light-inputBx': darkModeService.darkModeSignal() === 'light' }">
+        <input type="text" id="userName" formControlName="userName" required>
             <i>Username</i>
-            <div class="text-danger" *ngIf="registerForm.controls['userName'].invalid && ( registerForm.controls['userName'].touched || registerForm.controls['userName'].dirty)">
-              <small *ngIf="registerForm.controls['userName'].errors?.['required']" class="text-red-500">Username cannot be left blank.</small>
-           </div>
-          </div>
-          <div [ngClass]="{ 'dark-inputBx': darkModeService.darkModeSignal() === 'dark', 'light-inputBx': darkModeService.darkModeSignal() === 'light' }">
-            <input type="text" id="firstName" formControlName="firstName" required>
-            <i>First Name</i>
-            <div class="text-danger" *ngIf="registerForm.controls['firstName'].invalid && ( registerForm.controls['firstName'].touched || registerForm.controls['firstName'].dirty)">
-              <small *ngIf="registerForm.controls['firstName'].errors?.['required']" class="text-red-500">FirstName cannot be left blank.</small>
-           </div>
-          </div>
-          <div [ngClass]="{ 'dark-inputBx': darkModeService.darkModeSignal() === 'dark', 'light-inputBx': darkModeService.darkModeSignal() === 'light' }">
-            <input type="text" id="lastName" formControlName="lastName" required>
-            <i>Last Name</i>
-            <div class="text-danger" *ngIf="registerForm.controls['lastName'].invalid && ( registerForm.controls['lastName'].touched || registerForm.controls['lastName'].dirty)">
-              <small *ngIf="registerForm.controls['lastName'].errors?.['required']" class="text-red-500">LastName cannot be left blank.</small>
-           </div>
-          </div>
-          <div [ngClass]="{ 'dark-inputBx': darkModeService.darkModeSignal() === 'dark', 'light-inputBx': darkModeService.darkModeSignal() === 'light' }">
-            <input type="text" id="about" formControlName="about" required>
-            <i>About</i>
-            <div class="text-danger" *ngIf="registerForm.controls['about'].invalid && ( registerForm.controls['about'].touched || registerForm.controls['about'].dirty)">
-              <small *ngIf="registerForm.controls['about'].errors?.['required']" class="text-red-500">About cannot be left blank.</small>
-           </div>
-          </div>
-          <div [ngClass]="{ 'dark-inputBx': darkModeService.darkModeSignal() === 'dark', 'light-inputBx': darkModeService.darkModeSignal() === 'light' }">
-            <input type="text" id="nationalIdentity" formControlName="nationalIdentity" required>
-            <i>National Identity</i>
-            <div class="text-danger" *ngIf="registerForm.controls['nationalIdentity'].invalid && ( registerForm.controls['nationalIdentity'].touched || registerForm.controls['nationalIdentity'].dirty)">
-              <small *ngIf="registerForm.controls['nationalIdentity'].errors?.['required']" class="text-red-500">National Identity cannot be left blank.</small>
-           </div>
-          </div>
-          <div [ngClass]="{ 'dark-inputBx': darkModeService.darkModeSignal() === 'dark', 'light-inputBx': darkModeService.darkModeSignal() === 'light' }">
-            <input type="date" id="dateOfBirth" formControlName="dateOfBirth" required>
-            <i>Date of Birth</i>
-            <div *ngIf="registerForm.get('dateOfBirth')?.invalid && (registerForm.get('dateOfBirth')?.touched || registerForm.get('dateOfBirth')?.dirty)" class="text-red-500">
-              <small>The date cannot be left blank.</small>
-            </div>
-          </div>
-          <div [ngClass]="{ 'dark-inputBx': darkModeService.darkModeSignal() === 'dark', 'light-inputBx': darkModeService.darkModeSignal() === 'light' }">
-            <input type="email" id="email" formControlName="email" required>
-            <i>Email</i>
-            <div class="text-danger" *ngIf="registerForm.controls['email'].invalid && ( registerForm.controls['email'].touched || registerForm.controls['email'].dirty)">
-              <small *ngIf="registerForm.controls['email'].errors?.['required']" class="text-red-500">Email cannot be left blank.</small>
-           </div>
-          </div>
-          <div [ngClass]="{ 'dark-inputBx': darkModeService.darkModeSignal() === 'dark', 'light-inputBx': darkModeService.darkModeSignal() === 'light' }">
-            <input type="password" id="password" [(ngModel)]="password" (input)="validatePassword()" formControlName="password" required>
-            <i>Password</i>
-            <div *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.touched || registerForm.get('password')?.dirty)">
-              <small *ngIf="registerForm.get('password')?.hasError('required')" class="text-red-500">Password cannot be left blank.</small>
-            </div>
-            <div *ngFor="let validation of validations" class="error-message mt-4" [ngClass]="{'valid': validation.condition ,'dark-valid': darkModeService.darkModeSignal() === 'dark', 'light-valid': darkModeService.darkModeSignal() === 'light'}">
-              <p *ngIf="validation.condition" class="text-green-500">✓</p>
-              <p *ngIf="!validation.condition" class="text-red-500">✗</p>
-              {{ validation.message }}
-            </div>
-          </div>
-          <div [ngClass]="{ 'dark-links': darkModeService.darkModeSignal() === 'dark', 'light-links': darkModeService.darkModeSignal() === 'light' }">
-            <a>Already have an account?</a>
-            <a routerLink="/login">Login</a>
-          </div>
-          <div [ngClass]="{ 'dark-inputBx': darkModeService.darkModeSignal() === 'dark', 'light-inputBx': darkModeService.darkModeSignal() === 'light' }">
-            <input type="submit" value="Sign Up">
-          </div>
-        </form>
+        <div *ngIf="step1Form.get('userName')?.invalid && step1Form.get('userName')?.touched">
+          <small class="text-red-500">Username is required.</small>
+        </div>
       </div>
-    </div>
-  </section>
+      <div [ngClass]="{ 'dark-inputBx': darkModeService.darkModeSignal() === 'dark', 'light-inputBx': darkModeService.darkModeSignal() === 'light' }">
+        <input type="text" id="firstName" formControlName="firstName" required>
+            <i>First Name</i>
+        <div *ngIf="step1Form.get('firstName')?.invalid && step1Form.get('firstName')?.touched">
+          <small class="text-red-500">First Name is required.</small>
+        </div>
+      </div>
+      <div [ngClass]="{ 'dark-inputBx': darkModeService.darkModeSignal() === 'dark', 'light-inputBx': darkModeService.darkModeSignal() === 'light' }">
+        <input type="text" id="lastName" formControlName="lastName" required>
+            <i>Last Name</i>
+        <div *ngIf="step1Form.get('lastName')?.invalid && step1Form.get('lastName')?.touched">
+          <small class="text-red-500">Last Name is required.</small>
+        </div>
+      </div>
+      <div [ngClass]="{ 'dark-links': darkModeService.darkModeSignal() === 'dark', 'light-links': darkModeService.darkModeSignal() === 'light' }">
+        <a>Already have an account?</a>
+        <a routerLink="/login">Login</a>
+      </div>
+      <button [ngClass]="{ 'dark-button': darkModeService.darkModeSignal() === 'dark', 'light-button': darkModeService.darkModeSignal() === 'light' }" type="submit">Next</button>
+    </form>
+  
+    <form *ngSwitchCase="2" [formGroup]="step2Form" (ngSubmit)="nextStep()" [ngClass]="{ 'dark-form': darkModeService.darkModeSignal() === 'dark', 'light-form': darkModeService.darkModeSignal() === 'light' }">
+      <div [ngClass]="{ 'dark-inputBx': darkModeService.darkModeSignal() === 'dark', 'light-inputBx': darkModeService.darkModeSignal() === 'light' }">
+        <input type="text" id="about" formControlName="about" required>
+            <i>About</i>
+        <div *ngIf="step2Form.get('about')?.invalid && step2Form.get('about')?.touched">
+          <small class="text-red-500">About is required.</small>
+        </div>
+      </div>
+      <div [ngClass]="{ 'dark-inputBx': darkModeService.darkModeSignal() === 'dark', 'light-inputBx': darkModeService.darkModeSignal() === 'light' }">
+        <input type="text" id="nationalIdentity" formControlName="nationalIdentity" required>
+            <i>National Identity</i>
+        <div *ngIf="step2Form.get('nationalIdentity')?.invalid && step2Form.get('nationalIdentity')?.touched">
+          <small class="text-red-500">National Identity is required.</small>
+        </div>
+      </div>
+      <div [ngClass]="{ 'dark-inputBx': darkModeService.darkModeSignal() === 'dark', 'light-inputBx': darkModeService.darkModeSignal() === 'light' }">
+        <input type="date" id="dateOfBirth" formControlName="dateOfBirth" required>
+            <i>Date of Birth</i>
+        <div *ngIf="step2Form.get('dateOfBirth')?.invalid && step2Form.get('dateOfBirth')?.touched">
+          <small class="text-red-500">Date of Birth is required.</small>
+        </div>
+      </div>
+      <button [ngClass]="{ 'dark-button': darkModeService.darkModeSignal() === 'dark', 'light-button': darkModeService.darkModeSignal() === 'light' }" type="button" (click)="prevStep()">Previous</button>
+      <button [ngClass]="{ 'dark-button': darkModeService.darkModeSignal() === 'dark', 'light-button': darkModeService.darkModeSignal() === 'light' }" type="submit">Next</button>
+    </form>
+  
+    <form *ngSwitchCase="3" [formGroup]="step3Form" (ngSubmit)="submitForm()" [ngClass]="{ 'dark-form': darkModeService.darkModeSignal() === 'dark', 'light-form': darkModeService.darkModeSignal() === 'light' }">
+      <div [ngClass]="{ 'dark-inputBx': darkModeService.darkModeSignal() === 'dark', 'light-inputBx': darkModeService.darkModeSignal() === 'light' }">
+        <input type="email" id="email" formControlName="email" required>
+            <i>Email</i>
+        <div *ngIf="step3Form.get('email')?.invalid && step3Form.get('email')?.touched">
+          <small class="text-red-500">Valid Email is required.</small>
+        </div>
+      </div>
+      <div [ngClass]="{ 'dark-inputBx': darkModeService.darkModeSignal() === 'dark', 'light-inputBx': darkModeService.darkModeSignal() === 'light' }">
+        <input type="password" id="password" formControlName="password" [(ngModel)]="password" required (input)="validatePassword()">
+        <i for="password">Password</i>
+        <div *ngIf="step3Form.get('password')?.invalid && step3Form.get('password')?.touched">
+          <small *ngIf="step3Form.get('password')?.errors?.['required']" class="text-red-500">Password is required.</small>
+          <div *ngFor="let validation of validations" class="error-message mt-4" [ngClass]="{'valid': validation.condition ,'dark-valid': darkModeService.darkModeSignal() === 'dark', 'light-valid': darkModeService.darkModeSignal() === 'light'}">
+            <p *ngIf="validation.condition" class="text-green-500">✓</p>
+            <p *ngIf="!validation.condition" class="text-red-500">✗</p>
+            {{ validation.message }}
+          </div>
+        </div>
+      </div>
+      <div class="terms-agreement">
+        <label class="dark:text-white">
+          <input type="checkbox" formControlName="termsAgreement" required>
+          I accept the <a routerLink="/terms-of-use" target="_blank" class="underline font-semibold">Terms of Use</a> and <a routerLink="/privacy-policy" target="_blank" class="underline font-semibold">Privacy Policy</a>
+        </label>
+        <p class="checkmark" *ngIf="step3Form.get('termsAgreement')?.value"></p>
+      </div>
+      <button [ngClass]="{ 'dark-button': darkModeService.darkModeSignal() === 'dark', 'light-button': darkModeService.darkModeSignal() === 'light' }" type="button" (click)="prevStep()">Previous</button>
+      <button [ngClass]="{ 'dark-button': darkModeService.darkModeSignal() === 'dark', 'light-button': darkModeService.darkModeSignal() === 'light' }" type="submit">Sign Up</button>
+    </form>
+  </div>
+   </div>
+</section>
 </body>
   

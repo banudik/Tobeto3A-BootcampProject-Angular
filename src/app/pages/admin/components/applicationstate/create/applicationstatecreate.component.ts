@@ -3,25 +3,27 @@ import { ApplicationStateInformationService } from '../../../../../features/serv
 import { CreateApplicationStateInformationRequest } from '../../../../../features/models/requests/application-state-information/create-application-state-information-request';
 import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
+import { ValidationHelper } from '../../../../../core/helpers/validationtoastrmessagehelper';
 
 @Component({
   selector: 'app-applicationstatecreate',
   standalone: true,
-  imports: [ReactiveFormsModule,RouterModule],
+  imports: [ReactiveFormsModule,RouterModule,CommonModule],
   templateUrl: './applicationstatecreate.component.html',
   styleUrl: './applicationstatecreate.component.css'
 })
 export class ApplicationstatecreateComponent  implements OnInit{
 
   ApplicationStateForm!:FormGroup
-  formMessage:string | null=null;
 
   ngOnInit(): void {
     this.createForm();
   }
 
   constructor(private formBuilder:FormBuilder,private applicationStateService:ApplicationStateInformationService,
-    private router:Router,private change:ChangeDetectorRef
+    private router:Router,private change:ChangeDetectorRef,private toastr:ToastrService,private validationHelper:ValidationHelper
   ){}
 
   createForm(){
@@ -39,11 +41,11 @@ export class ApplicationstatecreateComponent  implements OnInit{
          alert(response.name)
         },
         error:(error)=>{
-          this.formMessage="Eklenemedi";
+          this.toastr.error("Application State Could not be added!");
           this.change.markForCheck();
         },
         complete:()=>{
-          this.formMessage="Başarıyla Eklendi";
+          this.toastr.success("Application state added!");
           this.ApplicationStateForm.reset();
           this.change.markForCheck();
 
@@ -55,10 +57,10 @@ export class ApplicationstatecreateComponent  implements OnInit{
     }}
 
     onFormSubmit(){
-      const nameControl = this.ApplicationStateForm.get('name');
+      this.validationHelper.checkValidation(this.ApplicationStateForm);
 
-      if (nameControl && nameControl.invalid) {
-        this.formMessage = "Lütfen gerekli alanları doldurun";
+      if (this.ApplicationStateForm.invalid) {
+        this.toastr.error("Invalid inputs");
         return;
       }
     

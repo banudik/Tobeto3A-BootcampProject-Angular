@@ -6,6 +6,8 @@ import { ApplicantService } from '../../../../../features/services/concretes/app
 import { BlacklistService } from '../../../../../features/services/concretes/blacklist.service';
 import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CreateBlacklistRequest } from '../../../../../features/models/requests/blacklist/create-blacklist-request';
+import { ToastrService } from 'ngx-toastr';
+import { ValidationHelper } from '../../../../../core/helpers/validationtoastrmessagehelper';
 
 @Component({
   selector: 'app-applicantblacklist',
@@ -17,7 +19,6 @@ import { CreateBlacklistRequest } from '../../../../../features/models/requests/
 export class ApplicantblacklistComponent implements OnInit{
   currentApplicant!:GetByIdApplicantResponse;
   BlacklistForm!:FormGroup;
-  formMessage:string | null=null;
   isLoading: boolean = false;
   
   ngOnInit(): void {
@@ -28,7 +29,7 @@ export class ApplicantblacklistComponent implements OnInit{
   }
 
   constructor(private applicantService:ApplicantService,
-    private router:Router,private change:ChangeDetectorRef, private activatedRoute:ActivatedRoute, private blacklistService:BlacklistService, private formBuilder:FormBuilder
+    private router:Router,private change:ChangeDetectorRef, private activatedRoute:ActivatedRoute, private blacklistService:BlacklistService, private formBuilder:FormBuilder,private toastr:ToastrService,private validationHelper:ValidationHelper
   ){}
 
   getApplicantById(id:string){
@@ -40,7 +41,7 @@ export class ApplicantblacklistComponent implements OnInit{
         this.isLoading = false;
       },
       (error: any) => {
-        console.error('Error fetching applicant:', error);
+        this.toastr.error('Error fetching applicant:', error.details);
         // Hata işleme mekanizmasını buraya ekleyebilirsiniz
         setTimeout(()=>{
           this.router.navigate(['/adminpanel/applicantindex'])
@@ -61,21 +62,19 @@ export class ApplicantblacklistComponent implements OnInit{
   add(){
     
     if(this.BlacklistForm.valid){
-      console.log("giriyor");
-      
       let blacklistModel:CreateBlacklistRequest = Object.assign({},this.BlacklistForm.value);
       this.blacklistService.blackListApplicant(blacklistModel).subscribe({
         //next => observable'dan gelen veri yakaladığımız fonksiyon
         next:(response)=>{
           
-         alert(this.currentApplicant.firstName +" "+this.currentApplicant.lastName+" is blaclisted until "+ blacklistModel.date )
+         
         },
         error:(error)=>{
-          this.formMessage="Eklenemedi";
+          this.toastr.error("Error while")
           this.change.markForCheck();
         },
         complete:()=>{
-          this.formMessage="Başarıyla Eklendi";
+          this.toastr.success(this.currentApplicant.firstName +" "+this.currentApplicant.lastName+" is blaclisted until "+ blacklistModel.date )
           this.BlacklistForm.reset();
           this.change.markForCheck();
 
@@ -88,10 +87,10 @@ export class ApplicantblacklistComponent implements OnInit{
   }
 
   onFormSubmit(){
-    const nameControl = this.BlacklistForm.get('reason');
+    this.validationHelper.checkValidation(this.BlacklistForm);
 
-    if (nameControl && nameControl.invalid) {
-      this.formMessage = "Lütfen gerekli alanları doldurun";
+    if (this.BlacklistForm.invalid) {
+      this.toastr.error( "Invalid inputs");
       return;
     }
   

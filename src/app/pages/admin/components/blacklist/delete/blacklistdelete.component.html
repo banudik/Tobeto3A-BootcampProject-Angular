@@ -1,0 +1,34 @@
+<form>
+    <div class="card-style mb-30">
+        <h6 class="mb-25">Blacklist Details</h6>
+        <div class="input-style-1">
+            <label for="applicantFirstNameInput">Applicant First Name</label>
+            <input disabled id="applicantFirstNameInput" type="text" value="{{currenBlacklist.applicantFirstName}}" />
+        </div>
+        <div class="input-style-1">
+            <label for="applicantLastNameInput">Applicant Last Name</label>
+            <input disabled id="applicantLastNameInput" type="text" value="{{currenBlacklist.applicantLastName}}" />
+        </div>
+        <div class="input-style-1">
+            <label for="applicantEmailInput">Applicant Email</label>
+            <input disabled id="applicantEmailInput" type="text" value="{{currenBlacklist.applicantEmail}}" />
+        </div>
+        <div class="input-style-1">
+            <label for="reasonInput">Blacklist Reason</label>
+            <input disabled id="reasonInput" type="text" value="{{currenBlacklist.reason}}" />
+        </div>
+        <div class="input-style-1">
+            <label for="Date">Blacklisted until</label>
+            <input disabled id="Date" type="text" [value]="currenBlacklist.date| date : 'dd/MM/yyyy'" />
+        </div>
+        <div class="input-style-1">
+            <label for="createdDate">Blacklisted Date</label>
+            <input disabled id="createdDate" type="text" [value]="currenBlacklist.createdDate | date : 'dd/MM/yyyy'" />
+        </div>
+    </div>
+    <br>
+    <div>
+        <a class="text-danger cursor-pointer" (click)="deleteBlacklist(currenBlacklist.id)" >Delete</a>  |
+        <a class="text-primary" routerLink="/adminpanel/blacklistindex">Back to List</a>
+    </div>
+</form>

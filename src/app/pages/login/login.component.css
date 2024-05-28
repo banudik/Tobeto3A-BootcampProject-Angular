@@ -62,9 +62,9 @@
 
 .dark-section .dark-login {
   position: absolute;
-  width: 400px;
+  width: 500px;
   background: #222;
-  z-index: 1000;
+  z-index: 200;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -500,9 +500,9 @@ color:#8585ff;
 
 .light-section .light-login {
   position: absolute;
-  width: 400px;
+  width: 500px;
   background: #f9f6f6;
-  z-index: 1000;
+  z-index: 200;
   display: flex;
   justify-content: center;
   align-items: center;

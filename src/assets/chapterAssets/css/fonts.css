@@ -1,0 +1,17 @@
+
+@font-face {
+    font-family: 'volte_roundedregular';
+    src: url('../fonts/volterounded-regular-webfont.woff2') format('woff2'),
+         url('../fonts/volterounded-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'volte_roundedsemibold';
+    src: url('../fonts/volterounded-semibold-webfont.woff2') format('woff2'),
+         url('../fonts/volterounded-semibold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}

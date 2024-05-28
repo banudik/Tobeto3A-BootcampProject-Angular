@@ -14,6 +14,7 @@ export const ErrorInterceptor: HttpInterceptorFn = (request, next) => {
 
   return next(request).pipe(
     catchError((error: HttpErrorResponse) => {
+
       console.log('ErrorInterceptor caught an error:', error);
 
       let errorMessage = 'Something went wrong.';
