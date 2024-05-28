@@ -8,6 +8,7 @@ import { ResetPasswordRequest } from '../../features/models/requests/auth/reset-
 import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { DarkModeService } from '../../features/services/dark-mode.service';
+import { LocalStorageService } from '../../features/services/concretes/local-storage.service';
 
 
 
@@ -30,7 +31,14 @@ export class ResetPasswordComponent implements OnInit {
     { condition: /[!@#$%^&*(),.?":{}|<>]/.test(this.newPassword), message: 'It must contain at least one special character.' }
   ];
 
-  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private authService: AuthService, private router: Router,private toastr: ToastrService){}
+  constructor(
+    private route: ActivatedRoute, 
+    private formBuilder: FormBuilder, 
+    private authService: AuthService, 
+    private router: Router,
+    private toastr: ToastrService,
+    private storageService:LocalStorageService
+  ){}
 
   ngOnInit(): void {
     // url üzerinde gelen tokeni alır
@@ -54,7 +62,9 @@ export class ResetPasswordComponent implements OnInit {
     });
   }
 
+  //localStorage'da token mevcut ise siler, Url üzerindeki accessTokeni alır ve yeni şifre ile Apiye gönderir
   resetPassword() {
+    this.storageService.removeToken();
     const newPasswordControl = this.passwordForm.get('newPassword');
     const confirmPasswordControl = this.passwordForm.get('confirmPassword');
 
