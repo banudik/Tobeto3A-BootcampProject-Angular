@@ -9,4 +9,5 @@ export interface UpdateInstructorRequest {
     email:string;
     password?:string;
     description:string;
+    newPassword?:string;
 }

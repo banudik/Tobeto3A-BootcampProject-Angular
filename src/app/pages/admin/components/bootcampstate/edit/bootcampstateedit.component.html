@@ -1,7 +1,5 @@
-<form [formGroup]="BootcampStateForm" (ngSubmit)="onFormSubmit()" >
-    @if(formMessage){
-        <small>{{formMessage}}</small>
-    }
+<form [formGroup]="BootcampStateForm" (ngSubmit)="onFormSubmit()" *ngIf="BootcampStateForm">
+
 <div class="card-style mb-30">
     <h6 class="mb-25">Input Fields</h6>
     <div class="input-style-1">
@@ -10,7 +8,6 @@
       <input formControlName="name" id="nameInput" type="text" placeholder="Bootcanmp State Name" value="{{currentBootcampState.name}}"/>
     </div>
   </div>
-  <button type="submit" class="main-btn active-btn rounded-full btn-hover">Update</button>
-  <br>
-  <a routerLink='/adminpanel/bootcampstateindex'><span class="main-btn dark-btn rounded-full btn-hover">Back</span></a>
+  <button type="submit" class="main-btn warning-btn rounded-full btn-hover">Update</button> |
+  <a class="main-btn dark-btn rounded-full btn-hover" routerLink='/adminpanel/bootcampstateindex'>Back</a>
 </form>

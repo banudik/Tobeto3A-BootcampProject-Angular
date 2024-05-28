@@ -1,0 +1,40 @@
+<form *ngIf="currentChapter">
+    <div class="card-style mb-30">
+        <h6 class="mb-25">Chapter Details</h6>
+        <div class="input-style-1">
+            <label for="bootcampNameInput">Bootcamp Name</label>
+            <input disabled id="bootcampNameInput" type="text" value="{{currentChapter.bootcampName}}" />
+        </div>
+
+        <div class="input-style-1">
+            <label for="titleInput">Chapter Title</label>
+            <textarea disabled id="titleInput" type="text" value="{{currentChapter.title}}" ></textarea>
+        </div>
+        <div class="input-style-1">
+            <label for="linkInput">Chapter Link</label>
+            <textarea disabled id="linkInput" type="text" value="{{currentChapter.link}}" ></textarea>
+        </div>
+        <div class="input-style-1">
+            <label for="timeInput">Chapter time(minutes)</label>
+            <textarea disabled id="timeInput" type="text" value="{{currentChapter.time}}" ></textarea>
+        </div>
+        <div class="input-style-1">
+            <label for="sortInput">Chapter sort</label>
+            <textarea disabled id="sortInput" type="text" value="{{currentChapter.sort}}" ></textarea>
+        </div>
+
+        <div class="input-style-1">
+            <label for="descriptionInput">Chapter Description</label>
+            <textarea disabled id="descriptionInput" type="text" value="{{currentChapter.description}}" ></textarea>
+        </div>
+        <div class="input-style-1">
+            <label for="createdDate">Chapter Created Date</label>
+            <input disabled id="createdDate" type="text" [value]="currentChapter.createdDate | date : 'dd/MM/yyyy'" />
+        </div>
+    </div>
+    <br>
+    <div>
+        <a class="main-btn warning-btn rounded-full btn-hover" routerLink="/adminpanel/chapteredit/{{currentChapter.id}}">Edit</a> |
+        <a class="main-btn dark-btn rounded-full btn-hover" routerLink="/adminpanel/chapterindex">Back to List</a>
+    </div>
+</form>

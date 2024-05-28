@@ -231,18 +231,17 @@ export class AuthService extends AuthBaseService {
     }
   }
 
-  isEmployee() {
-    this.getRoles();
-    if (this.claims.includes("Employees.EmployeeRole" && "Employees.EmployeeRole")) {
-      console.log("true");
-
-      return true;
+    isEmployee(){
+      this.getRoles();
+      if(this.claims.includes("Employees.EmployeeRole" && "Employees.EmployeeRole")){
+        return true;
+      }
+      else{
+        return false;
+      }
     }
-    else {
-      return false;
-    }
-  }
 
+ 
   isInstructor() {
     this.getRoles();
     if (this.claims.includes("instructorRole" && "InstructorRole")) {

@@ -78,8 +78,6 @@ export class NavbarComponent implements OnInit{
     return this.authService.getCurrentUserId();
    }
 
-
-
    getMenuItems(): void {
     this.authService.isLoggedIn$.subscribe(isLoggedIn => {
       if (isLoggedIn) {
@@ -91,6 +89,7 @@ export class NavbarComponent implements OnInit{
       }
       this.cdRef.detectChanges(); // Değişiklik algılansın ve template güncellensin
     });
+
   }
    
 

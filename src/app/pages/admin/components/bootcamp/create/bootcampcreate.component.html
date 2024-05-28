@@ -1,9 +1,5 @@
 <form [formGroup]="BootcampForm" (ngSubmit)="onFormSubmit()" enctype="multipart/form-data" *ngIf="BootcampForm && !isloading">
-    <div>
-      @if(formMessage){
-          <small>{{formMessage}}</small>
-      }
-    </div>
+
     <div class="card-style mb-30">
       <h6 class="mb-25">Input Fields</h6>
       <div class="input-style-1">
@@ -14,7 +10,7 @@
           <label for="instructorSelect">Instructor</label>
           <div class="select-position">
             <select formControlName="instructorId" id="instructorSelect" placeholder="Select Instructor">
-                <option *ngFor="let instructor of instructors.items" [value]="instructor.id">{{ instructor.firstName + " " + instructor.lastName }}</option>
+                <option *ngFor="let instructor of instructors" [value]="instructor.id">{{ instructor.firstName + " " + instructor.lastName }}</option>
             </select>
           </div>
     </div>
@@ -38,14 +34,13 @@
         <label for="stateSelect">Bootcamp State</label>
         <div class="select-position">
           <select formControlName="bootcampStateId" id="stateSelect">
-            <option *ngFor="let state of bootcampStates.items" [value]="state.id">{{ state.name }}</option>
+            <option *ngFor="let state of bootcampStates" [value]="state.id">{{ state.name }}</option>
           </select>
         </div>
     </div>
 </div>
 
 
-    <button type="submit" class="main-btn active-btn rounded-full btn-hover">Add Bootcamp</button>
-    <br>
-    <a routerLink='/adminpanel/bootcampindex'><span class="main-btn dark-btn rounded-full btn-hover">Back</span></a>
+    <button type="submit" class="main-btn success-btn rounded-full btn-hover">Add Bootcamp</button> |
+    <a class="main-btn dark-btn rounded-full btn-hover" routerLink='/adminpanel/bootcampindex'>Back</a>
   </form>

@@ -1,5 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
-import { Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { FormGroup, Validators, ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { UserForLoginRequest } from '../../features/models/requests/auth/user-for-login-request';
@@ -9,6 +10,8 @@ import { CommonModule } from '@angular/common';
 import { UserForLoginWithVerifyRequest } from '../../features/models/requests/auth/user-for-loginWithVerify-request';
 import { DarkModeService } from '../../features/services/concretes/dark-mode.service';
 import { ForgotPasswordRequest } from '../../features/models/requests/auth/forgot-password-request';
+import { ValidationHelper } from '../../core/helpers/validationtoastrmessagehelper';
+
 
 @Component({
   selector: 'app-login',
@@ -24,7 +27,7 @@ export class LoginComponent implements OnInit {
   forgotPasswordEmail!: ForgotPasswordRequest;
   forgotPassword!:FormGroup;
 
-  constructor(private formBuilder:FormBuilder,private authService:AuthService,private router:Router,private toastrService:ToastrService){}
+  constructor(private formBuilder:FormBuilder,private authService:AuthService,private router:Router,private toastrService:ToastrService,private change:ChangeDetectorRef,private validationHelper:ValidationHelper){}
 
   ngOnInit(): void {
     this.createLoginForm();
@@ -58,6 +61,11 @@ export class LoginComponent implements OnInit {
             //localStorage.setItem('token', response.accessToken.token);
             this.toastrService.success('Giriş Başarılı login', 'Giriş İşlemi');
             this.showAuthenticatorCodeInput = false;
+
+            setTimeout(()=>{
+              this.router.navigate(['homepage']);
+            },2000)
+
             console.log('component if',response);
             //this.authService.fetchRefreshTokenAfterLogin();
           } 
@@ -71,6 +79,9 @@ export class LoginComponent implements OnInit {
           console.log('component error',error);
         }
       });
+    }
+    else{
+      this.validationHelper.checkValidation(this.loginForm);
     }
   }
 

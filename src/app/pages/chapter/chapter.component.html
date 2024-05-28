@@ -1,0 +1,127 @@
+<div *ngIf="isloading >= 5" class="container d-flex course-detail-container">
+    <div class="course-left d-flex align-items-center flex-column">
+        <iframe class="course-detail-video" [src]="safeUrl" allowfullscreen="allowfullscreen"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" frameborder="0"></iframe>
+        <div class="video-content-section">
+            <div class="video-content-top-section">
+                <ul class="d-flex align-items-center justify-content-between">
+                    @if(currentChapter.description){
+                    <li>
+                        <button (onclick)="defaultText = currentChapter.description">
+                            About This Chapter
+                        </button>
+                    </li>
+                    }
+                    @else{
+                    <li>
+                        <button (onclick)="defaultText = currentBootcamp.description">
+                            About Course
+                        </button>
+                    </li>
+                    }
+
+                </ul>
+            </div>
+            <div class="video-content-bottom-section-container">
+                @if(currentChapter.description){
+                {{currentChapter.description}}
+                }
+                @else{
+                {{currentBootcamp.description}}
+                }
+            </div>
+        </div>
+    </div>
+    <div class="course-right">
+
+
+        <!-- <div class="question">
+            <h4>
+                Ask a Question {{isloading}}
+            </h4>
+            <div class="hide">
+                <input type="text" name="name" value="" placeholder="ask a question" class="form-control questionInput" />
+                <a href="#" class="btn askquestion">Ask</a>
+            </div>
+        </div> -->
+        @if (certificateControl == false)
+        {
+
+
+        <div class="certificate" id="CertificateHide">
+            <a style="display:block;width: auto; margin-right: 12px;text-align:left;border:none;" href="#"
+                class="navbar-right-btn login-btns">
+                <img src="assets/chapterAssets/images/star.png" width="13" /> Course Status:
+            </a>
+            <div>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" [style.width.%]="roundedCertificateStatus" [attr.aria-valuenow]="roundedCertificateStatus"
+                        aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p class="progress-count">{{certificateStatus + "%"}}</p>
+                <div class="cert-button">
+                    @if (certificateStatus == 100)
+                    {
+                    <a href="#" style="display:inline-block;width:100%;" class="createCertificate navbar-right-btn"
+                        onclick="CreateCertificate(); return false;">
+                        Create Certificate
+                    </a>
+                    }
+                </div>
+            </div>
+        </div>
+        }
+
+        <div class="right-box">
+            <!-- <h5 class="username" style="display:none">{{currentUser.firstName +" "+currentUser.lastName}}</h5> -->
+            <h6 class="eduTitle" style="margin-bottom: 20px;">CodeStorm</h6>
+            <div class="course-info-top-part d-flex align-items-center justify-content-start">
+                <div style="margin-right: 50px;" class="bars-container d-flex">
+                    <div class="bars d-flex" style="margin-right: 10px;">
+                        <img src="assets/chapterAssets/assets/img/course-progress-bar.svg" alt="vertical-line">
+                        <img src="assets/chapterAssets/assets/img/course-progress-bar.svg" alt="vertical-line">
+                        <img src="assets/chapterAssets/assets/img/course-progress-bar.svg" alt="vertical-line">
+                    </div>
+                    <span style="color: #0a142f; font-size: 14px;">{{getChapterCount()+" Video"}}</span>
+                </div>
+                <div class="course-info-time d-flex align-items-center justify-content-start">
+                    <img style="margin-right: 12px;" src="assets/chapterAssets/assets/img/clock-icon.svg"
+                        alt="clock-icon">
+                    <span style="color: #0a142f; font-size: 14px;">{{ totalLength }} Minutes</span>
+                </div>
+            </div>
+            <hr class="greyy">
+            <div class="lessons d-flex align-items-center justify-content-start flex-column" data-aos="fade-up"
+                data-aos-anchor=".lesson">
+                <!-- @{
+                    int counter = 0;
+                } -->
+                <div *ngFor="let item of chapterList; let i = index">
+                    <a *ngIf="part == item.id" routerLink="'/courses/coursedetail/' + educationId + '?part=' + item.id"
+                        class="lesson watching d-flex align-items-center justify-content-between">
+                        <div class="left-lesson d-flex align-items-center">
+                            <img class="play-icon" src="/assets/chapterAssets/assets/img/play-24.ico"
+                                alt="play-icon">
+                            <p>{{ item.title }} </p>
+                        </div>
+                        <div class="right-clock d-flex align-items-center">
+                            <img src="assets/chapterAssets/assets/img/clock-icon.svg" alt="clock-icon">
+                            <p>{{ item.time + " Minute"}}</p>
+                        </div>
+                    </a>
+                    <a *ngIf="part != item.id" routerLink='/chapter/{{item.id}}'
+                        class="lesson unwatched d-flex align-items-center justify-content-between">
+                        <div class="left-lesson d-flex align-items-center">
+                            <p>{{ i + 1 }}</p>
+                            <p>{{ item.title }} </p>
+                        </div>
+                        <div class="right-clock d-flex align-items-center">
+                            <img src="assets/chapterAssets/assets/img/clock-icon.svg" alt="clock-icon">
+                            <p>{{ item.time + " Minute"}}</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

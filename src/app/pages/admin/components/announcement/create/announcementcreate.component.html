@@ -1,0 +1,17 @@
+
+<form [formGroup]="announcementForm" (ngSubmit)="onFormSubmit()" >
+
+<div class="card-style mb-30">
+    <h6 class="mb-25">Input Fields</h6>
+    <div class="input-style-1">
+      <label for="headerInput" >Header/Title</label>
+      <input formControlName="header" id="headerInput" type="text" placeholder="Header" />
+    </div>
+    <div class="input-style-1">
+        <label for="descriptionInput" >Description</label>
+        <textarea formControlName="description" id="descriptionInput" type="text" placeholder="Header" ></textarea>
+      </div>
+  </div>
+  <button type="submit" class="main-btn success-btn rounded-full btn-hover">Add</button> |
+  <a routerLink='/adminpanel/announcementindex'><span class="main-btn dark-btn rounded-full btn-hover">Back</span></a>
+</form>

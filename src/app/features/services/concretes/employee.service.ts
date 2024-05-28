@@ -24,7 +24,7 @@ export class EmployeeService extends EmployeeBaseService {
 
   constructor(private httpClient:HttpClient) {super() }
 
-  override delete(id: number): Observable<DeletedEmployeeResponse> {
+  override delete(id: string): Observable<DeletedEmployeeResponse> {
     return this.httpClient.delete<DeletedEmployeeResponse>(`${this.apiUrl}/`+id);
   }
 
