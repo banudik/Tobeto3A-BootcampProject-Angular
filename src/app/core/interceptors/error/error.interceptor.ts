@@ -16,7 +16,7 @@ export const ErrorInterceptor: HttpInterceptorFn = (request, next) => {
     catchError((error: HttpErrorResponse) => {
       console.log('ErrorInterceptor caught an error:', error);
 
-      let errorMessage = 'Bir hata oluştu.';
+      let errorMessage = 'Something went wrong.';
 
       if (error.error instanceof ErrorEvent) {
         // Client-side error
@@ -25,7 +25,7 @@ export const ErrorInterceptor: HttpInterceptorFn = (request, next) => {
       else if (error.status === 401) {
         console.log('Unauthorized error. Handling...');
         // Server-side error with detail field
-        //errorMessage = `Server-side error: ${error.error.detail}`;
+        //errorMessage = `${error.error.detail}`;   // "You are not authorize hatası" verir
         notificationService.showError(errorMessage);
         // Return the error as HttpErrorResponse to allow AuthInterceptor to handle it
         return throwError(() => new HttpErrorResponse({
@@ -41,13 +41,24 @@ export const ErrorInterceptor: HttpInterceptorFn = (request, next) => {
       } else if (error.error && error.error.Detail) {
         // Server-side error with Detail field (considering different capitalization)
         errorMessage = `${error.error.Detail}`;
-      } else {
+      }
+      else if (error.error.Detail) {
+        // 2222Server-side error with Detail field (considering different capitalization)
+        errorMessage = `${error.error.Detail}`;
+      }
+      else {
         // Other server-side errors
-        errorMessage = `Hata Kodu: ${error.status}, Mesaj: ${error.message}`;
+        errorMessage = `${error.status}, Message: ${error.error.Detail}`;
       }
 
       notificationService.showError(errorMessage);
       return throwError(() => new Error(errorMessage));//HttpErrorResponse türünde fırlatılırsa 401 kontrolune ekstra gerek kalmayabilir test et :))))
+      // return throwError(() => new HttpErrorResponse({
+      //   error: error.error,
+      //   headers: error.headers,
+      //   status: error.status,
+      //   statusText: error.error.detail,
+      // }));
     })
   );
 };

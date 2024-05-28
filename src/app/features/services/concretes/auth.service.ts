@@ -18,6 +18,7 @@ import { CreatedInstructorResponse } from "../../models/responses/instructor/cre
 import { ResetPasswordRequest } from "../../models/requests/auth/reset-password-request";
 import { ForgotPasswordRequest } from "../../models/requests/auth/forgot-password-request";
 import { VerifyEmailRequest } from "../../models/requests/auth/verify-email-request";
+import { Router } from "@angular/router";
 
 
 @Injectable({
@@ -31,7 +32,13 @@ import { VerifyEmailRequest } from "../../models/requests/auth/verify-email-requ
     claims:string[]=[]
   
     private readonly apiUrl:string = `${environment.API_URL}/auth`
-    constructor(private httpClient:HttpClient,private storageService:LocalStorageService,private toastrService:ToastrService) {super() }
+
+    constructor(
+      private httpClient:HttpClient,
+      private storageService:LocalStorageService,
+      private toastrService:ToastrService,
+      private router:Router
+    ) {super() }
   
     override registerEmployee(createEmployeeRequest: CreateEmployeeRequest): Observable<CreatedEmployeeResponse> {
       return this.httpClient.post<CreatedEmployeeResponse>(`${this.apiUrl}/registeremployee`, createEmployeeRequest);
@@ -109,27 +116,10 @@ import { VerifyEmailRequest } from "../../models/requests/auth/verify-email-requ
     )
     }
 
-
-    //Mevcut refreshtoken ile yeni bir refreshtoken ister
+    //Mevcut refreshtoken ile yeni bir accessToken ister
     refreshToken(): Observable<AccessTokenModel<TokenModel>> {
       return this.httpClient.get<AccessTokenModel<TokenModel>>(`${this.apiUrl}/refreshToken`, { withCredentials: true });
     }
-
-    // refreshToken(): Observable<TokenModel> {
-    //   const refreshToken = this.storageService.getRefreshToken();
-    //   return this.httpClient.get<TokenModel>(`${this.apiUrl}/refreshtoken`, { headers: { Authorization: `Bearer ${refreshToken}` }, withCredentials:true })
-    //     .pipe(
-    //       tap(response => {
-    //         this.storageService.setToken(response.token);
-    //       }),
-    //       catchError(responseError => {
-    //         console.log('Token yenileme başarısız', responseError);
-    //         return throwError(responseError);
-    //       })
-    //     );
-    // }
-
-    
 
     resetPassword(token: string, resetPasswordRequest: ResetPasswordRequest){
       var tokenn = token;
@@ -155,25 +145,19 @@ import { VerifyEmailRequest } from "../../models/requests/auth/verify-email-requ
       );
     }
 
+    //Şifremi unuttum kısmında girilen Email adresine şifremi unuttum postası gönderir(Token göndermez)
     sendForgotPasswordEmail(ForgotPasswordRequest: ForgotPasswordRequest): Observable<any> {
       return this.httpClient.post(`${this.apiUrl}/ForgotPassword`, ForgotPasswordRequest, { responseType: 'text' }).pipe(
         map(response => {
           this.toastrService.success('Şifremi unuttum e-postası başarıyla gönderildi.', 'Başarılı');
           return response;
         }),
-        catchError((error) => {
-          return throwError(error);
-        })
+        // catchError((error) => {
+        //   return throwError(error);
+        // })
       );
     }
 
-    revokeToken(token: string): Observable<any> {
-      return this.httpClient.put<any>(`${this.apiUrl}/revoketoken`, token, {
-        headers: { 'Content-Type': 'application/json' }
-      });
-    }
-
-  
     getDecodedToken(){
       try{
         this.token=this.storageService.getToken();
@@ -202,37 +186,24 @@ import { VerifyEmailRequest } from "../../models/requests/auth/verify-email-requ
       return this.userId=decoded[propUserId]
     }
   
-    logOut(){
-      //this.storageService.removeToken();
-      this.toastrService.success('Çıkış Başarılı','Çıkış İşlemi');
-      this.storageService.clearTokens();
-      document.cookie = 'refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-      // setTimeout(function(){
-      //   window.location.reload()
-      // },1000)
-    }
-
-    logout(): void {
-      const token = this.storageService.getRefreshToken();
-  
-      if (token) {
-        this.revokeToken(token).subscribe({
+    logOut() {
+      console.log('çıkış butonuna basıldı');
+      //Angular/ts put olarak istek yapıldığı zaman body kısmının boş bırakılmasına izin vermiyor
+      //nArch hatası-- Controller HttpGet olarak değiştirildi
+      this.httpClient.get(`${this.apiUrl}/revoketoken`)
+        .subscribe({
           next: () => {
-            this.storageService.clearTokens();
-            this.toastrService.success('Çıkış Başarılı','Çıkış İşlemi');
+            console.log('istek yapıldı');
+            this.storageService.remove('token'); // LocalStorage'daki token'ı temizliyoruz
+            this.toastrService.success('Çıkış Başarılı', 'Çıkış İşlemi');
+            //this.router.navigate(['/login']); // Kullanıcıyı login sayfasına yönlendirir
           },
           error: (error) => {
-            console.error('Token revocation failed', error);
-            this.toastrService.success('Çıkış Başarılı','Çıkış İşlemi');
-            this.storageService.clearTokens();
+            console.error('Token revoke failed:', error);
           }
         });
-      } else {
-        this.storageService.clearTokens();
-        this.toastrService.success('Çıkış Başarılı','Çıkış İşlemi');
-      }
     }
-  
+
     getRoles():string[]{
       if(this.storageService.getToken()){
         var decoded = this.getDecodedToken()

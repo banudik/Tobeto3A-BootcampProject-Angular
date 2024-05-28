@@ -16,7 +16,7 @@ import { DarkModeService } from '../../../features/services/dark-mode.service';
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [MenubarModule,CommonModule,ProfileComponent],
+  imports: [MenubarModule,CommonModule,ProfileComponent,RouterModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
   changeDetection:ChangeDetectionStrategy.OnPush,
