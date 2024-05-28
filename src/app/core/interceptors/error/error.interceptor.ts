@@ -57,7 +57,7 @@ export const ErrorInterceptor: HttpInterceptorFn = (request, next) => {
   return next(request).pipe(
     catchError((error: HttpErrorResponse) => {
       let errorMessage = 'An Error has occured.';
-
+      
       if (error.error instanceof ErrorEvent) {
         // İstemci tarafında olan hata
         errorMessage = `Error: ${error.error.message}`;

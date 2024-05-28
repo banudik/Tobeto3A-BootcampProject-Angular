@@ -62,9 +62,9 @@ export class ApplicantindexComponent implements OnInit {
     });
   }
 
-  isBlackListed(state: string): boolean {
+  isBlackListed(id: string): boolean {
     this.isLoading = true;
-    if(this.blackList.find(item => item.applicantId === state)){
+    if(this.blackList.find(item => item.applicantId == id)){
       this.isLoading = false;
       return true;
     }

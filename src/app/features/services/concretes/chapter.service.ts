@@ -45,6 +45,32 @@ import { ChapterBaseService } from "../abstracts/chapter-base-service";
         })
       )
     }
+
+    override getListByBootcampId(bootcampId:number,pageRequest:PageRequest): Observable<ChapterListItemDto> {
+      const newRequest: {[key: string]: string | number} = {
+        pageIndex: pageRequest.pageIndex,
+        pageSize: pageRequest.pageSize,
+        bootcampId: bootcampId
+      };
+  
+      return this.httpClient.get<ChapterListItemDto>(this.apiUrl, {
+        params: newRequest
+      }).pipe(
+        map((response)=>{
+          const newResponse:ChapterListItemDto={
+            index:pageRequest.pageIndex,
+            size:pageRequest.pageSize,
+            count:response.count,
+            hasNext:response.hasNext,
+            hasPrevious:response.hasPrevious,
+            items:response.items,
+            pages:response.pages
+          };
+          
+          return newResponse;
+        })
+      )
+    }
   
     override getByChapterId(id:number):Observable<GetByIdChapterResponse> {
       return this.httpClient.get<GetByIdChapterResponse>(`${this.apiUrl}/`+id);

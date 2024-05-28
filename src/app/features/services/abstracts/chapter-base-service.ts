@@ -16,6 +16,9 @@ export abstract class ChapterBaseService {
     abstract getList(pageRequest: PageRequest):
         Observable<ChapterListItemDto>;
 
+        abstract getListByBootcampId(bootcampId:number , pageRequest: PageRequest):
+        Observable<ChapterListItemDto>;
+
     abstract getByChapterId(chapterId: number):
         Observable<GetByIdChapterResponse>;
 

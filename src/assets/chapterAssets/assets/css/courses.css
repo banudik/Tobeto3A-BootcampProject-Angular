@@ -1,0 +1,220 @@
+:root {
+    --tangerine: #f2911e;
+    --greyish-teal: #57bdaf;
+    --brownish-grey: #646464;
+    --brown-grey: #b1b1b1;
+    --golden-yellow: #f2bf26;
+    --white: #ffffff;
+    --light-pink: #f3f1f2;
+    --very-light-pink: #e3e3e3;
+    --bright-orange: #ff6c00;
+    --black: #000000;
+    --duck-egg-blue: #d2ebe8;
+    --dark-blue-figma: #0a142f;
+}
+
+a{
+  text-decoration: none !important;
+}
+
+.courses-top-orange {
+    height: 190px;
+    background-color: var(--dark-blue-figma) ;/*var(--bright-orange);*/
+    padding: 30px 0;
+    margin-bottom: 50px;
+    transition: .3s all ease;
+}
+
+.courses-top-orange.blue{
+  background-color: var(--golden-yellow);
+}
+
+.courses-top-orange .container h3{
+  font-family: 'Poppins',sans-serif;
+  font-size: 22px;
+  line-height: 33px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+
+.inputs .input-area{
+  position: relative;
+  width: auto;
+  margin-right: 20px;
+}
+
+.inputs .input-area input,.input-area .droppdown-btn{
+  border-radius: 60px;
+  background-color: var(--white);
+  padding: 15px 20px;
+  font-size: 12px;
+  color: var(--brown-grey);
+  font-weight: 600;
+}
+.inputs .input-area:nth-child(1) input{
+  width: 100%;
+}
+
+.droppdown-btn{
+  visibility: visible;
+  opacity: 1;
+  background: url("../img/dropdown-icon-orange.svg") white no-repeat 98.5% !important;
+  background: url("../img/dropdown-icon-orange.svg") white no-repeat calc(100% - 15px) !important;
+  padding-right: 45px;
+  min-width: 170px;
+  padding-left: 25px !important;
+  text-align: left;
+  width: 100% !important;
+  height: 100%;
+  transition: .3s all ease;
+}
+
+.droppdown-btn.active{
+  visibility: visible;
+  opacity: 1;
+  border: 1px solid var(--brown-grey);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom: 0;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  transition: .3s all ease;
+}
+
+
+.dropdown-category{
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: var(--white);
+  border-radius: 25px;
+  padding: 20px;
+  transition: .3s all ease;
+}
+
+.dropdown-category.active{
+  visibility: visible;
+  opacity: 1;
+  border: 1px solid var(--brown-grey);
+  border-top: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  transition: .3s all ease;
+  z-index:999;
+}
+
+
+.dropdown-category.active a{
+  color: var(--brown-grey);
+  font-size: 14px;
+  transition: .3s all ease;
+  display: block;
+  width: 100%;
+  font-size: 12px;
+}
+
+.dropdown-category a:hover{
+  color: var(--black);
+  transition: .3s all ease;
+}
+
+.dropdown-category a:not(:nth-last-child(1)){
+  margin-bottom: 12px;
+}
+
+.inputs{
+  max-height: 57px;
+}
+
+.inputs .input-area input::placeholder{
+  font-size: 12px;
+  color: var(--brown-grey);
+}
+
+
+.inputs .input-area:nth-child(1){
+  width:420px ;
+}
+
+
+.inputs .input-area:nth-child(1) input{
+  padding-left: 50px;
+}
+
+
+.inputs .input-area img{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 4.2%;
+}
+
+.inputs .input-area:nth-child(1) img{
+  left: 4.2%;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: url("../img/dropdown-icon-orange.svg") white no-repeat 98.5% !important;
+  background: url("../img/dropdown-icon-orange.svg") white no-repeat calc(100% - 10px) !important;
+  padding-right: 45px;
+  color: var(--brown-grey);
+  font-size: 14px !important;
+  border: 0;
+  outline: 0;
+  min-width: 200px;
+}
+select::-ms-expand { display: none; }
+
+.row>*{
+  padding: 0 !important;
+}
+.course {
+    border: 1px solid var(--brown-grey);
+    border-radius: 25px;
+    cursor: pointer;
+    flex: 0 0 23%;
+    min-height: 300px;
+    margin-bottom: 20px;
+}
+
+.courses-container .row {
+    align-items: flex-start;
+    gap:10px;
+
+}
+
+.course .course-top-img {
+    width: 100%;
+    min-height: 200px;
+    max-height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+}
+
+.course-bottom{
+  height: calc(100% - 195px);
+  width: 100%;
+  padding: 15px 20px;
+}
+
+.course-bottom p{
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  font-family: 'Poppins',sans-serif;
+  font-weight: 700;
+}
+
+.course-bottom img{
+  border: 2px solid var(--black);
+  border-radius: 50%;
+  padding: 5px 8px;
+}
