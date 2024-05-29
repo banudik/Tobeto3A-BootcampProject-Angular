@@ -261,7 +261,7 @@
       <li><a routerLink="/about-us">About</a></li>
       <li><a routerLink="/bootcamps">Courses</a></li>
       <li><a routerLink="/contact-us">Contact</a></li>
-      <li><a routerLink="/faq">FAQs</a></li>
+      <li><a routerLink="/faq">FAQ's</a></li>
     </ul>
 
     <div [ngClass]="{ 'dark-main': darkModeService.darkModeSignal() === 'dark', 'light-main': darkModeService.darkModeSignal() === 'light' }">
@@ -269,7 +269,7 @@
       <a *ngIf="!isLoggedIn" routerLink="/sign-up" [ngClass]="{ 'dark-user': darkModeService.darkModeSignal() === 'dark', 'light-user': darkModeService.darkModeSignal() === 'light' }"><i class="fa-solid fa-user-plus"></i> Register</a> 
       <a *ngIf="isLoggedIn" (click)="showLogoutModal = true" [ngClass]="{ 'dark-user': darkModeService.darkModeSignal() === 'dark', 'light-user': darkModeService.darkModeSignal() === 'light' }"><i class="ri-logout-circle-line"></i> Log out</a>
       <a *ngIf="isLoggedIn && !isAdmin" [routerLink]="['/myprofile', userId.toString()]" [ngClass]="{ 'dark-user': darkModeService.darkModeSignal() === 'dark', 'light-user': darkModeService.darkModeSignal() === 'light' }"><i class="ri-user-heart-line"></i> My Profile</a>
-      <a *ngIf="isAdmin" routerLink="/adminpanel" [ngClass]="{ 'dark-user': darkModeService.darkModeSignal() === 'dark', 'light-user': darkModeService.darkModeSignal() === 'light' }"><i class="ri-admin-line"></i> Admin Panel</a>
+      <a *ngIf="isLoggedIn && isAdmin" routerLink="/adminpanel" [ngClass]="{ 'dark-user': darkModeService.darkModeSignal() === 'dark', 'light-user': darkModeService.darkModeSignal() === 'light' }"><i class="ri-admin-line"></i> Admin Panel</a>
         
       
       @if (darkModeService.darkModeSignal() === 'dark') {

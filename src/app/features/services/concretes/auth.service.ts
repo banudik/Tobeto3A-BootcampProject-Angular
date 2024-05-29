@@ -91,24 +91,24 @@ export class AuthService extends AuthBaseService {
   //  email ve passwordu login olmak için gönderilir, activationKey kısmı null olarak post edilir(aktivasyon kodu null gönderildiği takdirde backend'de AktivasyonKeyi generate ediliyoruz ve mail olarak gönderiliyoruz) 2FA'i tetikler
   login(userLoginRequest: UserForLoginRequest): Observable<AccessTokenModel<TokenModel>> {
     return this.httpClient.post<AccessTokenModel<TokenModel>>(`${this.apiUrl}/login`, userLoginRequest, { withCredentials: true })
-      .pipe(
-        tap(response => {
-          if (response.accessToken) {
-            this.storageService.setToken(response.accessToken.token);
-            this.isLoggedInSubject.next(true);
-            this.isAdminSubject.next(true);
-            this.toastrService.success('Giriş yapıldı');
-          } else {
-            this.toastrService.info('Doğrulama Kodu Gönderildi');
-          }
-        }),
-        catchError(error => {
-          console.error('Hata:', error);
-          this.toastrService.error('Giriş yapılamadı. Lütfen tekrar deneyin.');
-          return throwError(error);
-        })
-      );
-  }
+    .pipe(
+      tap(response => {
+        if (response.accessToken) {
+          this.storageService.setToken(response.accessToken.token);
+          this.isLoggedInSubject.next(true);
+          this.isAdminSubject.next(this.isAdmin());
+          this.toastrService.success('Giriş yapıldı');
+        } else {
+          this.toastrService.info('Doğrulama Kodu Gönderildi');
+        }
+      }),
+      catchError(error => {
+        console.error('Hata:', error);
+        this.toastrService.error('Giriş yapılamadı. Lütfen tekrar deneyin.');
+        return throwError(error);
+      })
+    );
+}
 
   // pop-up ekranında ki activationKey i alıp tekrar  mevcut email ve password ile post ediliyoruz başarılı olursa response'taki tokeni storage'a kayıt ediyoruz login işlemi bu metod ile bitiyor(kullanıcının tekrar emai ve password girmesi gerekmiyor)
   loginWithVerify(UserWithActivationCode: UserForLoginWithVerifyRequest): Observable<AccessTokenModel<TokenModel>> {

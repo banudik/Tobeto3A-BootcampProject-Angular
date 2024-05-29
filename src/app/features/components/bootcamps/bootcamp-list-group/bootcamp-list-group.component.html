@@ -1,81 +1,153 @@
-<div class="flex h-screen bg-white dark:bg-black">
+<!doctype html>
+<html lang="zxx">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+        <!-- Links of CSS files -->
+        <link rel="stylesheet" href="../../../../../assets/homepageAssets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../../../../../assets/homepageAssets/css/boxicons.min.css">
+        <link rel="stylesheet" href="../../../../../assets/homepageAssets/css/odometer.min.css">
+        <link rel="stylesheet" href="../../../../../assets/homepageAssets/css/nice-select.min.css">
+        <link rel="stylesheet" href="../../../../../assets/homepageAssets/css/owl.carousel.min.css">
+        <link rel="stylesheet" href="../../../../../assets/homepageAssets/css/meanmenu.min.css">
+        <link rel="stylesheet" href="../../../../../assets/homepageAssets/css/magnific-popup.min.css">
+        <link rel="stylesheet" href="../../../../../assets/homepageAssets/css//style.css">
+        <link rel="stylesheet" href="../../../../../assets/homepageAssets/css/responsive.css">
+        
+        <title>Online Courses & Education Bootstrap Template</title>
+        <link rel="icon" type="image/png" href="assets/img/all-img/favicon.png">
+    </head>
+    <body>
+       
 
-    <!-- Sidebar -->
-    <!-- <aside class="w-64 bg-white shadow-md dark:bg-black">
 
-            <app-instructor></app-instructor>
-
-    </aside> -->
-
-    <!-- Content -->
-    <div class="flex-grow p-8">
-        <div *ngIf="!isLoading" class="container mx-auto">
-            <h3 *ngIf="bootcampList.items == []" class="text-center">Bootcamp Bulunamadı</h3>
-
-            <div class="flex justify-between items-center mb-4 mt-4 input-style-1">
-                <input type="text" placeholder="Search" class="w-full border p-2 rounded-lg" #filter
-                    (submit)="filterData(filter.value)">
-                <button class="ml-2 border p-2 rounded-lg bg-blue-500 text-white" (click)="filterData(filter.value)">
-                    Search
-                </button>
-                <select class="border p-2 rounded-lg" #InstructorFilter
-                    (change)="filterByInstructor(InstructorFilter.value)">
-                    <option value="">All Instructors</option>
-                    <option *ngFor="let instructor of instructors?.items" [value]="instructor.id">{{ instructor.firstName
-                        }} {{ instructor.lastName }}</option>
-                </select>
-
-                <select class="border p-2 rounded-lg" #pageSize (change)="changePageSize(pageSize.value)">
-                    <option *ngFor="let size of pageSizes" [value]="size">Page Size: {{size}}</option>
-                </select>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-center">
-                <div *ngFor="let bootcamp of visibleData()"
-                    class="max-w-sm rounded overflow-hidden shadow-lg transition duration-500 ease-in-out transform hover:scale-105">
-                    <!-- Mause üstüne geldiği zaman card büyür -->
-                    <img [src]="bootcamp.bootcampImageImagePath" class="w-full h-48 object-cover" alt="bootcamp image">
-                    <div class="px-6 py-4">
-                        <div class="font-bold text-xl mb-2">{{bootcamp.name}}</div>
-                        <p class="text-gray-700 text-base"><b>Hoca:</b> {{bootcamp.instructorFirstName}}
-                            {{bootcamp.instructorLastName}}</p>
-                        <p class="text-gray-700 text-base"><b>Start Date:</b> {{ bootcamp.startDate | date: 'dd/MM/yyyy'
-                            }}</p>
-                        <p class="text-gray-700 text-base"><b>End Date:</b> {{bootcamp.endDate | date: 'dd/MM/yyyy'}}
-                        </p>
-                    </div>
-                    <div class="px-6 py-4">
-                        <button
-                            class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center"
-                            [ngClass]="{'expired': isExpired(bootcamp.endDate), 'notExpired': !isExpired(bootcamp.endDate)}"
-                            [routerLink]="['/bootcampdetail', bootcamp.id.toString()]">
-                            Detaya Git
-                        </button>
+         <!-- Start EduMim Courses Area -->
+         <div class="edu-courses-area pt-70 pb-100">
+            <div class="container">
+                <div class="edu-grid-sorting">
+                    <div class="row align-items-center">
+                        <div class="col-lg-12 col-md-12 ordering">
+                            <div class="select-box">
+                                <label></label>
+                                <div class="flex justify-between items-center mb-4 mt-4 input-style-1">
+                                    <div class="text-left">
+                                        <input type="text" placeholder="Search" class="w-full border p-2 rounded-lg text-black" style="margin-right: 5px;max-width: 200px;" #filter
+                                        (submit)="filterData(filter.value)">
+                                    <button class="ml-2 border p-2 rounded-lg bg-blue-500 text-white" (click)="filterData(filter.value)">
+                                        Search
+                                    </button>
+                                    </div>
+                                    <div class="text-right">
+                                        <select class="border p-2 rounded-lg" style="margin-right: 5px;" #InstructorFilter
+                                        (change)="filterByInstructor(InstructorFilter.value)">
+                                        <option value="">All Instructors</option>
+                                        <option *ngFor="let instructor of instructors?.items" [value]="instructor.id">{{ instructor.firstName
+                                            }} {{ instructor.lastName }}</option>
+                                    </select>
+                    
+                                    <select class="border p-2 rounded-lg" #pageSize (change)="changePageSize(pageSize.value)">
+                                        <option *ngFor="let size of pageSizes" [value]="size">Page Size: {{size}}</option>
+                                    </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                    <div *ngFor="let bootcamp of visibleData()">
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div  class="single-courses-box">
+                                <div class="image">
+                                    <a class="d-block">
+                                        <img [routerLink]="['/bootcampdetail', bootcamp.id.toString()]"[src]="bootcamp.bootcampImageImagePath" class="w-full h-48 object-cover" alt="bootcamp image">
+                                    </a>
+                                </div>
+                                <div class="content">
+                                    <h3><a  [routerLink]="['/bootcampdetail', bootcamp.id.toString()]">{{bootcamp.name}}</a></h3>
+                                    <ul class="ev-items">
+                                        <li><i class="bx bx-user mr-2 mb-1"></i><span>{{bootcamp.instructorFirstName}} {{bootcamp.instructorLastName}}</span></li>
+                                        <li><i class='bx bx-calendar mr-2'></i><span>{{bootcamp.startDate | date:'dd.MM.yyyy'}} - {{bootcamp.endDate | date:'dd.MM.yyyy'}}</span></li>
+                                    </ul>
+                                    <ul class="cr-items" >
+                                        <li><i class='bx bx-food-menu'></i> <span>2 Lessons</span> </li>
+                                        <li><i class='bx bx-time-five'></i> <span>4h 30m</span></li>
+                                        <li><i class='bx bx-star' ></i> <span>4.5</span></li>
+                                    </ul>
+
+
+                                </div>
+                                <div class="text-center mt-5">
+                                    <a href="#" class="default-btn primery-red text-center boot-cards">Başvur</a>
+    
+                                        </div>
+                            </div>
+                        </div>
+                    </div>
             </div>
-            <!-- Buttons -->
+            
             <div class="flex flex-col items-center" *ngIf="bootcampList.hasNext || bootcampList.hasPrevious">
 
-                <div class="inline-flex mt-2 xs:mt-0">
-                    <button *ngIf="bootcampList.hasPrevious || bootcampList.hasNext" type="button"
-                        [disabled]="!bootcampList.hasPrevious" (click)="onPreviousPageClicked()" class="btn border-0"
-                        class="flex items-center justify-center px-4 h-10 text-base font-medium text-white bg-gray-800 rounded-s hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                        Prev
-                    </button>
-                    <!-- <a
-                        class="flex items-center justify-center px-4 h-10 text-base font-medium text-white bg-gray-800 rounded-s hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white cursor-default">Page:
-                        {{ this.currentPageNumber}}</a> -->
-                        <button *ngFor="let pageNumber of pageNumbers(); let i = index" class="py-2 px-4 cursor-pointer"
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="pagination-area text-center">
+                        <button *ngIf="bootcampList.hasPrevious || bootcampList.hasNext" type="button"
+                        [disabled]="!bootcampList.hasPrevious" (click)="onPreviousPageClicked()" class="prev page-numbers"><i class='bx bx-chevrons-left'></i></button>
+                        <button *ngFor="let pageNumber of pageNumbers(); let i = index"
+                        [class.prev]="i+1 == currentPageNumber" [class.current]="i+1 == currentPageNumber"
+                        (click)="changePage(i)"class="page-numbers" aria-current="page">{{i+1}}</button>
+                        <!-- <button  *ngFor="let pageNumber of pageNumbers(); let i = index"
                         [class.bg-cyan-500]="i+1 == currentPageNumber" [class.text-white]="i+1 == currentPageNumber"
-                        (click)="changePage(i)">{{i+1}}</button>
-                    <button *ngIf="bootcampList.hasNext || bootcampList.hasPrevious" type="button"
-                        [disabled]="!bootcampList.hasNext" (click)="onViewMoreClicked()"
-                        class="flex items-center justify-center px-4 h-10 text-base font-medium text-white bg-gray-800 border-0 border-s border-gray-700 rounded-e hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                        Next
-                    </button>
+                        (click)="changePage(i)"class="page-numbers current" aria-current="page">{{i+1}}</button> -->
+                        <button *ngIf="bootcampList.hasNext || bootcampList.hasPrevious" type="button"
+                        [disabled]="!bootcampList.hasNext" (click)="onViewMoreClicked()" class="next page-numbers"><i class='bx bx-chevrons-right'></i></button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+        <!-- End EduMim Courses Area -->
+
+        <!-- <div class="flex h-screen bg-white dark:bg-black"> -->
+
+            <!-- Sidebar -->
+            <!-- <aside class="w-64 bg-white shadow-md dark:bg-black">
+        
+                    <app-instructor></app-instructor>
+        
+            </aside> -->
+        
+            <!-- Content -->
+            <!-- <div class="flex-grow p-8">
+                <div *ngIf="!isLoading" class="container mx-auto">
+                    <h3 *ngIf="bootcampList.items == []" class="text-center">Bootcamp Bulunamadı</h3> -->
+                    <!-- <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-center">
+                        <div *ngFor="let bootcamp of visibleData()"
+                            class="max-w-sm rounded overflow-hidden shadow-lg transition duration-500 ease-in-out transform hover:scale-105">
+                            <img [src]="bootcamp.bootcampImageImagePath" class="w-full h-48 object-cover" alt="bootcamp image">
+                            <div class="px-6 py-4">
+                                <div class="font-bold text-xl mb-2">{{bootcamp.name}}</div>
+                                <p class="text-gray-700 text-base"><b>Hoca:</b> {{bootcamp.instructorFirstName}}
+                                    {{bootcamp.instructorLastName}}</p>
+                                <p class="text-gray-700 text-base"><b>Start Date:</b> {{ bootcamp.startDate | date: 'dd/MM/yyyy'
+                                    }}</p>
+                                <p class="text-gray-700 text-base"><b>End Date:</b> {{bootcamp.endDate | date: 'dd/MM/yyyy'}}
+                                </p>
+                            </div>
+                            <div class="px-6 py-4">
+                                <button
+                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center"
+                                    [ngClass]="{'expired': isExpired(bootcamp.endDate), 'notExpired': !isExpired(bootcamp.endDate)}"
+                                    [routerLink]="['/bootcampdetail', bootcamp.id.toString()]">
+                                    Detaya Git
+                                </button>
+                            </div>
+                        </div>
+                    </div> -->
+                    <!-- Buttons -->
+<!--                    
+                </div>
+            </div> -->
+        <!-- </div> -->
+    </body>
+</html>
+
