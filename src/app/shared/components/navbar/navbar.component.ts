@@ -38,13 +38,13 @@ export class NavbarComponent implements OnInit{
     this.authService.isLoggedIn$.subscribe(isLoggedIn => {
       this.isLoggedIn = isLoggedIn;
       this.cdRef.detectChanges(); // Değişiklik algılansın ve template güncellensin
-      this.router.navigate(['homepage']);
+      //this.router.navigate(['homepage']);
     });
 
     this.authService.isAdmin$.subscribe(isAdmin => {
       this.isAdmin = isAdmin;
       this.cdRef.detectChanges(); // Değişiklik algılansın ve template güncellensin
-      this.router.navigate(['homepage']);
+      //this.router.navigate(['homepage']);
     });
   
      this.getMenuItems();
@@ -83,6 +83,8 @@ export class NavbarComponent implements OnInit{
       if (isLoggedIn) {
         this.isLoggedIn = true;
         this.isAdmin = this.authService.isAdmin();
+        console.log("isadmin: "+ this.isAdmin);
+        
       } else {
         this.isLoggedIn = false;
         this.isAdmin = false;

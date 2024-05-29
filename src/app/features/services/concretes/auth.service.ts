@@ -85,6 +85,7 @@ export class AuthService extends AuthBaseService {
 
   // EmailVerify epostasındaki link üzerinden alınan ActivationKey gönderilir ve kullanıcının email adresi doğrulanmış olur
   verifyEmailWelcomePage(activationKey: string): Observable<any> {
+    console.log(activationKey);
     return this.httpClient.get(`${this.apiUrl}/VerifyEmailAuthenticator?ActivationKey=${encodeURIComponent(activationKey)}`);
   }
 
