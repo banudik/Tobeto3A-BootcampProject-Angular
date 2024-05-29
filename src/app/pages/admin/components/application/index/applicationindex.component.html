@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf="!isLoading">
     <div class="col-lg-6">
       <div class="card-style mb-30">
         <h6 class="mb-10">Application Index</h6>
@@ -11,7 +11,7 @@
   
               <select class="border p-2 rounded-lg" #ApplicationStateFilter (change)="filterByApplicationState(ApplicationStateFilter.value)">
                 <option value="">All States</option>
-                <option *ngFor="let applicationState of applicationStates.items" [value]="applicationState.name">{{ applicationState.name }}</option>
+                <option *ngFor="let applicationState of applicationStates" [value]="applicationState.name">{{ applicationState.name }}</option>
               </select>
               
             <select class="border p-2 rounded-lg" #pageSize (change)="changePageSize(pageSize.value)">

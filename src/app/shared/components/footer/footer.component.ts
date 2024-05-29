@@ -1,7 +1,8 @@
 import { DOCUMENT } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { Component, Inject, OnInit, Renderer2 } from '@angular/core';
+import { Component, Inject, OnInit, Renderer2, inject } from '@angular/core';
+import { DarkModeService } from '../../../features/services/concretes/dark-mode.service';
 
 @Component({
   selector: 'app-footer',
@@ -28,4 +29,5 @@ private loadScript(url: string) {
     this.renderer2.appendChild(this._document.body, script);
   }
 
+  darkModeService: DarkModeService = inject(DarkModeService);
 }

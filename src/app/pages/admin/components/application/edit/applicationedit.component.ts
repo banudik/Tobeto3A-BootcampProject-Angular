@@ -7,6 +7,8 @@ import { ApplicationInformationService } from '../../../../../features/services/
 import { ApplicationStateInformationService } from '../../../../../features/services/concretes/application-state-information.service';
 import { ApplicationStateInformationListItemDto } from '../../../../../features/models/responses/application-state-information/application-state-information-list-item-dto';
 import { CommonModule } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
+import { ValidationHelper } from '../../../../../core/helpers/validationtoastrmessagehelper';
 
 @Component({
   selector: 'app-applicationedit',
@@ -18,7 +20,6 @@ import { CommonModule } from '@angular/common';
 export class ApplicationeditComponent   implements OnInit{
   currentApplication!:GetByIdApplicationInformationResponse;
   ApplicationForm!:FormGroup
-  formMessage:string | null=null;
   applicationStates!:ApplicationStateInformationListItemDto;
   
   ngOnInit(): void {
@@ -31,7 +32,7 @@ export class ApplicationeditComponent   implements OnInit{
 
   constructor(private formBuilder:FormBuilder,private applicationService:ApplicationInformationService,
     private router:Router,private change:ChangeDetectorRef, private activatedRoute:ActivatedRoute , 
-    private applicationStateService:ApplicationStateInformationService
+    private applicationStateService:ApplicationStateInformationService,private toastr:ToastrService,private validationHelper:ValidationHelper
   ){}
 
   getApplicationById(id:number){
@@ -43,7 +44,7 @@ export class ApplicationeditComponent   implements OnInit{
         
       },
       (error: any) => {
-        console.error('Error fetching application:', error);
+        this.toastr.error('Error fetching application:', error.details);
         // Hata işleme mekanizmasını buraya ekleyebilirsiniz
         setTimeout(()=>{
           this.router.navigate(['/adminpanel/applicationindex'])
@@ -71,15 +72,14 @@ export class ApplicationeditComponent   implements OnInit{
       this.applicationService.update(applicationModel).subscribe({
         //next => observable'dan gelen veri yakaladığımız fonksiyon
         next:(response)=>{
-         console.log("Application Updated");
-         (response.id)
+
         },
         error:(error)=>{
-          this.formMessage="güncellenemedi";
+          this.toastr.error('Application could not be updated!');
           this.change.markForCheck();
         },
         complete:()=>{
-          this.formMessage="Başarıyla Güncellendi";
+          this.toastr.success('Application successfully updated');
           this.ApplicationForm.reset();
           this.change.markForCheck();
 
@@ -91,10 +91,10 @@ export class ApplicationeditComponent   implements OnInit{
     }}
 
     onFormSubmit(){
-      const nameControl = this.ApplicationForm.get('name');
+      this.validationHelper.checkValidation(this.ApplicationForm);
 
-      if (nameControl && nameControl.invalid) {
-        this.formMessage = "Lütfen gerekli alanları doldurun";
+      if (this.ApplicationForm.invalid) {
+        this.toastr.error('Invalid inputs');
         return;
       }
     

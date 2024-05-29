@@ -1,0 +1,124 @@
+/*! SVG Türkiye Haritasi | CSS | MIT Lisans | dnomak.com */
+
+#turkeymap path {
+    cursor: pointer;
+    fill: #eaeaea;
+}
+
+#turkeymap path:hover {
+    fill: #ff6a00;
+}
+
+.turkeymap {
+    left: 0;
+    height: 100%;
+    width: 100%;
+    max-width: 1140px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.turkeymap svg {
+    width: 100%;
+    height: auto;
+}
+
+.names {
+    position: absolute;
+    z-index: 2;
+}
+
+.names div {
+    display: inline-block;
+    background: #ff6a00;
+    color: white;
+    padding: 8px 16px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 25px;
+    opacity: 0.85;
+}
+
+#adana path{
+    fill: #dd4e1d;
+}
+
+#istanbul path{
+    fill: #dd4e1d;
+}
+
+#ankara path {
+    fill: #dd4e1d;
+}
+
+#eskisehir path {
+    fill: #dd4e1d;
+}
+
+#izmir path {
+    fill: #dd4e1d;
+}
+
+#aydin path {
+    fill: #dd4e1d;
+}
+
+#antalya path {
+    fill: #dd4e1d;
+}
+
+#bursa path {
+    fill: #dd4e1d;
+}
+
+#sinop path {
+    fill: #dd4e1d;
+}
+
+#kayseri path {
+    fill: #dd4e1d;
+}
+
+#kahramanmaras path {
+    fill: #dd4e1d;
+}
+
+#gaziantep path {
+    fill: #dd4e1d;
+}
+
+#elazig path {
+    fill: #dd4e1d;
+}
+
+#malatya path {
+    fill: #dd4e1d;
+}
+
+#diyarbakir path {
+    fill: #dd4e1d;
+}
+
+#erzurum path {
+    fill: #dd4e1d;
+}
+
+#rize path {
+    fill: #dd4e1d;
+}
+
+#trabzon path {
+    fill: #dd4e1d;
+}
+
+#mardin path {
+    fill: #dd4e1d;
+}
+
+#adiyaman path {
+    fill: #dd4e1d;
+}
+
+.city-table tr{
+    display:none;
+}

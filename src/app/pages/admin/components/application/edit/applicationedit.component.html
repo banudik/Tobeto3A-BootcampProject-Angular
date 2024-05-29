@@ -1,7 +1,4 @@
-<form [formGroup]="ApplicationForm" (ngSubmit)="onFormSubmit()" enctype="multipart/form-data">
-    <div>
-        <small *ngIf="formMessage">{{formMessage}}</small>
-    </div>
+<form [formGroup]="ApplicationForm" (ngSubmit)="onFormSubmit()" enctype="multipart/form-data" *ngIf="ApplicationForm">
     <div class="card-style mb-30">
         <h6 class="mb-25">Input Fields</h6>
         <div class="input-style-1">
@@ -27,7 +24,6 @@
             </div>
         </div>
     </div>
-    <button type="submit" class="main-btn active-btn rounded-full btn-hover">Update Application</button>
-    <br>
-    <a routerLink='/adminpanel/applicationindex'><span class="main-btn dark-btn rounded-full btn-hover">Back</span></a>
+    <button type="submit" class="main-btn warning-btn rounded-full btn-hover">Update Application</button> |
+    <a class="main-btn dark-btn rounded-full btn-hover" routerLink='/adminpanel/applicationindex'>Back</a>
 </form>

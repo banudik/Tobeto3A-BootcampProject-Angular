@@ -5,11 +5,14 @@ import { CreateBootcampStateRequest } from '../../../../../features/models/reque
 import { BootcampStateService } from '../../../../../features/services/concretes/bootcamp-state.service';
 import { UpdateBootcampStateRequest } from '../../../../../features/models/requests/bootcamp-state/update-bootcamp-state-request';
 import { GetByIdBootcampStateResponse } from '../../../../../features/models/responses/bootcamp-state/get-by-id-bootcamp-state-response';
+import { CommonModule } from '@angular/common';
+import { ValidationHelper } from '../../../../../core/helpers/validationtoastrmessagehelper';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-bootcampstateedit',
   standalone: true,
-  imports: [ReactiveFormsModule,RouterModule],
+  imports: [ReactiveFormsModule,RouterModule,CommonModule],
   templateUrl: './bootcampstateedit.component.html',
   styleUrl: './bootcampstateedit.component.css'
 })
@@ -17,7 +20,6 @@ export class BootcampstateeditComponent implements OnInit{
 
   currentBootcampState!:GetByIdBootcampStateResponse;
   BootcampStateForm!:FormGroup
-  formMessage:string | null=null;
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: { [x: string]: number; }) => {
@@ -27,7 +29,7 @@ export class BootcampstateeditComponent implements OnInit{
   }
 
   constructor(private formBuilder:FormBuilder,private bootcampStateService:BootcampStateService,
-    private router:Router,private change:ChangeDetectorRef, private activatedRoute:ActivatedRoute
+    private router:Router,private change:ChangeDetectorRef, private activatedRoute:ActivatedRoute,private validationhelper:ValidationHelper,private toastr:ToastrService
   ){}
 
   createForm(){
@@ -41,14 +43,13 @@ export class BootcampstateeditComponent implements OnInit{
     this.bootcampStateService.getById(id).subscribe(
       (response: GetByIdBootcampStateResponse) => {
         this.currentBootcampState = response;
-        console.log(this.currentBootcampState.name + " " + this.currentBootcampState.id);
         this.createForm();
         
       },
       (error: any) => {
         console.error('Error fetching bootcampState:', error);
         // Hata işleme mekanizmasını buraya ekleyebilirsiniz
-        this.formMessage="bootcampstate could not be found!";
+        this.toastr.error("bootcampstate could not be found!");
         setTimeout(()=>{
           this.router.navigate(['/adminpanel/bootcampstateindex'])
         },2000)
@@ -63,15 +64,15 @@ export class BootcampstateeditComponent implements OnInit{
       this.bootcampStateService.update(bootcampStateModel).subscribe({
         //next => observable'dan gelen veri yakaladığımız fonksiyon
         next:(response)=>{
-         console.log(response.name + " Updated");
-         (response.name)
+         //console.log(response.name + " Updated");
+         //(response.name)
         },
         error:(error)=>{
-          this.formMessage="güncellenemedi";
+          this.toastr.error("bootcampstate could not be updated!");
           this.change.markForCheck();
         },
         complete:()=>{
-          this.formMessage="Başarıyla Güncellendi";
+          this.toastr.success("bootcampstate updated successfully");
           this.BootcampStateForm.reset();
           this.change.markForCheck();
 
@@ -83,10 +84,10 @@ export class BootcampstateeditComponent implements OnInit{
     }}
 
     onFormSubmit(){
-      const nameControl = this.BootcampStateForm.get('name');
+      this.validationhelper.checkValidation(this.BootcampStateForm);
 
-      if (nameControl && nameControl.invalid) {
-        this.formMessage = "Lütfen gerekli alanları doldurun";
+      if (this.BootcampStateForm.invalid) {
+        this.toastr.error("Invalid inputs!");
         return;
       }
     

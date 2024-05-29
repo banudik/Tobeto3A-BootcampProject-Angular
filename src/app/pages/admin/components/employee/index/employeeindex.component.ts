@@ -4,6 +4,7 @@ import { EmployeeListItemDto } from '../../../../../features/models/responses/em
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { PageRequest } from '../../../../../core/models/page-request';
+import { AuthService } from '../../../../../features/services/concretes/auth.service';
 
 @Component({
   selector: 'app-employeeindex',
@@ -19,7 +20,8 @@ export class EmployeeindexComponent implements OnInit {
   pageSizes: Array<number> = [5,10,20];
   searchTermTmp:string = '';
   isLoading: boolean = false;
-  constructor(private employeeService:EmployeeService) {}
+  isAdmin:boolean = false;
+  constructor(private employeeService:EmployeeService,private authService:AuthService) {}
 
   employeeList: EmployeeListItemDto = {
     index: 0,
@@ -36,6 +38,7 @@ export class EmployeeindexComponent implements OnInit {
   ngOnInit(): void {
     this.getList({ pageIndex: 0, pageSize: this.PAGE_SIZE }) 
     //console.log("start " + this.bootcampStateList.items.length);
+    this.checkIfAdmin();
     this.visibleData();
     this.pageNumbers();
   }
@@ -49,6 +52,11 @@ export class EmployeeindexComponent implements OnInit {
     })
   }
 
+  checkIfAdmin(){
+    if(this.authService.isAdmin()){
+      this.isAdmin = true;
+    }
+  }
 
 
   visibleData(){

@@ -1,12 +1,12 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../features/services/concretes/auth.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-welcome',
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './welcome.component.html',
   styleUrl: './welcome.component.css'
 })

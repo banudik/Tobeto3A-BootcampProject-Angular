@@ -1,9 +1,4 @@
 <form [formGroup]="BootcampUpdateForm" (ngSubmit)="onFormSubmit()" enctype="multipart/form-data" *ngIf="BootcampUpdateForm">
-    <div>
-      @if(formMessage){
-          <small>{{formMessage}}</small>
-      }
-    </div>
     <div class="card-style mb-30">
       <h6 class="mb-25">Input Fields</h6>
       <div class="input-style-1">
@@ -50,7 +45,6 @@
 </div>
 
 
-    <button type="submit" class="main-btn active-btn rounded-full btn-hover">Update Bootcamp</button>
-    <br>
-    <a routerLink='/adminpanel/bootcampindex'><span class="main-btn dark-btn rounded-full btn-hover">Back</span></a>
+    <button type="submit" class="main-btn warning-btn rounded-full btn-hover">Update Bootcamp</button> |
+    <a class="main-btn dark-btn rounded-full btn-hover" routerLink='/adminpanel/bootcampindex'>Back</a>
   </form>

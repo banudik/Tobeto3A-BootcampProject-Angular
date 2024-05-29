@@ -247,37 +247,31 @@
   crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet"
   href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+  <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
   
 
 <body>
-  <header>
-    <a href="#" class="logo"> <img src="assets/img/logo.png.png" class="h-6" alt="CodeStorm Logo" /></a>
-    <ul class="navbar">
+  <header [ngClass]="{ 'dark-header': darkModeService.darkModeSignal() === 'dark', 'light-header': darkModeService.darkModeSignal() === 'light' }">
+    <a routerLink="homepage" class="logo"> <img src="assets/img/logo.png.png" class="h-6" alt="CodeStorm Logo" /></a>
+    <ul class="navbar" [ngClass]="{ 'dark-navbar': darkModeService.darkModeSignal() === 'dark', 'light-navbar': darkModeService.darkModeSignal() === 'light' }">
       <li><a routerLink="/homepage">Home</a></li>
       <li><a routerLink="/about-us">About</a></li>
       <li><a routerLink="/bootcamps">Courses</a></li>
       <li><a routerLink="/contact-us">Contact</a></li>
       <li><a routerLink="/faq">FAQs</a></li>
-      <li *ngIf="isAdmin"><a routerlink="/adminpanel">Admin Panel</a></li>
     </ul>
 
-    <div class="main">
-      <a *ngIf="!isLoggedIn" routerLink="/login" class="user"><i class="fa-solid fa-user"></i> Login </a>
-      <a *ngIf="!isLoggedIn" routerLink="/sign-up" class="user"><i class="fa-solid fa-user-plus"></i> Register</a>
-      <a *ngIf="isLoggedIn" (click)="showLogoutModal = true" routerLink="/homepage" class="user"><i class="fa-solid fa-user-plus"></i> Log out</a>
-      <a *ngIf="isLoggedIn" [routerLink]="['/myprofile', userId.toString()]" class="user"><i class="fa-solid fa-user-plus"></i> My Profile</a>
-      <div *ngIf="showLogoutModal"
-              class="fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-50">
-              <div class="bg-white p-8 rounded-lg shadow-lg">
-                <p class="text-lg font-semibold mb-4">Çıkış yapmak istediğinize emin misiniz?</p>
-                <div class="flex justify-end">
-                  <button (click)="showLogoutModal = false"
-                    class="text-black hover:text-gray-700 px-4 py-2 rounded-md mr-2">İptal</button>
-                  <button (click)="logOut()"
-                    class="text-black dark:text-white bg-indigo-400 hover:bg-indigo-600 px-4 py-2 rounded-md">Çıkış Yap</button>
-                </div>
-              </div>
-            </div>
+    <div [ngClass]="{ 'dark-main': darkModeService.darkModeSignal() === 'dark', 'light-main': darkModeService.darkModeSignal() === 'light' }">
+      <a *ngIf="!isLoggedIn" routerLink="/login" [ngClass]="{ 'dark-user': darkModeService.darkModeSignal() === 'dark', 'light-user': darkModeService.darkModeSignal() === 'light' }"><i class="fa-solid fa-user"></i> Login </a>
+      <a *ngIf="!isLoggedIn" routerLink="/sign-up" [ngClass]="{ 'dark-user': darkModeService.darkModeSignal() === 'dark', 'light-user': darkModeService.darkModeSignal() === 'light' }"><i class="fa-solid fa-user-plus"></i> Register</a> 
+      <a *ngIf="isLoggedIn" (click)="showLogoutModal = true" [ngClass]="{ 'dark-user': darkModeService.darkModeSignal() === 'dark', 'light-user': darkModeService.darkModeSignal() === 'light' }"><i class="ri-logout-circle-line"></i> Log out</a>
+      <a *ngIf="isLoggedIn && !isAdmin" [routerLink]="['/myprofile', userId.toString()]" [ngClass]="{ 'dark-user': darkModeService.darkModeSignal() === 'dark', 'light-user': darkModeService.darkModeSignal() === 'light' }"><i class="ri-user-heart-line"></i> My Profile</a>
+      <a *ngIf="isAdmin" routerLink="/adminpanel" [ngClass]="{ 'dark-user': darkModeService.darkModeSignal() === 'dark', 'light-user': darkModeService.darkModeSignal() === 'light' }"><i class="ri-admin-line"></i> Admin Panel</a>
+        
+      
       @if (darkModeService.darkModeSignal() === 'dark') {
         <span (click)="toggleDarkMode()">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="w-6 h-6">
@@ -291,7 +285,18 @@
         </svg>
         </span>
         }
-      <div class="bx bx-menu" id="menu-icon"></div>
+      <div class="bx bx-menu" [ngClass]="{ 'dark-menu': darkModeService.darkModeSignal() === 'dark', 'light-menu': darkModeService.darkModeSignal() === 'light' }" id="menu-icon" (click)="menuClick()"></div>
     </div>
   </header>
+  <div *ngIf="showLogoutModal">
+              <div [ngClass]="{ 'dark-modal': darkModeService.darkModeSignal() === 'dark', 'light-modal': darkModeService.darkModeSignal() === 'light' }">
+                <p [ngClass]="{ 'dark-text': darkModeService.darkModeSignal() === 'dark', 'light-text': darkModeService.darkModeSignal() === 'light' }">Çıkış yapmak istediğinize emin misiniz?</p>
+                <div [ngClass]="{ 'dark-buttons': darkModeService.darkModeSignal() === 'dark', 'light-buttons': darkModeService.darkModeSignal() === 'light' }">
+                  <button (click)="showLogoutModal = false"
+                  [ngClass]="{ 'dark-cancel': darkModeService.darkModeSignal() === 'dark', 'light-cancel': darkModeService.darkModeSignal() === 'light' }">İptal</button>
+                  <button (click)="logOut()"
+                  [ngClass]="{ 'dark-logout': darkModeService.darkModeSignal() === 'dark', 'light-logout': darkModeService.darkModeSignal() === 'light' }">Çıkış Yap</button>
+                </div>
+              </div>
+            </div>
 </body>

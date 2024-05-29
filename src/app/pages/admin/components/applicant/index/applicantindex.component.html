@@ -34,7 +34,7 @@
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody >
+                    <tbody *ngIf="!isLoading">
                         <tr  *ngFor="let state of visibleData(); let i = index">
 
                             <td>

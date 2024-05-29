@@ -1,0 +1,49 @@
+<form *ngIf="currentEmployee">
+    <div class="card-style mb-30">
+        <h6 class="mb-25">Employee Details</h6>
+        <div class="input-style-1">
+            <label for="firstNameInput">Employee First Name</label>
+            <input disabled id="firstNameInput" type="text" value="{{currentEmployee.firstName}}" />
+        </div>
+        <div class="input-style-1">
+            <label for="lastNameInput">Employee Last Name</label>
+            <input disabled id="lastNameInput" type="text" value="{{currentEmployee.lastName}}" />
+        </div>
+
+        <div class="input-style-1">
+            <label for="UserNameInput">Employee User Name</label>
+            <input disabled id="UserNameInput" type="text" value="{{currentEmployee.userName}}" />
+        </div>
+        <div class="input-style-1">
+            <label for="EmailInput">Employee Email</label>
+            <input disabled id="EmailInput" type="text" value="{{currentEmployee.email}}" />
+        </div>
+        <div class="input-style-1">
+            <label for="BirthInput">Employee Date of Birth</label>
+            <input disabled id="BirthInput" type="text"
+                value="{{currentEmployee.dateOfBirth | date : 'dd/MM/yyyy'}}" />
+        </div>
+        <div class="input-style-1">
+            <label for="NationalInput">Employee National Identity</label>
+            <input disabled id="NationalInput" type="text" value="{{currentEmployee.nationalIdentity}}" />
+        </div>
+        <div class="input-style-1">
+            <label for="PositionInput">Employee Company</label>
+            <input disabled id="PositionInput" type="text" value="{{currentEmployee.position}}" />
+        </div>
+
+        <div class="input-style-1">
+            <label for="createdDate">Employee Created Date</label>
+            <input disabled id="createdDate" type="text" [value]="currentEmployee.createdDate | date : 'dd/MM/yyyy'" />
+        </div>
+        <div class="input-style-1">
+            <label for="updatedDate">Employee Updated Date</label>
+            <input disabled id="updatedDate" type="text" [value]="currentEmployee.updatedDate| date : 'dd/MM/yyyy'" />
+        </div>
+    </div>
+    <br>
+    <div>
+        <a class="main-btn warning-btn rounded-full btn-hover" routerLink="/adminpanel/editemployeeprofile/{{currentEmployee.id}}">Edit</a> |
+        <a class="main-btn dark-btn rounded-full btn-hover" routerLink="/adminpanel/">Back</a>
+    </div>
+</form>

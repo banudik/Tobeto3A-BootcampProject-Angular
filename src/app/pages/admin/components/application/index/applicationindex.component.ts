@@ -6,6 +6,8 @@ import { ApplicationStateInformationListItemDto } from '../../../../../features/
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { PageRequest } from '../../../../../core/models/page-request';
 import { CommonModule } from '@angular/common';
+import { GetListApplicationInformationResponse } from '../../../../../features/models/responses/application-information/get-list-application-information-response';
+import { GetListApplicationStateInformationResponse } from '../../../../../features/models/responses/application-state-information/get-list-application-state-information-response';
 
 @Component({
   selector: 'app-applicationindex',
@@ -16,7 +18,7 @@ import { CommonModule } from '@angular/common';
 })
 export class ApplicationindexComponent implements OnInit {
   dateNow = Date.now;
-
+  isLoading: boolean = true;
   applicationList: ApplicationInformatinListItemDto = {
     index: 0,
 
@@ -28,7 +30,7 @@ export class ApplicationindexComponent implements OnInit {
     items: []
   };
 
-  applicationStates!: ApplicationStateInformationListItemDto;
+  applicationStates!: GetListApplicationStateInformationResponse[];
 
   constructor(private applicationService: ApplicationInformationService, private activatedRoute: ActivatedRoute, private applicationStateService: ApplicationStateInformationService) { }
   readonly PAGE_SIZE = 100000; //for api
@@ -48,15 +50,19 @@ export class ApplicationindexComponent implements OnInit {
   }
 
   getList(pageRequest: PageRequest) {
+    this.isLoading = true;
     this.applicationService.getList(pageRequest).subscribe((response) => {
       this.applicationList = response;
     })
+    this.isLoading = false;
   }
 
   getApplicationStates() {
+    this.isLoading = true;
     this.applicationStateService.getList({ pageIndex: 0, pageSize: this.PAGE_SIZE }).subscribe((response) => {
-      this.applicationStates = response;
+      this.applicationStates = response.items;
     })
+    this.isLoading = false;
   }
 
   visibleData() {

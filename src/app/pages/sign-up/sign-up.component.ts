@@ -9,7 +9,7 @@ import { LocalStorageService } from '../../features/services/concretes/local-sto
 import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { ValidationHelper } from '../../core/helpers/validationtoastrmessagehelper';
-import { DarkModeService } from '../../features/services/dark-mode.service';
+import { DarkModeService } from '../../features/services/concretes/dark-mode.service';
 
 
 @Component({

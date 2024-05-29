@@ -64,7 +64,7 @@
   position: absolute;
   width: 500px;
   background: #222;
-  z-index: 1000;
+  z-index: 200;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -502,7 +502,7 @@ color:#8585ff;
   position: absolute;
   width: 500px;
   background: #f9f6f6;
-  z-index: 1000;
+  z-index: 200;
   display: flex;
   justify-content: center;
   align-items: center;

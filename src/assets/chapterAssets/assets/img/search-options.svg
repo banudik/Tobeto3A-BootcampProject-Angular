@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="30.747" height="27">
+    <defs>
+        <style>
+            .cls-1{fill:#fff}
+        </style>
+    </defs>
+    <g id="Group_2504" data-name="Group 2504" transform="translate(-180 -228)">
+        <g id="Group_2507" data-name="Group 2507" transform="translate(180 228)">
+            <g id="Group_2504-2" data-name="Group 2504">
+                <path id="Path_2667" data-name="Path 2667" class="cls-1" d="M33.789 22.99h-16.66a1.129 1.129 0 0 0 0 2.257h16.66a4.036 4.036 0 0 0 3.883 2.89 3.982 3.982 0 0 0 3.838-2.89h4.109a1.129 1.129 0 0 0 0-2.257H41.51a4.023 4.023 0 0 0-7.721 0zm5.6 1.129a1.761 1.761 0 1 1-1.761-1.761 1.793 1.793 0 0 1 1.76 1.76z" transform="translate(-16 -20.1)"/>
+            </g>
+            <g id="Group_2505" data-name="Group 2505" transform="translate(0 9.03)">
+                <path id="Path_2668" data-name="Path 2668" class="cls-1" d="M20.244 42.99h-3.115a1.129 1.129 0 1 0 0 2.257h3.115a4.036 4.036 0 0 0 3.883 2.89 3.982 3.982 0 0 0 3.838-2.89h17.653a1.129 1.129 0 1 0 0-2.257H27.965a4.023 4.023 0 0 0-7.721 0zm5.6 1.129a1.761 1.761 0 1 1-1.761-1.761 1.763 1.763 0 0 1 1.76 1.76z" transform="translate(-16 -40.1)"/>
+            </g>
+            <g id="Group_2506" data-name="Group 2506" transform="translate(0 18.963)">
+                <path id="Path_2669" data-name="Path 2669" class="cls-1" d="M28.371 64.99H17.129a1.129 1.129 0 1 0 0 2.257h11.242a4.036 4.036 0 0 0 3.883 2.89 3.982 3.982 0 0 0 3.838-2.89h9.527a1.129 1.129 0 1 0 0-2.257h-9.527a4.023 4.023 0 0 0-7.721 0zm5.6 1.129a1.761 1.761 0 1 1-1.761-1.761 1.763 1.763 0 0 1 1.76 1.76z" transform="translate(-16 -62.1)"/>
+            </g>
+        </g>
+    </g>
+</svg>
