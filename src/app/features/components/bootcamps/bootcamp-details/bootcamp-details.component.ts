@@ -1,5 +1,4 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { BootcampService } from '../../../services/concretes/bootcamp.service';
 import { GetByIdBootcampResponse } from '../../../models/responses/bootcamp/get-by-id-bootcamp-response';
@@ -10,6 +9,8 @@ import { CreateApplicationInformationRequest } from '../../../models/requests/ap
 import { CreatedApplicationInformationResponse } from '../../../models/responses/application-information/created-application-information-response';
 import { LocalStorageService } from '../../../services/concretes/local-storage.service';
 import { AuthService } from '../../../services/concretes/auth.service';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject, OnInit, Renderer2 } from '@angular/core';
 
 @Component({
   selector: 'app-bootcamp-details',
@@ -28,7 +29,8 @@ export class BootcampDetailsComponent implements OnInit{
 
   constructor(private bootcampService: BootcampService, private activatedRoute: ActivatedRoute
      ,private applicationInformationService:ApplicationInformationService, private localStorageService:LocalStorageService
-    ,private authService:AuthService) {}
+    ,private authService:AuthService,    private renderer2: Renderer2,
+    @Inject(DOCUMENT) private _document:Document) {}
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: { [x: string]: number; }) => {
@@ -36,6 +38,26 @@ export class BootcampDetailsComponent implements OnInit{
         this.getBootcampById(params["bootcampId"])
       } else { console.log("getById bootcamp error") }
     })
+    window.scrollTo(0,0);
+    // Ana JS dosyalarını yükleme
+    this.loadScript('assets/homepageAssets/js/jquery.min.js');
+    this.loadScript('assets/homepageAssets/js/bootstrap.min.js');
+    this.loadScript('assets/homepageAssets/js/magnific-popup.min.js');
+    this.loadScript('assets/homepageAssets/js/nice-select.min.js');
+    this.loadScript('assets/homepageAssets/js/jquery.mixitup.min.js');
+    this.loadScript('assets/homepageAssets/js/appear.min.js');
+    this.loadScript('assets/homepageAssets/js/sticky-sidebar.min.js');
+    this.loadScript('assets/homepageAssets/js/odometer.min.js');
+    this.loadScript('assets/homepageAssets/js/owl.carousel.min.js');
+    this.loadScript('assets/homepageAssets/js/meanmenu.min.js');
+    this.loadScript('assets/homepageAssets/js/wow.min.js');
+    this.loadScript('assets/homepageAssets/js/main.js');
+  }
+  private loadScript(url: string) {
+    const script = this.renderer2.createElement('script');
+    script.src = url;
+    script.type = 'text/javascript';
+    this.renderer2.appendChild(this._document.body, script);
   }
 
   getBootcampById(bootcampId: number): void {

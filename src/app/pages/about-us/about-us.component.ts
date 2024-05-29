@@ -34,7 +34,7 @@ ngOnInit() {
     this.loadScript('assets/homepageAssets/js/owl.carousel.min.js');
     this.loadScript('assets/homepageAssets/js/meanmenu.min.js');
     this.loadScript('assets/homepageAssets/js/wow.min.js');
-    this.loadScript('assets/homepageAssets/js/main.js');
+    this.loadScript('assets/homepageAssets/js/deneme.js');
 
 }
 private loadScript(url: string) {
