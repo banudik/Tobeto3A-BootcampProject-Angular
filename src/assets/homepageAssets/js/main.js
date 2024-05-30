@@ -1,6 +1,3 @@
-(function ($) {
-	"use strict";
-		// go to top
 	$(function () {
 		// Scroll Event
 		$(window).on("scroll", function () {
@@ -13,6 +10,16 @@
 			$("html, body").animate({ scrollTop: "0" }, 500);
 		});
 	});
+
+	// Odometer JS
+	$('.odometer').appear(function(e) {
+		var odo = $(".odometer");
+		odo.each(function() {
+			var countNumber = $(this).attr("data-count");
+			$(this).html(countNumber);
+		});
+	});
+	
 	// Mean Menu
 	$('.mean-menu').meanmenu({
 		meanScreenWidth: "991"
@@ -38,16 +45,6 @@
 		fixedContentPos: false
 	});
 
-	// Odometer JS
-	$('.odometer').appear(function (e) {
-		var odo = $(".odometer");
-		odo.each(function () {
-			var countNumber = $(this).attr("data-count");
-			$(this).html(countNumber);
-		});
-	});
-
-
 	// Nice Select JS
 	$('select').niceSelect();
 
@@ -63,5 +60,3 @@
 			target: '.mix-target'
 		}
 	});
-
-}(jQuery));

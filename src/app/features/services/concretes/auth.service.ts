@@ -105,6 +105,7 @@ export class AuthService extends AuthBaseService {
       );
   }
 
+
   // pop-up ekranında ki activationKey i alıp tekrar  mevcut email ve password ile post ediliyoruz başarılı olursa response'taki tokeni storage'a kayıt ediyoruz login işlemi bu metod ile bitiyor(kullanıcının tekrar emai ve password girmesi gerekmiyor)
   loginWithVerify(UserWithActivationCode: UserForLoginWithVerifyRequest): Observable<AccessTokenModel<TokenModel>> {
     return this.httpClient.post<AccessTokenModel<TokenModel>>(`${this.apiUrl}/login`, UserWithActivationCode,{ withCredentials: true })

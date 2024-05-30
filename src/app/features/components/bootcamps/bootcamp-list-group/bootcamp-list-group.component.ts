@@ -19,10 +19,11 @@ import { AuthService } from '../../../services/concretes/auth.service';
   imports: [CommonModule, HttpClientModule, InstructorComponent, RouterModule, FormsModule]
 })
 export class BootcampListGroupComponent implements OnInit {
+
   dateNow = Date.now();
   currentPageNumber!: number;
-  pageSizes: Array<number> = [4, 8, 16, 24];
-  PAGE_SIZE: number = 4;
+  pageSizes: Array<number> = [3,6, 9, 12];
+  PAGE_SIZE: number = 3;
   instructors!: InstructorListItemDto;
   instructorFilterTmp: string = '';
   searchFilterTmp: string = '';
@@ -49,11 +50,9 @@ export class BootcampListGroupComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    window.scrollTo(0,0);
     this.getInstructors();
     this.getList({ pageIndex: 0, pageSize: this.PAGE_SIZE });
-    
-      window.scrollTo(0,0);
-    
   }
 
   getInstructors() {

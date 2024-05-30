@@ -20,6 +20,8 @@
     background: #181818;
     color: #8585ff;
     padding: 30px 0;
+    margin-top: 90px;
+    margin-bottom: 30px;
     text-align: center;
     border-radius: 8px;
   }
@@ -92,6 +94,8 @@
     background: #fff;
     color: #4ab4fb;
     padding: 30px 0;
+    margin-top: 90px;
+    margin-bottom: 30px;
     text-align: center;
     border-radius: 8px;
   }
