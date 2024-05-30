@@ -1,3 +1,9 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+
 <div *ngIf="isloading >= 5" class="container d-flex course-detail-container">
     <div class="course-left d-flex align-items-center flex-column">
         <iframe class="course-detail-video" [src]="safeUrl" allowfullscreen="allowfullscreen"
@@ -5,30 +11,19 @@
         <div class="video-content-section">
             <div class="video-content-top-section">
                 <ul class="d-flex align-items-center justify-content-between">
-                    @if(currentChapter.description){
+
                     <li>
-                        <button (onclick)="defaultText = currentChapter.description">
+                        <button >
                             About This Chapter
                         </button>
                     </li>
-                    }
-                    @else{
-                    <li>
-                        <button (onclick)="defaultText = currentBootcamp.description">
-                            About Course
-                        </button>
-                    </li>
-                    }
+
 
                 </ul>
             </div>
             <div class="video-content-bottom-section-container">
-                @if(currentChapter.description){
                 {{currentChapter.description}}
-                }
-                @else{
-                {{currentBootcamp.description}}
-                }
+
             </div>
         </div>
     </div>
@@ -49,7 +44,7 @@
 
 
         <div class="certificate" id="CertificateHide">
-            <a style="display:block;width: auto; margin-right: 12px;text-align:left;border:none;" href="#"
+            <a style="display:block;width: auto; margin-right: 12px;text-align:left;border:none;"
                 class="navbar-right-btn login-btns">
                 <img src="assets/chapterAssets/images/star.png" width="13" /> Course Status:
             </a>
@@ -60,10 +55,11 @@
                 </div>
                 <p class="progress-count">{{certificateStatus + "%"}}</p>
                 <div class="cert-button">
-                    @if (certificateStatus == 100)
+                    <!-- user needs to watch all chapters and bootcamp must be finished -->
+                     @if (certificateStatus == 100) 
                     {
-                    <a href="#" style="display:inline-block;width:100%;" class="createCertificate navbar-right-btn"
-                        onclick="CreateCertificate(); return false;">
+                    <a style="display:inline-block;width:100%;" class="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:focus:ring-yellow-900 cursor-pointer"
+                        (click)="CreateAndDownloadCertificate()">
                         Create Certificate
                     </a>
                     }
