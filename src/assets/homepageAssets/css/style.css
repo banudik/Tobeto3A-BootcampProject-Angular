@@ -1243,7 +1243,14 @@ Edu Courses Area CSS
   margin-bottom: 30px;
   -webkit-box-shadow: 0 2px 28px 0 rgba(0, 0, 0, 0.09);
   box-shadow: 0 2px 28px 0 rgba(0, 0, 0, 0.09);
-  transition: .5s;
+  transition: .5s;  
+  border-radius: 5px 5px 0px 0px;
+
+}
+.single-courses-box .boot-cards{
+  width: 100% ;
+  border-radius: 0px 0px 5px 5px;
+  margin-top: -50px;
 }
 
 .single-courses-box:hover {
@@ -1253,6 +1260,15 @@ Edu Courses Area CSS
 
 .single-courses-box .image {
   position: relative;
+}
+
+.bootcamps{
+  display: flex !important;
+}
+.single-courses-box .image img{
+  border-radius: 5px 5px 0px 0px;
+  max-height: 360px;
+  min-height: 360px;
 }
 
 .single-courses-box .cr-tag span {
@@ -1274,7 +1290,7 @@ Edu Courses Area CSS
 }
 
 .single-courses-box .content {
-  padding: 30px 30px;
+  padding: 15px 15px;
   background-color: white;
 }
 
@@ -1308,6 +1324,14 @@ Edu Courses Area CSS
 .single-courses-box .cr-items span {
   color: #7b7b8a;
   font-size: 18px;
+}
+
+.single-courses-box .ev-items{
+  font-size: 13px !important;
+}
+
+.single-courses-box .ev-items li i{
+  color: #30bead;
 }
 
 .section-button {
@@ -1530,9 +1554,7 @@ Edu Single Courses Area CSS
   color: #4ab4fb;
 }
 
-.single-course-desc .user-details .course-date {
-  margin-left: 40px;
-}
+
 
 .single-course-sidebar .course-widget {
   background-color: white;
@@ -1585,6 +1607,14 @@ Edu Single Courses Area CSS
   padding: 0;
   margin: 0;
   margin-bottom: 30px;
+} 
+
+.single-course-sidebar .course-widget .sidebar-content .courses-details li .icon {
+  display: flex;
+}
+
+.single-course-sidebar .course-widget .sidebar-content .courses-details li .icon img {
+  margin-top: 2px;
 }
 
 .single-course-sidebar .course-widget .sidebar-content .courses-details li {
@@ -1641,7 +1671,6 @@ Edu Single Courses Area CSS
 }
 
 .course-tabs .course-nav .course-link {
-  display: block;
   padding: 15px 48px;
   border: none;
   border-right: 2px solid #ececec;
@@ -3028,10 +3057,15 @@ Edu Events Area CSS
   list-style: none;
   padding: 0;
   margin-bottom: 25px;
+  color: #30bead !important; 
+
 }
 
 .single-event-box .content .ev-items li {
   margin-bottom: 10px;
+}
+.single-event-box i{
+  color: #30bead !important; 
 }
 
 .single-event-box .content .ev-items li:last-child {
@@ -3318,6 +3352,10 @@ Edu Team Area CSS
 
 .single-team-box02 .image {
   position: relative;
+}
+
+.single-team-box02 .image img{
+  max-height: 320px;
 }
 
 .single-team-box02 .image .social-links {

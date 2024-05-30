@@ -155,135 +155,44 @@
                     <h2>Choose Our Top <span class="shape02" >Courses</span></h2>
                 </div>
                 <div class="row justify-content-center">
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="single-courses-box">
-                            <div class="image">
-                                <a href="single-course.html" class="d-block">
-                                    <img src="assets/homepageAssets/images/all-img/c1.png" alt="image">
-                                </a>
-                                <div class="cr-tag">
-                                    <a href="#"><span>Development</span></a>
+                    
+                    <div *ngFor="let bootcamp of visibleData()">
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div  class="single-courses-box">
+                                <div class="image">
+                                    <a class="d-block">
+                                        <img [routerLink]="['/bootcampdetail', bootcamp.id.toString()]"[src]="bootcamp.bootcampImageImagePath" class="w-full h-48 object-cover" alt="bootcamp image">
+                                    </a>
                                 </div>
-                            </div>
-                            <div class="content">
-                                <span class="cr-price" >$29.07</span>
-                                <h3><a href="single-course.html">Financial Security Thinking and Principles Theory</a></h3>
-                                <ul class="cr-items" >
-                                    <li><i class='bx bx-food-menu'></i> <span>2 Lessons</span> </li>
-                                    <li><i class='bx bx-time-five'></i> <span>4h 30m</span></li>
-                                    <li><i class='bx bx-star' ></i> <span>4.5</span></li>
-                                </ul>
+                                <div class="content">
+                                    <h3><a  [routerLink]="['/bootcampdetail', bootcamp.id.toString()]">{{bootcamp.name}}</a></h3>
+                                    <ul class="ev-items">
+                                        <li><i class="bx bx-calendar mr-2 mb-1"></i><span>{{bootcamp.instructorFirstName}} {{bootcamp.instructorLastName}}</span></li>
+                                        <li><i class='bx bx-map mr-2'></i><span>{{bootcamp.startDate | date:'dd.MM.yyyy'}} - {{bootcamp.endDate | date:'dd.MM.yyyy'}}</span></li>
+                                    </ul>
+                                    <ul class="cr-items" >
+                                        <li><i class='bx bx-food-menu'></i> <span>2 Lessons</span> </li>
+                                        <li><i class='bx bx-time-five'></i> <span>4h 30m</span></li>
+                                        <li><i class='bx bx-star' ></i> <span>4.5</span></li>
+                                    </ul>
+
+
+                                </div>
+                                <div class="text-center mt-5">
+                                    <a href="#" class="default-btn primery-red text-center boot-cards">Başvur</a>
+    
+                                        </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="single-courses-box">
-                            <div class="image">
-                                <a href="single-course.html" class="d-block">
-                                    <img src="assets/homepageAssets/images/all-img/c2.png" alt="image">
-                                </a>
-                                <div class="cr-tag">
-                                    <a href="#"><span>Art & Design </span></a>
-                                </div>
-                            </div>
-                            <div class="content">
-                                <span class="cr-price" >$80</span>
-                                <h3><a href="single-course.html">Basic Fundamentals of Interior & Graphics Design</a></h3>
-                                <ul class="cr-items" >
-                                    <li><i class='bx bx-food-menu'></i> <span>2 Lessons</span> </li>
-                                    <li><i class='bx bx-time-five'></i> <span>4h 30m</span></li>
-                                    <li><i class='bx bx-star' ></i> <span>4.5</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="single-courses-box">
-                            <div class="image">
-                                <a href="single-course.html" class="d-block">
-                                    <img src="assets/homepageAssets/images/all-img/c3.png" alt="image">
-                                </a>
-                                <div class="cr-tag">
-                                    <a href="#"><span>Art & Design </span></a>
-                                </div>
-                            </div>
-                            <div class="content">
-                                <span class="cr-price" >$25.20</span>
-                                <h3><a href="single-course.html">Increasing Engagement with Instagram & Facebook</a></h3>
-                                <ul class="cr-items" >
-                                    <li><i class='bx bx-food-menu'></i> <span>2 Lessons</span> </li>
-                                    <li><i class='bx bx-time-five'></i> <span>4h 30m</span></li>
-                                    <li><i class='bx bx-star' ></i> <span>4.5</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="single-courses-box">
-                            <div class="image">
-                                <a href="single-course.html" class="d-block">
-                                    <img src="assets/homepageAssets/images/all-img/c4.png" alt="image">
-                                </a>
-                                <div class="cr-tag">
-                                    <a href="#"><span>Drawing</span></a>
-                                </div>
-                            </div>
-                            <div class="content">
-                                <span class="cr-price" >$75</span>
-                                <h3><a href="single-course.html">Introduction to Color Theory & Basic UI/UX </a></h3>
-                                <ul class="cr-items" >
-                                    <li><i class='bx bx-food-menu'></i> <span>2 Lessons</span> </li>
-                                    <li><i class='bx bx-time-five'></i> <span>4h 30m</span></li>
-                                    <li><i class='bx bx-star' ></i> <span>4.5</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="single-courses-box">
-                            <div class="image">
-                                <a href="single-course.html" class="d-block">
-                                    <img src="assets/homepageAssets/images/all-img/c5.png" alt="image">
-                                </a>
-                                <div class="cr-tag">
-                                    <a href="#"><span>Technology</span></a>
-                                </div>
-                            </div>
-                            <div class="content">
-                                <span class="cr-price" >$36.20</span>
-                                <h3><a href="single-course.html">Financial Security Thinking and Principles Theory</a></h3>
-                                <ul class="cr-items" >
-                                    <li><i class='bx bx-food-menu'></i> <span>2 Lessons</span> </li>
-                                    <li><i class='bx bx-time-five'></i> <span>4h 30m</span></li>
-                                    <li><i class='bx bx-star' ></i> <span>4.5</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="single-courses-box">
-                            <div class="image">
-                                <a href="single-course.html" class="d-block">
-                                    <img src="assets/homepageAssets/images/all-img/c6.png" alt="image">
-                                </a>
-                                <div class="cr-tag">
-                                    <a href="#"><span>Data Science</span></a>
-                                </div>
-                            </div>
-                            <div class="content">
-                                <span class="cr-price" >$38</span>
-                                <h3><a href="single-course.html">Free Logo Design: From Concept to Presentation</a></h3>
-                                <ul class="cr-items" >
-                                    <li><i class='bx bx-food-menu'></i> <span>2 Lessons</span> </li>
-                                    <li><i class='bx bx-time-five'></i> <span>4h 30m</span></li>
-                                    <li><i class='bx bx-star' ></i> <span>4.5</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="section-button">
-                        <a routerLink="/bootcamps" class="default-btn">View All Courses</a>
-                    </div>
+                   
+                   
+                   
+                   
+                    
+                </div>
+                <div class="section-button">
+                    <a routerLink="/bootcamps" class="default-btn">View All Courses</a>
                 </div>
             </div>
         </div>
