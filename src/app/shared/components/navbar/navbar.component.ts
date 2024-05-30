@@ -43,14 +43,12 @@ export class NavbarComponent implements OnInit{
       this.isLoggedIn = isLoggedIn;
       this.cdRef.detectChanges(); // Değişiklik algılansın ve template güncellensin
       //this.router.navigate(['homepage']);
-
     });
 
     this.authService.isAdmin$.subscribe(isAdmin => {
       this.isAdmin = isAdmin;
       this.cdRef.detectChanges(); // Değişiklik algılansın ve template güncellensin
       //this.router.navigate(['homepage']);
-
     });
   
      this.getMenuItems();

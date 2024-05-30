@@ -1,16 +1,23 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
+import { CertificateBaseService } from '../abstracts/certificate-base-service';
+import { CreateCertificateRequest } from '../../models/requests/certificate/create-certificate-request';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CertificateService {
+export class CertificateService extends CertificateBaseService{
+
+  
+
   private readonly apiUrl:string = `${environment.API_URL}/certificates`
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    super();
+  }
 
   createCertificate( bootcampId: string): Observable<any> {
     return this.http.post(this.apiUrl, { bootcampId });
@@ -18,6 +25,11 @@ export class CertificateService {
 
   getCertificate(certificateId: string): Observable<Blob> {
     return this.http.get(`${this.apiUrl}/${certificateId}`, { responseType: 'blob' });
+  }
+
+  override createAndDownloadCertificate(request: CreateCertificateRequest): Observable<Blob> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post(`${this.apiUrl}/createanddownloadcertificate`, request, { headers, responseType: 'blob' });
   }
 }
 
