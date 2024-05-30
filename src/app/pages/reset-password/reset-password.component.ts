@@ -65,6 +65,24 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   //localStorage'da token mevcut ise siler, Url üzerindeki accessTokeni alır ve yeni şifre ile Apiye gönderir
+  // resetPassword() {
+  //   this.storageService.removeToken();
+  //   const newPasswordControl = this.passwordForm.get('newPassword');
+  //   const confirmPasswordControl = this.passwordForm.get('confirmPassword');
+
+  //   const newPasswordValue = newPasswordControl?.value;
+  //   const confirmPasswordValue = confirmPasswordControl?.value;
+
+  //   if (this.passwordForm.valid && newPasswordValue==confirmPasswordValue) {
+  //     let PasswordModel: ResetPasswordRequest = {password: this.passwordForm.get('newPassword')?.value};
+  //     this.authService.resetPassword(this.token,PasswordModel);
+  //     console.log(PasswordModel,this.token)
+  //       }
+  //       else{
+  //         this.toastr.error('Passwords do not match')
+  //       }
+  //     }
+
   resetPassword() {
     this.storageService.removeToken();
     const newPasswordControl = this.passwordForm.get('newPassword');
@@ -73,17 +91,13 @@ export class ResetPasswordComponent implements OnInit {
     const newPasswordValue = newPasswordControl?.value;
     const confirmPasswordValue = confirmPasswordControl?.value;
 
-    if (this.passwordForm.valid && newPasswordValue==confirmPasswordValue) {
-      let PasswordModel: ResetPasswordRequest = {password: this.passwordForm.get('newPassword')?.value};
-      this.authService.resetPassword(this.token,PasswordModel);
-      this.toastr.success('Şifre Sıfırlama Başarılı')
-      console.log(PasswordModel,this.token)
-        }
-        else{
-          this.toastr.error('Şifreler uyuşmuyor')
-        }
-      }
-
+    if (this.passwordForm.valid && newPasswordValue === confirmPasswordValue) {
+      const passwordModel: ResetPasswordRequest = { password: newPasswordValue };
+      this.authService.resetPassword(this.token, passwordModel);
+    } else {
+      this.toastr.error('Passwords do not match');
+    }
+  }
   
 //yeni şifre için dinamik validasyon koşulları
   validatePassword() {

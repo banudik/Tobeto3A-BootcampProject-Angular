@@ -1,17 +1,12 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit,inject } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
-import { LoginComponent } from '../../../pages/login/login.component';
-import { SignUpComponent } from '../../../pages/sign-up/sign-up.component';
-import { BootcampListGroupComponent } from '../../../features/components/bootcamps/bootcamp-list-group/bootcamp-list-group.component';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { AuthService } from '../../../features/services/concretes/auth.service';
 import { MenubarModule } from 'primeng/menubar';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ProfileComponent } from '../../../pages/profile/profile.component';
 import { DarkModeService } from '../../../features/services/concretes/dark-mode.service';
-
+import { LocalStorageService } from '../../../features/services/concretes/local-storage.service';
 
 @Component({
   selector: 'app-navbar',
@@ -27,24 +22,33 @@ export class NavbarComponent implements OnInit{
   isAdmin: boolean = false; 
   menuItems!:MenuItem[];
   userLogged!:boolean;
+  token: string | null = null;
   showLogoutModal = false;
   userId!:string;
   showMenu:boolean = false;
-  
-  constructor(private authService:AuthService,private router:Router,private cdRef:ChangeDetectorRef){}
 
-  
+
+  constructor(private authService:AuthService,private router:Router,private cdRef:ChangeDetectorRef,private storageService:LocalStorageService)
+  {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.checkLoginStatus();
+      }
+    });
+  }
+
    ngOnInit(): void {
-    this.authService.isLoggedIn$.subscribe(isLoggedIn => {
+    this.authService.isLoggedIn$.subscribe(isLoggedIn => 
+    {
       this.isLoggedIn = isLoggedIn;
       this.cdRef.detectChanges(); // Değişiklik algılansın ve template güncellensin
-      this.router.navigate(['homepage']);
+      //this.router.navigate(['homepage']);
     });
 
     this.authService.isAdmin$.subscribe(isAdmin => {
       this.isAdmin = isAdmin;
       this.cdRef.detectChanges(); // Değişiklik algılansın ve template güncellensin
-      this.router.navigate(['homepage']);
+      //this.router.navigate(['homepage']);
     });
   
      this.getMenuItems();
@@ -54,10 +58,9 @@ export class NavbarComponent implements OnInit{
      this.getUserId();
      this.cdRef.detectChanges();
      this.menuClick();
-     
+     this.checkLoginStatus();
    }
    
-
    logOut() {
     this.authService.logOut();
     this.showLogoutModal = false;
@@ -83,11 +86,12 @@ export class NavbarComponent implements OnInit{
       if (isLoggedIn) {
         this.isLoggedIn = true;
         this.isAdmin = this.authService.isAdmin();
+        this.cdRef.detectChanges();
       } else {
         this.isLoggedIn = false;
         this.isAdmin = false;
-      }
-      this.cdRef.detectChanges(); // Değişiklik algılansın ve template güncellensin
+        this.cdRef.detectChanges();
+      } // Değişiklik algılansın ve template güncellensin
     });
 
   }
@@ -115,5 +119,12 @@ export class NavbarComponent implements OnInit{
     }
   }
   
+  checkLoginStatus(): void {
+    this.isLoggedIn = this.authService.loggedIn();
+    this.token = this.storageService.getToken();
+    this.isAdmin = this.authService.isAdmin();
+    this.userId = this.authService.getCurrentUserId();
+    this.cdRef.detectChanges(); // ChangeDetectorRef kullanarak değişiklikleri tespit et
+  }
 }
 

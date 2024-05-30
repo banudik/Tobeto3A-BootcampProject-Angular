@@ -12,7 +12,7 @@ export class NotificationService {
   }
 
   showError(message: string): void {
-    this.toastr.error(message,'Hata');
+    this.toastr.error(message,'Error');
   }
 
   showInfo(message: string): void {
