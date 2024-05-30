@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, map, catchError, switchMap, tap, throwError, of, BehaviorSubject } from "rxjs";
+import { Observable, map, catchError, switchMap, tap, throwError, of, BehaviorSubject, debounceTime, take } from "rxjs";
 import { environment } from "../../../../environments/environment";
 import { UserForLoginRequest } from "../../models/requests/auth/user-for-login-request";
 import { AccessTokenModel } from "../../models/responses/auth/access-token-model";
@@ -53,6 +53,7 @@ export class AuthService extends AuthBaseService {
     return this.httpClient.post<CreatedInstructorResponse>(`${this.apiUrl}/registerinstructor`, createInstructorRequest);
   }
 
+  //Ogrenci kayıt olma formunu gönderir
   override registerApplicant(userforRegisterRequest: ApplicantForRegisterRequest): Observable<TokenModel> {
     return this.httpClient.post<TokenModel>(`${this.apiUrl}/registerapplicant`, userforRegisterRequest).pipe(
       switchMap((response: TokenModel) => {
@@ -91,29 +92,24 @@ export class AuthService extends AuthBaseService {
   //  email ve passwordu login olmak için gönderilir, activationKey kısmı null olarak post edilir(aktivasyon kodu null gönderildiği takdirde backend'de AktivasyonKeyi generate ediliyoruz ve mail olarak gönderiliyoruz) 2FA'i tetikler
   login(userLoginRequest: UserForLoginRequest): Observable<AccessTokenModel<TokenModel>> {
     return this.httpClient.post<AccessTokenModel<TokenModel>>(`${this.apiUrl}/login`, userLoginRequest, { withCredentials: true })
-    .pipe(
-      tap(response => {
-        if (response.accessToken) {
-          this.storageService.setToken(response.accessToken.token);
-          this.isLoggedInSubject.next(true);
-          this.isAdminSubject.next(this.isAdmin());
-          this.toastrService.success('Giriş yapıldı');
-        } else {
-          this.toastrService.info('Doğrulama Kodu Gönderildi');
-        }
-      }),
-      catchError(error => {
-        console.error('Hata:', error);
-        this.toastrService.error('Giriş yapılamadı. Lütfen tekrar deneyin.');
-        return throwError(error);
-      })
-    );
-}
+      .pipe(
+        tap(response => {
+          if (response.accessToken) {
+            this.storageService.setToken(response.accessToken.token);
+            this.isLoggedInSubject.next(true);
+            this.isAdminSubject.next(true);
+          } else {
+            //this.toastrService.info('We sent a verification code');
+          }
+        })
+      );
+  }
+
 
   // pop-up ekranında ki activationKey i alıp tekrar  mevcut email ve password ile post ediliyoruz başarılı olursa response'taki tokeni storage'a kayıt ediyoruz login işlemi bu metod ile bitiyor(kullanıcının tekrar emai ve password girmesi gerekmiyor)
   loginWithVerify(UserWithActivationCode: UserForLoginWithVerifyRequest): Observable<AccessTokenModel<TokenModel>> {
-    return this.httpClient.post<AccessTokenModel<TokenModel>>(`${this.apiUrl}/login`, UserWithActivationCode)
-      .pipe(map(response => {
+    return this.httpClient.post<AccessTokenModel<TokenModel>>(`${this.apiUrl}/login`, UserWithActivationCode,{ withCredentials: true })
+      .pipe(take(1),debounceTime(300),map(response => {
         this.storageService.setToken(response.accessToken.token);
         return response;
       }
@@ -126,6 +122,7 @@ export class AuthService extends AuthBaseService {
     return this.httpClient.get<AccessTokenModel<TokenModel>>(`${this.apiUrl}/refreshToken`, { withCredentials: true });
   }
 
+  //ŞifreSıfırlamak için yeni şifreyi gönderir
   resetPassword(token: string, resetPasswordRequest: ResetPasswordRequest) {
     var tokenn = token;
     console.log(`Bearer ${tokenn}`)
@@ -134,27 +131,23 @@ export class AuthService extends AuthBaseService {
       'accept': 'application/json'
     });
 
-    this.httpClient.post(`${this.apiUrl}/ResetPassword`, resetPasswordRequest, { headers }).pipe(
-      catchError(error => {
-        console.error('Şifre sıfırlama başarısız:', error);
-        return throwError(error);
-      })
-    )
-      .subscribe(
+    this.httpClient.post(`${this.apiUrl}/ResetPassword`, resetPasswordRequest, { headers })
+    .pipe().subscribe(
         response => {
-          console.log('Şifre sıfırlama başarılı:', response);
-        },
-        // error => {
-        //   console.error('Hata:', error);
-        // }
+          this.toastrService.success("You are now redirected to the Login page.","Reset Password Success");
+          setTimeout(() => {
+            this.router.navigate(['login']);
+          }, 1500);
+        }
       );
-  }
+    }
 
   //Şifremi unuttum kısmında girilen Email adresine şifremi unuttum postası gönderir(Token göndermez)
   sendForgotPasswordEmail(ForgotPasswordRequest: ForgotPasswordRequest): Observable<any> {
     return this.httpClient.post(`${this.apiUrl}/ForgotPassword`, ForgotPasswordRequest, { responseType: 'text' }).pipe(
       map(response => {
-        this.toastrService.success('Şifremi unuttum e-postası başarıyla gönderildi.', 'Başarılı');
+        this.toastrService.success('Forgot my password email has been sent.', 'Successful');
+
         return response;
       }),
       // catchError((error) => {
@@ -191,26 +184,49 @@ export class AuthService extends AuthBaseService {
     return this.userId = decoded[propUserId]
   }
 
+  //Navbar için çıkış metodu
   logOut() {
-    console.log('çıkış butonuna basıldı');
-    //Angular/ts put olarak istek yapıldığı zaman body kısmının boş bırakılmasına izin vermiyor
+    //Angular put olarak istek yapıldığı zaman body kısmının boş bırakılmasına izin vermiyor
     //nArch hatası-- Controller HttpGet olarak değiştirildi
-    this.httpClient.get(`${this.apiUrl}/revoketoken`)
+    this.httpClient.get(`${this.apiUrl}/revoketoken`,{ withCredentials: true })
       .subscribe({
         next: () => {
           console.log('istek yapıldı');
-          this.storageService.remove('token'); // LocalStorage'daki token'ı temizliyoruz
-          this.toastrService.success('Çıkış Başarılı', 'Çıkış İşlemi');
-          //this.router.navigate(['/login']); // Kullanıcıyı login sayfasına yönlendirir
+           // LocalStorage'daki token'ı temizliyoruz
+          this.storageService.remove('token');
           this.isLoggedInSubject.next(false);
           this.isAdminSubject.next(false);
+          this.router.navigate(['/login']); // Kullanıcıyı login sayfasına yönlendirir
+          this.toastrService.success('Exit Successful', 'Exit');
         },
         error: (error) => {
-          console.error('Token revoke failed:', error);
+          console.log('Token revoke failed');
         }
       });
-
   }
+
+  //RefreshToken süresi bittiği zaman AuthInterceptor'da çalışacak çıkış metodu
+  logOutForInterceptor() {
+    console.log('istek yapıldı');
+          this.storageService.remove('token'); // LocalStorage'daki token'ı temizliyoruz
+          this.isLoggedInSubject.next(false);
+          this.isAdminSubject.next(false);
+    //Angular put olarak istek yapıldığı zaman body kısmının boş bırakılmasına izin vermiyor
+    //nArch hatası-- Controller HttpGet olarak değiştirildi
+    // this.httpClient.get(`${this.apiUrl}/revoketoken`)
+    //   .subscribe({
+    //     next: () => {
+    //       console.log('istek yapıldı');
+    //       this.storageService.remove('token'); // LocalStorage'daki token'ı temizliyoruz
+    //       this.isLoggedInSubject.next(false);
+    //       this.isAdminSubject.next(false);
+    //     },
+    //     error: (error) => {
+    //       console.log('Token revoke failed');
+    //     }
+    //   });
+  }
+
 
   getRoles(): string[] {
     if (this.storageService.getToken()) {

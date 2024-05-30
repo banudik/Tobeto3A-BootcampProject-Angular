@@ -11,6 +11,8 @@ import { UserForLoginWithVerifyRequest } from '../../features/models/requests/au
 import { DarkModeService } from '../../features/services/concretes/dark-mode.service';
 import { ForgotPasswordRequest } from '../../features/models/requests/auth/forgot-password-request';
 import { ValidationHelper } from '../../core/helpers/validationtoastrmessagehelper';
+import { Subscription, debounceTime, take } from 'rxjs';
+
 
 
 @Component({
@@ -53,32 +55,21 @@ export class LoginComponent implements OnInit {
   login() {
     if (this.loginForm.valid) {
       let loginModel: UserForLoginRequest = Object.assign({}, this.loginForm.value);
-      console.log(loginModel.email + " " + loginModel.password);
-      
       this.authService.login(loginModel).subscribe({
         next: (response) => {
+          debounceTime(500)
           if (response.accessToken) {
-            //localStorage.setItem('token', response.accessToken.token);
-            this.toastrService.success('Giriş Başarılı login', 'Giriş İşlemi');
             this.showAuthenticatorCodeInput = false;
-
-            setTimeout(()=>{
-              this.router.navigate(['homepage']);
-            },2000)
-
-            console.log('component if',response);
-            //this.authService.fetchRefreshTokenAfterLogin();
+            this.router.navigate(['homepage']);
+            this.toastrService.success('Login successful', 'Welcome');
           } 
           else {
-            this.toastrService.success('Doğrulama kodu mail adresinize gönderildi', 'Doğrulama Kodu');
+            this.toastrService.info('The verification code has been sent to your e-mail address.', 'Verification Code');
             this.showAuthenticatorCodeInput = true;
-            console.log('component else',response);
           }
-        },
-        error: (error) => {
-          console.log('component error',error);
         }
-      });
+      }
+    );
     }
     else{
       this.validationHelper.checkValidation(this.loginForm);
@@ -88,21 +79,17 @@ export class LoginComponent implements OnInit {
   // girilen doğrulama kodunu apiye gönderir (email,password,activationKey olarak 3 parametre gönderir) başarılı olursa tokeni kaydeder
   verifyCode() {
       let loginModel2: UserForLoginWithVerifyRequest = Object.assign({}, this.loginForm.value);
-      this.authService.loginWithVerify(loginModel2).subscribe({
+      this.authService.loginWithVerify(loginModel2).pipe(
+        debounceTime(300)
+      ).subscribe({
         next:()=>{
-          this.toastrService.success('Giriş Başarılı verifyCode', 'Giriş işlemi');
           this.onCancel();
-          return console.log("LoginComponent Verify Success");
+          this.router.navigate(['homepage']);
+          this.toastrService.success('Login Successful', 'Welcome');
         },
         error:(error) => {
-          console.log("LoginComponent Verify error");
-          this.onCancel();
-
-          return console.log(error);
-        },
-        complete:() => {
-          this.onCancel();
-        },
+          return console.log("Login Verify error");
+        }
       });
   }
 
@@ -111,12 +98,12 @@ export class LoginComponent implements OnInit {
       const forgotPasswordModel: ForgotPasswordRequest = Object.assign({}, this.forgotPassword.value);
       this.authService.sendForgotPasswordEmail(forgotPasswordModel).subscribe({
         next: (response) => {
-          console.log('Mail gönderildi');
+          console.log('Forgot my password email has been sent.');
         }
       });
     } else {
       // Eğer form geçerli değilse toastr ile uyarı göster
-      this.toastrService.error('Lütfen geçerli bir e-posta adresi girin.', 'Hata');
+      this.toastrService.warning('Please enter a valid email address.', 'Warning');
     }
   }
   
