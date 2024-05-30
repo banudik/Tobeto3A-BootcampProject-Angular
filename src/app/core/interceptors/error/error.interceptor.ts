@@ -15,8 +15,6 @@ export const ErrorInterceptor: HttpInterceptorFn = (request, next) => {
   return next(request).pipe(
     catchError((error: HttpErrorResponse) => {
 
-      console.log('ErrorInterceptor caught an error:', error);
-
       let errorMessage = 'Something went wrong.';
 
       if (error.error instanceof ErrorEvent) {
@@ -24,10 +22,10 @@ export const ErrorInterceptor: HttpInterceptorFn = (request, next) => {
         errorMessage = `${error.error.message}`;
       } 
       else if (error.status === 401) {
-        console.log('Unauthorized error. Handling...');
+        console.log('Unauthorized error. We are trying to renew the token... ');
         // Server-side error with detail field
-        //errorMessage = `${error.error.detail}`;   // "You are not authorize hatası" verir
-        notificationService.showError(errorMessage);
+        errorMessage = `${error.error.detail}`;   // "You are not authorize hatası" verir
+        //notificationService.showError(errorMessage);
         // Return the error as HttpErrorResponse to allow AuthInterceptor to handle it
         return throwError(() => new HttpErrorResponse({
           error: error.error,

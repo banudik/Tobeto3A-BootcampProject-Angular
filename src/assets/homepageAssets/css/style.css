@@ -1331,7 +1331,7 @@ Edu Courses Area CSS
 }
 
 .single-courses-box .ev-items li i{
-  color: #30bead;
+  color: #8585ff;
 }
 
 .section-button {
@@ -5128,7 +5128,7 @@ Pagination CSS
 .pagination-area .page-numbers:hover,
 .pagination-area .page-numbers.current {
   color: white;
-  background-color: #ff7e84;
+  background-color: #4ab4fb;
 }
 
 .pagination-area .page-numbers i {

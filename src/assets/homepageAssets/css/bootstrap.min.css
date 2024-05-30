@@ -4,8 +4,10 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+
 html {
-    font-family: sans-serif;
+    font-family: 'Poppins', sans-serif;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%
 }
@@ -1383,6 +1385,8 @@ th {
     content: "\e260"
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+
 * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -1402,7 +1406,7 @@ html {
 }
 
 body {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 14px;
     line-height: 1.42857143;
     color: #333;
@@ -1413,11 +1417,30 @@ button,
 input,
 select,
 textarea {
-    font-family: inherit;
+    font-family: 'Poppins', sans-serif;
     font-size: inherit;
-    line-height: inherit
+    line-height: inherit;
+    color:white;
+    background-color: #8585ff;
 }
 
+input {
+    background-color:#8585ff68 ;
+    color:black;
+}
+
+
+select:hover {
+background-color:#4ab4fb;
+text-decoration: none;
+transition: .5s linear;
+}
+
+
+button:hover {
+    background-color:#4ab4fb;
+    transition: .5s linear;
+}
 a {
     color: #337ab7;
     text-decoration: none
