@@ -5,15 +5,20 @@ import { catchError, switchMap, filter, take } from 'rxjs/operators';
 import { LocalStorageService } from '../../../features/services/concretes/local-storage.service';
 import { AuthService } from '../../../features/services/concretes/auth.service';
 import { TokenModel } from '../../../features/models/responses/auth/token-model';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 export const AuthInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: HttpHandlerFn) => {
   const storageService = inject(LocalStorageService);
   const authService = inject(AuthService);
-  let isRefreshing = false;
+  const toastr = inject(ToastrService);
+  const router = inject(Router);
+  let isRefreshing = false; // Token yenileme işleminin yapılıp yapılmadığını takip eder
   const refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
   let token = storageService.getToken();
 
+  // Eğer token varsa, request'in header'ına Authorization ekler
   if (token) {
     req = req.clone({
       setHeaders: {
@@ -22,34 +27,29 @@ export const AuthInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: 
       withCredentials: true
     });
   } else {
+    // Token yoksa, sadece withCredentials ayarını ekler
     req = req.clone({
       withCredentials: true
     });
   }
 
+  // Request'i devam ettirir ve hata oluşursa yakalar
   return next(req).pipe(
-    catchError((error: any) => {
-      console.log('AuthInterceptor caught an error:', error);
-      console.log('Hata bu şekilde', error);
-      console.log('Error status:', error.status);
-
-        
-
-
-        if (error.status === 401 && !req.url.includes('refreshToken')) {
-          console.log('1.Koşul içerisinde',error.status === 401 && !req.url.includes('refreshToken'));
+    catchError((error: HttpErrorResponse) => {
+      // Eğer hata 401 (Unauthorized) ve istek refreshToken ve login içermiyorsa koşula girer
+        if (error.status === 401 && !req.url.includes('refreshToken') && !req.url.includes('login')) {
+          // Eğer token yenilenmiyorsa, yenileme işlemini başlatır
           if (!isRefreshing) {
-          console.log('2.Koşul içerisinde');
-
             isRefreshing = true;
             refreshTokenSubject.next(null);
 
-            return authService.refreshToken().pipe(
+            return authService.refreshToken().pipe( // Token yenileme isteğini başlatır
               switchMap((tokenModel: any) => {
                 isRefreshing = false;
                 storageService.setToken(tokenModel.token);
                 refreshTokenSubject.next(tokenModel.token);
-                return next(req.clone({
+
+                return next(req.clone({  // Yeni token ile requesti tekrar gönderir
                   setHeaders: {
                     Authorization: `Bearer ${tokenModel.token}`
                   },
@@ -57,17 +57,23 @@ export const AuthInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: 
                 }));
               }),
               catchError((refreshError) => {
+                // Token yenileme başarısız olursa, çıkış yapar ve login sayfasına yönlendirir
                 isRefreshing = false;
-                authService.logOut();
-                return throwError(refreshError);
+                authService.logOutForInterceptor();
+                router.navigate(['/login']);
+                toastr.warning('Your session has expired', 'Log In Again')
+                //authService.logOut();
+                //return throwError(() => new HttpErrorResponse({}));
+                return throwError(() => Error());
               })
             );
           } else {
+            // Eğer token yenileniyorsa, yeni tokeni bekler
             return refreshTokenSubject.pipe(
               filter(token => token != null),
               take(1),
               switchMap((newToken) => {
-                return next(req.clone({
+                return next(req.clone({ // Yeni token ile requesti tekrar gönderir
                   setHeaders: {
                     Authorization: `Bearer ${newToken}`
                   },
@@ -77,8 +83,7 @@ export const AuthInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: 
             );
           }
         }
-
-      return throwError(error);
+        return throwError(() => Error()); // Diğer tüm hataları fırlatır
     })
   );
 };
