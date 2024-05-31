@@ -17,6 +17,33 @@ import { UpdatedBootcampResponse } from '../../models/responses/bootcamp/updated
   providedIn: 'root'
 })
 export class BootcampService extends BootcampBaseService {
+
+
+  override getListByBootcampState(pageRequest: PageRequest, bootcampStateId: number): Observable<BootcampListItemDto> {
+    const newRequest: {[key: string]: string | number} = {
+      pageIndex: pageRequest.pageIndex,
+      pageSize: pageRequest.pageSize,
+      bootcampStateId: bootcampStateId,
+    };
+  
+    return this.httpClient.get<BootcampListItemDto>(`${this.apiUrl}/getbootcampbybootcampstate`, {
+      params: newRequest
+    }).pipe(
+      map((response)=>{
+        const newResponse:BootcampListItemDto={
+          index:pageRequest.pageIndex,
+          size:pageRequest.pageSize,
+          count:response.count,
+          hasNext:response.hasNext,
+          hasPrevious:response.hasPrevious,
+          items:response.items,
+          pages:response.pages
+
+        };
+        return newResponse;
+      })
+      )
+    }
   
   private readonly apiUrl:string = `${environment.API_URL}/bootcamps`
 

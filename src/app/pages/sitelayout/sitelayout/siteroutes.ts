@@ -28,7 +28,7 @@ export const siteRoutes: Routes = [
     {path: 'reset-password', component: ResetPasswordComponent },
     {path:'about-us',component:AboutUsComponent},
     {path:'privacy-policy',component:PrivacyPolicyComponent},
-    {path:'chapter/:chapterId',component:ChapterComponent},
+    {path:'chapter/:bootcampId/:sort',component:ChapterComponent},
     {path:'terms-of-use',component:TermsOfUseComponent},
     {path:'welcome',component:WelcomeComponent},
 ];

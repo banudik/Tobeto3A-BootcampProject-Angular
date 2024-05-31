@@ -28,4 +28,7 @@ export abstract class BootcampBaseService {
   :Observable<UpdatedBootcampResponse>;
 abstract delete(id:number)
   :Observable<DeletedBootcampResponse>;
+
+  abstract getListByBootcampState(pageRequest:PageRequest,bootcampStateId:number):
+  Observable<BootcampListItemDto>;
 }
