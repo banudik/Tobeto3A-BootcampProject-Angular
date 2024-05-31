@@ -11,6 +11,10 @@ import { LocalStorageService } from '../../../services/concretes/local-storage.s
 import { AuthService } from '../../../services/concretes/auth.service';
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit, Renderer2 } from '@angular/core';
+import { CommentService } from '../../../services/concretes/comment.service';
+import { CommentListItemDto } from '../../../models/responses/comment/comment-list-item-dto';
+import { GetListCommentResponse } from '../../../models/responses/comment/get-list-comment-response';
+import { PageRequest } from '../../../../core/models/page-request';
 
 @Component({
   selector: 'app-bootcamp-details',
@@ -24,12 +28,15 @@ export class BootcampDetailsComponent implements OnInit{
 
   getByIdBootcampResponse !: GetByIdBootcampResponse
   bootcampId: number = 1;
+  commentList!:CommentListItemDto;
+  commentIndex:number = 0;
+  isloading:boolean = true;
   // activatedRoute: any;
   // bootcampService: any;
 
   constructor(private bootcampService: BootcampService, private activatedRoute: ActivatedRoute
      ,private applicationInformationService:ApplicationInformationService, private localStorageService:LocalStorageService
-    ,private authService:AuthService,    private renderer2: Renderer2,
+    ,private authService:AuthService,    private renderer2: Renderer2,private commentService:CommentService,
     @Inject(DOCUMENT) private _document:Document) {}
 
   ngOnInit(): void {
@@ -63,8 +70,8 @@ export class BootcampDetailsComponent implements OnInit{
   getBootcampById(bootcampId: number): void {
     this.bootcampService.getBootcampById(bootcampId).subscribe(
       (response: GetByIdBootcampResponse) => {
-        console.log("geliyor " + response.name);
         this.getByIdBootcampResponse = response;
+        this.getComments({pageIndex:this.commentIndex , pageSize:5});
       },
       (error: any) => {
         console.error('Error fetching bootcamp:', error);
@@ -72,6 +79,43 @@ export class BootcampDetailsComponent implements OnInit{
         console.log("getBootcampById error");
       }
     );
+  }
+
+  getComments(pageRequest:PageRequest){
+    //{pageIndex:this.commentIndex , pageSize:10}
+    this.isloading = true;
+    this.commentService.getListByBootcampId(pageRequest,this.getByIdBootcampResponse.id).subscribe(
+      (response: CommentListItemDto) => {
+        this.commentList = response;
+        this.isloading = false;
+      },
+      (error: any) => {
+        console.error('Error fetching bootcamp:', error);
+        // Hata işleme mekanizmasını buraya ekleyebilirsiniz
+        console.log("getBootcampById error");
+      }
+    );
+  }
+  
+  nextCommentPage(){
+    this.commentIndex++;
+    this.getComments({pageIndex:this.commentIndex , pageSize:5});
+  }
+
+  PreviousCommentPage(){
+    this.commentIndex--;
+    this.getComments({pageIndex:this.commentIndex , pageSize:5});
+  }
+
+  pageNumbers(){
+    let pageNumbers = new Array(this.commentList.pages);
+    return pageNumbers;
+  }
+
+  changePage(pageNumber:number){
+    this.commentIndex = pageNumber;
+    
+    this.getComments({pageIndex: this.commentIndex, pageSize:5});
   }
 
 // addApplication metodu
