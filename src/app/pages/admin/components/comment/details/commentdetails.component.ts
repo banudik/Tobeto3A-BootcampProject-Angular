@@ -1,0 +1,45 @@
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { RouterModule, Router, ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { GetByIdCommentResponse } from '../../../../../features/models/responses/comment/get-by-id-comment-response';
+import { CommentService } from '../../../../../features/services/concretes/comment.service';
+
+@Component({
+  selector: 'app-commentdetails',
+  standalone: true,
+  imports: [RouterModule,CommonModule],
+  templateUrl: './commentdetails.component.html',
+  styleUrl: './commentdetails.component.css'
+})
+export class CommentdetailsComponent   implements OnInit{
+  currentComment!:GetByIdCommentResponse;
+  isloading:boolean = true;
+  
+  ngOnInit(): void {
+    this.activatedRoute.params.subscribe((params: { [x: string]: number; }) => {
+      this.getCommentById(params["commentId"])
+  })
+  }
+
+  constructor(private commentService:CommentService,
+    private router:Router,private activatedRoute:ActivatedRoute, private toastr:ToastrService
+  ){}
+
+  getCommentById(id:number){
+    this.commentService.getByCommentId(id).subscribe(
+      (response: GetByIdCommentResponse) => {
+        this.currentComment = response;
+        this.isloading = false;
+      },
+      (error: any) => {
+        this.toastr.error('Error fetching Comment:', error)
+        // Hata işleme mekanizmasını buraya ekleyebilirsiniz
+        setTimeout(()=>{
+          this.router.navigate(['/adminpanel/commentindex'])
+        },2000)
+      }
+    );
+
+  }
+}

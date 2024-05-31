@@ -9,6 +9,9 @@ import { InstructorListItemDto } from '../../../../../features/models/responses/
 import { BootcampStateListItemDto } from '../../../../../features/models/responses/bootcamp-state/bootcampstate-list-item-dto';
 import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import { GetListBootcampStateResponse } from '../../../../../features/models/responses/bootcamp-state/get-list-bootcamp-state-response';
+import { GetListInstructorResponse } from '../../../../../features/models/responses/instructor/get-list-instructor-response';
+import { ValidationHelper } from '../../../../../core/helpers/validationtoastrmessagehelper';
 
 @Component({
   selector: 'app-bootcampcreate',
@@ -20,10 +23,10 @@ import { ToastrService } from 'ngx-toastr';
 export class BootcampcreateComponent  implements OnInit{
 
   BootcampForm!:FormGroup
-  formMessage:string | null=null;
-  instructors!:InstructorListItemDto;
-  bootcampStates!:BootcampStateListItemDto;
+  instructors!:GetListInstructorResponse[];
+  bootcampStates!:GetListBootcampStateResponse[];
   isloading:boolean = true;
+
   ngOnInit(): void {
     this.getInstructors();
     this.getBootcampStates();
@@ -32,7 +35,7 @@ export class BootcampcreateComponent  implements OnInit{
 
   constructor(private formBuilder:FormBuilder,private bootcampService:BootcampService,
     private router:Router,private change:ChangeDetectorRef, private bootcampStateService:BootcampStateService
-    , private instructorService:InstructorService,private toastr:ToastrService
+    , private instructorService:InstructorService,private toastr:ToastrService,private validationHelper:ValidationHelper
   ){}
 
   createForm(){
@@ -55,7 +58,7 @@ export class BootcampcreateComponent  implements OnInit{
   getInstructors(){
     this.isloading = true;
     this.instructorService.GetListAll().subscribe((response)=>{
-     this.instructors=response;
+     this.instructors=response.items;
      this.isloading = false;
     })
  }
@@ -63,7 +66,7 @@ export class BootcampcreateComponent  implements OnInit{
  getBootcampStates(){
   this.isloading = true;
   this.bootcampStateService.getList({ pageIndex: 0, pageSize: 100000}).subscribe((response)=>{
-   this.bootcampStates=response;
+   this.bootcampStates=response.items;
    this.isloading = false;
   })
 }
@@ -86,8 +89,6 @@ export class BootcampcreateComponent  implements OnInit{
         next:(response)=>{
         },
         error:(error)=>{
-          console.log(bootcampModel);
-          
           this.toastr.error("Failed to add: " +error.message);
           this.change.markForCheck();
         },
@@ -104,10 +105,10 @@ export class BootcampcreateComponent  implements OnInit{
     }}
 
     onFormSubmit(){
-      const nameControl = this.BootcampForm.get('name');
+      this.validationHelper.checkValidation(this.BootcampForm);
 
-      if (nameControl && nameControl.invalid) {
-        this.formMessage = "Lütfen gerekli alanları doldurun";
+      if (this.BootcampForm.invalid) {
+        this.toastr.error("Invalid inputs!");
         return;
       }
     

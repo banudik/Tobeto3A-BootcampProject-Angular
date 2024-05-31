@@ -1,0 +1,283 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+:root {
+    --tangerine: #f2911e;
+    --greyish-teal: #57bdaf;
+    --brownish-grey: #646464;
+    --brown-grey: #b1b1b1;
+    --golden-yellow: #f2bf26;
+    --white: #ffffff;
+    --light-pink: #f3f1f2;
+    --very-light-pink: #e3e3e3;
+    --bright-orange: #ff6c00;
+    --black: #000000;
+    --duck-egg-blue: #d2ebe8;
+    --figma-dark-blue: #0a142f;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+.course-detail-container {
+    margin-block: 50px;
+}
+
+.course-left {
+    width: 75%;
+    margin-right: 30px;
+}
+
+.video-content-section, .video-content-section .video-content-top-section {
+    width: 100%;
+    margin-top: 10px;
+}
+
+    .video-content-section .video-content-top-section ul {
+        padding: 0;
+        margin: 0;
+        width: 100%;
+    }
+
+        .video-content-section .video-content-top-section ul li {
+            display: block;
+            /* width: 100%; */
+        }
+
+            .video-content-section .video-content-top-section ul li button {
+                display: block;
+                font-size: 12px;
+                border: 1px solid var(--brown-grey);
+                padding: 10px 25px;
+                border-radius: 28px;
+                color: var(--brown-grey);
+                font-weight: 500;
+            }
+
+            .video-content-section .video-content-top-section ul li.active button {
+                background-color: var(--figma-dark-blue);
+                color: var(--white);
+                border: 1px solid var(--figma-dark-blue);
+            }
+
+
+.course-detail-video {
+    width: 100%;
+    height: 450px;
+}
+
+header.with-shadow {
+    box-shadow: 0 3px 20px 0 rgba(0, 0, 0, 0.15);
+}
+
+.video-content-bottom-section-container {
+    margin-top: 20px;
+    border: 1px solid var(--white);
+    border-radius: 28px;
+    box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.1);
+    padding: 30px 35px;
+    /* display: none; */
+    height: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.video-content-bottom-section {
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+    width: 0;
+    transition: .4s opacity ease-in;
+}
+
+
+    .video-content-bottom-section.active {
+        opacity: 1;
+        visibility: visible;
+        height: 300px;
+        overflow-x: hidden;
+        width: auto;
+        transition: .4s opacity ease-in;
+    }
+
+
+    .video-content-bottom-section ul {
+        width: 100%;
+    }
+
+        .video-content-bottom-section ul li {
+            font-size: 12px;
+            color: var(--black);
+            line-height: 31px;
+            list-style-type: disc;
+            list-style-position: outside;
+        }
+
+    .video-content-bottom-section p {
+        font-size: 12px;
+        line-height: 30px;
+    }
+
+.course-right {
+    width: 40%;
+}
+
+    .course-right .right-box {
+        box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.1);
+        border: solid 1px var(--white);
+        max-height: 1060px;
+        border-radius: 30px;
+        padding: 30px;
+    }
+
+.progress {
+    width: 85%;
+    float: left;
+}
+
+.progress-bar {
+    border-radius: 5px;
+    background: #ff6c00;
+}
+
+p.progress-count {
+    font-size: 16px;
+    margin: -5px 0 0 10px;
+    color: #ff6c00;
+    font-weight: bold;
+    float: right;
+}
+
+.course-right .certificate {
+    border: solid 1px var(--white);
+    margin: 10px 0;
+    box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+    padding: 10px 10px 35px 10px;
+}
+
+
+.course-right .question {
+    border: solid 1px var(--white);
+    margin: 10px 0;
+    box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+    padding: 10px 10px 10px 10px;
+}
+
+    .course-right .question h4 {
+        margin: 20px 20px 20px 0;
+        color: #0a142f;
+    }
+
+    .course-right .question input {
+        margin: 20px 0;
+        height: 40px;
+        box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.1);
+        border-radius: 30px;
+        display: block;
+        width: 100%;
+    }
+
+    .course-right .question a.btn {
+        color: #fff;
+        font-weight: bold;
+        font-size: 14px;
+        background: #0a142f;
+        box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.1);
+        border-radius: 30px;
+        display: block;
+        width: 100%;
+    }
+
+.bars img:not(:nth-last-child(1)) {
+    margin-right: 5px;
+}
+
+.greyy {
+    color: var(--brown-grey);
+    border: 1px solid var(--brown-grey);
+    margin-block: 2rem;
+}
+
+.lessons, .lesson {
+    width: 100%;
+}
+
+.lesson {
+    padding: 0 20px;
+    border-radius: 40px;
+    border: solid 1px var(--brown-grey);
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.lessons {
+    max-height: 872px;
+    overflow-y: auto;
+}
+
+    .lessons::-webkit-scrollbar {
+        display: none;
+    }
+
+
+.course-info-top-part {
+    font-weight: 500;
+}
+
+
+.lesson.watched {
+    opacity: 0.5;
+}
+
+.lesson.watching {
+    border-color: #0a142f;/*#ee742f;*/
+}
+
+    .lesson.watching .left-lesson p {
+        color: #0e0d45;/*var(--greyish-teal);*/
+    }
+
+.lesson.unwatched .left-lesson p:nth-child(1) {
+    padding: 8px 10px;
+    border-radius: 50%;
+    background-color: var(--light-pink);
+    margin-left: -12px;
+}
+
+
+.play-icon {
+    background-color: var(--figma-dark-blue);
+    margin-right: 12px;
+    border-radius: 50%;
+    padding: 10px;
+    margin-left: -12px;
+}
+
+.lesson p, .right-clock p {
+    margin: 0;
+    font-size: 12px;
+    font-family: 'Poppins',sans-serif;
+    font-weight: 700;
+}
+
+.right-clock p {
+    color: var(--brown-grey);
+}
+
+.left-lesson {
+    padding: 5px 0;
+}
+
+.right-clock {
+    min-width: 80px;
+}
+
+    .right-clock img {
+        width: 18px;
+    }
+
+    .left-lesson p:nth-child(1), .right-clock img {
+        margin-right: 12px;
+    }

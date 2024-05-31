@@ -30,8 +30,6 @@ export class BootcampdetailsComponent implements OnInit{
     this.bootcampService.getBootcampById(id).subscribe(
       (response: GetByIdBootcampResponse) => {
         this.currentBootcamp = response;
-        console.log(this.currentBootcamp.name + " " + this.currentBootcamp.id);
-        
       },
       (error: any) => {
         console.error('Error fetching bootcamp:', error);

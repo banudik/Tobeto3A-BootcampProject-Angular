@@ -4,6 +4,7 @@ import { InstructorListItemDto } from '../../../../../features/models/responses/
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { PageRequest } from '../../../../../core/models/page-request';
+import { AuthService } from '../../../../../features/services/concretes/auth.service';
 
 @Component({
   selector: 'app-instructorindex',
@@ -19,7 +20,8 @@ export class InstructorindexComponent implements OnInit {
   pageSizes: Array<number> = [5,10,20];
   searchTermTmp:string = '';
   isLoading: boolean = false;
-  constructor(private instructorService:InstructorService) {}
+  isInstructor:boolean = false;
+  constructor(private instructorService:InstructorService,private authService:AuthService) {}
 
   instructorList: InstructorListItemDto = {
     index: 0,
@@ -47,6 +49,12 @@ export class InstructorindexComponent implements OnInit {
       this.instructorList = response;
       this.isLoading = false;
     })
+  }
+
+  checkIfInstructor(){
+    if(this.authService.isInstructor()){
+      this.isInstructor = true;
+    }
   }
 
 

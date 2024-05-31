@@ -3,13 +3,13 @@ Default CSS
 =================================================*/
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap");
 :root {
-  --fontFamily: 'DM Sans', sans-serif;
-  --mainColor: #ff7e84;
-  --secounderyColor: #30bead;
+  --fontFamily: 'Poppins', sans-serif;
+  --mainColor: #8585ff;
+  --secounderyColor: #4ab4fb;
   --paragraphColor: #7b7b8a;
   --whiteColor: #ffffff;
   --blackColor: #000000;
-  --footerColor: #0c1427;
+  --footerColor: #181818;
   --fontSize: 18px;
   --transition: .5s;
 }
@@ -34,7 +34,7 @@ a {
 }
 
 a:hover {
-  color: #ff7e84;
+  color: #8585ff;
   text-decoration: none;
 }
 
@@ -100,7 +100,7 @@ p:last-child {
 
 /*default-btn*/
 .default-btn {
-  background-color: #ff7e84;
+  background-color: #8585ff;
   -webkit-transition: .5s;
   transition: .5s;
   padding: 15px 32px;
@@ -115,9 +115,9 @@ p:last-child {
 }
 
 .default-btn:hover {
-  background-color: #ff7e84;
+  background-color: #4ab4fb;
   color: white;
-  box-shadow: 0px 0px 0px 2.5px white inset, 0px 0px 0px 3px #ff7e84;
+  box-shadow: 0px 0px 0px 2.5px white inset, 0px 0px 0px 3px #4ab4fb;
 }
 
 .primery-black {
@@ -155,7 +155,7 @@ p:last-child {
   font-weight: 500;
   font-size: 18px;
   margin-bottom: 5px;
-  color: #30bead;
+  color: #4ab4fb;
 }
 
 .edu-section-title .link-btn {
@@ -173,7 +173,7 @@ p:last-child {
 }
 
 .edu-section-title h2 span {
-  color: #ff7e84;
+  color: #4ab4fb;
   padding-bottom: 15px;
 }
 
@@ -757,7 +757,7 @@ Edu Banner Area CSS
 }
 
 .edu-banner-content span {
-  color: #30bead;
+  color: #4ab4fb;
 }
 
 .edu-banner-content .fl-default-btn {
@@ -774,7 +774,7 @@ Edu Banner Area CSS
 }
 
 .shape01 {
-  background-image: url(../images/banner/shape.svg);
+  
   background-repeat: no-repeat;
   background-position: bottom;
   display: inline-block;
@@ -795,7 +795,7 @@ Edu Banner Area CSS
   margin-bottom: 0;
   left: 15px;
   top: 22px;
-  color: #ff7e84;
+  color: #4ab4fb;
   font-size: 25px;
 }
 
@@ -855,7 +855,7 @@ Edu Banner Area CSS
   position: absolute;
   right: 20px;
   top: 10px;
-  background-color: #ff7e84;
+  background-color: #4ab4fb;
   color: white;
 }
 
@@ -868,7 +868,7 @@ Edu Banner Area CSS
 }
 
 .edu-content-2 span {
-  color: #ff7e84;
+  color: #4ab4fb;
 }
 
 .edu-content-2 h1 {
@@ -884,7 +884,7 @@ Edu Banner Area CSS
   position: absolute;
   content: '';
   height: 70px;
-  background-color: #ff7e84;
+  background-color: #4ab4fb;
   width: 2px;
   top: 0;
   left: 0;
@@ -920,7 +920,7 @@ Edu About Area CSS
   font-weight: 500;
   font-size: 18px;
   margin-bottom: 5px;
-  color: #30bead;
+  color: #4ab4fb;
 }
 
 .edu-about-content p {
@@ -928,7 +928,7 @@ Edu About Area CSS
 }
 
 .edu-about-content h2 span {
-  color: #ff7e84;
+  color: #4ab4fb;
   padding-bottom: 8px;
 }
 
@@ -1030,15 +1030,15 @@ Edu About Area CSS
 }
 
 .progress-section .psc01 {
-  background-color: #ff7e84;
+  background-color: #d180fc;
 }
 
 .progress-section .psc02 {
-  background-color: #30bead;
+  background-color: #8585ff;
 }
 
 .progress-section .psc03 {
-  background-color: #ffbc1f;
+  background-color: #4ab4fb;
 }
 
 @keyframes progress {
@@ -1138,7 +1138,7 @@ Edu Services Area CSS
 .edu-services-box .icon {
   font-size: 45px;
   margin-bottom: 30px;
-  color: #30bead;
+  color: #4ab4fb;
   height: 80px;
   line-height: 88px;
   text-align: center;
@@ -1149,12 +1149,12 @@ Edu Services Area CSS
 
 .edu-services-box:hover .icon {
   color: white;
-  background-color: #e6737b;
+  background-color: #4ab4fb;
   transition: .5s;
 }
 
 .edu-services-box:hover {
-  background-color: #ff7e84;
+  background-color: #8585ff;
   -webkit-box-shadow: 0 10px 28px 0 rgba(0, 0, 0, 0.09);
   box-shadow: 0 10px 28px 0 rgba(0, 0, 0, 0.09);
   -webkit-transform: translateY(-10px);
@@ -1214,12 +1214,12 @@ Edu Courses Area CSS
 
 .sorting-menu ul li:hover {
   cursor: pointer;
-  color: #ff7e84;
+  color: #4ab4fb;
 }
 
 .sorting-menu ul .active {
   cursor: pointer;
-  color: #ff7e84;
+  color: #4ab4fb;
 }
 
 .expired {
@@ -1277,7 +1277,7 @@ Edu Courses Area CSS
   font-size: 16px;
   font-weight: 800;
   padding: 8px 15px;
-  background-color: #30bead;
+  background-color: #4ab4fb;
   color: white;
   border-radius: 6px;
 }
@@ -1294,7 +1294,7 @@ Edu Courses Area CSS
 
 .single-courses-box .content .cr-price {
   font-weight: 800;
-  color: #30bead;
+  color: #4ab4fb;
   font-size: 25px;
   margin-bottom: 12px;
   display: block;
@@ -1314,7 +1314,7 @@ Edu Courses Area CSS
 }
 
 .single-courses-box .cr-items i {
-  color: #ff7e84;
+  color: #4ab4fb;
   margin-right: 6px;
   font-size: 18px;
 }
@@ -1356,7 +1356,7 @@ Edu Courses Area CSS
 .single-courses-box02:hover {
   -webkit-box-shadow: 0px 14px 21px 0 rgb(255 126 132 / 24%);
   box-shadow: 0px 14px 21px 0 rgb(255 126 132 / 24%);
-  border-bottom: 4px solid #ff7e84;
+  border-bottom: 4px solid #4ab4fb;
 }
 
 .single-courses-box02 .content h3 {
@@ -1404,7 +1404,7 @@ Edu Courses Area CSS
 
 .single-courses-box02 .content .cr-price {
   font-weight: 800;
-  color: #ff7e84;
+  color: #4ab4fb;
   font-size: 25px;
   margin-bottom: 10px;
   display: block;
@@ -1449,7 +1449,7 @@ Edu Courses Area CSS
 
 .edu-courses-area .result-count .courbtn:hover {
   color: white;
-  background-color: #30bead;
+  background-color: #4ab4fb;
 }
 
 .edu-courses-area .result-count .courbtn:last-child {
@@ -1458,7 +1458,7 @@ Edu Courses Area CSS
 
 .active-courbtn {
   color: white !important;
-  background-color: #30bead !important;
+  background-color: #4ab4fb!important;
 }
 
 .edu-courses-area .result-count p {
@@ -1516,7 +1516,7 @@ Edu Single Courses Area CSS
   padding: 2px 15px;
   display: inline-block;
   font-weight: 600;
-  background-color: #30bead;
+  background-color: #4ab4fb;
   color: white;
   margin-bottom: 30px;
   border-radius: 6px;
@@ -1549,7 +1549,7 @@ Edu Single Courses Area CSS
 }
 
 .single-course-desc .user-details span {
-  color: #30bead;
+  color: #4ab4fb;
 }
 
 
@@ -1783,7 +1783,7 @@ Edu Single Courses Area CSS
 
 .lession-button:not(.collapsed) {
   color: white;
-  background-color: #30bead;
+  background-color: #4ab4fb;
 }
 
 .lession-button span {
@@ -1869,7 +1869,7 @@ Edu Single Courses Area CSS
   padding: 6px 20px;
   border-radius: 6px;
   margin-right: 10px;
-  background-color: #ff7e84;
+  background-color: #4ab4fb;
   color: white;
 }
 
@@ -1888,7 +1888,7 @@ Edu Single Courses Area CSS
 }
 
 .single-instructor-info .sub-title {
-  color: #ff7e84;
+  color: #4ab4fb;
   font-size: 18px;
 }
 
@@ -2103,7 +2103,7 @@ Edu platfrom Area CSS
   font-weight: 500;
   font-size: 18px;
   margin-bottom: 5px;
-  color: #30bead;
+  color: #4ab4fb;
 }
 
 .edu-platfrom-content p {
@@ -2115,7 +2115,7 @@ Edu platfrom Area CSS
 }
 
 .edu-platfrom-content h2 span {
-  color: #ff7e84;
+  color: #4ab4fb;
   padding-bottom: 8px;
 }
 
@@ -2197,7 +2197,7 @@ video area CSS
   font-size: 40px;
   text-align: center;
   margin: auto;
-  color: #ff7e84;
+  color: #4ab4fb;
   border-radius: 100%;
   line-height: 97px;
   height: 90px;
@@ -2245,7 +2245,7 @@ video area CSS
 }
 
 .brands-title h3 span {
-  color: #ff7e84;
+  color: #4ab4fb;
   line-height: 40px;
 }
 
@@ -2274,7 +2274,7 @@ whyChoose form CSS
   font-weight: 500;
   font-size: 18px;
   margin-bottom: 5px;
-  color: #30bead;
+  color: #4ab4fb;
 }
 
 .edu-whyChoose-content p {
@@ -2286,7 +2286,7 @@ whyChoose form CSS
 }
 
 .edu-whyChoose-content h2 span {
-  color: #ff7e84;
+  color: #4ab4fb;
   padding-bottom: 8px;
 }
 
@@ -2320,7 +2320,7 @@ whyChoose form CSS
 Subscribe form CSS
 =================================================*/
 .subscribe-area {
-  background-image: url(../images/all-img/section-bg-3.png);
+  background-color:#8585ff;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -2418,12 +2418,17 @@ Subscribe form CSS
   position: absolute;
   right: 0;
   top: -2px;
-  background-color: white;
-  color: #30bead;
+  background-color: #fff;
+  color: #4ab4fb;
+  transition: .5s;
+  border-radius: 5px;
+  
 }
 
 .subscribe-from form .default-btn:hover {
-  box-shadow: none;
+  background-color: #fff;
+  color: #4ab4fb;
+  box-shadow: 0px 0px 0px 2.5px #4ab4fb inset, 0px 0px 0px 3px #fff;
 }
 
 .subscribe-from form #validator-newsletter {
@@ -2534,7 +2539,7 @@ Edu Topics Area CSS
 }
 
 .single-topic-box02:hover {
-  border-left: 4px solid #ff7e84;
+  border-left: 4px solid #4ab4fb;
   -webkit-box-shadow: 0 2px 28px 0 rgba(0, 0, 0, 0.09);
   box-shadow: 0 2px 28px 0 rgba(0, 0, 0, 0.09);
 }
@@ -2601,7 +2606,7 @@ Edu Counter Area CSS
   line-height: 1;
   font-size: 44px;
   margin-bottom: 10px;
-  color: #30bead;
+  color: #4ab4fb;
 }
 
 .counter-box .counter-list li p {
@@ -2662,7 +2667,7 @@ Edu testimonial Area CSS
 }
 
 .edu-testimonial-nav-content h2 span {
-  color: #ff7e84;
+  color: #4ab4fb;
   padding-bottom: 8px;
 }
 
@@ -2671,7 +2676,7 @@ Edu testimonial Area CSS
   font-weight: 500;
   font-size: 18px;
   margin-bottom: 5px;
-  color: #30bead;
+  color: #4ab4fb;
 }
 
 .edu-testimonial-navigator-item {
@@ -2719,7 +2724,7 @@ Edu testimonial Area CSS
 }
 
 .edu-testimonial-nav-content .client-title {
-  color: #ff7e84;
+  color: #4ab4fb;
 }
 
 .edu-testimonial-navigator.owl-theme .owl-nav [class*=owl-] {
@@ -2733,7 +2738,7 @@ Edu testimonial Area CSS
   width: 60px;
   height: 60px;
   background-color: white;
-  color: #ff7e84;
+  color: #4ab4fb;
   border-radius: 6px;
   font-size: 35px;
   padding: 0;
@@ -2757,7 +2762,7 @@ Edu testimonial Area CSS
 }
 
 .edu-testimonial-navigator.owl-theme .owl-nav [class*=owl-]:hover {
-  background-color: #ff7e84;
+  background-color: #4ab4fb;
   color: white;
 }
 
@@ -2771,7 +2776,7 @@ Edu testimonial Area CSS
   font-weight: 500;
   font-size: 18px;
   margin-bottom: 5px;
-  color: #30bead;
+  color: #4ab4fb;
 }
 
 .edu-testimonial-content p {
@@ -2779,7 +2784,7 @@ Edu testimonial Area CSS
 }
 
 .edu-testimonial-content h2 span {
-  color: #ff7e84;
+  color: #4ab4fb;
   padding-bottom: 8px;
 }
 
@@ -2841,7 +2846,7 @@ Edu testimonial Area CSS
 
 .edu-review span {
   font-size: 18px;
-  color: #ff7e84;
+  color: #4ab4fb;
 }
 
 .edu-review-box {
@@ -2947,7 +2952,7 @@ Edu testimonial Area CSS
 
 .edu-review-single span {
   font-size: 18px;
-  color: #ff7e84;
+  color: #4ab4fb;
 }
 
 .edu-review-single-box {
@@ -2995,7 +3000,7 @@ Edu Courses Area CSS
 }
 
 .single-courseBlock-box .content .sub-title {
-  color: #30bead;
+  color: #4ab4fb;
 }
 
 .single-courseBlock-box .content h3 {
@@ -3005,12 +3010,12 @@ Edu Courses Area CSS
 }
 
 .single-courseBlock-box .content h3 span {
-  color: #ff7e84;
+  color: #4ab4fb;
   padding-bottom: 8px;
 }
 
 .single-courseBlock-box .content .sub-title {
-  color: #30bead;
+  color: #4ab4fb;
   font-weight: 500;
   margin-bottom: 10px;
 }
@@ -3099,7 +3104,7 @@ Edu Single Events Area CSS
 
 .event-single-content .time-counter {
   padding: 30px 40px;
-  background-color: #30bead;
+  background-color: #4ab4fb;
   border-radius: 6px;
   margin-bottom: 20px;
 }
@@ -3219,7 +3224,7 @@ Edu Single Events Area CSS
 }
 
 .event-sidebar-widget .widget-spacial-gust ul li p {
-  color: #ff7e84;
+  color: #4ab4fb;
   font-size: 18px;
 }
 
@@ -3239,7 +3244,7 @@ Edu Team Area CSS
 }
 
 .single-team-box:hover {
-  border-top: 4px solid #30bead;
+  border-top: 4px solid #4ab4fb;
   -webkit-box-shadow: 0px 20px 35px 0 rgba(0, 0, 0, 0.09);
   box-shadow: 0px 20px 35px 0 rgba(0, 0, 0, 0.09);
   transition: .5s;
@@ -3302,21 +3307,21 @@ Edu Team Area CSS
 
 .single-team-box .sg-1 {
   background-color: #ffe8e8 !important;
-  color:#ff7e84 !important;
+  color:#4ab4fb !important;
 }
 
 .single-team-box .sg-1:hover {
-  background-color: #ff7e84;
+  background-color: #4ab4fb;
   color: white;
 }
 
 .single-team-box .sg-2 {
   background-color: #e9fbfa;
-  color: #30bead;
+  color: #4ab4fb;
 }
 
 .single-team-box .sg-2:hover {
-  background-color: #30bead;
+  background-color: #4ab4fb;
   color: white;
 }
 
@@ -3368,7 +3373,7 @@ Edu Team Area CSS
   bottom: 0;
   border-radius: 5px 0 0 0;
   right: 0;
-  background-color: #30bead;
+  background-color: #4ab4fb;
   padding: 12px 12px;
   font-size: 20px;
   color: white;
@@ -3388,7 +3393,7 @@ Edu Team Area CSS
   visibility: hidden;
   border-radius: 5px 0 0 0;
   right: 0;
-  background-color: #ff7e84;
+  background-color: #4ab4fb;
   -webkit-transition: .5s;
   transition: .5s;
 }
@@ -3472,7 +3477,7 @@ Edu Instructor Single Details CSS
 .instructor-info ul li i {
   padding: 10px;
   border-radius: 5px;
-  background-color: #30bead;
+  background-color: #4ab4fb;
   color: white;
   margin-right: 10px;
 }
@@ -3503,7 +3508,7 @@ Edu Instructor Single Details CSS
 }
 
 .instructor-single-content .sub-title {
-  color: #ff7e84;
+  color: #4ab4fb;
   margin-bottom: 40px;
   font-size: 20px;
 }
@@ -3543,11 +3548,11 @@ Edu Faq Area CSS
   font-weight: 500;
   font-size: 18px;
   margin-bottom: 5px;
-  color: #30bead;
+  color: #4ab4fb;
 }
 
 .edu-faq-content h2 span {
-  color: #ff7e84;
+  color: #4ab4fb;
   padding-bottom: 8px;
 }
 
@@ -3569,7 +3574,7 @@ Edu Faq Area CSS
 
 .faq-button:not(.collapsed) {
   color: white;
-  background-color: #30bead;
+  background-color: #4ab4fb;
 }
 
 .faq-button span {
@@ -3699,7 +3704,7 @@ Edu widgets Area CSS
   color: white;
   -webkit-transition: .5s;
   transition: .5s;
-  background-color: #ff7e84;
+  background-color: #4ab4fb;
 }
 
 .widget-area .widget_search form .widget-search-btn i {
@@ -3738,7 +3743,7 @@ Edu widgets Area CSS
 }
 
 .widget-catgory ul li:hover {
-  background-color: #ff7e84;
+  background-color: #4ab4fb;
   color: white;
 }
 
@@ -3766,7 +3771,7 @@ Edu widgets Area CSS
 
 .edu-check-input:checked {
   border: none;
-  background-color: #ff7e84;
+  background-color: #4ab4fb;
 }
 
 .edu-check-label {
@@ -3842,7 +3847,7 @@ Edu widgets Area CSS
 }
 
 .widget-resent-course .item span {
-  color: #30bead;
+  color: #4ab4fb;
   font-weight: 500;
   font-size: 18px;
 }
@@ -3877,7 +3882,7 @@ Edu widgets Area CSS
 }
 
 .widget-recent-blog .item .re-blog-btn {
-  color: #30bead;
+  color: #4ab4fb;
   font-weight: 500;
 }
 
@@ -3894,7 +3899,7 @@ Edu widgets Area CSS
 }
 
 .widget-tag-cloud .tagcloud a:hover {
-  background-color: #ff7e84;
+  background-color: #4ab4fb;
   color: white;
 }
 
@@ -3979,7 +3984,7 @@ Edu Blog Standard Area CSS
   font-size: 16px;
   font-weight: 800;
   padding: 8px 15px;
-  background-color: #30bead;
+  background-color: #4ab4fb;
   color: white;
   border-radius: 6px;
   margin-bottom: 20px;
@@ -4011,7 +4016,7 @@ Edu Blog Standard Area CSS
 }
 
 .single-blog-standard .cr-items i {
-  color: #30bead;
+  color: #4ab4fb;
   margin-right: 6px;
   font-size: 18px;
 }
@@ -4050,7 +4055,7 @@ Edu Blog and Artical Area CSS
   font-size: 16px;
   font-weight: 800;
   padding: 8px 15px;
-  background-color: #30bead;
+  background-color: #4ab4fb;
   color: white;
   border-radius: 6px;
 }
@@ -4067,7 +4072,7 @@ Edu Blog and Artical Area CSS
 
 .single-blog-box .content .cr-price {
   font-weight: 800;
-  color: #30bead;
+  color: #4ab4fb;
   font-size: 25px;
   margin-bottom: 12px;
   display: block;
@@ -4086,7 +4091,7 @@ Edu Blog and Artical Area CSS
 }
 
 .single-blog-box .cr-items i {
-  color: #30bead;
+  color: #4ab4fb;
   margin-right: 6px;
   font-size: 18px;
 }
@@ -4119,7 +4124,7 @@ Edu Blog and Artical Area CSS
 }
 
 .single-artical-box:hover {
-  border: 2px solid #ff7e84;
+  border: 2px solid #4ab4fb;
 }
 
 .single-artical-box .image {
@@ -4130,7 +4135,7 @@ Edu Blog and Artical Area CSS
   font-size: 16px;
   padding: 8px 15px;
   background-color: #e3f9f6;
-  color: #30bead;
+  color: #4ab4fb;
   border-radius: 6px;
   margin-bottom: 20px;
   display: inline-block;
@@ -4207,7 +4212,7 @@ Edu Blog Single Area CSS
 }
 
 .blog-details-desc .article-content .entry-meta ul li i {
-  color: #30bead;
+  color: #4ab4fb;
   margin-right: 4px;
 }
 
@@ -4233,7 +4238,7 @@ blockquote i,
 
 blockquote,
 .blockquote {
-  background-color: #30bead;
+  background-color: #4ab4fb;
   padding: 40px 35px !important;
   margin-bottom: 20px;
   margin-top: 20px;
@@ -4325,7 +4330,7 @@ blockquote span::before,
   height: 5px;
   width: 5px;
   border-radius: 100%;
-  background-color: #30bead;
+  background-color: #4ab4fb;
 }
 
 .blog-details-desc .article-content .article-footer {
@@ -4373,7 +4378,7 @@ blockquote span::before,
 }
 
 .blog-details-desc .article-content .article-footer .article-tags a:hover {
-  color: #ff7e84;
+  color: #4ab4fb;
 }
 
 .blog-details-desc .article-content .article-footer .article-share .social {
@@ -4449,7 +4454,7 @@ blockquote span::before,
 }
 
 .prev-link-wrapper .prev-link-info-wrapper .post-nav-title {
-  color: #ff7e84;
+  color: #4ab4fb;
   font-size: 16px;
   display: block;
 }
@@ -4496,7 +4501,7 @@ blockquote span::before,
 }
 
 .next-link-wrapper .prev-link-info-wrapper .post-nav-title {
-  color: #ff7e84;
+  color: #4ab4fb;
   font-size: 16px;
   display: block;
 }
@@ -4555,7 +4560,7 @@ blockquote span::before,
 
 .comments-area .comment-body .reply a {
   border: 1px dashed #ded9d9;
-  color: #30bead;
+  color: #4ab4fb;
   display: inline-block;
   padding: 2px 15px;
   border-radius: 6px;
@@ -4566,7 +4571,7 @@ blockquote span::before,
 
 .comments-area .comment-body .reply a:hover {
   color: white;
-  background-color: #30bead;
+  background-color: #4ab4fb;
 }
 
 .comments-area .comment-author {
@@ -5169,57 +5174,58 @@ Edu 404 Area CSS
 /*================================================
 Edu Footer Area CSS
 =================================================*/
-.edu-footer-area {
+.dark-edu-footer-area {
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
-  background-color: black;
+  background-color: #181818;
   text-align: center;
+  font-family: 'Poppins', sans-serif;
 }
-.footer-link{
+.dark-footer-link{
   margin-top: -20px !important;
 }
 @media (max-width: 767px) {
-  .footer-logo{
+  .dark-footer-logo{
     max-width: 300px !important;
   }
 }
 
 
 
-.edu-footer-area .pr-line {
+.dark-edu-footer-area .dark-pr-line {
   background-color: #252c3d;
 }
 
-.single-footer-widget {
+.dark-single-footer-widget {
   margin-bottom: 30px;
 }
 
-.single-footer-widget .logo {
+.dark-single-footer-widget .logo {
   display: inline-block;
   margin-bottom: 25px;
 }
 
-.single-footer-widget p {
+.dark-single-footer-widget p {
   color: #ececfc;
   font-size: 18px;
 }
 
-.single-footer-widget .social-links {
+.dark-single-footer-widget .social-links {
   padding-left: 0;
   list-style-type: none;
   margin-bottom: 0;
   margin-top: 20px;
 }
 
-.single-footer-widget .social-links li {
+.dark-single-footer-widget .social-links li {
   display: inline-block;
   margin-right: 8px;
 }
 
-.single-footer-widget .social-links li a {
+.dark-single-footer-widget .social-links li a {
   display: block;
-  background-color: #1f2638;
+  background-color: #313131;
   width: 45px;
   height: 45px;
   text-align: center;
@@ -5229,7 +5235,7 @@ Edu Footer Area CSS
   position: relative;
 }
 
-.single-footer-widget .social-links li a i {
+.dark-single-footer-widget .social-links li a i {
   position: absolute;
   left: 0;
   right: 0;
@@ -5238,44 +5244,150 @@ Edu Footer Area CSS
   transform: translateY(-50%);
 }
 
-.single-footer-widget .social-links li a:hover {
-  background-color: #ff7e84;
+.dark-single-footer-widget .social-links li a:hover {
+  background-color: #8861db;
   color: white;
 }
 
-.single-footer-widget .social-links li:last-child {
+.dark-single-footer-widget .social-links li:last-child {
   margin-right: 0;
 }
 
-.single-footer-widget h3 {
+.dark-single-footer-widget h3 {
   color: white;
   font-size: 22px;
   margin-bottom: 20px;
   padding-bottom: 7px;
 }
 
-.single-footer-widget .links-list {
+.dark-single-footer-widget .links-list {
   padding-left: 0;
   margin-bottom: 0;
   list-style-type: none;
 }
 
-.single-footer-widget .links-list li {
+.dark-single-footer-widget .links-list li {
   margin-bottom: 12px;
 }
 
-.single-footer-widget .links-list li a {
+.dark-single-footer-widget .links-list li a {
   display: inline-block;
   color: #7b7b8a;
   font-size: 18px;
 }
 
-.single-footer-widget .links-list li a:hover {
-  color: #ff7e84;
+.dark-single-footer-widget .links-list li a:hover {
+  color: #8861db;
+}
+/*light mode*/
+.light-edu-footer-area {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-color: #fff;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+}
+.light-footer-link{
+  margin-top: -20px !important;
+}
+@media (max-width: 767px) {
+  .light-footer-logo{
+    max-width: 300px !important;
+  }
+}
+
+
+
+.light-edu-footer-area .light-pr-line {
+  background-color: #181818;
+}
+
+.light-single-footer-widget {
+  margin-bottom: 30px;
+}
+
+.light-single-footer-widget .logo {
+  display: inline-block;
+  margin-bottom: 25px;
+}
+
+.light-single-footer-widget p {
+  color: #181818;
+  font-size: 18px;
+}
+
+.light-single-footer-widget .social-links {
+  padding-left: 0;
+  list-style-type: none;
+  margin-bottom: 0;
+  margin-top: 20px;
+}
+
+.light-single-footer-widget .social-links li {
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.light-single-footer-widget .social-links li a {
+  display: block;
+  background-color: #ebebed;
+  width: 45px;
+  height: 45px;
+  text-align: center;
+  color: #181818;
+  font-size: 25px;
+  border-radius: 2px;
+  position: relative;
+}
+
+.light-single-footer-widget .social-links li a i {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.light-single-footer-widget .social-links li a:hover {
+  background-color: #4ab4fb;
+  color: #181818;
+}
+
+.light-single-footer-widget .social-links li:last-child {
+  margin-right: 0;
+}
+
+.light-single-footer-widget h3 {
+  color: #181818;
+  font-size: 22px;
+  margin-bottom: 20px;
+  padding-bottom: 7px;
+}
+
+.light-single-footer-widget .links-list {
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style-type: none;
+}
+
+.light-single-footer-widget .links-list li {
+  margin-bottom: 12px;
+}
+
+.light-single-footer-widget .links-list li a {
+  display: inline-block;
+  color: #595962;
+  font-size: 18px;
+}
+
+.light-single-footer-widget .links-list li a:hover {
+  color: #4ab4fb;
 }
 
 .footer-newsletter-info p span {
-  color: #ff7e84;
+  color: #4ab4fb;
   text-decoration: underline;
 }
 
@@ -5289,7 +5401,7 @@ Edu Footer Area CSS
   margin-bottom: 0;
   left: 15px;
   top: 8px;
-  color: #7b7b8a;
+  color: #67676a;
   font-size: 25px;
 }
 
@@ -5298,7 +5410,7 @@ Edu Footer Area CSS
   display: block;
   width: 100%;
   background-color: white;
-  color: #000000;
+  color: #181818;
   border-radius: 5px;
   border: none;
   padding-left: 55px;
@@ -5347,13 +5459,13 @@ Edu Footer Area CSS
 }
 
 .footer-newsletter-info form .default-btn {
-  background-color: #ff7e84;
+  background-color: #8861db;
   color: white;
   width: 100%;
 }
 
 .footer-newsletter-info form .default-btn:hover {
-  background-color: #ff7e84;
+  background-color: #8861db;
   color: white;
 }
 
@@ -5365,26 +5477,45 @@ Edu Footer Area CSS
   color: white;
 }
 
-.footer-bottom-area {
+.dark-footer-bottom-area {
   text-align: center;
   padding-top: 30px;
   padding-bottom: 30px;
-  background-color: #000000;
+  background-color: #181818;
 }
 
-.footer-bottom-area p {
+.dark-footer-bottom-area p {
   font-size: 15px;
 }
 
-.footer-bottom-area p a {
+.dark-footer-bottom-area p a {
   color: white;
   font-weight: 600;
 }
 
-.footer-bottom-area p a:hover {
-  color: #ff7e84;
+.dark-footer-bottom-area p a:hover {
+  color: #8861db;
+}
+/*light mode*/
+.light-footer-bottom-area {
+  text-align: center;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background-color: #fff;
 }
 
+.light-footer-bottom-area p {
+  font-size: 15px;
+}
+
+.light-footer-bottom-area p a {
+  color: #181818;
+  font-weight: 600;
+}
+
+.light-footer-bottom-area p a:hover {
+  color: #4ab4fb;
+}
 /*================================================
 Go Top CSS
 =================================================*/
@@ -5394,7 +5525,7 @@ Go Top CSS
   cursor: pointer;
   bottom: 20px;
   right: 20px;
-  background-color: #ff7e84;
+  background-color: #8861db;
   color: white;
   z-index: 4;
   width: 43px;
@@ -5428,6 +5559,6 @@ Go Top CSS
 }
 
 .go-top:hover {
-  background-color: #30bead;
+  background-color: #4ab4fb;
   color: white;
 }

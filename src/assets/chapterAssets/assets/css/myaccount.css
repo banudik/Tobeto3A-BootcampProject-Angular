@@ -1,0 +1,135 @@
+:root {
+    --tangerine: #f2911e;
+    --greyish-teal: #57bdaf;
+    --brownish-grey: #646464;
+    --brown-grey: #b1b1b1;
+    --golden-yellow: #f2bf26;
+    --white: #ffffff;
+    --light-pink: #f3f1f2;
+    --very-light-pink: #e3e3e3;
+    --bright-orange: #ff6c00;
+    --black: #000000;
+    --duck-egg-blue: #d2ebe8;
+    --dark-blue-figma: #0a142f;
+}
+
+a{
+  text-decoration: none !important;
+}
+
+button{
+  cursor: pointer;
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+}
+
+
+.myaccount{
+  height:90px ;
+  background-color: var(--dark-blue-figma);
+  margin-bottom: 25px;
+}
+
+.pp-big{
+  background-color: var(--greyish-teal);
+  color: var(--white);
+  font-size: 40px;
+  line-height: 60px;
+  border-radius: 50%;
+  padding: 22px 27px;
+  display: inline-block;
+  margin-right: 30px;
+}
+
+.my-account-top-left button{
+  font-size: 14px;
+  line-height: 29px;
+  text-decoration: underline;
+  color: var(--black);
+  font-weight: 600;
+  }
+
+  .my-account-top-right a{
+    color:var(--brown-grey) ;
+    font-size: 14px;
+    line-height: 29px;
+    text-decoration: underline !important;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+
+  .my-account-bottom{
+    border-radius: 25px;
+    box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.1);
+    padding: 30px;
+  }
+
+  .my-account-bottom-left,.my-account-bottom-right{
+    width: 50%;
+    height: 100%;
+    padding-left: 30px;
+  }
+
+  .my-account-bottom-left{
+    border-right:2px solid var(--brown-grey) ;
+  }
+
+  .my-account-form-label{
+    font-size: 14px;
+    color: var(--brown-grey);
+    font-weight: 600;
+    padding-left: 25px;
+  }
+
+  .my-account-heading{
+    font-size: 16px;
+    line-height: 25px;
+    font-weight: 600;
+    color: var(--black);
+  }
+
+
+  .my-account-bottom input{
+    width: 90%;
+    border: 1px solid #b7b7b7;
+    border-radius: 10px;
+    padding:12px 17px;
+    font-size: 13px;
+    color: var(--black);
+    font-weight: 600;
+    margin-block: 10px;
+  }
+
+  .my-account-bottom input::placeholder{
+    color: #b7b7b7;
+  }
+
+  .submit-btn{
+    width: 208px;
+    padding: 12px 25px;
+    color: var(--greyish-teal);
+    background-color: var(--white);
+    font-size: 15px;
+    line-height: 29px;
+    text-align: center;
+    border: 2px solid var(--brown-grey);
+    border-radius:28px ;
+    margin: 0 auto;
+    margin-top: 25px;
+    transition: .3s all ease;
+  }
+
+  .submit-btn.active, .submit-btn:hover{
+    color: var(--white);
+    background-color: var(--greyish-teal);
+    transition: .3s all ease;
+  }
+
+  .vertical-line{
+    display: block;
+    width: 2px;
+    height: 100%;
+    background-color: var(--black);
+  }

@@ -6,18 +6,20 @@ import { ApplicationStateInformationService } from '../../../../../features/serv
 import { UpdateBootcampStateRequest } from '../../../../../features/models/requests/bootcamp-state/update-bootcamp-state-request';
 import { UpdateApplicationStateInformationRequest } from '../../../../../features/models/requests/application-state-information/update-application-state-information-request';
 import { ApplicationStateInformationListItemDto } from '../../../../../features/models/responses/application-state-information/application-state-information-list-item-dto';
+import { CommonModule } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
+import { ValidationHelper } from '../../../../../core/helpers/validationtoastrmessagehelper';
 
 @Component({
   selector: 'app-applicationstateedit',
   standalone: true,
-  imports: [ReactiveFormsModule,RouterModule],
+  imports: [ReactiveFormsModule,RouterModule,CommonModule],
   templateUrl: './applicationstateedit.component.html',
   styleUrl: './applicationstateedit.component.css'
 })
 export class ApplicationstateeditComponent  implements OnInit{
   currentApplicationState!:GetByIdApplicationStateInformationResponse;
   ApplicationStateForm!:FormGroup
-  formMessage:string | null=null;
   
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: { [x: string]: number; }) => {
@@ -26,7 +28,7 @@ export class ApplicationstateeditComponent  implements OnInit{
   }
 
   constructor(private formBuilder:FormBuilder,private applicationStateService:ApplicationStateInformationService,
-    private router:Router,private change:ChangeDetectorRef, private activatedRoute:ActivatedRoute
+    private router:Router,private change:ChangeDetectorRef, private activatedRoute:ActivatedRoute,private toastr:ToastrService,private validationHelper:ValidationHelper
   ){}
 
   getApplicationStateById(id:number){
@@ -37,7 +39,7 @@ export class ApplicationstateeditComponent  implements OnInit{
         
       },
       (error: any) => {
-        console.error('Error fetching applicationState:', error);
+        this.toastr.error('Error fetching applicationState:', error.details);
         // Hata işleme mekanizmasını buraya ekleyebilirsiniz
         setTimeout(()=>{
           this.router.navigate(['/adminpanel/applicationstateindex'])
@@ -61,15 +63,14 @@ export class ApplicationstateeditComponent  implements OnInit{
       this.applicationStateService.update(applicationStateModel).subscribe({
         //next => observable'dan gelen veri yakaladığımız fonksiyon
         next:(response)=>{
-         console.log(response.name + " Updated");
-         (response.name)
+
         },
         error:(error)=>{
-          this.formMessage="güncellenemedi";
+          this.toastr.error('Application State could not be updated');
           this.change.markForCheck();
         },
         complete:()=>{
-          this.formMessage="Başarıyla Güncellendi";
+          this.toastr.success('Application State successfully updated');
           this.ApplicationStateForm.reset();
           this.change.markForCheck();
 
@@ -81,10 +82,10 @@ export class ApplicationstateeditComponent  implements OnInit{
     }}
 
     onFormSubmit(){
-      const nameControl = this.ApplicationStateForm.get('name');
+      this.validationHelper.checkValidation(this.ApplicationStateForm);
 
-      if (nameControl && nameControl.invalid) {
-        this.formMessage = "Lütfen gerekli alanları doldurun";
+      if (this.ApplicationStateForm.invalid) {
+        this.toastr.error('Invalid inputs');
         return;
       }
     

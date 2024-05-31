@@ -3,7 +3,7 @@ import { FAQItem } from '../../models/const/FAQItem';
 import { FAQList } from '../../models/const/FAQList';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { DarkModeService } from '../../services/dark-mode.service';
+import { DarkModeService } from '../../services/concretes/dark-mode.service';
 
 
 @Component({

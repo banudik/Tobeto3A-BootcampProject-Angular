@@ -1,0 +1,46 @@
+<form [formGroup]="CommentUpdateForm" (ngSubmit)="onFormSubmit()" enctype="multipart/form-data"
+    *ngIf="CommentUpdateForm && !isloading">
+
+    <div class="card-style mb-30">
+        <h6 class="mb-25">Input Fields</h6>
+
+        <div class="form-check checkbox-style chexbox-success mb-20">
+            <label class="form-check-label" for="checkbox-3">
+                Comment approval &#160; &#160;</label>
+            <input formControlName="status" type="checkbox" value="" id="checkbox-3 statusInput">
+          </div>
+
+        <div class="input-style-1">
+            <label for="contextInput">Comment Context</label>
+            <textarea id="contextInput" disabled value="{{this.currentComment.context}}"></textarea>
+        </div>
+        <div class="input-style-1">
+            <input formControlName="id" id="idInput" type="hidden" />
+            <label for="chapterBootcampNameInput">Bootcamp Name</label>
+            <input disabled id="chapterBootcampNameInput" type="text"  value="{{this.currentComment.chapterBootcampName}}"/>
+        </div>
+
+        <div class="input-style-1">
+            <label for="userEmailInput">User Email</label>
+            <input  id="userEmailInput" disabled value="{{this.currentComment.userEmail}}"/>
+        </div>
+        <div class="input-style-1">
+            <label for="userFirstNameInput">User First Name</label>
+            <input  id="userFirstName" disabled value="{{this.currentComment.userFirstName}}"/>
+        </div>
+        <div class="input-style-1">
+            <label for="userLastNameInput">User Last Name</label>
+            <input id="userLastNameInput" disabled value="{{this.currentComment.userLastName}}"/>
+        </div>
+        <div class="input-style-1">
+            <label for="createdDateInput">Comment Created Date</label>
+            <input type="text" id="createdDateInput" disabled value="{{currentComment.createdDate | date : 'dd/MM/yyyy' }}"/>
+        </div>
+    </div>
+
+    <div> <button type="submit" class="main-btn warning-btn rounded-full btn-hover">Update Comment</button> |
+        
+        <a routerLink='/adminpanel/commentindex'><span class="main-btn dark-btn rounded-full btn-hover">Back</span></a>
+    </div>
+
+</form>

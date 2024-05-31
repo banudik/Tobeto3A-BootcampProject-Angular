@@ -1,0 +1,46 @@
+<form [formGroup]="ChapterUpdateForm" (ngSubmit)="onFormSubmit()" enctype="multipart/form-data"
+    *ngIf="ChapterUpdateForm && !isloading">
+
+    <div class="card-style mb-30">
+        <h6 class="mb-25">Input Fields</h6>
+        <div class="input-style-1">
+            <input formControlName="id" id="idInput" type="hidden" />
+            <label for="nameInput">Bootcamp Name</label>
+            <input id="nameInput" type="text" [disabled]="true" value="{{currentChapter.bootcampName}}" />
+        </div>
+        <div class="select-style-1">
+            <label for="bootcampSelect">Bootcamp</label>
+            <div class="select-position">
+                <select formControlName="bootcampId" id="bootcampSelect">
+                    <option *ngFor="let bootcamp of bootcamps" [value]="bootcamp.id">{{ bootcamp.name }}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="input-style-1">
+            <label for="titleInput">Chapter Title</label>
+            <input formControlName="title" id="titleInput" />
+        </div>
+        <div class="input-style-1">
+            <label for="linkInput">Chapter Video Link</label>
+            <input formControlName="link" id="linkInput" />
+        </div>
+        <div class="input-style-1">
+            <label for="timeInput">Chapter Time(minute)</label>
+            <input formControlName="time" id="timeInput" />
+        </div>
+        <div class="input-style-1">
+            <label for="sortInput">Chapter Sort</label>
+            <input formControlName="sort" id="sortInput" />
+        </div>
+        <div class="input-style-1">
+            <label for="descriptionInput">Chapter Description</label>
+            <textarea formControlName="description" id="descriptionInput"></textarea>
+        </div>
+    </div>
+
+    <div> <button type="submit" class="main-btn warning-btn rounded-full btn-hover">Update Chapter</button> |
+        <a routerLink='/adminpanel/chapterindex'><span class="main-btn dark-btn rounded-full btn-hover">Back</span></a>
+    </div>
+
+</form>
