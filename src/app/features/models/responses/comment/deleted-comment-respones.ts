@@ -1,6 +1,6 @@
 export interface DeletedCommentResponse {
     context:string;
-    chapterId:number;
+    bootcampId:number;
     userId:string;
     //status will be given at backend default:false
 }
