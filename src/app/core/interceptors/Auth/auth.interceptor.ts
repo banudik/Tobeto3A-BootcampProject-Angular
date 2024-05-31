@@ -4,13 +4,10 @@ import { BehaviorSubject, throwError, Observable } from 'rxjs';
 import { catchError, switchMap, filter, take } from 'rxjs/operators';
 import { LocalStorageService } from '../../../features/services/concretes/local-storage.service';
 import { AuthService } from '../../../features/services/concretes/auth.service';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import { TokenModel } from '../../../features/models/responses/auth/token-model';
 
 export const AuthInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: HttpHandlerFn) => {
   const storageService = inject(LocalStorageService);
-  const toastr = inject(ToastrService);
-  const router = inject(Router);
   const authService = inject(AuthService);
   let isRefreshing = false;
   const refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
@@ -31,8 +28,14 @@ export const AuthInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: 
   }
 
   return next(req).pipe(
-    catchError((error: HttpErrorResponse) => {
-      console.log('AuthInterception yakaladı')
+    catchError((error: any) => {
+      console.log('AuthInterceptor caught an error:', error);
+      console.log('Hata bu şekilde', error);
+      console.log('Error status:', error.status);
+
+        
+
+
         if (error.status === 401 && !req.url.includes('refreshToken')) {
           console.log('1.Koşul içerisinde',error.status === 401 && !req.url.includes('refreshToken'));
           if (!isRefreshing) {
@@ -55,10 +58,7 @@ export const AuthInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: 
               }),
               catchError((refreshError) => {
                 isRefreshing = false;
-                storageService.removeToken();
-                router.navigate(['/login']);
-                toastr.warning('Your session has expired', 'Log In Again')
-                //authService.logOut();
+                authService.logOut();
                 return throwError(refreshError);
               })
             );
@@ -78,7 +78,7 @@ export const AuthInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: 
           }
         }
 
-        return throwError(() => Error());
+      return throwError(error);
     })
   );
 };

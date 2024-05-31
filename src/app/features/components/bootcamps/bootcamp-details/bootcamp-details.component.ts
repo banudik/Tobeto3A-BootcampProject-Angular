@@ -81,6 +81,7 @@ export class BootcampDetailsComponent implements OnInit{
     );
   }
 
+
   getComments(pageRequest:PageRequest){
     //{pageIndex:this.commentIndex , pageSize:10}
     this.isloading = true;

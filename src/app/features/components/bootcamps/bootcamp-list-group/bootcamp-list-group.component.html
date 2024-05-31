@@ -79,7 +79,7 @@
 
                                 </div>
                                 <div class="text-center mt-5">
-                                    <a href="#" class="default-btn primery-red text-center boot-cards">Başvur</a>
+                                    <a href="#" class="default-btn text-center boot-cards" [ngClass]="{'expired': isExpired(bootcamp.endDate), 'notExpired': !isExpired(bootcamp.endDate)}">Başvur</a>
     
                                         </div>
                             </div>
