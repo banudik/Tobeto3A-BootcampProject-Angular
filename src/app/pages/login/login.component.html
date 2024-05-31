@@ -310,7 +310,7 @@
     <div [ngClass]="{ 'dark-login': darkModeService.darkModeSignal() === 'dark', 'light-login': darkModeService.darkModeSignal() === 'light' }">
       <div [ngClass]="{ 'dark-content': darkModeService.darkModeSignal() === 'dark', 'light-content': darkModeService.darkModeSignal() === 'light' }" *ngIf="!showForgotPassword">
         <h2>Login</h2>
-        <form [ngClass]="{ 'dark-form': darkModeService.darkModeSignal() === 'dark', 'light-form': darkModeService.darkModeSignal() === 'light' }" [formGroup]="loginForm" (ngSubmit)="login()">
+        <form [ngClass]="{ 'dark-form': darkModeService.darkModeSignal() === 'dark', 'light-form': darkModeService.darkModeSignal() === 'light' }" [formGroup]="loginForm" >
           <div [ngClass]="{ 'dark-inputBx': darkModeService.darkModeSignal() === 'dark', 'light-inputBx': darkModeService.darkModeSignal() === 'light' }">
             <input type="email" formControlName="email" required >
             <i>Email</i>
@@ -324,7 +324,7 @@
             <a routerLink="/sign-up">Sign Up</a>
           </div>
           <div [ngClass]="{ 'dark-inputBx': darkModeService.darkModeSignal() === 'dark', 'light-inputBx': darkModeService.darkModeSignal() === 'light' }">
-            <input type="submit" value="Login">
+            <input type="submit" (click)="login()" value="Login">
           </div>
           <!-- Doğrulama Kodu -->
           <div *ngIf="showAuthenticatorCodeInput" [ngClass]="{ 'dark-authenticator-code-modal': darkModeService.darkModeSignal() === 'dark', 'light-authenticator-code-modal': darkModeService.darkModeSignal() === 'light' }">
@@ -346,7 +346,7 @@
                     </div>
                 </div>
                 <div [ngClass]="{ 'dark-button-container': darkModeService.darkModeSignal() === 'dark', 'light-button-container': darkModeService.darkModeSignal() === 'light' }">
-                    <button type="submit" id="btn" [ngClass]="{ 'dark-submit-button': darkModeService.darkModeSignal() === 'dark', 'light-submit-button': darkModeService.darkModeSignal() === 'light' }" (click)="verifyCode()">Verify</button>
+                    <button  id="btn" [ngClass]="{ 'dark-submit-button': darkModeService.darkModeSignal() === 'dark', 'light-submit-button': darkModeService.darkModeSignal() === 'light' }" (click)="verifyCode()">Verify</button>
                 </div>
         </div> 
       </div>

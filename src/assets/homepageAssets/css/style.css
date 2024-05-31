@@ -67,29 +67,37 @@ p:last-child {
 }
 
 .ptb-100 {
-  padding-top: 100px;
+  padding-top: 150px;
   padding-bottom: 100px;
+  
+  
 }
 
 .pt-100 {
   padding-top: 100px;
+  
 }
 
 .pb-100 {
   padding-bottom: 100px;
+  
 }
 
 .ptb-70 {
   padding-top: 70px;
   padding-bottom: 70px;
+ 
 }
 
 .pt-70 {
   padding-top: 70px;
+  
+  
 }
 
 .pb-70 {
   padding-bottom: 70px;
+  
 }
 
 .pr-line {
@@ -1329,7 +1337,7 @@ Edu Courses Area CSS
 }
 
 .single-courses-box .ev-items li i{
-  color: #30bead;
+  color: #8585ff;
 }
 
 .section-button {
@@ -2422,6 +2430,7 @@ Subscribe form CSS
   color: #4ab4fb;
   transition: .5s;
   border-radius: 5px;
+  margin-top: 35px;
   
 }
 
@@ -5131,7 +5140,7 @@ Pagination CSS
 .pagination-area .page-numbers:hover,
 .pagination-area .page-numbers.current {
   color: white;
-  background-color: #ff7e84;
+  background-color: #4ab4fb;
 }
 
 .pagination-area .page-numbers i {

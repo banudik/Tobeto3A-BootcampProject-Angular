@@ -45,7 +45,7 @@ import { ChapterBaseService } from "../abstracts/chapter-base-service";
         })
       )
     }
-
+    
     override getListByBootcampId(bootcampId:number,pageRequest:PageRequest): Observable<ChapterListItemDto> {
       const newRequest: {[key: string]: string | number} = {
         pageIndex: pageRequest.pageIndex,
@@ -53,7 +53,7 @@ import { ChapterBaseService } from "../abstracts/chapter-base-service";
         bootcampId: bootcampId
       };
   
-      return this.httpClient.get<ChapterListItemDto>(this.apiUrl, {
+      return this.httpClient.get<ChapterListItemDto>(`${this.apiUrl}/getlistbybootcampid`, {
         params: newRequest
       }).pipe(
         map((response)=>{

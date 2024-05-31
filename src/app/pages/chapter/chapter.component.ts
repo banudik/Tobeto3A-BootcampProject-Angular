@@ -19,6 +19,8 @@ import { GetListBootcampLogsResponse } from '../../features/models/responses/boo
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { CreateBootcampLogsRequest } from '../../features/models/requests/bootcamp-logs/create-bootcamp-log-request';
 import { CreatedBootcampLogsResponse } from '../../features/models/responses/bootcamp-logs/created-bootcamp-logs-response';
+import { CertificateService } from '../../features/services/concretes/certificate.service';
+
 
 @Component({
   selector: 'app-chapter',
@@ -30,10 +32,9 @@ import { CreatedBootcampLogsResponse } from '../../features/models/responses/boo
 export class ChapterComponent implements OnInit, OnDestroy {
   certificateControl: boolean = false;
   certificateStatus: number = 0;
-  currentUser!: GetByIdUserResponse;
+  currentUserId!: string;
   currentChapter!: GetByIdChapterResponse;
   currentBootcamp!: GetByIdBootcampResponse;
-  currentInstructor!: GetByIdInstructorResponse;
   chapterList!: GetListChapterResponse[];
   part!: number;
   chapterCount!: number;
@@ -41,12 +42,11 @@ export class ChapterComponent implements OnInit, OnDestroy {
   logs!: GetListBootcampLogsResponse[];
   safeUrl!: SafeResourceUrl;
   isloading: number = 0;
-  defaultText!: string;
   timer: number = 0;
   interval: any;
 
 
-  constructor(private bootcampServie: BootcampService, private chapterService: ChapterService, private userService: UserService, private authService: AuthService, private toastr: ToastrService, private router: Router, private activatedRoute: ActivatedRoute, private bootcampLogsService: BootcampLogsService, private sanitizer: DomSanitizer, private cdf: ChangeDetectorRef) { }
+  constructor(private bootcampServie: BootcampService, private chapterService: ChapterService, private authService: AuthService, private toastr: ToastrService, private router: Router, private activatedRoute: ActivatedRoute, private bootcampLogsService: BootcampLogsService, private sanitizer: DomSanitizer, private cdf: ChangeDetectorRef,private certificateService:CertificateService) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: { [x: string]: number; }) => {
@@ -64,7 +64,6 @@ export class ChapterComponent implements OnInit, OnDestroy {
       (response: GetByIdBootcampResponse) => {
         this.currentBootcamp = response
         this.isloading++;
-        this.defaultText = this.currentBootcamp.description;
         this.getChapters(this.currentBootcamp.id);
       })
 
@@ -75,13 +74,14 @@ export class ChapterComponent implements OnInit, OnDestroy {
       (response: ChapterListItemDto) => {
         this.chapterList = response.items;
         this.isloading++;
-        this.getUser();
+        this.getUserId();
         this.getTotalLength();
       })
 
   }
 
   getChapterById(id: number) {
+    this.clearTimer();
     this.chapterService.getByChapterId(id).subscribe(
       (response: GetByIdChapterResponse) => {
         this.part = id;
@@ -103,7 +103,7 @@ export class ChapterComponent implements OnInit, OnDestroy {
 
   getLogs() {
     //Get Logs for progress bar
-    this.bootcampLogsService.getListByUserId(this.currentUser.id,this.currentChapter.bootcampId, { pageIndex: 0, pageSize: 100 }).subscribe(
+    this.bootcampLogsService.getListByUserId(this.currentUserId,this.currentChapter.bootcampId, { pageIndex: 0, pageSize: 100 }).subscribe(
       (response: BootcampLogsListItemDto) => {
         this.logs = response.items;
         
@@ -117,14 +117,10 @@ export class ChapterComponent implements OnInit, OnDestroy {
 
   }
 
-  getUser() {
-    let userId = this.authService.getCurrentUserId();
-    this.userService.getByUserId(userId).subscribe(
-      (response: GetByIdUserResponse) => {
-        this.currentUser = response;
-        this.isloading++;
-        this.getLogs();
-      })
+  getUserId() {
+    this.currentUserId = this.authService.getCurrentUserId();
+    this.isloading++;
+    this.getLogs();
   }
 
   updateSafeUrl(): void {
@@ -133,9 +129,9 @@ export class ChapterComponent implements OnInit, OnDestroy {
 
   addViewData() {
     //User finished chapter. Add it to the logs
-    const request: CreateBootcampLogsRequest = {
+    let request: CreateBootcampLogsRequest = {
       bootcampId: this.currentChapter.bootcampId,
-      userId: this.currentUser.id,
+      userId: this.currentUserId,
       chapterId: this.currentChapter.id,
       status: true
     }
@@ -162,7 +158,7 @@ export class ChapterComponent implements OnInit, OnDestroy {
   }
 
   checkLogsAndStartTimer() {
-    const logExists = this.logs.some(log => log.chapterId == this.currentChapter.id && log.userId == this.currentUser.id);
+    let logExists = this.logs.some(log => log.chapterId == this.currentChapter.id && log.userId == this.currentUserId);
     console.log(logExists);
     
     if (!logExists) {
@@ -210,5 +206,29 @@ export class ChapterComponent implements OnInit, OnDestroy {
     return parseFloat(this.certificateStatus.toFixed(2));
   }
 
+  CreateCertificate(){
+    this.toastr.success("certificate created successfully");
+  }
+
+  CreateAndDownloadCertificate() {
+    const createCertificateDto = {
+      bootcampId:this.currentBootcamp.id
+    };
+
+    this.certificateService.createAndDownloadCertificate(createCertificateDto).subscribe(response => {
+      const blob = new Blob([response], { type: 'application/pdf' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'certificate.pdf'; // You can dynamically set the filename if needed
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+      this.toastr.success("certificate created successfully");
+    }, error => {
+      console.error('Error downloading the certificate', error);
+    });
+  }
 
 }

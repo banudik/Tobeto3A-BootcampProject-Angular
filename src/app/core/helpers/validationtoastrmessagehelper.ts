@@ -28,8 +28,14 @@ export class ValidationHelper {
                             return `Unknown error: ${errorKey}`;
                     }
                 }).join(', ');
-                this.toastr.warning(key + ' field has errors: ' + errorMessages);
+                //this.toastr.warning(key + ' field has errors: ' + errorMessages);
+                this.toastr.warning(errorMessages, capitalizeFirstLetter(key) + ' field has errors');
             }
         });
     }
 }
+//kelimenin ilk harfini büyük yazar
+function capitalizeFirstLetter(string: string) {
+    if (!string) return string;
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }

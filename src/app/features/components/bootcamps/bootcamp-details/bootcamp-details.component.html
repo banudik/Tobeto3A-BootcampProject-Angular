@@ -23,7 +23,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 col-md-12">
-                        <div class="single-course-desc">
+                        <div *ngIf="!isloading" class="single-course-desc">
                             <div class="single-course-image">
                                 <img [src]="getByIdBootcampResponse.bootcampImageImagePath" alt="image"/>
                                 
@@ -80,29 +80,54 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="overview-extra">
-                                            <h3 class="course-desc-heading">Our Extra Fcilities!</h3>
-                                            <div class="row">
-                                                <div class="col-lg-4">
-                                                    <div class="extra-otp">
-                                                        <img src="../../../../../assets/homepageAssets/images/icon/laptop.svg" alt="icon">
-                                                        <p>Computer/Mobile</p>
-                                                    </div>
+                                        <!-- Comment Section -->
+                                        <div *ngIf="!isloading" class="overview-extra">
+                                            <section class="bg-white dark:bg-gray-900 py-8 lg:py-16 antialiased">
+                                                <div class="max-w-2xl mx-auto px-4">
+                                                  <form class="mb-6">
+                                                      <div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+                                                          <label for="comment" class="sr-only">Your comment</label>
+                                                          <textarea id="comment" rows="6"
+                                                              class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
+                                                              placeholder="Write a comment..." required></textarea>
+                                                      </div>
+                                                      <button type="submit"
+                                                          class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+                                                          Post comment
+                                                      </button>
+                                                  </form>
+                                                  <article *ngFor="let items of commentList.items" class="p-6 text-base bg-white rounded-lg dark:bg-gray-900">
+                                                      <footer class="flex justify-between items-center mb-2">
+                                                          <div class="flex items-center">
+                                                              <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold"><img
+                                                                      class="mr-2 w-6 h-6 rounded-full"
+                                                                      src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
+                                                                      alt="Michael Gough">{{items.userFirstName +" "+items.userLastName}}</p>
+                                                              <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-08"
+                                                                      title="February 8th, 2022">{{items.createdDate | date:'dd.MM.yyyy'}}</time></p>
+                                                          </div>
+                                                      </footer>
+                                                      <p class="text-gray-500 dark:text-gray-400">{{items.context}}</p>
+                                                  </article>
                                                 </div>
-                                                <div class="col-lg-4">
-                                                    <div class="extra-otp">
-                                                        <img src="../../../../../assets/homepageAssets/images/icon/pencil.svg" alt="icon">
-                                                        <p>Paper & Pencil</p>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4">
-                                                    <div class="extra-otp">
-                                                        <img src="../../../../../assets/homepageAssets/images/icon/wifi.svg" alt="icon">
-                                                        <p>Internet Connect</p>
+                                              </section>
+                                              <div class="flex flex-col items-center" *ngIf="commentList.hasNext || commentList.hasPrevious">
+
+                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                    <div class="pagination-area text-center">
+                                                        <button *ngIf="commentList.hasPrevious" type="button"
+                                                        [disabled]="!commentList.hasPrevious" (click)="PreviousCommentPage()" class="prev page-numbers"><i class='bx bx-chevrons-left'></i></button>
+                                                        <button class="page-numbers" aria-current="page">{{commentIndex+1}}</button>
+                                                        <!-- <button  *ngFor="let pageNumber of pageNumbers(); let i = index"
+                                                        [class.bg-cyan-500]="i+1 == currentPageNumber" [class.text-white]="i+1 == currentPageNumber"
+                                                        (click)="changePage(i)"class="page-numbers current" aria-current="page">{{i+1}}</button> -->
+                                                        <button *ngIf="commentList.hasNext" type="button"
+                                                        [disabled]="!commentList.hasNext" (click)="nextCommentPage()" class="next page-numbers"><i class='bx bx-chevrons-right'></i></button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+
                                     </div>
                                     <div class="carriculum-panel fade" id="nav-carriculum" role="tabpanel" aria-labelledby="nav-carriculum-tab">
                                         <div class="carriculum-content cmb-30">
