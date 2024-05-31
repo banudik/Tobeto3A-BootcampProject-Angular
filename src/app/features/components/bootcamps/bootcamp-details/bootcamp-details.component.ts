@@ -19,25 +19,25 @@ import { PageRequest } from '../../../../core/models/page-request';
 @Component({
   selector: 'app-bootcamp-details',
   standalone: true,
-  imports: [CommonModule,RouterModule,HttpClientModule,BootcampListGroupComponent],
+  imports: [CommonModule, RouterModule, HttpClientModule, BootcampListGroupComponent],
   templateUrl: './bootcamp-details.component.html',
   styleUrl: './bootcamp-details.component.css'
 })
-export class BootcampDetailsComponent implements OnInit{
+export class BootcampDetailsComponent implements OnInit {
 
 
   getByIdBootcampResponse !: GetByIdBootcampResponse
   bootcampId: number = 1;
-  commentList!:CommentListItemDto;
-  commentIndex:number = 0;
-  isloading:boolean = true;
+  commentList!: CommentListItemDto;
+  commentIndex: number = 0;
+  isloading: boolean = true;
   // activatedRoute: any;
   // bootcampService: any;
 
   constructor(private bootcampService: BootcampService, private activatedRoute: ActivatedRoute
-     ,private applicationInformationService:ApplicationInformationService, private localStorageService:LocalStorageService
-    ,private authService:AuthService,    private renderer2: Renderer2,private commentService:CommentService,
-    @Inject(DOCUMENT) private _document:Document) {}
+    , private applicationInformationService: ApplicationInformationService, private localStorageService: LocalStorageService
+    , private authService: AuthService, private renderer2: Renderer2, private commentService: CommentService,
+    @Inject(DOCUMENT) private _document: Document) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: { [x: string]: number; }) => {
@@ -45,7 +45,7 @@ export class BootcampDetailsComponent implements OnInit{
         this.getBootcampById(params["bootcampId"])
       } else { console.log("getById bootcamp error") }
     })
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
     // Ana JS dosyalarını yükleme
     this.loadScript('assets/homepageAssets/js/jquery.min.js');
     this.loadScript('assets/homepageAssets/js/bootstrap.min.js');
@@ -71,7 +71,7 @@ export class BootcampDetailsComponent implements OnInit{
     this.bootcampService.getBootcampById(bootcampId).subscribe(
       (response: GetByIdBootcampResponse) => {
         this.getByIdBootcampResponse = response;
-        this.getComments({pageIndex:this.commentIndex , pageSize:5});
+        this.getComments({ pageIndex: this.commentIndex, pageSize: 5 });
       },
       (error: any) => {
         console.error('Error fetching bootcamp:', error);
@@ -82,10 +82,10 @@ export class BootcampDetailsComponent implements OnInit{
   }
 
 
-  getComments(pageRequest:PageRequest){
+  getComments(pageRequest: PageRequest) {
     //{pageIndex:this.commentIndex , pageSize:10}
     this.isloading = true;
-    this.commentService.getListByBootcampId(pageRequest,this.getByIdBootcampResponse.id).subscribe(
+    this.commentService.getListByBootcampId(pageRequest, this.getByIdBootcampResponse.id).subscribe(
       (response: CommentListItemDto) => {
         this.commentList = response;
         this.isloading = false;
@@ -97,44 +97,47 @@ export class BootcampDetailsComponent implements OnInit{
       }
     );
   }
-  
-  nextCommentPage(){
+
+  nextCommentPage() {
     this.commentIndex++;
-    this.getComments({pageIndex:this.commentIndex , pageSize:5});
+    this.getComments({ pageIndex: this.commentIndex, pageSize: 5 });
   }
 
-  PreviousCommentPage(){
+  PreviousCommentPage() {
     this.commentIndex--;
-    this.getComments({pageIndex:this.commentIndex , pageSize:5});
+    this.getComments({ pageIndex: this.commentIndex, pageSize: 5 });
   }
 
-  pageNumbers(){
+  pageNumbers() {
     let pageNumbers = new Array(this.commentList.pages);
     return pageNumbers;
   }
 
-  changePage(pageNumber:number){
+  changePage(pageNumber: number) {
     this.commentIndex = pageNumber;
-    
-    this.getComments({pageIndex: this.commentIndex, pageSize:5});
+
+    this.getComments({ pageIndex: this.commentIndex, pageSize: 5 });
   }
 
-// addApplication metodu
-addApplication(bootcampId: number) {
-  // CreateApplicationInformationRequest nesnesi oluşturma
-  const token = this.authService.getDecodedToken();
-  console.log(token['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']);
-  
+  isExpired(endDate: Date): boolean {
+    return new Date(endDate) < new Date(); // endDate, geçmiş bir tarihe sahipse true döndürür   }
+  }
+  // addApplication metodu
+  addApplication(bootcampId: number) {
+    // CreateApplicationInformationRequest nesnesi oluşturma
+    const token = this.authService.getDecodedToken();
+    console.log(token['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']);
 
-  const createApplicationRequest: CreateApplicationInformationRequest = {
-    bootcampId: bootcampId,
-    applicantId: token['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'],
-    ApplicationStateInformationId: 2 // default olarak 1 değeri atanıyor
-  };
 
-  // Servis çağrısı ve abonelik
-  this.applicationInformationService.addApplication(createApplicationRequest).subscribe((response: any) => {
-    console.log("application yapıldı");
-  });
-}
+    const createApplicationRequest: CreateApplicationInformationRequest = {
+      bootcampId: bootcampId,
+      applicantId: token['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'],
+      ApplicationStateInformationId: 2 // default olarak 1 değeri atanıyor
+    };
+
+    // Servis çağrısı ve abonelik
+    this.applicationInformationService.addApplication(createApplicationRequest).subscribe((response: any) => {
+      console.log("application yapıldı");
+    });
+  }
 }
