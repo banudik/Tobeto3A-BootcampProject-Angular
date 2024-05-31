@@ -12,11 +12,12 @@ export const AuthInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: 
   const toastr = inject(ToastrService);
   const router = inject(Router);
   const authService = inject(AuthService);
-  let isRefreshing = false;
+  let isRefreshing = false; // Token yenileme işleminin yapılıp yapılmadığını takip eder
   const refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
   let token = storageService.getToken();
 
+  // Eğer token varsa, request'in header'ına Authorization ekler
   if (token) {
     req = req.clone({
       setHeaders: {
@@ -25,28 +26,29 @@ export const AuthInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: 
       withCredentials: true
     });
   } else {
+    // Token yoksa, sadece withCredentials ayarını ekler
     req = req.clone({
       withCredentials: true
     });
   }
 
+  // Request'i devam ettirir ve hata oluşursa yakalar
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
-      console.log('AuthInterception yakaladı')
-        if (error.status === 401 && !req.url.includes('refreshToken')) {
-          console.log('1.Koşul içerisinde',error.status === 401 && !req.url.includes('refreshToken'));
+      // Eğer hata 401 (Unauthorized) ve istek refreshToken ve login içermiyorsa koşula girer
+        if (error.status === 401 && !req.url.includes('refreshToken') && !req.url.includes('login')) {
+          // Eğer token yenilenmiyorsa, yenileme işlemini başlatır
           if (!isRefreshing) {
-          console.log('2.Koşul içerisinde');
-
             isRefreshing = true;
             refreshTokenSubject.next(null);
 
-            return authService.refreshToken().pipe(
+            return authService.refreshToken().pipe( // Token yenileme isteğini başlatır
               switchMap((tokenModel: any) => {
                 isRefreshing = false;
                 storageService.setToken(tokenModel.token);
                 refreshTokenSubject.next(tokenModel.token);
-                return next(req.clone({
+
+                return next(req.clone({  // Yeni token ile requesti tekrar gönderir
                   setHeaders: {
                     Authorization: `Bearer ${tokenModel.token}`
                   },
@@ -54,20 +56,23 @@ export const AuthInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: 
                 }));
               }),
               catchError((refreshError) => {
+                // Token yenileme başarısız olursa, çıkış yapar ve login sayfasına yönlendirir
                 isRefreshing = false;
-                storageService.removeToken();
+                authService.logOutForInterceptor();
                 router.navigate(['/login']);
                 toastr.warning('Your session has expired', 'Log In Again')
                 //authService.logOut();
-                return throwError(refreshError);
+                //return throwError(() => new HttpErrorResponse({}));
+                return throwError(() => Error());
               })
             );
           } else {
+            // Eğer token yenileniyorsa, yeni tokeni bekler
             return refreshTokenSubject.pipe(
               filter(token => token != null),
               take(1),
               switchMap((newToken) => {
-                return next(req.clone({
+                return next(req.clone({ // Yeni token ile requesti tekrar gönderir
                   setHeaders: {
                     Authorization: `Bearer ${newToken}`
                   },
@@ -77,8 +82,7 @@ export const AuthInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: 
             );
           }
         }
-
-        return throwError(() => Error());
+        return throwError(() => Error()); // Diğer tüm hataları fırlatır
     })
   );
 };
