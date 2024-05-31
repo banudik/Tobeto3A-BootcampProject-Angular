@@ -16,10 +16,13 @@ export abstract class ChapterBaseService {
     abstract getList(pageRequest: PageRequest):
         Observable<ChapterListItemDto>;
 
-        abstract getListByBootcampId(bootcampId:number , pageRequest: PageRequest):
+    abstract getListByBootcampId(bootcampId: number, pageRequest: PageRequest):
         Observable<ChapterListItemDto>;
 
     abstract getByChapterId(chapterId: number):
+        Observable<GetByIdChapterResponse>;
+        
+    abstract getByChapterSortAndBootcampId(bootcampId: number, chapterSort: number):
         Observable<GetByIdChapterResponse>;
 
     abstract delete(id: number)
