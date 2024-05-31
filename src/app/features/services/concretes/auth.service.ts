@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Observable, map, catchError, switchMap, tap, throwError, of, BehaviorSubject, debounceTime, take } from "rxjs";
+import { Injectable, OnDestroy } from "@angular/core";
+import { Observable, map, catchError, switchMap, tap, throwError, of, BehaviorSubject, debounceTime, take, Subscription, interval } from "rxjs";
 import { environment } from "../../../../environments/environment";
 import { UserForLoginRequest } from "../../models/requests/auth/user-for-login-request";
 import { AccessTokenModel } from "../../models/responses/auth/access-token-model";
@@ -24,7 +24,10 @@ import { Router } from "@angular/router";
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService extends AuthBaseService {
+export class AuthService extends AuthBaseService implements OnDestroy {
+  private readonly REFRESH_INTERVAL = 1 * 60 * 1000; // 14 dakika
+  private refreshInterval: Subscription | null = null;
+
   fullname!: string;
   userId!: string;
   token: any;
@@ -35,7 +38,11 @@ export class AuthService extends AuthBaseService {
   private isAdminSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   private readonly apiUrl: string = `${environment.API_URL}/auth`
-  constructor(private httpClient: HttpClient, private storageService: LocalStorageService, private toastrService: ToastrService, private router: Router) { super() }
+  
+  constructor(private httpClient: HttpClient, private storageService: LocalStorageService, private toastrService: ToastrService, private router: Router) { 
+    super()
+    this.startTokenRefresh();
+   }
 
   get isLoggedIn$(): Observable<boolean> {
     return this.isLoggedInSubject.asObservable();
@@ -119,8 +126,8 @@ export class AuthService extends AuthBaseService {
   }
 
   //Mevcut refreshtoken ile yeni bir accessToken ister
-  refreshToken(): Observable<AccessTokenModel<TokenModel>> {
-    return this.httpClient.get<AccessTokenModel<TokenModel>>(`${this.apiUrl}/refreshToken`, { withCredentials: true });
+  refreshToken(): Observable<TokenModel> {
+    return this.httpClient.get<TokenModel>(`${this.apiUrl}/refreshToken`, { withCredentials: true });
   }
 
   //ŞifreSıfırlamak için yeni şifreyi gönderir
@@ -168,9 +175,7 @@ export class AuthService extends AuthBaseService {
   }
 
   loggedIn(): boolean {
-    this.token = this.storageService.getToken();
-    let isExpired = this.jwtHelper.isTokenExpired(this.token);
-    return !isExpired;
+    return !!this.storageService.getToken();
   }
 
   getUserName(): string {
@@ -185,6 +190,30 @@ export class AuthService extends AuthBaseService {
     return this.userId = decoded[propUserId]
   }
 
+  private startTokenRefresh() {
+    if (this.refreshInterval) {
+      this.refreshInterval.unsubscribe();
+    }
+    this.refreshInterval = interval(this.REFRESH_INTERVAL).pipe(
+      switchMap(() => this.refreshToken().pipe(
+        tap(tokenModel => {
+          this.storageService.setToken(tokenModel.token);
+          this.isLoggedInSubject.next(true);
+        })
+      )),
+      catchError(err => {
+        console.error('Token yenileme hatası:', err);
+        return [];
+      })
+    ).subscribe();
+  }
+
+  ngOnDestroy() {
+    if (this.refreshInterval) {
+      this.refreshInterval.unsubscribe();
+    }
+  }
+
   //Navbar için çıkış metodu
   logOut() {
     //Angular put olarak istek yapıldığı zaman body kısmının boş bırakılmasına izin vermiyor
@@ -192,11 +221,14 @@ export class AuthService extends AuthBaseService {
     this.httpClient.get(`${this.apiUrl}/revoketoken`,{ withCredentials: true })
       .subscribe({
         next: () => {
-          console.log('istek yapıldı');
+          console.log('Revoke Token İsteği yapıldı. ');
            // LocalStorage'daki token'ı temizliyoruz
           this.storageService.remove('token');
           this.isLoggedInSubject.next(false);
           this.isAdminSubject.next(false);
+          if (this.refreshInterval) {
+            this.refreshInterval.unsubscribe();
+          }
           this.router.navigate(['/login']); // Kullanıcıyı login sayfasına yönlendirir
           this.toastrService.success('Exit Successful', 'Exit');
         },
@@ -208,7 +240,7 @@ export class AuthService extends AuthBaseService {
 
   //RefreshToken süresi bittiği zaman AuthInterceptor'da çalışacak çıkış metodu
   logOutForInterceptor() {
-    console.log('istek yapıldı');
+    console.log('Interceptor Çıkış yaptı');
           this.storageService.remove('token'); // LocalStorage'daki token'ı temizliyoruz
           this.isLoggedInSubject.next(false);
           this.isAdminSubject.next(false);

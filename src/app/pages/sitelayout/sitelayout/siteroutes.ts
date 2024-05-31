@@ -13,6 +13,7 @@ import { PrivacyPolicyComponent } from "../../privacy-policy/privacy-policy.comp
 import { ChapterComponent } from "../../chapter/chapter.component";
 import { TermsOfUseComponent } from "../../terms-of-use/terms-of-use.component";
 import { WelcomeComponent } from "../../welcome/welcome.component";
+import { CourseComponent } from "../../profile/components/course/course.component";
 
 
 export const siteRoutes: Routes = [
@@ -31,4 +32,5 @@ export const siteRoutes: Routes = [
     {path:'chapter/:chapterId',component:ChapterComponent},
     {path:'terms-of-use',component:TermsOfUseComponent},
     {path:'welcome',component:WelcomeComponent},
+    {path:'course/:applicantId',component:CourseComponent},
 ];

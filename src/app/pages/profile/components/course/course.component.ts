@@ -1,19 +1,19 @@
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { ApplicantService } from '../../features/services/concretes/applicant.service';
-import { GetByIdApplicantResponse } from '../../features/models/responses/applicant/get-by-id-applicant-response';
+import { ApplicantService } from '../../../../features/services/concretes/applicant.service';
+import { GetByIdApplicantResponse } from '../../../../features/models/responses/applicant/get-by-id-applicant-response';
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit, Renderer2 } from '@angular/core';
 
 
 
 @Component({
-  selector: 'app-profile',
+  selector: 'app-course',
   standalone: true,
   imports: [RouterModule],
-  templateUrl: './profile.component.html',
-  styleUrl: './profile.component.css'
+  templateUrl: './course.component.html',
+  styleUrl: './course.component.css'
 })
-export class ProfileComponent implements OnInit{
+export class CourseComponent implements OnInit{
 
   getApplicantByIdResponse!:GetByIdApplicantResponse
 

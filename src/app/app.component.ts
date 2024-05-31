@@ -22,6 +22,7 @@ import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
 import { FaqComponent } from './features/components/faq/faq.component';
 import { TermsOfUseComponent } from './pages/terms-of-use/terms-of-use.component';
+import { CourseComponent } from './pages/profile/components/course/course.component';
 
 
 
@@ -30,7 +31,7 @@ import { TermsOfUseComponent } from './pages/terms-of-use/terms-of-use.component
   standalone: true,
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  imports: [RouterOutlet, HttpClientModule, NavbarComponent, HomepageComponent, LoginComponent, SignUpComponent, SharedModule, BootcampListGroupComponent, InstructorComponent, CloudinaryModule, FooterComponent, ProfileComponent,PrivacyPolicyComponent,LoadingSpinnerComponent,ContactUsComponent,FaqComponent,TermsOfUseComponent],
+  imports: [RouterOutlet, HttpClientModule, NavbarComponent, HomepageComponent, LoginComponent, SignUpComponent, SharedModule, BootcampListGroupComponent, InstructorComponent, CloudinaryModule, FooterComponent, ProfileComponent,PrivacyPolicyComponent,LoadingSpinnerComponent,ContactUsComponent,FaqComponent,TermsOfUseComponent,CourseComponent],
 
 })
 export class AppComponent /** implements OnInit**/ {
