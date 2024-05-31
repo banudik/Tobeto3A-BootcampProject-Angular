@@ -4,10 +4,10 @@ import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideToastr } from 'ngx-toastr';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { AuthInterceptor } from './core/interceptors/auth/auth.interceptor';
 import { LoadingInterceptor } from './core/interceptors/loading/loading.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ErrorInterceptor } from './core/interceptors/error/error.interceptor';
+import { AuthInterceptor } from './core/interceptors/auth/auth.interceptor';
 
 
 
