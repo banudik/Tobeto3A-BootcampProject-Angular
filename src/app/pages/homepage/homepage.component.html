@@ -30,7 +30,7 @@
                             <p>It is long established fact that reader distracted by the readable content.</p>
 
                             <div class="subscribe-inner-area">
-                                    <button routerLink="/sign-up" class="default-btn">Sign Up</button>
+                                    <button routerLink="/bootcamps" class="default-btn">Explore Now</button>
                             </div>
                         </div>
                     </div>
@@ -179,7 +179,7 @@
 
                                 </div>
                                 <div class="text-center mt-5">
-                                    <a href="#" class="default-btn primery-red text-center boot-cards">Başvur</a>
+                                    <a [routerLink]="['/bootcampdetail', bootcamp.id.toString()]" class="default-btn primery-red text-center boot-cards">View</a>
     
                                         </div>
                             </div>
@@ -252,13 +252,13 @@
                     <div class="col-lg-4 col-md-12 col-sm-12">
                         <div class="subcribe-content">
                             <img src="assets/homepageAssets/images/svg/big-mail.svg" alt="mail">
-                            <h2>Üye Ol Lan! Baaaasssssssssss</h2>
+                            <h2>Feel free to contact us!</h2>
                         </div>
                     </div>
                     <div class="col-lg-8 col-md-12 col-sm-12">
                         <div class="subscribe-from">
                             <form class="newsletter-form" data-toggle="validator">
-                                <button routerLink="/sign-up" type="submit" class="default-btn">Sign Up</button>
+                                <button routerLink="/contact-us" type="submit" class="default-btn">Contact Us!</button>
                                 <div id="validator-newsletter3" class="form-result"></div>
                             </form>
                         </div>
@@ -430,8 +430,8 @@
                                     <li><i class='bx bxs-star'></i></li>
                                     <li><i class='bx bxs-star'></i></li>
                                 </ul>
-                                <h3>Jhon Smith</h3>
-                                <span>UI UX Designer</span>
+                                <h3>Mücahid Uygun</h3>
+                                <span>Fullstack Developer</span>
                             </div>
                         </div>
                         <div class="edu-review-box">
@@ -463,8 +463,8 @@
                                     <li><i class='bx bxs-star'></i></li>
                                     <li><i class='bx bxs-star'></i></li>
                                 </ul>
-                                <h3>Jhon Smith</h3>
-                                <span>UI UX Designer</span>
+                                <h3>Burak Yazici</h3>
+                                <span>Fullstack Developer</span>
                             </div>
                         </div>
                     </div>
@@ -472,8 +472,7 @@
                         <div class="edu-testimonial-content">
                             <p class="sub-title" >Testimonial</p>
                             <h2> What Says Our <span class="shape02" >Students</span> About Us</h2>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered. There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour.</p>
-                            <a href="#" class="default-btn">View All Reviews</a>
+                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered. There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour.</p>    
                         </div>
                     </div>
                 </div>

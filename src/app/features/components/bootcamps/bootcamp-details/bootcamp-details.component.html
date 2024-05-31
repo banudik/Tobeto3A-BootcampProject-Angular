@@ -19,16 +19,16 @@
     </head>
     <body>
         <!-- Start Edu Single Course Area -->
-        <div class="single-course-area ptb-100">
+        <div class="single-course-area ptb-100" *ngIf="getByIdBootcampResponse">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 col-md-12">
-                        <div class="single-course-desc">
+                        <div *ngIf="!isloading" class="single-course-desc">
                             <div class="single-course-image">
                                 <img [src]="getByIdBootcampResponse.bootcampImageImagePath" alt="image"/>
                                 
                             </div>
-                            <div class="single-course-content"*ngIf="getByIdBootcampResponse">
+                            <div class="single-course-content">
                                 <h2>{{getByIdBootcampResponse.name}}</h2>
 
                                 <div class="user-details">
@@ -49,8 +49,7 @@
                                     <div class="overview-panel fade active show" id="nav-overview" role="tabpanel" aria-labelledby="nav-overview-tab">
                                         <div class="overview-content cmb-30">
                                             <h3 class="course-desc-heading">Course Description</h3>
-                                            <p>This tutorial will help you learn quickly and thoroughly. Lorem ipsum, or lipsum as it sometimes known, is dummy text used in laying out print, graphic or web designs. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros.</p>
-                                            <p>You’ll be exposed to principles and strategies, but, more importantly, you’ll learn how actually apply these abstract concepts by coding three different websites for three very different the audiences. Lorem ipsum is dummy text used in laying out print, graphic or web designs Lorem ipsum blinding shot chinwag knees.</p>
+                                            <p>{{getByIdBootcampResponse.description}}</p>
                                         </div>
                                         <div class="overview-otp cmb-30">
                                             <h3 class="course-desc-heading">What You will Learn?</h3>
@@ -81,29 +80,54 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="overview-extra">
-                                            <h3 class="course-desc-heading">Our Extra Fcilities!</h3>
-                                            <div class="row">
-                                                <div class="col-lg-4">
-                                                    <div class="extra-otp">
-                                                        <img src="../../../../../assets/homepageAssets/images/icon/laptop.svg" alt="icon">
-                                                        <p>Computer/Mobile</p>
-                                                    </div>
+                                        <!-- Comment Section -->
+                                        <div *ngIf="!isloading" class="overview-extra">
+                                            <section class="bg-white dark:bg-gray-900 py-8 lg:py-16 antialiased">
+                                                <div class="max-w-2xl mx-auto px-4">
+                                                  <form class="mb-6">
+                                                      <div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+                                                          <label for="comment" class="sr-only">Your comment</label>
+                                                          <textarea id="comment" rows="6"
+                                                              class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
+                                                              placeholder="Write a comment..." required></textarea>
+                                                      </div>
+                                                      <button type="submit"
+                                                          class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+                                                          Post comment
+                                                      </button>
+                                                  </form>
+                                                  <article *ngFor="let items of commentList.items" class="p-6 text-base bg-white rounded-lg dark:bg-gray-900">
+                                                      <footer class="flex justify-between items-center mb-2">
+                                                          <div class="flex items-center">
+                                                              <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold"><img
+                                                                      class="mr-2 w-6 h-6 rounded-full"
+                                                                      src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
+                                                                      alt="Michael Gough">{{items.userFirstName +" "+items.userLastName}}</p>
+                                                              <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-08"
+                                                                      title="February 8th, 2022">{{items.createdDate | date:'dd.MM.yyyy'}}</time></p>
+                                                          </div>
+                                                      </footer>
+                                                      <p class="text-gray-500 dark:text-gray-400">{{items.context}}</p>
+                                                  </article>
                                                 </div>
-                                                <div class="col-lg-4">
-                                                    <div class="extra-otp">
-                                                        <img src="../../../../../assets/homepageAssets/images/icon/pencil.svg" alt="icon">
-                                                        <p>Paper & Pencil</p>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4">
-                                                    <div class="extra-otp">
-                                                        <img src="../../../../../assets/homepageAssets/images/icon/wifi.svg" alt="icon">
-                                                        <p>Internet Connect</p>
+                                              </section>
+                                              <div class="flex flex-col items-center" *ngIf="commentList.hasNext || commentList.hasPrevious">
+
+                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                    <div class="pagination-area text-center">
+                                                        <button *ngIf="commentList.hasPrevious" type="button"
+                                                        [disabled]="!commentList.hasPrevious" (click)="PreviousCommentPage()" class="prev page-numbers"><i class='bx bx-chevrons-left'></i></button>
+                                                        <button class="page-numbers" aria-current="page">{{commentIndex+1}}</button>
+                                                        <!-- <button  *ngFor="let pageNumber of pageNumbers(); let i = index"
+                                                        [class.bg-cyan-500]="i+1 == currentPageNumber" [class.text-white]="i+1 == currentPageNumber"
+                                                        (click)="changePage(i)"class="page-numbers current" aria-current="page">{{i+1}}</button> -->
+                                                        <button *ngIf="commentList.hasNext" type="button"
+                                                        [disabled]="!commentList.hasNext" (click)="nextCommentPage()" class="next page-numbers"><i class='bx bx-chevrons-right'></i></button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+
                                     </div>
                                     <div class="carriculum-panel fade" id="nav-carriculum" role="tabpanel" aria-labelledby="nav-carriculum-tab">
                                         <div class="carriculum-content cmb-30">
@@ -198,7 +222,7 @@
                                                 </div>
                                                 <div class="col-lg-7">
                                                     <div class="single-instructor-info">
-                                                        <h2>Daniel Smith</h2>
+                                                        <h2>{{getByIdBootcampResponse.instructorFirstName}} {{getByIdBootcampResponse.instructorLastName}}</h2>
                                                         <p class="sub-title" >User Experience Designer</p>
                                                         <ul>
                                                             <li><img src="../../../../../assets/homepageAssets/images/icon/file2.svg" alt="icon"> <span>65+ Courses</span> </li>
@@ -217,7 +241,7 @@
                                                 </div>
                                             </div>
                                             <div class="single-instructor-desc">
-                                                <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend.</p>
+                                                <p>{{getByIdBootcampResponse.instructorDescription}}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -345,7 +369,7 @@
                                                         <li><i class="bx bxs-star disstar"></i></li>
                                                     </ul>
                                                     <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration.</p>
-                                                    <h3>Daniel Smith</h3>
+                                                    <h3>{{ getByIdBootcampResponse.instructorFirstName + getByIdBootcampResponse.instructorLastName}}</h3>
                                                     <span>Jan 24, 2023</span>
                                                 </div>
                                                 <div class="student-review-items">
@@ -379,14 +403,11 @@
                                 </div>
                                 <div class="sidebar-content">
                                     <h3>Free</h3>
-                                    <a href="#" class="default-btn course-btn">Başvur</a>
+                                    <a href="#" class="default-btn course-btn" [ngClass]="{'expired': isExpired(getByIdBootcampResponse.endDate), 'notExpired': !isExpired(getByIdBootcampResponse.endDate)}">Başvur</a>
                                     <ul class="courses-details">
-                                        <li><div class="icon"><img src="../../../../../assets/homepageAssets/images/icon/user.svg" alt="icon"> Instructor</div> <p>Daniel Smith</p></li>
+                                        <li><div class="icon"><img src="../../../../../assets/homepageAssets/images/icon/user.svg" alt="icon"> Instructor</div> <p>{{ getByIdBootcampResponse.instructorFirstName +" "+ getByIdBootcampResponse.instructorLastName}}</p></li>
                                         <li><div class="icon"><img src="../../../../../assets/homepageAssets/images/icon/file2.svg" alt="icon"> Lectures</div> <p>23</p></li>
                                         <li><div class="icon"><img src="../../../../../assets/homepageAssets/images/icon/clock.svg" alt="icon"> Duration</div> <p>2Hr 36Minutes</p></li>
-                                        <li><div class="icon"><img src="../../../../../assets/homepageAssets/images/icon/star.svg" alt="icon"> Enrolled</div> <p>2k Students</p></li>
-                                        <li><div class="icon"><img src="../../../../../assets/homepageAssets/images/icon/target.svg" alt="icon"> Course level</div> <p>Intermediate</p></li>
-                                        <li><div class="icon"><img src="../../../../../assets/homepageAssets/images/icon/web.svg" alt="icon"> Language</div> <p>English</p></li>
                                     </ul>
                                     <ul class="course-shared">
                                         <li class="title">Share On:</li>
@@ -406,174 +427,3 @@
     </body>
 </html>
 
-<div class="font-[sans-serif] bg-white">
-    <div class="p-6 lg:max-w-7xl max-w-4xl mx-auto">
-      <div class="grid items-start grid-cols-1 lg:grid-cols-5 gap-12 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] p-6">
-        <div class="lg:col-span-3 w-full lg:sticky top-0 text-center">
-          <div class="px-4 py-10 rounded-xl shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] relative">
-            <img [src]="getByIdBootcampResponse.bootcampImageImagePath" alt="Product" class="w-4/5 rounded object-cover" />
-            <button type="button" class="absolute top-4 right-4">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20px" fill="#ccc" class="mr-1 hover:fill-[#333]" viewBox="0 0 64 64">
-                <path d="M45.5 4A18.53 18.53 0 0 0 32 9.86 18.5 18.5 0 0 0 0 22.5C0 40.92 29.71 59 31 59.71a2 2 0 0 0 2.06 0C34.29 59 64 40.92 64 22.5A18.52 18.52 0 0 0 45.5 4ZM32 55.64C26.83 52.34 4 36.92 4 22.5a14.5 14.5 0 0 1 26.36-8.33 2 2 0 0 0 3.27 0A14.5 14.5 0 0 1 60 22.5c0 14.41-22.83 29.83-28 33.14Z" data-original="#000000"></path>
-              </svg>
-            </button>
-          </div>
-          <!-- <div class="mt-6 flex flex-wrap justify-center gap-6 mx-auto">
-            <div class="rounded-xl p-4 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)]">
-              <img src="https://readymadeui.com/images/laptop2.webp" alt="Product2" class="w-24 cursor-pointer" />
-            </div>
-            <div class="rounded-xl p-4 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)]">
-              <img src="https://readymadeui.com/images/laptop3.webp" alt="Product2" class="w-24 cursor-pointer" />
-            </div>
-            <div class="rounded-xl p-4 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)]">
-              <img src="https://readymadeui.com/images/laptop4.webp" alt="Product2" class="w-24 cursor-pointer" />
-            </div>
-            <div class="rounded-xl p-4 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)]">
-              <img src="https://readymadeui.com/images/laptop5.webp" alt="Product2" class="w-24 cursor-pointer" />
-            </div>
-          </div> -->
-        </div>
-        <div class="lg:col-span-2" *ngIf="getByIdBootcampResponse">
-          <h2 class="text-2xl font-extrabold text-[#333]">{{getByIdBootcampResponse.name}}</h2>
-          <div class="flex flex-wrap gap-4 mt-6">
-            <p class="text-[#333] text-4xl font-bold">$1200</p>
-            <p class="text-gray-400 text-xl"><strong>$1500</strong> <span class="text-sm ml-1">Tax included</span></p>
-          </div>
-           <div class="flex space-x-2 mt-4">
-            <p [innerHTML]="getByIdBootcampResponse.description"></p>
-            
-          </div>
-          <!--
-          <div class="mt-10">
-            <h3 class="text-lg font-bold text-gray-800">Choose a Color</h3>
-            <div class="flex flex-wrap gap-4 mt-4">
-              <button type="button" class="w-12 h-12 bg-black border-2 border-white hover:border-gray-800 rounded-full shrink-0"></button>
-              <button type="button" class="w-12 h-12 bg-gray-300 border-2 border-white hover:border-gray-800 rounded-full shrink-0"></button>
-              <button type="button" class="w-12 h-12 bg-gray-100 border-2 border-white hover:border-gray-800 rounded-full shrink-0"></button>
-              <button type="button" class="w-12 h-12 bg-blue-400 border-2 border-white hover:border-gray-800 rounded-full shrink-0"></button>
-            </div>
-          </div> -->
-          <div class="flex flex-wrap gap-4 mt-10">
-            <button type="button" (click)="addApplication(getByIdBootcampResponse.id)"  class="min-w-[200px] px-4 py-3 bg-[#333] hover:bg-[#111] text-white text-sm font-bold rounded">Apply</button>
-            <button type="button" class="min-w-[200px] px-4 py-2.5 border border-[#333] bg-transparent hover:bg-gray-50 text-[#333] text-sm font-bold rounded">Ask Question</button>
-          </div>
-        </div>
-      </div>
-      <div class="mt-16 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] p-6">
-        <h3 class="text-lg font-bold text-[#333]">Bootcamp information</h3>
-        <ul class="mt-6 space-y-6 text-[#333]">
-          <li class="text-sm">Instructor Name <span class="ml-4 float-right">{{getByIdBootcampResponse.instructorFirstName +" "+ getByIdBootcampResponse.instructorLastName}}</span></li>
-          <li class="text-sm">Bootcamp State <span class="ml-4 float-right">{{getByIdBootcampResponse.bootcampStateName}}</span></li>
-          <li class="text-sm">Start Date <span class="ml-4 float-right">{{ getByIdBootcampResponse.startDate | date:'dd/MM/yyyy' }}</span></li>
-          <li class="text-sm">End Date <span class="ml-4 float-right">{{ getByIdBootcampResponse.endDate | date:'dd/MM/yyyy' }}</span></li>
-          <!-- <li class="text-sm">PROCESSOR SPEED <span class="ml-4 float-right">2.3 - 4.7 GHz</span></li>
-          <li class="text-sm">DISPLAY SIZE INCH <span class="ml-4 float-right">16.0</span></li>
-          <li class="text-sm">DISPLAY SIZE SM <span class="ml-4 float-right">40.64 cm</span></li>
-          <li class="text-sm">DISPLAY TYPE <span class="ml-4 float-right">OLED, TOUCHSCREEN, 120 Hz</span></li>
-          <li class="text-sm">DISPLAY RESOLUTION <span class="ml-4 float-right">2880x1620</span></li> -->
-        </ul>
-      </div>
-      <div class="mt-16 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] p-6">
-        <h3 class="text-lg font-bold text-[#333]">Reviews(10)</h3>
-        <div class="grid md:grid-cols-2 gap-12 mt-6">
-          <div>
-            <div class="space-y-3">
-              <div class="flex items-center">
-                <p class="text-sm text-[#333] font-bold">5.0</p>
-                <svg class="w-5 fill-[#333] ml-1" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                </svg>
-                <div class="bg-gray-400 rounded w-full h-2 ml-3">
-                  <div class="w-2/3 h-full rounded bg-[#333]"></div>
-                </div>
-                <p class="text-sm text-[#333] font-bold ml-3">66%</p>
-              </div>
-              <div class="flex items-center">
-                <p class="text-sm text-[#333] font-bold">4.0</p>
-                <svg class="w-5 fill-[#333] ml-1" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                </svg>
-                <div class="bg-gray-400 rounded w-full h-2 ml-3">
-                  <div class="w-1/3 h-full rounded bg-[#333]"></div>
-                </div>
-                <p class="text-sm text-[#333] font-bold ml-3">33%</p>
-              </div>
-              <div class="flex items-center">
-                <p class="text-sm text-[#333] font-bold">3.0</p>
-                <svg class="w-5 fill-[#333] ml-1" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                </svg>
-                <div class="bg-gray-400 rounded w-full h-2 ml-3">
-                  <div class="w-1/6 h-full rounded bg-[#333]"></div>
-                </div>
-                <p class="text-sm text-[#333] font-bold ml-3">16%</p>
-              </div>
-              <div class="flex items-center">
-                <p class="text-sm text-[#333] font-bold">2.0</p>
-                <svg class="w-5 fill-[#333] ml-1" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                </svg>
-                <div class="bg-gray-400 rounded w-full h-2 ml-3">
-                  <div class="w-1/12 h-full rounded bg-[#333]"></div>
-                </div>
-                <p class="text-sm text-[#333] font-bold ml-3">8%</p>
-              </div>
-              <div class="flex items-center">
-                <p class="text-sm text-[#333] font-bold">1.0</p>
-                <svg class="w-5 fill-[#333] ml-1" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                </svg>
-                <div class="bg-gray-400 rounded w-full h-2 ml-3">
-                  <div class="w-[6%] h-full rounded bg-[#333]"></div>
-                </div>
-                <p class="text-sm text-[#333] font-bold ml-3">6%</p>
-              </div>
-            </div>
-          </div>
-          <div class="">
-            <div class="flex items-start">
-              <img src="https://readymadeui.com/team-2.webp" class="w-12 h-12 rounded-full border-2 border-white" />
-              <div class="ml-3">
-                <h4 class="text-sm font-bold text-[#333]">John Doe</h4>
-                <div class="flex space-x-1 mt-1">
-                  <svg class="w-4 fill-[#333]" viewBox="0 0 14 13" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <svg class="w-4 fill-[#333]" viewBox="0 0 14 13" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <svg class="w-4 fill-[#333]" viewBox="0 0 14 13" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <svg class="w-4 fill-[#CED5D8]" viewBox="0 0 14 13" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <svg class="w-4 fill-[#CED5D8]" viewBox="0 0 14 13" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <p class="text-xs !ml-2 font-semibold text-[#333]">2 mins ago</p>
-                </div>
-                <p class="text-sm mt-4 text-[#333]">Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.</p>
-              </div>
-            </div>
-            <button type="button" class="w-full mt-10 px-4 py-2.5 bg-transparent hover:bg-gray-50 border border-[#333] text-[#333] font-bold rounded">Read all reviews</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>

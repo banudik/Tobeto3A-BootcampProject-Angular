@@ -20,6 +20,7 @@
 
 .dark-contact .dark-content {
     max-width: 800px;
+    padding-top:50px;
     text-align: center;
 }
 
@@ -290,6 +291,7 @@
 
 .light-contact .light-content {
     max-width: 800px;
+    padding-top:50px;
     text-align: center;
 }
 

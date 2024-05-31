@@ -1,5 +1,5 @@
 export interface CreatedCommentResponse {
     context:string;
-    chapterId:number;
+    bootcampId:number;
     userId:string;
 }

@@ -4,6 +4,7 @@ export interface GetByIdBootcampResponse {
     instructorId: string;
     instructorFirstName: string;
     instructorLastName: string;
+    instructorDescription: string;
     description: string;
     startDate: Date;
     endDate: Date;
