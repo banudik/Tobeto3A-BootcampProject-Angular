@@ -35,8 +35,8 @@ export const AuthInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: 
   // Request'i devam ettirir ve hata oluşursa yakalar
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
-      // Eğer hata 401 (Unauthorized) ve istek refreshToken içermiyorsa koşula girer
-        if (error.status === 401 && !req.url.includes('refreshToken')) {
+      // Eğer hata 401 (Unauthorized) ve istek refreshToken ve login içermiyorsa koşula girer
+        if (error.status === 401 && !req.url.includes('refreshToken') && !req.url.includes('login')) {
           // Eğer token yenilenmiyorsa, yenileme işlemini başlatır
           if (!isRefreshing) {
             isRefreshing = true;
@@ -62,6 +62,7 @@ export const AuthInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: 
                 router.navigate(['/login']);
                 toastr.warning('Your session has expired', 'Log In Again')
                 //authService.logOut();
+                //return throwError(() => new HttpErrorResponse({}));
                 return throwError(() => Error());
               })
             );
