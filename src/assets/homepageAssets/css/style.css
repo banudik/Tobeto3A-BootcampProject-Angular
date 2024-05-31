@@ -80,29 +80,37 @@ p:last-child {
 }
 
 .ptb-100 {
-  padding-top: 100px;
+  padding-top: 150px;
   padding-bottom: 100px;
+  
+  
 }
 
 .pt-100 {
   padding-top: 100px;
+  
 }
 
 .pb-100 {
   padding-bottom: 100px;
+  
 }
 
 .ptb-70 {
   padding-top: 70px;
   padding-bottom: 70px;
+ 
 }
 
 .pt-70 {
   padding-top: 70px;
+  
+  
 }
 
 .pb-70 {
   padding-bottom: 70px;
+  
 }
 
 .pr-line {
@@ -2419,6 +2427,7 @@ Subscribe form CSS
   color: #4ab4fb;
   transition: .5s;
   border-radius: 5px;
+  margin-top: 35px;
   
 }
 
