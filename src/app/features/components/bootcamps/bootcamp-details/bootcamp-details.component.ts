@@ -74,6 +74,10 @@ export class BootcampDetailsComponent implements OnInit{
     );
   }
 
+  isExpired(endDate: Date): boolean {
+    return new Date(endDate) < new Date(); // endDate, geçmiş bir tarihe sahipse true döndürür
+  }
+
 // addApplication metodu
 addApplication(bootcampId: number) {
   // CreateApplicationInformationRequest nesnesi oluşturma
