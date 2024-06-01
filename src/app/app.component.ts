@@ -1,5 +1,5 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { HomepageComponent } from './pages/homepage/homepage.component';
@@ -23,6 +23,8 @@ import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.co
 import { FaqComponent } from './features/components/faq/faq.component';
 import { TermsOfUseComponent } from './pages/terms-of-use/terms-of-use.component';
 import { CourseComponent } from './pages/profile/components/course/course.component';
+import { AuthService } from './features/services/concretes/auth.service';
+
 
 
 
@@ -34,6 +36,13 @@ import { CourseComponent } from './pages/profile/components/course/course.compon
   imports: [RouterOutlet, HttpClientModule, NavbarComponent, HomepageComponent, LoginComponent, SignUpComponent, SharedModule, BootcampListGroupComponent, InstructorComponent, CloudinaryModule, FooterComponent, ProfileComponent,PrivacyPolicyComponent,LoadingSpinnerComponent,ContactUsComponent,FaqComponent,TermsOfUseComponent,CourseComponent],
 
 })
-export class AppComponent /** implements OnInit**/ {
+export class AppComponent implements OnInit {
   title = 'BootcampProject-FrontEnd';
+  constructor(private authService: AuthService){}
+
+  ngOnInit() {
+    this.authService.isLoggedIn$.subscribe(isLoggedIn => {
+      console.log('User is logged in:', isLoggedIn);
+    });
+  }
 }

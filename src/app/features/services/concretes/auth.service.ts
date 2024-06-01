@@ -25,7 +25,7 @@ import { Router } from "@angular/router";
   providedIn: 'root'
 })
 export class AuthService extends AuthBaseService implements OnDestroy {
-  private readonly REFRESH_INTERVAL = 1 * 60 * 1000; // 14 dakika
+  private readonly REFRESH_INTERVAL = 10 * 60 * 1000; // 10 dakika
   private refreshInterval: Subscription | null = null;
 
   fullname!: string;
@@ -197,7 +197,9 @@ export class AuthService extends AuthBaseService implements OnDestroy {
     this.refreshInterval = interval(this.REFRESH_INTERVAL).pipe(
       switchMap(() => this.refreshToken().pipe(
         tap(tokenModel => {
+
           this.storageService.setToken(tokenModel.token);
+
           this.isLoggedInSubject.next(true);
         })
       )),

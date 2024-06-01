@@ -105,7 +105,7 @@
                             <p>{{ item.time + " Minute"}}</p>
                         </div>
                     </a>
-                    <a *ngIf="part != item.id" routerLink='/chapter/{{item.id}}'
+                    <a *ngIf="part != item.id" routerLink='/chapter/{{currentBootcamp.id}}/{{item.sort}}'
                         class="lesson unwatched d-flex align-items-center justify-content-between">
                         <div class="left-lesson d-flex align-items-center">
                             <p>{{ i + 1 }}</p>

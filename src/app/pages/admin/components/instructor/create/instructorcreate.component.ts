@@ -8,6 +8,7 @@ import { environment } from '../../../../../../environments/environment';
 import { AuthService } from '../../../../../features/services/concretes/auth.service';
 import { LocalStorageService } from '../../../../../features/services/concretes/local-storage.service';
 import { CreateInstructorRequest } from '../../../../../features/models/requests/instructor/create-instructor-request';
+import { ValidationHelper } from '../../../../../core/helpers/validationtoastrmessagehelper';
 
 @Component({
   selector: 'app-instructorcreate',
@@ -21,7 +22,7 @@ export class InstructorcreateComponent implements OnInit {
   registerForm!: FormGroup;
   formMessage: string | null = null;
   constructor(private formBuilder: FormBuilder, private authService: AuthService,
-    private router: Router, private httpClient: HttpClient, private change: ChangeDetectorRef,private toastr:ToastrService) { }
+    private router: Router, private httpClient: HttpClient, private change: ChangeDetectorRef,private toastr:ToastrService,private validationHelper:ValidationHelper) { }
 
   ngOnInit(): void {
     this.createRegisterForm();
@@ -75,17 +76,11 @@ export class InstructorcreateComponent implements OnInit {
   }
 
   onFormSubmit() {
-    
-    const nameControl = this.registerForm.get('firstName');
-    if(this.registerForm.get('password')?.invalid){
-      console.log("invalid ");
+    this.validationHelper.checkValidation(this.registerForm);
+
+    if(this.registerForm.invalid){
+      console.log("invalid Inputs");
       
-    }
-    if (nameControl && nameControl.invalid) {
-      this.formMessage = "Lütfen gerekli alanları doldurun";
-      console.log("hata");
-      
-      return;
     }
 
     this.add();
