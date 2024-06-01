@@ -49,9 +49,11 @@ export class ChapterComponent implements OnInit, OnDestroy {
   constructor(private bootcampServie: BootcampService, private chapterService: ChapterService, private authService: AuthService, private toastr: ToastrService, private router: Router, private activatedRoute: ActivatedRoute, private bootcampLogsService: BootcampLogsService, private sanitizer: DomSanitizer, private cdf: ChangeDetectorRef,private certificateService:CertificateService) { }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe((params: { [x: string]: number; }) => {
-      this.getChapterById(params["chapterId"])
-    })
+    this.activatedRoute.params.subscribe(params => {
+      const bootcampId = +params['bootcampId'];
+      const chapterSort = +params['sort'];
+      this.getChapterByBootcampIdAndSort(bootcampId, chapterSort);
+    });
   }
 
   ngOnDestroy(): void {
@@ -80,22 +82,21 @@ export class ChapterComponent implements OnInit, OnDestroy {
 
   }
 
-  getChapterById(id: number) {
-    this.clearTimer();
-    this.chapterService.getByChapterId(id).subscribe(
+  getChapterByBootcampIdAndSort(bootcampId: number, chapterSort: number) {
+    this.clearTimer(); // Clear any existing timer before starting a new one
+    this.chapterService.getByChapterSortAndBootcampId(bootcampId, chapterSort).subscribe(
       (response: GetByIdChapterResponse) => {
-        this.part = id;
+        this.part = chapterSort;
         this.currentChapter = response;
         this.updateSafeUrl();
         this.isloading++;
         this.getBootcamp();
       },
       (error: any) => {
-        this.toastr.error('Error fetching Chapter:', error)
-        // Hata işleme mekanizmasını buraya ekleyebilirsiniz
+        this.toastr.error('Error fetching Chapter:', error);
         setTimeout(() => {
-          this.router.navigate(['/courses'])
-        }, 2000)
+          this.router.navigate(['/courses']);
+        }, 2000);
       }
     );
 

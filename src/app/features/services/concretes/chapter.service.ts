@@ -71,6 +71,11 @@ import { ChapterBaseService } from "../abstracts/chapter-base-service";
         })
       )
     }
+
+    getByChapterSortAndBootcampId(bootcampId: number, chapterSort: number): Observable<GetByIdChapterResponse> {
+      const url = `${this.apiUrl}/getbybootcampIdAndSort/${bootcampId}/${chapterSort}`;
+      return this.httpClient.get<GetByIdChapterResponse>(url);
+    }
   
     override getByChapterId(id:number):Observable<GetByIdChapterResponse> {
       return this.httpClient.get<GetByIdChapterResponse>(`${this.apiUrl}/`+id);
