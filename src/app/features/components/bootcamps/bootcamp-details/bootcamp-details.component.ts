@@ -15,6 +15,8 @@ import { CommentService } from '../../../services/concretes/comment.service';
 import { CommentListItemDto } from '../../../models/responses/comment/comment-list-item-dto';
 import { GetListCommentResponse } from '../../../models/responses/comment/get-list-comment-response';
 import { PageRequest } from '../../../../core/models/page-request';
+import { ChapterService } from '../../../services/concretes/chapter.service';
+import { ChapterListItemDto } from '../../../models/responses/chapter/chapter-list-item-dto';
 
 @Component({
   selector: 'app-bootcamp-details',
@@ -27,16 +29,20 @@ export class BootcampDetailsComponent implements OnInit {
 
 
   getByIdBootcampResponse !: GetByIdBootcampResponse
-  bootcampId: number = 1;
+  currentPageNumber!: number;
   commentList!: CommentListItemDto;
   commentIndex: number = 0;
+  chapterIndex:number = 0;
   isloading: boolean = true;
+  totallength!:number;
+  chapterList!:ChapterListItemDto;
+  chapterCount!:number;
   // activatedRoute: any;
   // bootcampService: any;
 
   constructor(private bootcampService: BootcampService, private activatedRoute: ActivatedRoute
     , private applicationInformationService: ApplicationInformationService, private localStorageService: LocalStorageService
-    , private authService: AuthService, private renderer2: Renderer2, private commentService: CommentService,
+    , private authService: AuthService, private renderer2: Renderer2, private commentService: CommentService,private ChapterService:ChapterService,
     @Inject(DOCUMENT) private _document: Document) { }
 
   ngOnInit(): void {
@@ -71,6 +77,7 @@ export class BootcampDetailsComponent implements OnInit {
     this.bootcampService.getBootcampById(bootcampId).subscribe(
       (response: GetByIdBootcampResponse) => {
         this.getByIdBootcampResponse = response;
+        this.getChapters({pageIndex:this.chapterIndex,pageSize: 10})
         this.getComments({ pageIndex: this.commentIndex, pageSize: 5 });
       },
       (error: any) => {
@@ -94,6 +101,23 @@ export class BootcampDetailsComponent implements OnInit {
         console.error('Error fetching bootcamp:', error);
         // Hata işleme mekanizmasını buraya ekleyebilirsiniz
         console.log("getBootcampById error");
+      }
+    );
+  }
+
+  getChapters(pageRequest:PageRequest){
+    this.isloading = true;
+    this.ChapterService.getListByBootcampId(this.getByIdBootcampResponse.id,pageRequest ).subscribe(
+      (response: ChapterListItemDto) => {
+        this.chapterList = response;
+        this.isloading = false;
+        this.getTotalLength();
+        this.getChapterCount();
+      },
+      (error: any) => {
+        console.error('Error fetching chapters:', error);
+        // Hata işleme mekanizmasını buraya ekleyebilirsiniz
+        console.log("getListChapter error");
       }
     );
   }
@@ -139,5 +163,33 @@ export class BootcampDetailsComponent implements OnInit {
     this.applicationInformationService.addApplication(createApplicationRequest).subscribe((response: any) => {
       console.log("application yapıldı");
     });
+  }
+
+  getTotalLength() {
+    this.totallength = this.chapterList.items.reduce((total, chapter) => total + chapter.time, 0);
+  }
+
+  getChapterCount(): number {
+    return this.chapterList.items.length;
+  }
+
+  onViewMoreClicked(): void {
+    const nextPageIndex = this.chapterList.index + 1;
+    this.updateCurrentPageNumber();
+    this.getChapters({ pageIndex: nextPageIndex, pageSize: 10 });
+  }
+
+  onPreviousPageClicked(): void {
+    const previousPageIndex = this.chapterList.index - 1;
+    this.lowerCurrentPageNumber();
+    this.getChapters({ pageIndex: previousPageIndex, pageSize: 10 });
+  }
+
+  updateCurrentPageNumber(): void {
+    this.currentPageNumber = this.chapterList.index + 1;
+  }
+
+  lowerCurrentPageNumber(): void {
+    this.currentPageNumber = this.chapterList.index - 1;
   }
 }
