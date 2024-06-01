@@ -1,29 +1,48 @@
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ApplicantService } from '../../../../features/services/concretes/applicant.service';
 import { GetByIdApplicantResponse } from '../../../../features/models/responses/applicant/get-by-id-applicant-response';
-import { DOCUMENT } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit, Renderer2 } from '@angular/core';
+import { BootcampService } from '../../../../features/services/concretes/bootcamp.service';
+import { BootcampListItemDto } from '../../../../features/models/responses/bootcamp/bootcamp-list-item-dto';
+import { PageRequest } from '../../../../core/models/page-request';
+import { HttpClientModule } from '@angular/common/http';
+import { InstructorComponent } from '../../../../features/components/instructor/instructor.component';
+import { FormsModule } from '@angular/forms';
 
 
 
 @Component({
   selector: 'app-course',
   standalone: true,
-  imports: [RouterModule],
+  imports: [CommonModule, HttpClientModule, RouterModule, FormsModule],
   templateUrl: './course.component.html',
   styleUrl: './course.component.css'
 })
 export class CourseComponent implements OnInit{
 
   getApplicantByIdResponse!:GetByIdApplicantResponse
+  isLoading: boolean = false;
+  currentPageNumber!: number;
 
-  constructor(private router:Router, private activatedRoute: ActivatedRoute, private applicantService:ApplicantService,private renderer2: Renderer2,
+  bootcampList: BootcampListItemDto = {
+    index: 0,
+    size: 0,
+    count: 0,
+    hasNext: false,
+    hasPrevious: false,
+    pages: 0,
+    items: []
+  };
+
+
+  constructor(private router:Router, private bootcampService: BootcampService, private activatedRoute: ActivatedRoute, private applicantService:ApplicantService,private renderer2: Renderer2,
     @Inject(DOCUMENT) private _document:Document) {}
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: { [x: string]: string; }) => {
-      if (params["userId"]) {
-        this.getApplicantById(params["userId"])
+      if (params["applicantId"]) {
+        this.getApplicantById(params["applicantId"])
       } else { console.log("getById applicant error") }
     })
 
@@ -52,11 +71,27 @@ export class CourseComponent implements OnInit{
       (response: GetByIdApplicantResponse) => {
         console.log("geliyor " + response.email);
         this.getApplicantByIdResponse = response;
+        this.getBootcampListByApplicant({pageIndex:0,pageSize: 10},this.getApplicantByIdResponse.id);
       },
       (error: any) => {
         console.error('Error fetching applicant:', error);
         // Hata işleme mekanizmasını buraya ekleyebilirsiniz
       }
     );
+  }
+
+  getBootcampListByApplicant(pageRequest: PageRequest, applicantId: string) {
+    this.isLoading = true;
+    this.bootcampService.getBootcampListByApplicantId(pageRequest, applicantId).subscribe((response) => {
+      this.bootcampList = response;
+      this.isLoading = false;
+      this.updateCurrentPageNumber();
+    });
+  }
+  updateCurrentPageNumber(): void {
+    this.currentPageNumber = this.bootcampList.index + 1;
+  }
+  visibleData() {
+    return this.bootcampList.items;
   }
 } 
