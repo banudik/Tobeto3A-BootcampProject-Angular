@@ -15,14 +15,18 @@ import { CommentService } from '../../../services/concretes/comment.service';
 import { CommentListItemDto } from '../../../models/responses/comment/comment-list-item-dto';
 import { GetListCommentResponse } from '../../../models/responses/comment/get-list-comment-response';
 import { PageRequest } from '../../../../core/models/page-request';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CreateCommentRequest } from '../../../models/requests/comment/create-comment-request';
+import { CreatedCommentResponse } from '../../../models/responses/comment/created-comment-response';
 import { ChapterService } from '../../../services/concretes/chapter.service';
 import { ChapterListItemDto } from '../../../models/responses/chapter/chapter-list-item-dto';
 import { ToastrService } from 'ngx-toastr';
 
+
 @Component({
   selector: 'app-bootcamp-details',
   standalone: true,
-  imports: [CommonModule, RouterModule, HttpClientModule, BootcampListGroupComponent],
+  imports: [CommonModule, RouterModule, HttpClientModule, BootcampListGroupComponent,FormsModule,ReactiveFormsModule],
   templateUrl: './bootcamp-details.component.html',
   styleUrl: './bootcamp-details.component.css'
 })
@@ -35,6 +39,7 @@ export class BootcampDetailsComponent implements OnInit {
   commentIndex: number = 0;
   chapterIndex:number = 0;
   isloading: boolean = true;
+  commentForm!: FormGroup;
   totallength!:number;
   chapterList!:ChapterListItemDto;
   chapterCount!:number;
@@ -43,8 +48,10 @@ export class BootcampDetailsComponent implements OnInit {
 
   constructor(private bootcampService: BootcampService, private activatedRoute: ActivatedRoute
     , private applicationInformationService: ApplicationInformationService, private localStorageService: LocalStorageService
+    ,private fb: FormBuilder,
     , private authService: AuthService, private renderer2: Renderer2, private commentService: CommentService,private ChapterService:ChapterService,
     private toastr:ToastrService,
+
     @Inject(DOCUMENT) private _document: Document) { }
 
   ngOnInit(): void {
@@ -67,6 +74,12 @@ export class BootcampDetailsComponent implements OnInit {
     this.loadScript('assets/homepageAssets/js/meanmenu.min.js');
     this.loadScript('assets/homepageAssets/js/wow.min.js');
     this.loadScript('assets/homepageAssets/js/main.js');
+
+     // Yorum formunu oluşturma
+     this.commentForm = this.fb.group({
+      content: ['', Validators.required],
+      status: false,
+    });
   }
   private loadScript(url: string) {
     const script = this.renderer2.createElement('script');
@@ -169,6 +182,33 @@ export class BootcampDetailsComponent implements OnInit {
     });
   }
 
+
+  // Yorum ekleme metodu
+  addComment(): void {
+    if (this.commentForm.valid) {
+      const token = this.authService.getDecodedToken();
+      const createCommentRequest: CreateCommentRequest = {
+        context: this.commentForm.value.content,
+        bootcampId: this.getByIdBootcampResponse.id,
+        userId: token['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']
+      };
+
+      this.commentService.add(createCommentRequest).subscribe(
+        (response: CreatedCommentResponse) => {
+          if (response) {
+            console.log('Comment added successfully', response);
+            this.commentForm.reset();
+            this.getComments({ pageIndex: this.commentIndex, pageSize: 5 });
+          } else {
+            console.error('Failed to add comment', response);
+          }
+        },
+        (error) => {
+          console.error('Error adding comment', error);
+        }
+      );
+    }
+
   getTotalLength() {
     this.totallength = this.chapterList.items.reduce((total, chapter) => total + chapter.time, 0);
   }
@@ -195,5 +235,6 @@ export class BootcampDetailsComponent implements OnInit {
 
   lowerCurrentPageNumber(): void {
     this.currentPageNumber = this.chapterList.index - 1;
+
   }
 }
