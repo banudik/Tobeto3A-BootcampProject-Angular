@@ -10,6 +10,9 @@ import { FormsModule } from '@angular/forms';
 import { InstructorService } from '../../../services/concretes/instructor.service';
 import { InstructorListItemDto } from '../../../models/responses/instructor/instructor-list-item-dto';
 import { AuthService } from '../../../services/concretes/auth.service';
+import { ToastrService } from 'ngx-toastr';
+import { ApplicationInformationService } from '../../../services/concretes/application-information.service';
+import { CreateApplicationInformationRequest } from '../../../models/requests/application-information/create-application-information-request';
 
 @Component({
   selector: 'app-bootcamp-list-group',
@@ -47,6 +50,9 @@ export class BootcampListGroupComponent implements OnInit {
     private bootcampService: BootcampService,
     private activatedRoute: ActivatedRoute,
     private instructorService: InstructorService,
+    private toastr:ToastrService,
+    private authService:AuthService,
+    private applicationInformationService:ApplicationInformationService
   ) { }
 
   ngOnInit(): void {
@@ -164,6 +170,26 @@ export class BootcampListGroupComponent implements OnInit {
 
   visibleData() {
     return this.bootcampList.items;
+  }
+
+  addApplication(bootmcampId:number) {
+    // CreateApplicationInformationRequest nesnesi oluşturma
+    //const token = this.authService.getDecodedToken();
+    // console.log(token['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']);
+
+
+    const createApplicationRequest: CreateApplicationInformationRequest = {
+      bootcampId: bootmcampId,
+      applicantId: this.authService.getCurrentUserId(),
+      ApplicationStateInformationId: 1 // default olarak 1 değeri atanıyor
+    };
+
+    // Servis çağrısı ve abonelik
+    this.applicationInformationService.addApplication(createApplicationRequest).subscribe((response: any) => {
+      if(response){
+        this.toastr.success("Application successfull");
+      }
+    });
   }
 }
 

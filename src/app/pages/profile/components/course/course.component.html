@@ -113,7 +113,7 @@
                                             <li class="nav-item" role="presentation">
                                                 <button class="single__tab__link active" data-bs-toggle="tab"
                                                     data-bs-target="#projects__one" type="button" aria-selected="true"
-                                                    role="tab">Publish</button>
+                                                    role="tab">My Courses</button>
                                             </li>
                                         </ul>
                                     </div>
@@ -129,9 +129,9 @@
                                                 <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
                                                     <div class="gridarea__wraper">
                                                         <div class="gridarea__img">
-                                                            <img loading="lazy" [routerLink]="['/bootcampdetail', bootcamp.id.toString()]"[src]="bootcamp.bootcampImageImagePath" alt="grid">
+                                                            <img loading="lazy" routerLink="/chapter/{{bootcamp.id}}/1" [src]="bootcamp.bootcampImageImagePath" alt="grid">
                                                             <div class="gridarea__small__button">
-                                                                <div class="grid__badge blue__color">Mechanical</div>
+                                                                <div class="grid__badge blue__color">{{bootcamp.bootcampStateName}}</div>
                                                             </div>
                                                             <div class="gridarea__small__icon">
                                                                 <a href="#"><i class="icofont-heart-alt"></i></a>
@@ -139,7 +139,7 @@
 
                                                         </div>
                                                         <div class="gridarea__content">
-                                                            <div class="gridarea__list">
+                                                            <!-- <div class="gridarea__list">
                                                                 <ul>
                                                                     <li>
                                                                         <i class="icofont-book-alt"></i> 29 Lesson
@@ -148,35 +148,22 @@
                                                                         <i class="icofont-clock-time"></i> 2 hr 10 min
                                                                     </li>
                                                                 </ul>
-                                                            </div>
+                                                            </div> -->
                                                             <div class="gridarea__heading">
-                                                                <h3><a href="#">{{bootcamp.name}} </a></h3>
+                                                                <h3><a routerLink="/chapter/{{bootcamp.id}}/1">{{bootcamp.name}} </a></h3>
 
                                                             </div>
-                                                            <div class="gridarea__price green__color">
-                                                                $32.00<del>/$67.00</del>
-                                                                <span>.Free</span>
-
-                                                            </div>
+        
                                                             <div class="gridarea__bottom">
-                                                                <a href="instructor-details.html">
+                                                                <a routerLink="/chapter/{{bootcamp.id}}/1">
                                                                     <div class="gridarea__small__img">
-                                                                        <img loading="lazy"
-                                                                            src="../img/grid/grid_small_2.jpg"
-                                                                            alt="grid">
+                                                                        
                                                                         <div class="gridarea__small__content">
-                                                                            <h6>Rinis Jhon</h6>
+                                                                            <h6>{{bootcamp.instructorFirstName +" "+ bootcamp.instructorLastName}} </h6>
                                                                         </div>
                                                                     </div>
                                                                 </a>
-                                                                <div class="gridarea__star">
-                                                                    <i class="icofont-star"></i>
-                                                                    <i class="icofont-star"></i>
-                                                                    <i class="icofont-star"></i>
-                                                                    <i class="icofont-star"></i>
-                                                                    <i class="icofont-star"></i>
-                                                                    <span>(44)</span>
-                                                                </div>
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -202,7 +189,7 @@
 
 
     <!-- JS here -->
-    <script src="../js/vendor/modernizr-3.5.0.min.js"></script>
+    <!-- <script src="../js/vendor/modernizr-3.5.0.min.js"></script>
     <script src="../js/vendor/jquery-3.6.0.min.js"></script>
     <script src="../js/popper.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
@@ -218,7 +205,7 @@
     <script src="../js/jquery.counterup.min.js"></script>
     <script src="../js/plugins.js"></script>
     <script src="../js/swiper-bundle.min.js"></script>
-    <script src="../js/main.js"></script>
+    <script src="../js/main.js"></script> -->
 
 
 </body>
@@ -227,133 +214,3 @@
 <!-- Mirrored from html.themewin.com/edurock-preview/edurock/dashboard/admin-profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 30 May 2024 20:53:25 GMT -->
 </html>
 
-<main class="profile-page">
-    <section class="relative block" style="height: 500px;">
-      <div
-        class="absolute top-0 w-full h-full bg-center bg-cover"
-        style='background-image: url("https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=2710&amp;q=80");'
-      >
-        <span
-          id="blackOverlay"
-          class="w-full h-full absolute opacity-50 bg-black"
-        ></span>
-      </div>
-      <div
-        class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden"
-        style="height: 70px;"
-      >
-        <svg
-          class="absolute bottom-0 overflow-hidden"
-          xmlns="http://www.w3.org/2000/svg"
-          preserveAspectRatio="none"
-          version="1.1"
-          viewBox="0 0 2560 100"
-          x="0"
-          y="0"
-        >
-          <polygon
-            class="text-gray-300 fill-current"
-            points="2560 0 2560 100 0 100"
-          ></polygon>
-        </svg>
-      </div>
-    </section>
-    <section class="relative py-16 bg-white-300">
-      <div class="container mx-auto px-4">
-        <div
-          class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64"
-        >
-          <div class="px-6">
-            <div class="flex flex-wrap justify-center">
-              <div
-                class="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center"
-              >
-                <div class="relative">
-                  <img
-                    alt="..."
-                    src="https://i.pinimg.com/736x/4f/fa/74/4ffa7439fe6536e7e0f6532b2c4003f8.jpg"
-                    class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16"
-                    style="max-width: 150px;"
-                  />
-                </div>
-              </div>
-              <div
-                class="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center"
-              >
-                <div class="py-6 px-3 mt-32 sm:mt-0">
-                  <button
-                    class="bg-pink-500 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
-                    type="button"
-                    style="transition: all 0.15s ease 0s;"
-                  >
-                    Edit
-                  </button>
-                </div>
-              </div>
-              <div class="w-full lg:w-4/12 px-4 lg:order-1">
-                <div class="flex justify-center py-4 lg:pt-4 pt-8">
-                  <div class="mr-4 p-3 text-center">
-                    <span
-                      class="text-xl font-bold block uppercase tracking-wide text-gray-700"
-                      >22</span
-                    ><span class="text-sm text-gray-500">Friends</span>
-                  </div>
-                  <div class="mr-4 p-3 text-center">
-                    <span
-                      class="text-xl font-bold block uppercase tracking-wide text-gray-700"
-                      >10</span
-                    ><span class="text-sm text-gray-500">Photos</span>
-                  </div>
-                  <div class="lg:mr-4 p-3 text-center">
-                    <span
-                      class="text-xl font-bold block uppercase tracking-wide text-gray-700"
-                      >89</span
-                    ><span class="text-sm text-gray-500">Comments</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="text-center mt-12">
-              <h3
-                class="text-4xl font-semibold leading-normal mb-2 text-gray-800"
-              >
-                {{getApplicantByIdResponse.firstName + " " + getApplicantByIdResponse.lastName}}
-              </h3>
-              <div
-                class="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase"
-              >
-                <i
-                  class="fas fa-map-marker-alt mr-2 text-lg text-gray-500"
-                ></i>
-                Los Angeles, California
-              </div>
-              <div class="mb-2 text-gray-700 mt-10">
-                <i class="fas fa-briefcase mr-2 text-lg text-gray-500"></i
-                >Solution Manager - Creative Tim Officer
-              </div>
-              <div class="mb-2 text-gray-700">
-                <i class="fas fa-university mr-2 text-lg text-gray-500"></i
-                >University of Computer Science
-              </div>
-            </div>
-            <div class="mt-10 py-10 border-t border-gray-300 text-center">
-              <div class="flex flex-wrap justify-center">
-                <div class="w-full lg:w-9/12 px-4">
-                  <p class="mb-4 text-lg leading-relaxed text-gray-800">
-                    An artist of considerable range, Jenna the name taken by
-                    Melbourne-raised, Brooklyn-based Nick Murphy writes,
-                    performs and records all of his own music, giving it a
-                    warm, intimate feel with a solid groove structure. An
-                    artist of considerable range.
-                  </p>
-                  <a href="#pablo" class="font-normal text-pink-500"
-                    >Show more</a
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
