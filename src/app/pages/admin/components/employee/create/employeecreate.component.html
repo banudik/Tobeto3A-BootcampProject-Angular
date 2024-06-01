@@ -1,1 +1,49 @@
-<p>employeecreate works!</p>
+<form [formGroup]="registerForm" (ngSubmit)="onFormSubmit()" *ngIf="registerForm">
+    <div class="card-style mb-30">
+      <h6 class="mb-25">Employee Registration Form</h6>
+      
+      <div class="input-style-1">
+        <label for="firstNameInput">First Name</label>
+        <input formControlName="firstName" id="firstNameInput" type="text" placeholder="First Name" />
+      </div>
+      
+      <div class="input-style-1">
+        <label for="lastNameInput">Last Name</label>
+        <input formControlName="lastName" id="lastNameInput" type="text" placeholder="Last Name" />
+      </div>
+      
+      <div class="input-style-1">
+        <label for="emailInput">Email</label>
+        <input formControlName="email" id="emailInput" type="email" placeholder="Email" />
+      </div>
+      
+      <div class="input-style-1">
+        <label for="passwordInput">Password</label>
+        <input formControlName="password" id="passwordInput" type="password" placeholder="Password" />
+      </div>
+      
+      <div class="input-style-1">
+        <label for="positionInput">Position</label>
+        <input formControlName="position" id="positionInput" type="text" placeholder="Position" />
+      </div>
+      
+      <div class="input-style-1">
+        <label for="dateOfBirthInput">Date of Birth</label>
+        <input formControlName="dateOfBirth" id="dateOfBirthInput" type="date" placeholder="Date of Birth" />
+      </div>
+      
+      <div class="input-style-1">
+        <label for="userNameInput">Username</label>
+        <input formControlName="userName" id="userNameInput" type="text" placeholder="Username" />
+      </div>
+      
+      <div class="input-style-1">
+        <label for="nationalIdentityInput">National Identity</label>
+        <input formControlName="nationalIdentity" id="nationalIdentityInput" type="text" placeholder="National Identity" />
+      </div>
+    </div>
+    
+    <button type="submit" class="main-btn success-btn rounded-full btn-hover">Register</button> |
+    <a class="main-btn dark-btn rounded-full btn-hover" routerLink='/adminpanel/employeeindex'>Back</a>
+  </form>
+  

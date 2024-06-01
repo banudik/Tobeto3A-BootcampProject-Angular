@@ -100,30 +100,12 @@ export class BootcampListGroupComponent implements OnInit {
     const nextPageIndex = this.bootcampList.index + 1;
     this.updateCurrentPageNumber();
     this.applyFilters({ pageIndex: nextPageIndex, pageSize: this.PAGE_SIZE });
-    // this.activatedRoute.params.subscribe(params => {
-    //   if (params['instructorId']) {
-    //     this.getBootcampListByInstructor({ page: nextPageIndex, pageSize: pageSize }, params['instructorId']);
-    //   } else {
-    //     this.getList({ page: nextPageIndex, pageSize: pageSize });
-    //   }
-    // });
-
-    
   }
 
   onPreviousPageClicked(): void {
     const previousPageIndex = this.bootcampList.index - 1;
     this.lowerCurrentPageNumber();
     this.applyFilters({ pageIndex: previousPageIndex, pageSize: this.PAGE_SIZE });
-    // this.activatedRoute.params.subscribe(params => {
-    //   if (params['instructorId']) {
-    //     this.getBootcampListByInstructor({ page: previousPageIndex, pageSize: pageSize }, params['instructorId']);
-    //   } else {
-    //     this.getList({ page: previousPageIndex, pageSize: pageSize });
-    //   }
-    // });
-
-    
   }
 
   updateCurrentPageNumber(): void {
