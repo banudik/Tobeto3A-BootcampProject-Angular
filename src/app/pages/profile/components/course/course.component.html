@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Profile</title>
+    <title>Course</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -14,33 +14,20 @@
     <!-- Place favicon.ico in the root directory -->
 
     <!-- CSS here -->
-    <link rel="stylesheet" href="../../../assets/profilAssets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../../assets/profilAssets/css/animate.min.css">
-    <link rel="stylesheet" href="../../../assets/profilAssets/css/aos.min.css">
-    <link rel="stylesheet" href="../../../assets/profilAssets/css/magnific-popup.css">
-    <link rel="stylesheet" href="../../../assets/profilAssets/css/icofont.min.css">
-    <link rel="stylesheet" href="../../../assets/profilAssets/css/slick.css">
-    <link rel="stylesheet" href="../../../assets/profilAssets/css/swiper-bundle.min.css">
-    <link rel="stylesheet" href="../../../assets/profilAssets/css/style.css">
-
+    <link rel="stylesheet" href="../../../../../assets/profilAssets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../../../assets/profilAssets/css/animate.min.css">
+    <link rel="stylesheet" href="../../../../../assets/profilAssets/css/aos.min.css">
+    <link rel="stylesheet" href="../../../../../assets/profilAssets/css/magnific-popup.css">
+    <link rel="stylesheet" href="../../../../../assets/profilAssets/css/icofont.min.css">
+    <link rel="stylesheet" href="../../../../../assets/profilAssets/css/slick.css">
+    <link rel="stylesheet" href="../../../../../assets/profilAssets/css/swiper-bundle.min.css">
+    <link rel="stylesheet" href="../../../../../assets/profilAssets/css/style.css">
 </head>
 
 <body class="body__wrapper">
-    
-        <!-- Dark/Light area end -->
-
     <main class="main_wrapper overflow-hidden">
-
-       
-
-
-
-
-
         <!-- dashboardarea__area__start  -->
-        <div class="dashboardarea sp_bottom_100">
-            
-       
+        <div class="dashboardarea sp_bottom_100">            
             <div class="dashboard">
                 <div class="container-fluid full__width__padding">
                     <div class="row">
@@ -52,7 +39,7 @@
                                 <div class="dashboard__nav">
                                     <ul>
                                         <li>
-                                            <a class="active" [routerLink]="['/myprofile', getApplicantByIdResponse.id]">
+                                            <a [routerLink]="['/myprofile', getApplicantByIdResponse.id]">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                     viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -63,7 +50,7 @@
                                                 My Profile</a>
                                         </li>
                                         <li>
-                                            <a [routerLink]="['/course', getApplicantByIdResponse.id]">
+                                            <a class="active" [routerLink]="['/course', getApplicantByIdResponse.id]">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                     viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -114,61 +101,93 @@
 
                             </div>
                         </div>
-                        <div class="col-xl-9 col-lg-9 col-md-9" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <div class="col-xl-9 col-lg-9 col-md-12">
                             <div class="dashboard__content__wraper">
                                 <div class="dashboard__section__title">
-                                    <h4>My Profile</h4>
+                                    <h4>Course Status</h4>
                                 </div>
                                 <div class="row">
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="dashboard__form">Registration Date</div>
-                                    </div>
-                                    <div class="col-lg-8 col-md-8">
-                                        <div class="dashboard__form">{{getApplicantByIdResponse.createdDate}}</div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="dashboard__form dashboard__form__margin">First Name</div>
-                                    </div>
-                                    <div class="col-lg-8 col-md-8">
-                                        <div class="dashboard__form dashboard__form__margin">{{getApplicantByIdResponse.firstName}}</div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="dashboard__form dashboard__form__margin">Last Name</div>
-                                    </div>
-                                    <div class="col-lg-8 col-md-8">
-                                        <div class="dashboard__form dashboard__form__margin">{{getApplicantByIdResponse.lastName}}</div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="dashboard__form dashboard__form__margin">Username</div>
-                                    </div>
-                                    <div class="col-lg-8 col-md-8">
-                                        <div class="dashboard__form dashboard__form__margin">{{getApplicantByIdResponse.userName}}</div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="dashboard__form dashboard__form__margin">Email</div>
-                                    </div>
-                                    <div class="col-lg-8 col-md-8">
-                                        <div class="dashboard__form dashboard__form__margin">{{getApplicantByIdResponse.email}}</div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="dashboard__form dashboard__form__margin">Date of Birth</div>
-                                    </div>
-                                    <div class="col-lg-8 col-md-8">
-                                        <div class="dashboard__form dashboard__form__margin">{{getApplicantByIdResponse.dateOfBirth}}</div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="dashboard__form dashboard__form__margin">National Identity</div>
-                                    </div>
-                                    <div class="col-lg-8 col-md-8">
-                                        <div class="dashboard__form dashboard__form__margin">{{getApplicantByIdResponse.nationalIdentity}}</div>
+                                    <div class="col-xl-12 aos-init aos-animate" data-aos="fade-up">
+                                        <ul class="nav  about__button__wrap dashboard__button__wrap" id="myTab"
+                                            role="tablist">
+                                            <li class="nav-item" role="presentation">
+                                                <button class="single__tab__link active" data-bs-toggle="tab"
+                                                    data-bs-target="#projects__one" type="button" aria-selected="true"
+                                                    role="tab">Publish</button>
+                                            </li>
+                                        </ul>
                                     </div>
 
+
+                                    <div class="tab-content tab__content__wrapper aos-init aos-animate"
+                                        id="myTabContent" data-aos="fade-up">
+
+                                        <div class="tab-pane fade active show" id="projects__one" role="tabpanel"
+                                            aria-labelledby="projects__one">
+                                            <div class="row" *ngFor="let bootcamp of visibleData()">
+
+                                                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
+                                                    <div class="gridarea__wraper">
+                                                        <div class="gridarea__img">
+                                                            <img loading="lazy" [routerLink]="['/bootcampdetail', bootcamp.id.toString()]"[src]="bootcamp.bootcampImageImagePath" alt="grid">
+                                                            <div class="gridarea__small__button">
+                                                                <div class="grid__badge blue__color">Mechanical</div>
+                                                            </div>
+                                                            <div class="gridarea__small__icon">
+                                                                <a href="#"><i class="icofont-heart-alt"></i></a>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="gridarea__content">
+                                                            <div class="gridarea__list">
+                                                                <ul>
+                                                                    <li>
+                                                                        <i class="icofont-book-alt"></i> 29 Lesson
+                                                                    </li>
+                                                                    <li>
+                                                                        <i class="icofont-clock-time"></i> 2 hr 10 min
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="gridarea__heading">
+                                                                <h3><a href="#">{{bootcamp.name}} </a></h3>
+
+                                                            </div>
+                                                            <div class="gridarea__price green__color">
+                                                                $32.00<del>/$67.00</del>
+                                                                <span>.Free</span>
+
+                                                            </div>
+                                                            <div class="gridarea__bottom">
+                                                                <a href="instructor-details.html">
+                                                                    <div class="gridarea__small__img">
+                                                                        <img loading="lazy"
+                                                                            src="../img/grid/grid_small_2.jpg"
+                                                                            alt="grid">
+                                                                        <div class="gridarea__small__content">
+                                                                            <h6>Rinis Jhon</h6>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                                <div class="gridarea__star">
+                                                                    <i class="icofont-star"></i>
+                                                                    <i class="icofont-star"></i>
+                                                                    <i class="icofont-star"></i>
+                                                                    <i class="icofont-star"></i>
+                                                                    <i class="icofont-star"></i>
+                                                                    <span>(44)</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        
                         </div>
-
-                      
+                    
                     </div>
                 </div>
             </div>

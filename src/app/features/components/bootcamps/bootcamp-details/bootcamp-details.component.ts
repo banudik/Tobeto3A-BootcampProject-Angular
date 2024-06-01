@@ -102,6 +102,7 @@ export class BootcampDetailsComponent implements OnInit {
       }
     );
   }
+  
 
 
   getComments(pageRequest: PageRequest) {
@@ -157,6 +158,7 @@ export class BootcampDetailsComponent implements OnInit {
 
     this.getComments({ pageIndex: this.commentIndex, pageSize: 5 });
   }
+  isExpired(endDate: Date): boolean {     return new Date(endDate) < new Date(); }// endDate, geçmiş bir tarihe sahipse true döndürür   
 
   isExpired(endDate: Date): boolean {
     return new Date(endDate) < new Date(); // endDate, geçmiş bir tarihe sahipse true döndürür   }

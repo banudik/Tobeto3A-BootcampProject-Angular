@@ -28,7 +28,6 @@ export class AuthService extends AuthBaseService implements OnDestroy {
   private readonly REFRESH_INTERVAL = 10 * 60 * 1000; // 10 dakika
   private refreshInterval: Subscription | null = null;
 
-
   fullname!: string;
   userId!: string;
   token: any;
@@ -127,8 +126,8 @@ export class AuthService extends AuthBaseService implements OnDestroy {
   }
 
   //Mevcut refreshtoken ile yeni bir accessToken ister
-  refreshToken(): Observable<AccessTokenModel<TokenModel>> {
-    return this.httpClient.get<AccessTokenModel<TokenModel>>(`${this.apiUrl}/refreshToken`, { withCredentials: true });
+  refreshToken(): Observable<TokenModel> {
+    return this.httpClient.get<TokenModel>(`${this.apiUrl}/refreshToken`, { withCredentials: true });
   }
 
   //ŞifreSıfırlamak için yeni şifreyi gönderir
@@ -198,7 +197,9 @@ export class AuthService extends AuthBaseService implements OnDestroy {
     this.refreshInterval = interval(this.REFRESH_INTERVAL).pipe(
       switchMap(() => this.refreshToken().pipe(
         tap(tokenModel => {
-          this.storageService.setToken(tokenModel.accessToken.token);
+
+          this.storageService.setToken(tokenModel.token);
+
           this.isLoggedInSubject.next(true);
         })
       )),

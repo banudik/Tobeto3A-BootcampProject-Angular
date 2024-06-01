@@ -52,6 +52,16 @@
                                         data-bs-target="#nav-reviews" type="button" role="tab"
                                         aria-controls="nav-reviews" aria-selected="false">Chapters</button>
                                 </div>
+
+                            </div>
+                            <div class="course-tabs">
+                                <nav>
+                                    <div class="nav course-nav" id="nav-tab" role="tablist">
+                                        <button class="course-link active" id="nav-overview-tab" data-bs-toggle="tab" data-bs-target="#nav-overview" type="button" role="tab" aria-controls="nav-overview" aria-selected="true">Overview</button>
+                                        <button class=" course-link " id="nav-carriculum-tab" data-bs-toggle="tab" data-bs-target="#nav-carriculum" type="button" role="tab" aria-controls="nav-carriculum" aria-selected="false">Carriculum</button>
+                                        <button class=" course-link" id="nav-instructor-tab" data-bs-toggle="tab" data-bs-target="#nav-instructor" type="button" role="tab" aria-controls="nav-instructor" aria-selected="false">Instructor</button>
+                                        <button class=" course-link" id="nav-reviews-tab" data-bs-toggle="tab" data-bs-target="#nav-reviews" type="button" role="tab" aria-controls="nav-reviews" aria-selected="false">Reviews</button>
+
                             </nav>
                             <div class="single-course-tab" id="nav-tabContent">
                                 <div class="overview-panel fade active show" id="nav-overview" role="tabpanel"
@@ -59,6 +69,7 @@
                                     <div class="overview-content cmb-30">
                                         <h3 class="course-desc-heading">Course Description</h3>
                                         <p>{{getByIdBootcampResponse.description}}</p>
+
                                     </div>
 
 

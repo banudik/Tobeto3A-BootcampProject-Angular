@@ -175,6 +175,33 @@ export class BootcampService extends BootcampBaseService {
       })
       )
     }
+    override getBootcampListByApplicantId(pageRequest: PageRequest, applicantId: string): Observable<BootcampListItemDto> {
+      const newRequest: {[key: string]: string | number} = {
+        pageIndex: pageRequest.pageIndex,
+        pageSize: pageRequest.pageSize,
+        applicantId: applicantId,
+      };
+    
+      return this.httpClient.get<BootcampListItemDto>(`${this.apiUrl}/getbootcampbyapplication`, {
+        params: newRequest
+      }).pipe(
+        map((response)=>{
+          const newResponse:BootcampListItemDto={
+            index:pageRequest.pageIndex,
+            size:pageRequest.pageSize,
+            count:response.count,
+            hasNext:response.hasNext,
+            hasPrevious:response.hasPrevious,
+            items:response.items,
+            pages:response.pages
+  
+          };
+          return newResponse;
+        })
+        )
+      }
+
+    
 }
 
 
