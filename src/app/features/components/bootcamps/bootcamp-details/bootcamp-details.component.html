@@ -310,7 +310,7 @@
                                 </div>
                                 <div class="sidebar-content">
                                     <h3>Free</h3>
-                                    <a href="#" class="default-btn course-btn" [ngClass]="{'expired': isExpired(getByIdBootcampResponse.endDate), 'notExpired': !isExpired(getByIdBootcampResponse.endDate)}">Başvur</a>
+                                    <a (click)="addApplication()" class="default-btn course-btn" [ngClass]="{'expired': isExpired(getByIdBootcampResponse.endDate), 'notExpired': !isExpired(getByIdBootcampResponse.endDate)}">Apply</a>
                                     <ul class="courses-details">
                                         <li><div class="icon"><img src="../../../../../assets/homepageAssets/images/icon/user.svg" alt="icon"> Instructor</div> <p>{{ getByIdBootcampResponse.instructorFirstName +" "+ getByIdBootcampResponse.instructorLastName}}</p></li>
                                         <li><div class="icon"><img src="../../../../../assets/homepageAssets/images/icon/file2.svg" alt="icon"> Lectures</div> <p>{{getChapterCount()}}</p></li>

@@ -17,6 +17,7 @@ import { GetListCommentResponse } from '../../../models/responses/comment/get-li
 import { PageRequest } from '../../../../core/models/page-request';
 import { ChapterService } from '../../../services/concretes/chapter.service';
 import { ChapterListItemDto } from '../../../models/responses/chapter/chapter-list-item-dto';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-bootcamp-details',
@@ -43,6 +44,7 @@ export class BootcampDetailsComponent implements OnInit {
   constructor(private bootcampService: BootcampService, private activatedRoute: ActivatedRoute
     , private applicationInformationService: ApplicationInformationService, private localStorageService: LocalStorageService
     , private authService: AuthService, private renderer2: Renderer2, private commentService: CommentService,private ChapterService:ChapterService,
+    private toastr:ToastrService,
     @Inject(DOCUMENT) private _document: Document) { }
 
   ngOnInit(): void {
@@ -147,21 +149,23 @@ export class BootcampDetailsComponent implements OnInit {
     return new Date(endDate) < new Date(); // endDate, geçmiş bir tarihe sahipse true döndürür   }
   }
   // addApplication metodu
-  addApplication(bootcampId: number) {
+  addApplication() {
     // CreateApplicationInformationRequest nesnesi oluşturma
-    const token = this.authService.getDecodedToken();
-    console.log(token['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']);
+    //const token = this.authService.getDecodedToken();
+    // console.log(token['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']);
 
 
     const createApplicationRequest: CreateApplicationInformationRequest = {
-      bootcampId: bootcampId,
-      applicantId: token['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'],
-      ApplicationStateInformationId: 2 // default olarak 1 değeri atanıyor
+      bootcampId: this.getByIdBootcampResponse.id,
+      applicantId: this.authService.getCurrentUserId(),
+      ApplicationStateInformationId: 1 // default olarak 1 değeri atanıyor
     };
 
     // Servis çağrısı ve abonelik
     this.applicationInformationService.addApplication(createApplicationRequest).subscribe((response: any) => {
-      console.log("application yapıldı");
+      if(response){
+        this.toastr.success("Application successfull");
+      }
     });
   }
 
