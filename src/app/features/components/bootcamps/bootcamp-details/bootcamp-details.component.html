@@ -1,284 +1,404 @@
 <!doctype html>
 <html lang="zxx">
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        
-        <!-- Links of CSS files -->
-        <link rel="stylesheet" href="../../../../../assets/homepageAssets/css/bootstrap.min.css">
-        <link rel="stylesheet" href="../../../../../assets/homepageAssets/css/boxicons.min.css">
-        <link rel="stylesheet" href="../../../../../assets/homepageAssets/css/odometer.min.css">
-        <link rel="stylesheet" href="../../../../../assets/homepageAssets/css/nice-select.min.css">
-        <link rel="stylesheet" href="../../../../../assets/homepageAssets/css/owl.carousel.min.css">
-        <link rel="stylesheet" href="../../../../../assets/homepageAssets/css/meanmenu.min.css">
-        <link rel="stylesheet" href="../../../../../assets/homepageAssets/css/magnific-popup.min.css">
-        <link rel="stylesheet" href="../../../../../assets/homepageAssets/css/style.css">
-        <link rel="stylesheet" href="../../../../../assets/homepageAssets/css/responsive.css">
 
-    </head>
-    <body>
-        <!-- Start Edu Single Course Area -->
-        <div class="single-course-area ptb-100" *ngIf="getByIdBootcampResponse">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-md-12">
-                        <div *ngIf="!isloading" class="single-course-desc">
-                            <div class="single-course-image">
-                                <img [src]="getByIdBootcampResponse.bootcampImageImagePath" alt="image"/>
-                                
-                            </div>
-                            <div class="single-course-content">
-                                <h2>{{getByIdBootcampResponse.name}}</h2>
-                                <h5>Status: {{getByIdBootcampResponse.bootcampStateName}}</h5>
-                                <h5>Start Date: {{getByIdBootcampResponse.startDate | date:'dd.MM.yyyy'}}</h5>
-                                <h5>End Date: {{getByIdBootcampResponse.endDate | date:'dd.MM.yyyy'}}</h5>
-                            </div>
-                            <div class="course-tabs">
-                                <nav>
-                                    <div class="nav course-nav" id="nav-tab" role="tablist">
-                                        <button class="course-link active" id="nav-overview-tab" data-bs-toggle="tab" data-bs-target="#nav-overview" type="button" role="tab" aria-controls="nav-overview" aria-selected="true">Description</button>
-                                        <button class=" course-link" id="nav-carriculum-tab" data-bs-toggle="tab" data-bs-target="#nav-carriculum" type="button" role="tab" aria-controls="nav-carriculum" aria-selected="false">Comments</button>
-                                        <button class=" course-link" id="nav-instructor-tab" data-bs-toggle="tab" data-bs-target="#nav-instructor" type="button" role="tab" aria-controls="nav-instructor" aria-selected="false">Instructor</button>
-                                        <button class=" course-link" id="nav-reviews-tab" data-bs-toggle="tab" data-bs-target="#nav-reviews" type="button" role="tab" aria-controls="nav-reviews" aria-selected="false">Chapters</button>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Links of CSS files -->
+    <link rel="stylesheet" href="../../../../../assets/homepageAssets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../../../assets/homepageAssets/css/boxicons.min.css">
+    <link rel="stylesheet" href="../../../../../assets/homepageAssets/css/odometer.min.css">
+    <link rel="stylesheet" href="../../../../../assets/homepageAssets/css/nice-select.min.css">
+    <link rel="stylesheet" href="../../../../../assets/homepageAssets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../../../../../assets/homepageAssets/css/meanmenu.min.css">
+    <link rel="stylesheet" href="../../../../../assets/homepageAssets/css/magnific-popup.min.css">
+    <link rel="stylesheet" href="../../../../../assets/homepageAssets/css/style.css">
+    <link rel="stylesheet" href="../../../../../assets/homepageAssets/css/responsive.css">
+
+</head>
+
+<body>
+    <!-- Start Edu Single Course Area -->
+    <div class="single-course-area ptb-100" *ngIf="getByIdBootcampResponse">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-12">
+                    <div *ngIf="!isloading" class="single-course-desc">
+                        <div class="single-course-image">
+                            <img [src]="getByIdBootcampResponse.bootcampImageImagePath" alt="image" />
+
+                        </div>
+                        <div class="single-course-content">
+                            <h2>{{getByIdBootcampResponse.name}}</h2>
+                            <h5>Status: {{getByIdBootcampResponse.bootcampStateName}}</h5>
+                            <h5>Start Date: {{getByIdBootcampResponse.startDate | date:'dd.MM.yyyy'}}</h5>
+                            <h5>End Date: {{getByIdBootcampResponse.endDate | date:'dd.MM.yyyy'}}</h5>
+                        </div>
+                        <div class="course-tabs">
+                            <nav>
+                                <div class="nav course-nav" id="nav-tab" role="tablist">
+                                    <button class="course-link active" id="nav-overview-tab" data-bs-toggle="tab"
+                                        data-bs-target="#nav-overview" type="button" role="tab"
+                                        aria-controls="nav-overview" aria-selected="true">Description</button>
+                                    <button class=" course-link" id="nav-carriculum-tab" data-bs-toggle="tab"
+                                        data-bs-target="#nav-carriculum" type="button" role="tab"
+                                        aria-controls="nav-carriculum" aria-selected="false">Comments</button>
+                                    <button class=" course-link" id="nav-instructor-tab" data-bs-toggle="tab"
+                                        data-bs-target="#nav-instructor" type="button" role="tab"
+                                        aria-controls="nav-instructor" aria-selected="false">Instructor</button>
+                                    <button class=" course-link" id="nav-reviews-tab" data-bs-toggle="tab"
+                                        data-bs-target="#nav-reviews" type="button" role="tab"
+                                        aria-controls="nav-reviews" aria-selected="false">Chapters</button>
+                                </div>
+                            </nav>
+                            <div class="single-course-tab" id="nav-tabContent">
+                                <div class="overview-panel fade active show" id="nav-overview" role="tabpanel"
+                                    aria-labelledby="nav-overview-tab">
+                                    <div class="overview-content cmb-30">
+                                        <h3 class="course-desc-heading">Course Description</h3>
+                                        <p>{{getByIdBootcampResponse.description}}</p>
                                     </div>
-                                </nav>
-                                <div class="single-course-tab" id="nav-tabContent">
-                                    <div class="overview-panel fade active show" id="nav-overview" role="tabpanel" aria-labelledby="nav-overview-tab">
-                                        <div class="overview-content cmb-30">
-                                            <h3 class="course-desc-heading">Course Description</h3>
-                                            <p>{{getByIdBootcampResponse.description}}</p>
-                                        </div>
-                                        
-                                        
-                                    </div>
-                                    <div class="carriculum-panel fade" id="nav-carriculum" role="tabpanel" aria-labelledby="nav-carriculum-tab">
-                                        
-                                        <!-- Comment Section -->
+
+
+                                </div>
+                                <div class="carriculum-panel fade" id="nav-carriculum" role="tabpanel"
+                                    aria-labelledby="nav-carriculum-tab">
+
+                                    <!-- Comment Section -->
                                     <div *ngIf="!isloading" class="overview-extra">
                                         <section class="bg-white dark:bg-white py-8 lg:py-16 antialiased">
                                             <div class="max-w-2xl mx-auto px-4">
-                                              <form class="mb-6" [formGroup]="commentForm" (ngSubmit)="addComment()">
-                                                  <div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-300 dark:bg-gray-300 dark:border-gray-300">
-                                                      <label for="comment" class="sr-only">Your comment</label>
-                                                      <textarea id="comment" rows="6"
-                                                          class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-black dark:placeholder-gray-500 dark:bg-gray-300"
-                                                          placeholder="Write a comment..." formControlName="content" required></textarea>
-                                                  </div>
-                                                  <button type="submit"
-                                                      class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
-                                                      Post comment
-                                                  </button>
-                                              </form>
-                                              <article *ngFor="let items of commentList.items" class="p-6 text-base bg-white rounded-lg dark:bg-gray-300">
-                                                  <footer class="flex justify-between items-center mb-2">
-                                                      <div class="flex items-center">
-                                                          <p class="inline-flex items-center mr-3 text-sm text-gray-300 dark:text-black font-semibold"><img
-                                                                  class="mr-2 w-6 h-6 rounded-full"
-                                                                  src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
-                                                                  alt="Michael Gough">{{items.userFirstName +" "+items.userLastName}}</p>
-                                                          <p class="text-sm text-gray-300 dark:text-gray-400"><time pubdate datetime="2022-02-08"
-                                                                  title="February 8th, 2022">{{items.createdDate | date:'dd.MM.yyyy'}}</time></p>
-                                                      </div>
-                                                  </footer>
-                                                  <p class="text-gray-500 dark:text-gray-400">{{items.context}}</p>
-                                              </article>
+                                                <form class="mb-6" [formGroup]="commentForm" (ngSubmit)="addComment()">
+                                                    <div
+                                                        class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-300 dark:bg-gray-300 dark:border-gray-300">
+                                                        <label for="comment" class="sr-only">Your comment</label>
+                                                        <textarea id="comment" rows="6"
+                                                            class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-black dark:placeholder-gray-500 dark:bg-gray-300"
+                                                            placeholder="Write a comment..." formControlName="content"
+                                                            required></textarea>
+                                                    </div>
+                                                    <button type="submit"
+                                                        class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+                                                        Post comment
+                                                    </button>
+                                                </form>
+                                                <article *ngFor="let items of commentList.items"
+                                                    class="p-6 text-base bg-white rounded-lg dark:bg-gray-300">
+                                                    <footer class="flex justify-between items-center mb-2">
+                                                        <div class="flex items-center">
+                                                            <p
+                                                                class="inline-flex items-center mr-3 text-sm text-gray-300 dark:text-black font-semibold">
+                                                                <img class="mr-2 w-6 h-6 rounded-full"
+                                                                    src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
+                                                                    alt="Michael Gough">{{items.userFirstName +"
+                                                                "+items.userLastName}}
+                                                            </p>
+                                                            <p class="text-sm text-gray-300 dark:text-gray-400"><time
+                                                                    pubdate datetime="2022-02-08"
+                                                                    title="February 8th, 2022">{{items.createdDate |
+                                                                    date:'dd.MM.yyyy'}}</time></p>
+                                                        </div>
+                                                    </footer>
+                                                    <p class="text-gray-500 dark:text-gray-400">{{items.context}}</p>
+                                                </article>
                                             </div>
-                                          </section>
-                                          <div class="flex flex-col items-center" *ngIf="commentList.hasNext || commentList.hasPrevious">
+                                        </section>
+                                        <div class="flex flex-col items-center"
+                                            *ngIf="commentList.hasNext || commentList.hasPrevious">
 
 
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <div class="pagination-area text-center">
                                                     <button *ngIf="commentList.hasPrevious" type="button"
-                                                    [disabled]="!commentList.hasPrevious" (click)="PreviousCommentPage()" class="prev page-numbers"><i class='bx bx-chevrons-left'></i></button>
-                                                    <button class="page-numbers" aria-current="page">{{commentIndex+1}}</button>
+                                                        [disabled]="!commentList.hasPrevious"
+                                                        (click)="PreviousCommentPage()" class="prev page-numbers"><i
+                                                            class='bx bx-chevrons-left'></i></button>
+                                                    <button class="page-numbers"
+                                                        aria-current="page">{{commentIndex+1}}</button>
                                                     <!-- <button  *ngFor="let pageNumber of pageNumbers(); let i = index"
                                                     [class.bg-cyan-500]="i+1 == currentPageNumber" [class.text-white]="i+1 == currentPageNumber"
                                                     (click)="changePage(i)"class="page-numbers current" aria-current="page">{{i+1}}</button> -->
                                                     <button *ngIf="commentList.hasNext" type="button"
-                                                    [disabled]="!commentList.hasNext" (click)="nextCommentPage()" class="next page-numbers"><i class='bx bx-chevrons-right'></i></button>
-
-                                    </div>
-                                    <div class="carriculum-panel fade" id="nav-carriculum" role="tabpanel" aria-labelledby="nav-carriculum-tab">
-                                        <div class="carriculum-content cmb-30">
-                                            <h3 class="course-desc-heading">Course Description</h3>
-                                            <ul>
-                                                <li><p>Level Beginner</p></li>
-                                                <li><p>{{chapterCount}} Lectures</p></li>
-                                                <li><p>Total: {{totallength}} Minutes</p></li>
-                                            </ul>
-                                        </div>
-                                        <div class="accordion" id="accordionFlushExample">
-                                            <div class="accordion-item lesson-item">
-                                              <h2 class="lesson-header" id="flush-headingOne">
-                                                <button class="accordion-button lession-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                                  Introduction <span>3 Lectures, 34:51 min</span>
-                                                </button>
-                                              </h2>
-                                              <div id="flush-collapseOne" class="accordion-collapse collapse lesson-collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                                <div class="lesson-item-body">
-                                                    <h3>Intermediate Level</h3>
-                                                    <p>This tutorial will help you learn quickly and thoroughly. Lorem ipsum is dummy text used in laying out print, graphic or web designs</p>
-                                                    <h4>2 Videos, 1 Audio, 1 Notebook</h4>
-                                                    <ul class="lesson-item-list">
-                                                        <a href="#"><li>
-                                                            <div class="lession-item-title">
-                                                                <img src="../../../../../assets/homepageAssets/images/icon/camera.svg" alt="icon">
-                                                                <p>Video: Getting Started and Introductions</p>
-                                                            </div>
-                                                            <div class="lession-item-status">
-                                                                <span>Preview</span>
-                                                                <img src="../../../../../assets/homepageAssets/images/icon/lock.svg" alt="icon">
-                                                            </div>
-                                                        </li></a>
-                                                        <a href="#"><li>
-                                                            <div class="lession-item-title">
-                                                                <img src="../../../../../assets/homepageAssets/images/icon/headphone.svg" alt="icon">
-                                                                <p>Audio: Connectig Throgh Technology</p>
-                                                            </div>
-                                                            <div class="lession-item-status">
-                                                                <span>Preview</span>
-                                                                <img src="../../../../../assets/homepageAssets/images/icon/lock.svg" alt="icon">
-                                                            </div>
-                                                        </li></a>
-                                                        <a href="#"><li>
-                                                            <div class="lession-item-title">
-                                                                <img src="../../../../../assets/homepageAssets/images/icon/file.svg" alt="icon">
-                                                                <p>Video: Connectig Throgh Technology</p>
-                                                            </div>
-                                                            <div class="lession-item-status">
-                                                                <img src="../../../../../assets/homepageAssets/images/icon/lock.svg" alt="icon">
-                                                            </div>
-                                                        </li></a>
-                                                    </ul>
-                                                </div>
-                                              </div>
-                                            </div>
-                                            <div class="accordion-item lesson-item">
-                                              <h2 class="lesson-header" id="flush-headingTow">
-                                                <button class="accordion-button lession-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTow" aria-expanded="false" aria-controls="flush-collapseTow">
-                                                  Getting Started <span>3 Lectures, 34:51 min</span>
-                                                </button>
-                                              </h2>
-                                              <div id="flush-collapseTow" class="accordion-collapse collapse lesson-collapse" aria-labelledby="flush-headingTow" data-bs-parent="#accordionFlushExample">
-                                                <div class="lesson-item-body">
-                                                    <h3>Intermediate Level</h3>
-                                                    <p>This tutorial will help you learn quickly and thoroughly. Lorem ipsum is dummy text used in laying out print, graphic or web designs</p>
-                                                    <h4>2 Videos, 1 Audio, 1 Notebook</h4>
-                                                    <ul class="lesson-item-list">
-                                                        <a href="#"><li>
-                                                            <div class="lession-item-title">
-                                                                <img src="../../../../../assets/homepageAssets/images/icon/camera.svg" alt="icon">
-                                                                <p>Video: Getting Started and Introductions</p>
-                                                            </div>
-                                                            <div class="lession-item-status">
-                                                                <span>Preview</span>
-                                                                <img src="../../../../../assets/homepageAssets/images/icon/lock.svg" alt="icon">
-                                                            </div>
-                                                        </li></a>
-                                                    </ul>
+                                                        [disabled]="!commentList.hasNext" (click)="nextCommentPage()"
+                                                        class="next page-numbers"><i
+                                                            class='bx bx-chevrons-right'></i></button>
 
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                                <div class="carriculum-panel fade" id="nav-carriculum" role="tabpanel"
+                                                    aria-labelledby="nav-carriculum-tab">
+                                                    <div class="carriculum-content cmb-30">
+                                                        <h3 class="course-desc-heading">Course Description</h3>
+                                                        <ul>
+                                                            <li>
+                                                                <p>Level Beginner</p>
+                                                            </li>
+                                                            <li>
+                                                                <p>{{chapterCount}} Lectures</p>
+                                                            </li>
+                                                            <li>
+                                                                <p>Total: {{totallength}} Minutes</p>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="accordion" id="accordionFlushExample">
+                                                        <div class="accordion-item lesson-item">
+                                                            <h2 class="lesson-header" id="flush-headingOne">
+                                                                <button
+                                                                    class="accordion-button lession-button collapsed"
+                                                                    type="button" data-bs-toggle="collapse"
+                                                                    data-bs-target="#flush-collapseOne"
+                                                                    aria-expanded="false"
+                                                                    aria-controls="flush-collapseOne">
+                                                                    Introduction <span>3 Lectures, 34:51 min</span>
+                                                                </button>
+                                                            </h2>
+                                                            <div id="flush-collapseOne"
+                                                                class="accordion-collapse collapse lesson-collapse"
+                                                                aria-labelledby="flush-headingOne"
+                                                                data-bs-parent="#accordionFlushExample">
+                                                                <div class="lesson-item-body">
+                                                                    <h3>Intermediate Level</h3>
+                                                                    <p>This tutorial will help you learn quickly and
+                                                                        thoroughly. Lorem ipsum is dummy text used in
+                                                                        laying out print, graphic or web designs</p>
+                                                                    <h4>2 Videos, 1 Audio, 1 Notebook</h4>
+                                                                    <ul class="lesson-item-list">
+                                                                        <a href="#">
+                                                                            <li>
+                                                                                <div class="lession-item-title">
+                                                                                    <img src="../../../../../assets/homepageAssets/images/icon/camera.svg"
+                                                                                        alt="icon">
+                                                                                    <p>Video: Getting Started and
+                                                                                        Introductions</p>
+                                                                                </div>
+                                                                                <div class="lession-item-status">
+                                                                                    <span>Preview</span>
+                                                                                    <img src="../../../../../assets/homepageAssets/images/icon/lock.svg"
+                                                                                        alt="icon">
+                                                                                </div>
+                                                                            </li>
+                                                                        </a>
+                                                                        <a href="#">
+                                                                            <li>
+                                                                                <div class="lession-item-title">
+                                                                                    <img src="../../../../../assets/homepageAssets/images/icon/headphone.svg"
+                                                                                        alt="icon">
+                                                                                    <p>Audio: Connectig Throgh
+                                                                                        Technology</p>
+                                                                                </div>
+                                                                                <div class="lession-item-status">
+                                                                                    <span>Preview</span>
+                                                                                    <img src="../../../../../assets/homepageAssets/images/icon/lock.svg"
+                                                                                        alt="icon">
+                                                                                </div>
+                                                                            </li>
+                                                                        </a>
+                                                                        <a href="#">
+                                                                            <li>
+                                                                                <div class="lession-item-title">
+                                                                                    <img src="../../../../../assets/homepageAssets/images/icon/file.svg"
+                                                                                        alt="icon">
+                                                                                    <p>Video: Connectig Throgh
+                                                                                        Technology</p>
+                                                                                </div>
+                                                                                <div class="lession-item-status">
+                                                                                    <img src="../../../../../assets/homepageAssets/images/icon/lock.svg"
+                                                                                        alt="icon">
+                                                                                </div>
+                                                                            </li>
+                                                                        </a>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="accordion-item lesson-item">
+                                                            <h2 class="lesson-header" id="flush-headingTow">
+                                                                <button
+                                                                    class="accordion-button lession-button collapsed"
+                                                                    type="button" data-bs-toggle="collapse"
+                                                                    data-bs-target="#flush-collapseTow"
+                                                                    aria-expanded="false"
+                                                                    aria-controls="flush-collapseTow">
+                                                                    Getting Started <span>3 Lectures, 34:51 min</span>
+                                                                </button>
+                                                            </h2>
+                                                            <div id="flush-collapseTow"
+                                                                class="accordion-collapse collapse lesson-collapse"
+                                                                aria-labelledby="flush-headingTow"
+                                                                data-bs-parent="#accordionFlushExample">
+                                                                <div class="lesson-item-body">
+                                                                    <h3>Intermediate Level</h3>
+                                                                    <p>This tutorial will help you learn quickly and
+                                                                        thoroughly. Lorem ipsum is dummy text used in
+                                                                        laying out print, graphic or web designs</p>
+                                                                    <h4>2 Videos, 1 Audio, 1 Notebook</h4>
+                                                                    <ul class="lesson-item-list">
+                                                                        <a href="#">
+                                                                            <li>
+                                                                                <div class="lession-item-title">
+                                                                                    <img src="../../../../../assets/homepageAssets/images/icon/camera.svg"
+                                                                                        alt="icon">
+                                                                                    <p>Video: Getting Started and
+                                                                                        Introductions</p>
+                                                                                </div>
+                                                                                <div class="lession-item-status">
+                                                                                    <span>Preview</span>
+                                                                                    <img src="../../../../../assets/homepageAssets/images/icon/lock.svg"
+                                                                                        alt="icon">
+                                                                                </div>
+                                                                            </li>
+                                                                        </a>
+                                                                    </ul>
 
-                                    </div>
-                                    <div class="instructor-panel fade" id="nav-instructor" role="tabpanel" aria-labelledby="nav-instructor-tab">
-                                        <div class="single-instructor-content">
-                                            <div class="row">
-                                                <div class="col-lg-5">
-                                                    <div class="instructor-img">
-                                                        <img src="../../../../../assets/homepageAssets/images/all-img/ux.png" alt="image">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="instructor-panel fade" id="nav-instructor" role="tabpanel"
+                                                    aria-labelledby="nav-instructor-tab">
+                                                    <div class="single-instructor-content">
+                                                        <div class="row">
+                                                            <div class="col-lg-5">
+                                                                <div class="instructor-img">
+                                                                    <img src="../../../../../assets/homepageAssets/images/all-img/ux.png"
+                                                                        alt="image">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-7">
+                                                                <div class="single-instructor-info">
+                                                                    <h2>{{getByIdBootcampResponse.instructorFirstName}}
+                                                                        {{getByIdBootcampResponse.instructorLastName}}
+                                                                    </h2>
+                                                                    <p class="sub-title">FullStack Developer</p>
+                                                                    <div class="single-instructor-desc">
+                                                                        <p>{{getByIdBootcampResponse.instructorDescription}}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-7">
-                                                    <div class="single-instructor-info">
-                                                        <h2>{{getByIdBootcampResponse.instructorFirstName}} {{getByIdBootcampResponse.instructorLastName}}</h2>
-                                                        <p class="sub-title" >FullStack Developer</p>
-                                                        <div class="single-instructor-desc">
-                                                            <p>{{getByIdBootcampResponse.instructorDescription}}</p>
+                                                <div *ngIf="chapterList" class="reviews-panel fade" id="nav-reviews"
+                                                    role="tabpanel" aria-labelledby="nav-reviews-tab">
+                                                    <div class="table-wrapper table-responsive">
+                                                        <table class="table striped-table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>#</th>
+                                                                    <th>
+                                                                        <h6>Chapter Title</h6>
+                                                                    </th>
+                                                                    <th>
+                                                                        <h6>Time (Minute)</h6>
+                                                                    </th>
+                                                                    <th>
+                                                                        <h6>Created Date</h6>
+                                                                    </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr
+                                                                    *ngFor="let items of chapterList.items; let i = index">
+                                                                    <td>
+                                                                        <p>{{ items.sort }}</p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <!-- routerLink="/chapter/{{getByIdBootcampResponse.id}}/{{items.sort}}" -->
+                                                                        <p>{{ items.title }}</p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p>{{ items.time }}</p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p>{{ items.createdDate | date:'dd/MM/yyyy' }}
+                                                                        </p>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        <!-- pagination -->
+                                                        <div class="pagination-area text-center">
+                                                            <button
+                                                                *ngIf="chapterList.hasPrevious || chapterList.hasNext"
+                                                                type="button" [disabled]="!chapterList.hasPrevious"
+                                                                (click)="onPreviousPageClicked()"
+                                                                class="prev page-numbers"><i
+                                                                    class='bx bx-chevrons-left'></i></button>
+                                                            <button
+                                                                *ngFor="let pageNumber of pageNumbers(); let i = index"
+                                                                [class.prev]="i+1 == currentPageNumber"
+                                                                [class.current]="i+1 == currentPageNumber"
+                                                                (click)="changePage(i)" class="page-numbers"
+                                                                aria-current="page">{{i+1}}</button>
+                                                            <!-- <button  *ngFor="let pageNumber of pageNumbers(); let i = index"
+                                                [class.bg-cyan-500]="i+1 == currentPageNumber" [class.text-white]="i+1 == currentPageNumber"
+                                                (click)="changePage(i)"class="page-numbers current" aria-current="page">{{i+1}}</button> -->
+                                                            <button
+                                                                *ngIf="chapterList.hasNext || chapterList.hasPrevious"
+                                                                type="button" [disabled]="!chapterList.hasNext"
+                                                                (click)="onViewMoreClicked()"
+                                                                class="next page-numbers"><i
+                                                                    class='bx bx-chevrons-right'></i></button>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            
                                         </div>
                                     </div>
-                                    <div *ngIf="chapterList" class="reviews-panel fade" id="nav-reviews" role="tabpanel" aria-labelledby="nav-reviews-tab">
-                                        <div class="table-wrapper table-responsive">
-                                            <table class="table striped-table">
-                                              <thead>
-                                                <tr>
-                                                  <th>#</th>
-                                                  <th>
-                                                    <h6>Chapter Title</h6>
-                                                  </th>
-                                                  <th>
-                                                    <h6>Time (Minute)</h6>
-                                                  </th>
-                                                  <th>
-                                                    <h6>Created Date</h6>
-                                                  </th>
-                                                </tr>
-                                              </thead>
-                                              <tbody>
-                                                <tr *ngFor="let items of chapterList.items; let i = index">
-                                                  <td>
-                                                    <p>{{ items.sort }}</p>
-                                                  </td>
-                                                  <td>
-                                                    <!-- routerLink="/chapter/{{getByIdBootcampResponse.id}}/{{items.sort}}" -->
-                                                    <p>{{ items.title }}</p>
-                                                  </td>
-                                                  <td>
-                                                      <p>{{ items.time }}</p>
-                                                    </td>
-                                                  <td>
-                                                    <p>{{ items.createdDate | date:'dd/MM/yyyy' }}</p>
-                                                  </td>
-                                                </tr>
-                                              </tbody>
-                                            </table>
-                                            <!-- pagination -->
-                                            <div class="pagination-area text-center">
-                                                <button *ngIf="chapterList.hasPrevious || chapterList.hasNext" type="button"
-                                                [disabled]="!chapterList.hasPrevious" (click)="onPreviousPageClicked()" class="prev page-numbers"><i class='bx bx-chevrons-left'></i></button>
-                                                <button *ngFor="let pageNumber of pageNumbers(); let i = index"
-                                                [class.prev]="i+1 == currentPageNumber" [class.current]="i+1 == currentPageNumber"
-                                                (click)="changePage(i)"class="page-numbers" aria-current="page">{{i+1}}</button>
-                                                <!-- <button  *ngFor="let pageNumber of pageNumbers(); let i = index"
-                                                [class.bg-cyan-500]="i+1 == currentPageNumber" [class.text-white]="i+1 == currentPageNumber"
-                                                (click)="changePage(i)"class="page-numbers current" aria-current="page">{{i+1}}</button> -->
-                                                <button *ngIf="chapterList.hasNext || chapterList.hasPrevious" type="button"
-                                                [disabled]="!chapterList.hasNext" (click)="onViewMoreClicked()" class="next page-numbers"><i class='bx bx-chevrons-right'></i></button>
+                                </div>
+                                <div class="col-lg-4 col-md-12">
+                                    <div class="single-course-sidebar">
+                                        <div class="course-widget">
+
+                                            <div class="sidebar-content">
+                                                <h3>Free</h3>
+                                                <a (click)="addApplication()" class="default-btn course-btn"
+                                                    [ngClass]="{'expired': isExpired(getByIdBootcampResponse.endDate), 'notExpired': !isExpired(getByIdBootcampResponse.endDate)}">Apply</a>
+                                                <ul class="courses-details">
+                                                    <li>
+                                                        <div class="icon"><img
+                                                                src="../../../../../assets/homepageAssets/images/icon/user.svg"
+                                                                alt="icon"> Instructor</div>
+                                                        <p>{{ getByIdBootcampResponse.instructorFirstName +" "+
+                                                            getByIdBootcampResponse.instructorLastName}}</p>
+                                                    </li>
+                                                    <li>
+                                                        <div class="icon"><img
+                                                                src="../../../../../assets/homepageAssets/images/icon/file2.svg"
+                                                                alt="icon"> Lectures</div>
+                                                        <p>{{getChapterCount()}}</p>
+                                                    </li>
+                                                    <li>
+                                                        <div class="icon"><img
+                                                                src="../../../../../assets/homepageAssets/images/icon/clock.svg"
+                                                                alt="icon"> Duration</div>
+                                                        <p>{{totallength}} Minutes</p>
+                                                    </li>
+                                                </ul>
+                                                <ul class="course-shared">
+                                                    <li class="title">Share On:</li>
+                                                    <li><a href="#"><img
+                                                                src="../../../../../assets/homepageAssets/images/icon/fb.svg"
+                                                                alt="icon"></a></li>
+                                                    <li><a href="#"><img
+                                                                src="../../../../../assets/homepageAssets/images/icon/tw.svg"
+                                                                alt="icon"></a></li>
+                                                    <li><a href="#"><img
+                                                                src="../../../../../assets/homepageAssets/images/icon/ins.svg"
+                                                                alt="icon"></a></li>
+                                                    <li><a href="#"><img
+                                                                src="../../../../../assets/homepageAssets/images/icon/pn.svg"
+                                                                alt="icon"></a></li>
+                                                </ul>
                                             </div>
-                                          </div>
+                                        </div>
                                     </div>
-                                </div> 
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12">
-                        <div class="single-course-sidebar">
-                            <div class="course-widget">
-                                
-                                <div class="sidebar-content">
-                                    <h3>Free</h3>
-                                    <a (click)="addApplication()" class="default-btn course-btn" [ngClass]="{'expired': isExpired(getByIdBootcampResponse.endDate), 'notExpired': !isExpired(getByIdBootcampResponse.endDate)}">Apply</a>
-                                    <ul class="courses-details">
-                                        <li><div class="icon"><img src="../../../../../assets/homepageAssets/images/icon/user.svg" alt="icon"> Instructor</div> <p>{{ getByIdBootcampResponse.instructorFirstName +" "+ getByIdBootcampResponse.instructorLastName}}</p></li>
-                                        <li><div class="icon"><img src="../../../../../assets/homepageAssets/images/icon/file2.svg" alt="icon"> Lectures</div> <p>{{getChapterCount()}}</p></li>
-                                        <li><div class="icon"><img src="../../../../../assets/homepageAssets/images/icon/clock.svg" alt="icon"> Duration</div> <p>{{totallength}} Minutes</p></li>
-                                    </ul>
-                                    <ul class="course-shared">
-                                        <li class="title">Share On:</li>
-                                        <li><a href="#"><img src="../../../../../assets/homepageAssets/images/icon/fb.svg" alt="icon"></a></li>
-                                        <li><a href="#"><img src="../../../../../assets/homepageAssets/images/icon/tw.svg" alt="icon"></a></li>
-                                        <li><a href="#"><img src="../../../../../assets/homepageAssets/images/icon/ins.svg" alt="icon"></a></li>
-                                        <li><a href="#"><img src="../../../../../assets/homepageAssets/images/icon/pn.svg" alt="icon"></a></li>
-                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -286,7 +406,8 @@
                 </div>
             </div>
         </div>
-        <!-- End Edu Single Course Area -->
-    </body>
-</html>
+    </div>
+    <!-- End Edu Single Course Area -->
+</body>
 
+</html>

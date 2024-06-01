@@ -49,7 +49,7 @@ export class BootcampDetailsComponent implements OnInit {
   constructor(private bootcampService: BootcampService, private activatedRoute: ActivatedRoute
     , private applicationInformationService: ApplicationInformationService, private localStorageService: LocalStorageService
     ,private fb: FormBuilder,
-    , private authService: AuthService, private renderer2: Renderer2, private commentService: CommentService,private ChapterService:ChapterService,
+    private authService: AuthService, private renderer2: Renderer2, private commentService: CommentService,private ChapterService:ChapterService,
     private toastr:ToastrService,
 
     @Inject(DOCUMENT) private _document: Document) { }
@@ -208,6 +208,7 @@ export class BootcampDetailsComponent implements OnInit {
         }
       );
     }
+  }
 
   getTotalLength() {
     this.totallength = this.chapterList.items.reduce((total, chapter) => total + chapter.time, 0);
