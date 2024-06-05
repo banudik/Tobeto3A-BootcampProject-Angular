@@ -3,7 +3,7 @@ import { BootcampListItemDto } from '../../../models/responses/bootcamp/bootcamp
 import { BootcampService } from '../../../services/concretes/bootcamp.service';
 import { PageRequest } from '../../../../core/models/page-request';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { InstructorComponent } from "../../instructor/instructor.component";
 import { FormsModule } from '@angular/forms';
@@ -52,7 +52,8 @@ export class BootcampListGroupComponent implements OnInit {
     private instructorService: InstructorService,
     private toastr:ToastrService,
     private authService:AuthService,
-    private applicationInformationService:ApplicationInformationService
+    private applicationInformationService:ApplicationInformationService,
+    private router:Router
   ) { }
 
   ngOnInit(): void {
@@ -146,7 +147,6 @@ export class BootcampListGroupComponent implements OnInit {
     }
     this.isLoading = true;
     if (this.instructorFilterTmp && this.searchFilterTmp) {
-      console.log("1");
       
       this.bootcampService.getListByBootcampNameSearch(this.pageRequestTmp, this.searchFilterTmp,this.instructorFilterTmp).subscribe((response) => {
         this.filteredBootcampList = response;
@@ -155,7 +155,6 @@ export class BootcampListGroupComponent implements OnInit {
         this.updateCurrentPageNumber();
       });
     } else if (this.instructorFilterTmp) {
-      console.log("2");
       this.getBootcampListByInstructor(this.pageRequestTmp, this.instructorFilterTmp);
     } else if (this.searchFilterTmp) {
       this.bootcampService.getListByBootcampNameSearch(this.pageRequestTmp, this.searchFilterTmp,this.instructorFilterTmp).subscribe((response) => {
@@ -176,7 +175,10 @@ export class BootcampListGroupComponent implements OnInit {
     // CreateApplicationInformationRequest nesnesi oluşturma
     //const token = this.authService.getDecodedToken();
     // console.log(token['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']);
-
+    if(!this.authService.isApplicant()){
+      this.toastr.warning("You must login before applying!");
+      this.router.navigate(['/login'])
+    }
 
     const createApplicationRequest: CreateApplicationInformationRequest = {
       bootcampId: bootmcampId,
