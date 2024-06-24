@@ -70,16 +70,16 @@
                                         <li><i class="bx bx-user mr-2 mb-1"></i><span>{{bootcamp.instructorFirstName}} {{bootcamp.instructorLastName}}</span></li>
                                         <li><i class='bx bx-calendar mr-2'></i><span>{{bootcamp.startDate | date:'dd.MM.yyyy'}} - {{bootcamp.endDate | date:'dd.MM.yyyy'}}</span></li>
                                     </ul>
-                                    <ul class="cr-items" >
+                                    <!-- <ul class="cr-items" >
                                         <li><i class='bx bx-food-menu'></i> <span>2 Lessons</span> </li>
                                         <li><i class='bx bx-time-five'></i> <span>4h 30m</span></li>
                                         <li><i class='bx bx-star' ></i> <span>4.5</span></li>
-                                    </ul>
+                                    </ul> -->
 
 
                                 </div>
                                 <div class="text-center mt-5">
-                                    <a href="#" class="default-btn text-center boot-cards" [ngClass]="{'expired': isExpired(bootcamp.endDate), 'notExpired': !isExpired(bootcamp.endDate)}">Başvur</a>
+                                    <a (click)="addApplication(bootcamp.id)" class="default-btn text-center boot-cards cursor-pointer" [ngClass]="{'expired': isExpired(bootcamp.endDate), 'notExpired': !isExpired(bootcamp.endDate)}">Apply</a>
     
                                         </div>
                             </div>

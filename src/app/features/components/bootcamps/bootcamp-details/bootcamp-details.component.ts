@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { BootcampService } from '../../../services/concretes/bootcamp.service';
 import { GetByIdBootcampResponse } from '../../../models/responses/bootcamp/get-by-id-bootcamp-response';
 import { HttpClientModule } from '@angular/common/http';
@@ -48,7 +48,7 @@ export class BootcampDetailsComponent implements OnInit {
 
   constructor(private bootcampService: BootcampService, private activatedRoute: ActivatedRoute
     , private applicationInformationService: ApplicationInformationService, private localStorageService: LocalStorageService
-    ,private fb: FormBuilder,
+    ,private fb: FormBuilder,private router:Router,
     private authService: AuthService, private renderer2: Renderer2, private commentService: CommentService,private ChapterService:ChapterService,
     private toastr:ToastrService,
 
@@ -102,6 +102,7 @@ export class BootcampDetailsComponent implements OnInit {
       }
     );
   }
+  
 
 
   getComments(pageRequest: PageRequest) {
@@ -157,16 +158,17 @@ export class BootcampDetailsComponent implements OnInit {
 
     this.getComments({ pageIndex: this.commentIndex, pageSize: 5 });
   }
-
-  isExpired(endDate: Date): boolean {
-    return new Date(endDate) < new Date(); // endDate, geçmiş bir tarihe sahipse true döndürür   }
-  }
+  isExpired(endDate: Date): boolean {     return new Date(endDate) < new Date(); }// endDate, geçmiş bir tarihe sahipse true döndürür   
   // addApplication metodu
   addApplication() {
     // CreateApplicationInformationRequest nesnesi oluşturma
     //const token = this.authService.getDecodedToken();
     // console.log(token['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']);
-
+    
+    if(!this.authService.isApplicant()){
+      this.toastr.warning("You must login before applying!");
+      this.router.navigate(['/login'])
+    }
 
     const createApplicationRequest: CreateApplicationInformationRequest = {
       bootcampId: this.getByIdBootcampResponse.id,

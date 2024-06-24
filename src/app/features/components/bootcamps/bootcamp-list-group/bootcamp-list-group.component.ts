@@ -3,13 +3,16 @@ import { BootcampListItemDto } from '../../../models/responses/bootcamp/bootcamp
 import { BootcampService } from '../../../services/concretes/bootcamp.service';
 import { PageRequest } from '../../../../core/models/page-request';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { InstructorComponent } from "../../instructor/instructor.component";
 import { FormsModule } from '@angular/forms';
 import { InstructorService } from '../../../services/concretes/instructor.service';
 import { InstructorListItemDto } from '../../../models/responses/instructor/instructor-list-item-dto';
 import { AuthService } from '../../../services/concretes/auth.service';
+import { ToastrService } from 'ngx-toastr';
+import { ApplicationInformationService } from '../../../services/concretes/application-information.service';
+import { CreateApplicationInformationRequest } from '../../../models/requests/application-information/create-application-information-request';
 
 @Component({
   selector: 'app-bootcamp-list-group',
@@ -47,6 +50,10 @@ export class BootcampListGroupComponent implements OnInit {
     private bootcampService: BootcampService,
     private activatedRoute: ActivatedRoute,
     private instructorService: InstructorService,
+    private toastr:ToastrService,
+    private authService:AuthService,
+    private applicationInformationService:ApplicationInformationService,
+    private router:Router
   ) { }
 
   ngOnInit(): void {
@@ -140,7 +147,6 @@ export class BootcampListGroupComponent implements OnInit {
     }
     this.isLoading = true;
     if (this.instructorFilterTmp && this.searchFilterTmp) {
-      console.log("1");
       
       this.bootcampService.getListByBootcampNameSearch(this.pageRequestTmp, this.searchFilterTmp,this.instructorFilterTmp).subscribe((response) => {
         this.filteredBootcampList = response;
@@ -149,7 +155,6 @@ export class BootcampListGroupComponent implements OnInit {
         this.updateCurrentPageNumber();
       });
     } else if (this.instructorFilterTmp) {
-      console.log("2");
       this.getBootcampListByInstructor(this.pageRequestTmp, this.instructorFilterTmp);
     } else if (this.searchFilterTmp) {
       this.bootcampService.getListByBootcampNameSearch(this.pageRequestTmp, this.searchFilterTmp,this.instructorFilterTmp).subscribe((response) => {
@@ -164,6 +169,29 @@ export class BootcampListGroupComponent implements OnInit {
 
   visibleData() {
     return this.bootcampList.items;
+  }
+
+  addApplication(bootmcampId:number) {
+    // CreateApplicationInformationRequest nesnesi oluşturma
+    //const token = this.authService.getDecodedToken();
+    // console.log(token['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']);
+    if(!this.authService.isApplicant()){
+      this.toastr.warning("You must login before applying!");
+      this.router.navigate(['/login'])
+    }
+
+    const createApplicationRequest: CreateApplicationInformationRequest = {
+      bootcampId: bootmcampId,
+      applicantId: this.authService.getCurrentUserId(),
+      ApplicationStateInformationId: 1 // default olarak 1 değeri atanıyor
+    };
+
+    // Servis çağrısı ve abonelik
+    this.applicationInformationService.addApplication(createApplicationRequest).subscribe((response: any) => {
+      if(response){
+        this.toastr.success("Application successfull");
+      }
+    });
   }
 }
 
