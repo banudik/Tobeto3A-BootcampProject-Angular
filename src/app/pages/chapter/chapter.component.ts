@@ -81,6 +81,7 @@ export class ChapterComponent implements OnInit, OnDestroy {
   }
 
   getChapterById(id: number) {
+    this.clearTimer();
     this.chapterService.getByChapterId(id).subscribe(
       (response: GetByIdChapterResponse) => {
         this.part = id;
@@ -128,7 +129,7 @@ export class ChapterComponent implements OnInit, OnDestroy {
 
   addViewData() {
     //User finished chapter. Add it to the logs
-    const request: CreateBootcampLogsRequest = {
+    let request: CreateBootcampLogsRequest = {
       bootcampId: this.currentChapter.bootcampId,
       userId: this.currentUserId,
       chapterId: this.currentChapter.id,
@@ -157,7 +158,7 @@ export class ChapterComponent implements OnInit, OnDestroy {
   }
 
   checkLogsAndStartTimer() {
-    const logExists = this.logs.some(log => log.chapterId == this.currentChapter.id && log.userId == this.currentUserId);
+    let logExists = this.logs.some(log => log.chapterId == this.currentChapter.id && log.userId == this.currentUserId);
     console.log(logExists);
     
     if (!logExists) {

@@ -1,13 +1,12 @@
 export interface GetByIdCommentResponse {
     id:number;
     context:string;
-    chapterId:number;
+    bootcampId:number;
     userId:string;
     userEmail:string;
     status:boolean;
     userFirstName:string;
     userLastName:string;
-    chapterSort:number;
-    chapterBootcampName:string;
+    bootcampName:string;
     createdDate:Date;
 }

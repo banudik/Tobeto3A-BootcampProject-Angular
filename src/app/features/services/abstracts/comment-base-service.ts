@@ -16,6 +16,9 @@ export abstract class CommentBaseService {
     abstract getList(pageRequest: PageRequest):
         Observable<CommentListItemDto>;
 
+        abstract getListByBootcampId(pageRequest: PageRequest,bootcampId:number):
+        Observable<CommentListItemDto>;
+
     abstract getByCommentId(commentId: number):
         Observable<GetByIdCommentResponse>;
 

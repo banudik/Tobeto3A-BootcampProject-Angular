@@ -17,10 +17,37 @@ import { DynamicQuery } from "../../../core/models/dynamic-query";
     providedIn: 'root'
   })
   export class CommentService extends CommentBaseService {
+
   
     private readonly apiUrl:string = `${environment.API_URL}/comments`
     
     constructor(private httpClient:HttpClient) {super() }
+
+    override getListByBootcampId(pageRequest: PageRequest, bootcampId: number): Observable<CommentListItemDto> {
+      const newRequest: {[key: string]: string | number} = {
+        bootcampId: bootcampId,
+        pageIndex: pageRequest.pageIndex,
+        pageSize: pageRequest.pageSize
+      };
+  
+      return this.httpClient.get<CommentListItemDto>(`${this.apiUrl}/getlistbybootcampid`, {
+        params: newRequest
+      }).pipe(
+        map((response)=>{
+          const newResponse:CommentListItemDto={
+            index:pageRequest.pageIndex,
+            size:pageRequest.pageSize,
+            count:response.count,
+            hasNext:response.hasNext,
+            hasPrevious:response.hasPrevious,
+            items:response.items,
+            pages:response.pages
+          };
+          
+          return newResponse;
+        })
+      )
+    }
   
     override getList(pageRequest:PageRequest): Observable<CommentListItemDto> {
       const newRequest: {[key: string]: string | number} = {
