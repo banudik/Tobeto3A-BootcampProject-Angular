@@ -19,6 +19,7 @@ export abstract class BootcampBaseService {
   Observable<BootcampListItemDto>;
   /**abstract getById(pageRequest:PageRequest,id:string):Observable<GetByIdBootcampResponse[]>;**/
   abstract getBootcampListByInstructorId(pageRequest:PageRequest,instructorId:string):Observable<BootcampListItemDto>;
+  abstract getBootcampListByApplicantId(pageRequest:PageRequest,applicantId:string):Observable<BootcampListItemDto>;
   abstract getBootcampById(BootcampId:number):
   Observable<GetByIdBootcampResponse>;
 
@@ -28,4 +29,7 @@ export abstract class BootcampBaseService {
   :Observable<UpdatedBootcampResponse>;
 abstract delete(id:number)
   :Observable<DeletedBootcampResponse>;
+
+  abstract getListByBootcampState(pageRequest:PageRequest,bootcampStateId:number):
+  Observable<BootcampListItemDto>;
 }

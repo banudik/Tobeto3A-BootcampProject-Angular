@@ -93,7 +93,7 @@
 
 /* Dark mode styles */
 .dark-header { 
-  position: fixed;
+  position: relative;
   width: 100%;
   top: 0;
   right: 0;
@@ -186,8 +186,8 @@
 
 /* Light mode styles */
 .light-header { 
-  position: fixed;
-  width: 100%;
+  position: relative;
+  width: 100%;  
   top: 0;
   right: 0;
   z-index: 1000;

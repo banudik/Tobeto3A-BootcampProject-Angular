@@ -1,0 +1,182 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+
+<!-- Mirrored from html.themewin.com/edurock-preview/edurock/dashboard/admin-profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 30 May 2024 20:53:25 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Course</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" type="image/x-icon" href="https://html.themewin.com/edurock-preview/edurock/img/favicon.ico">
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="../../../../../assets/profilAssets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../../../assets/profilAssets/css/animate.min.css">
+    <link rel="stylesheet" href="../../../../../assets/profilAssets/css/aos.min.css">
+    <link rel="stylesheet" href="../../../../../assets/profilAssets/css/magnific-popup.css">
+    <link rel="stylesheet" href="../../../../../assets/profilAssets/css/icofont.min.css">
+    <link rel="stylesheet" href="../../../../../assets/profilAssets/css/slick.css">
+    <link rel="stylesheet" href="../../../../../assets/profilAssets/css/swiper-bundle.min.css">
+    <link rel="stylesheet" href="../../../../../assets/profilAssets/css/style.css">
+</head>
+
+<body class="body__wrapper">
+    <main class="main_wrapper overflow-hidden">
+        <!-- dashboardarea__area__start  -->
+        <div class="dashboardarea sp_bottom_100">            
+            <div class="dashboard">
+                <div class="container-fluid full__width__padding">
+                    <div class="row">
+                        <div class="col-xl-3 col-lg-3 col-md-3">
+                            <div class="dashboard__inner sticky-top">
+                                <div class="dashboard__nav__title">
+                                    <h6>Welcome, {{getApplicantByIdResponse.firstName + " " + getApplicantByIdResponse.lastName}}</h6>
+                                </div>
+                                <div class="dashboard__nav">
+                                    <ul>
+                                        <li>
+                                            <a [routerLink]="['/myprofile', getApplicantByIdResponse.id]">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="feather feather-user">
+                                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                                    <circle cx="12" cy="7" r="4"></circle>
+                                                </svg>
+                                                My Profile</a>
+                                        </li>
+                                        <li>
+                                            <a class="active" [routerLink]="['/course', getApplicantByIdResponse.id]">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="feather feather-bookmark">
+                                                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                                                </svg>
+                                               Courses</a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+
+
+
+                            </div>
+                        </div>
+                        <div class="col-xl-9 col-lg-9 col-md-12">
+                            <div class="dashboard__content__wraper">
+                                <div class="dashboard__section__title">
+                                    <h4>Course Status</h4>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-12 aos-init aos-animate" data-aos="fade-up">
+                                        <ul class="nav  about__button__wrap dashboard__button__wrap" id="myTab"
+                                            role="tablist">
+                                            <li class="nav-item" role="presentation">
+                                                <button class="single__tab__link active" data-bs-toggle="tab"
+                                                    data-bs-target="#projects__one" type="button" aria-selected="true"
+                                                    role="tab">My Courses</button>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+
+                                    <div class="tab-content tab__content__wrapper aos-init aos-animate"
+                                        id="myTabContent" data-aos="fade-up">
+
+                                        <div class="tab-pane fade active show" id="projects__one" role="tabpanel"
+                                            aria-labelledby="projects__one">
+                                            <div class="row" *ngFor="let bootcamp of visibleData()">
+
+                                                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
+                                                    <div class="gridarea__wraper">
+                                                        <div class="gridarea__img">
+                                                            <img loading="lazy" routerLink="/chapter/{{bootcamp.id}}/1" [src]="bootcamp.bootcampImageImagePath" alt="grid">
+                                                            <div class="gridarea__small__button">
+                                                                <div class="grid__badge blue__color">{{bootcamp.bootcampStateName}}</div>
+                                                            </div>
+                                                            <div class="gridarea__small__icon">
+                                                                <a href="#"><i class="icofont-heart-alt"></i></a>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="gridarea__content">
+                                                            <!-- <div class="gridarea__list">
+                                                                <ul>
+                                                                    <li>
+                                                                        <i class="icofont-book-alt"></i> 29 Lesson
+                                                                    </li>
+                                                                    <li>
+                                                                        <i class="icofont-clock-time"></i> 2 hr 10 min
+                                                                    </li>
+                                                                </ul>
+                                                            </div> -->
+                                                            <div class="gridarea__heading">
+                                                                <h3><a routerLink="/chapter/{{bootcamp.id}}/1">{{bootcamp.name}} </a></h3>
+
+                                                            </div>
+        
+                                                            <div class="gridarea__bottom">
+                                                                <a routerLink="/chapter/{{bootcamp.id}}/1">
+                                                                    <div class="gridarea__small__img">
+                                                                        
+                                                                        <div class="gridarea__small__content">
+                                                                            <h6>{{bootcamp.instructorFirstName +" "+ bootcamp.instructorLastName}} </h6>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+
+         <!-- dashboardarea__menu__end   -->
+
+
+
+
+    </main>
+
+
+    <!-- JS here -->
+    <!-- <script src="../js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="../js/vendor/jquery-3.6.0.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/isotope.pkgd.min.js"></script>
+    <script src="../js/slick.min.js"></script>
+    <script src="../js/jquery.meanmenu.min.js"></script>
+    <script src="../js/ajax-form.js"></script>
+    <script src="../js/wow.min.js"></script>
+    <script src="../js/jquery.scrollUp.min.js"></script>
+    <script src="../js/imagesloaded.pkgd.min.js"></script>
+    <script src="../js/jquery.magnific-popup.min.js"></script>
+    <script src="../js/waypoints.min.js"></script>
+    <script src="../js/jquery.counterup.min.js"></script>
+    <script src="../js/plugins.js"></script>
+    <script src="../js/swiper-bundle.min.js"></script>
+    <script src="../js/main.js"></script> -->
+
+
+</body>
+
+
+<!-- Mirrored from html.themewin.com/edurock-preview/edurock/dashboard/admin-profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 30 May 2024 20:53:25 GMT -->
+</html>
+
