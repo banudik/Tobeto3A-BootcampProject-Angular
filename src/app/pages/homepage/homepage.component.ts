@@ -50,6 +50,8 @@ export class HomepageComponent implements OnInit{
   };
   filteredBootcampList: BootcampListItemDto = this.bootcampList;
   announcementList!:GetListAnnouncementResponse[];
+  isModalOpen = false;
+    selectedAnnouncement: GetListAnnouncementResponse | null = null;
 
     
 constructor(
@@ -79,6 +81,7 @@ ngOnInit() {
     this.getInstructors();
     this.getAnnouncements();
     this.getList({ pageIndex: 0, pageSize: this.PAGE_SIZE });
+    
 }
 private loadScript(url: string) {
     const script = this.renderer2.createElement('script');
@@ -102,6 +105,7 @@ private loadScript(url: string) {
     })
   }
 
+  
   isExpired(endDate: Date): boolean {
     return new Date(endDate) < new Date(); // endDate, geçmiş bir tarihe sahipse true döndürür
   }
@@ -205,4 +209,14 @@ private loadScript(url: string) {
     return this.bootcampList.items;
   }
 
+  openModal(announcement: GetListAnnouncementResponse) {
+    this.selectedAnnouncement = announcement;
+    this.isModalOpen = true;
 }
+
+closeModal() {
+    this.isModalOpen = false;
+    this.selectedAnnouncement = null;
+}
+}
+
