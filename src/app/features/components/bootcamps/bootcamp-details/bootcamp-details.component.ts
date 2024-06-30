@@ -77,7 +77,7 @@ export class BootcampDetailsComponent implements OnInit {
 
      // Yorum formunu oluşturma
      this.commentForm = this.fb.group({
-      content: ['', Validators.required],
+      context: ['', Validators.required],
       status: false,
     });
   }
@@ -190,11 +190,12 @@ export class BootcampDetailsComponent implements OnInit {
     if (this.commentForm.valid) {
       const token = this.authService.getDecodedToken();
       const createCommentRequest: CreateCommentRequest = {
-        context: this.commentForm.value.content,
+        context: this.commentForm.value.context,
         bootcampId: this.getByIdBootcampResponse.id,
-        userId: token['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']
+        userId: token['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'],
+        status:false
       };
-
+      this.toastr.success(createCommentRequest.userId)
       this.commentService.add(createCommentRequest).subscribe(
         (response: CreatedCommentResponse) => {
           if (response) {
