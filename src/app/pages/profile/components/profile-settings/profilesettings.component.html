@@ -14,14 +14,14 @@
     <!-- Place favicon.ico in the root directory -->
 
     <!-- CSS here -->
-    <link rel="stylesheet" href="../../../assets/profilAssets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../../assets/profilAssets/css/animate.min.css">
-    <link rel="stylesheet" href="../../../assets/profilAssets/css/aos.min.css">
-    <link rel="stylesheet" href="../../../assets/profilAssets/css/magnific-popup.css">
-    <link rel="stylesheet" href="../../../assets/profilAssets/css/icofont.min.css">
-    <link rel="stylesheet" href="../../../assets/profilAssets/css/slick.css">
-    <link rel="stylesheet" href="../../../assets/profilAssets/css/swiper-bundle.min.css">
-    <link rel="stylesheet" href="../../../assets/profilAssets/css/style.css">
+    <link rel="stylesheet" href="../../../../../assets/profilAssets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../../../assets/profilAssets/css/animate.min.css">
+    <link rel="stylesheet" href="../../../../../assets/profilAssets/css/aos.min.css">
+    <link rel="stylesheet" href="../../../../../assets/profilAssets/css/magnific-popup.css">
+    <link rel="stylesheet" href="../../../../../assets/profilAssets/css/icofont.min.css">
+    <link rel="stylesheet" href="../../../../../assets/profilAssets/css/slick.css">
+    <link rel="stylesheet" href="../../../../../assets/profilAssets/css/swiper-bundle.min.css">
+    <link rel="stylesheet" href="../../../../../assets/profilAssets/css/style.css">
 
 </head>
 
@@ -52,7 +52,7 @@
                                 <div class="dashboard__nav">
                                     <ul>
                                         <li>
-                                            <a class="active" [routerLink]="['/myprofile', getApplicantByIdResponse.id]">
+                                            <a class="active cursor-pointer"[routerLink]="['/myprofile', getApplicantByIdResponse.id]">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                     viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -63,7 +63,7 @@
                                                 My Profile</a>
                                         </li>
                                         <li>
-                                            <a [routerLink]="['/course', getApplicantByIdResponse.id]">
+                                            <a class="cursor-pointer" [routerLink]="['/course', getApplicantByIdResponse.id]">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                     viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -73,7 +73,7 @@
                                                Courses</a>
                                         </li>
                                         <li>
-                                            <a routerLink="/myprofileedit/{{getApplicantByIdResponse.id}}">
+                                            <a class="cursor-pointer">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                     viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -87,8 +87,8 @@
                                         </li>
                                     </ul>
                                 </div>
-<!-- 
-                                <div class="dashboard__nav__title mt-40">
+
+                                <!-- <div class="dashboard__nav__title mt-40">
                                     <h6>user</h6>
                                 </div> -->
 
@@ -118,53 +118,70 @@
                         <div class="col-xl-9 col-lg-9 col-md-9" role="tabpanel" aria-labelledby="nav-profile-tab">
                             <div class="dashboard__content__wraper">
                                 <div class="dashboard__section__title">
-                                    <h4>My Profile</h4>
+                                    <h4>Edit Profile</h4>
                                 </div>
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="dashboard__form">Registration Date</div>
-                                    </div>
-                                    <div class="col-lg-8 col-md-8">
-                                        <div class="dashboard__form">{{getApplicantByIdResponse.createdDate | date:'dd.MM.yyyy'}}</div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="dashboard__form dashboard__form__margin">First Name</div>
-                                    </div>
-                                    <div class="col-lg-8 col-md-8">
-                                        <div class="dashboard__form dashboard__form__margin">{{getApplicantByIdResponse.firstName}}</div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="dashboard__form dashboard__form__margin">Last Name</div>
-                                    </div>
-                                    <div class="col-lg-8 col-md-8">
-                                        <div class="dashboard__form dashboard__form__margin">{{getApplicantByIdResponse.lastName}}</div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="dashboard__form dashboard__form__margin">Username</div>
-                                    </div>
-                                    <div class="col-lg-8 col-md-8">
-                                        <div class="dashboard__form dashboard__form__margin">{{getApplicantByIdResponse.userName}}</div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="dashboard__form dashboard__form__margin">Email</div>
-                                    </div>
-                                    <div class="col-lg-8 col-md-8">
-                                        <div class="dashboard__form dashboard__form__margin">{{getApplicantByIdResponse.email}}</div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="dashboard__form dashboard__form__margin">Date of Birth</div>
-                                    </div>
-                                    <div class="col-lg-8 col-md-8">
-                                        <div class="dashboard__form dashboard__form__margin">{{getApplicantByIdResponse.dateOfBirth | date:'dd.MM.yyyy'}}</div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="dashboard__form dashboard__form__margin">National Identity</div>
-                                    </div>
-                                    <div class="col-lg-8 col-md-8">
-                                        <div class="dashboard__form dashboard__form__margin">{{getApplicantByIdResponse.nationalIdentity}}</div>
-                                    </div>
+                                <form [formGroup]="UserUpdateForm" (ngSubmit)="onFormSubmit()" *ngIf="UserUpdateForm">
 
-                                </div>
+                                    <div class="card-style mb-30">
+                                      
+                                      <div class="dashboard__form__input">
+                                        <label for="firstNameInput">First Name</label>
+                                        <input formControlName="firstName" id="firstNameInput" type="text" placeholder="First Name" />
+                                      </div>
+                                  
+                                      <div class="dashboard__form__input">
+                                        <label for="lastNameInput">Last Name</label>
+                                        <input formControlName="lastName" id="lastNameInput" type="text" placeholder="Last Name" />
+                                      </div>
+                                  
+                                      <div class="dashboard__form__input">
+                                        <label for="userNameInput">User Name</label>
+                                        <input formControlName="userName" id="userNameInput" type="text" placeholder="User Name" />
+                                      </div>
+                                  
+                                
+                                  
+                                      <div class="dashboard__form__input">
+                                        <label for="birthInput">Date of Birth</label>
+                                        <input formControlName="dateOfBirth" id="birthInput" type="date" placeholder="Date of Birth" />
+                                      </div>
+                                  
+                                      <div class="dashboard__form__input">
+                                        <label for="nationalIdentityInput">National Identity</label>
+                                        <input formControlName="nationalIdentity" id="nationalIdentityInput" type="text" placeholder="National Identity" />
+                                      </div>
+                                      <div class="dashboard__form__input">
+                                        <label for="aboutInput">about</label>
+                                        <input formControlName="about" id="aboutInput" type="text" placeholder="About" />
+                                      </div>
+                                      <hr>
+                                      
+                                      <div class="dashboard__form__input">
+                                        <label for="emailInput">Email</label>
+                                        <input formControlName="email" id="emailInput" type="email" placeholder="Email" />
+                                      </div>
+                                      <div class="dashboard__form__input">
+                                        <label for="passwordInput">Current Password*</label>
+                                        <input formControlName="password" id="passwordInput" type="password" placeholder="Current Password" required="true"/>
+                                      </div>
+                                      <hr>
+                                      <h6 class="mb-25">Update Password (Optional)</h6>
+                                      <div class="dashboard__form__input">
+                                        <label for="newPasswordInput">New Password</label>
+                                        <input formControlName="newPassword" id="newPasswordInput" type="password" placeholder="New Password"/>
+                                      </div>
+                                      <div class="dashboard__form__input">
+                                        <label for="newPasswordRepeatInput">New Password Repeat</label>
+                                        <input formControlName="newPasswordRepeat" id="newPasswordRepeatInput" type="password" placeholder="New Password Repeat"/>
+                                      </div> 
+                                
+                                    </div>
+                                  
+                                    <br>
+                                    <div>
+                                      <button type="submit" class="default__button">Update </button>
+                                    </div>
+                                  </form>
                             </div>
                         
                         </div>
@@ -181,28 +198,6 @@
 
 
     </main>
-
-
-    <!-- JS here -->
-    <!-- <script src="../js/vendor/modernizr-3.5.0.min.js"></script>
-    <script src="../js/vendor/jquery-3.6.0.min.js"></script>
-    <script src="../js/popper.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/isotope.pkgd.min.js"></script>
-    <script src="../js/slick.min.js"></script>
-    <script src="../js/jquery.meanmenu.min.js"></script>
-    <script src="../js/ajax-form.js"></script>
-    <script src="../js/wow.min.js"></script>
-    <script src="../js/jquery.scrollUp.min.js"></script>
-    <script src="../js/imagesloaded.pkgd.min.js"></script>
-    <script src="../js/jquery.magnific-popup.min.js"></script>
-    <script src="../js/waypoints.min.js"></script>
-    <script src="../js/jquery.counterup.min.js"></script>
-    <script src="../js/plugins.js"></script>
-    <script src="../js/swiper-bundle.min.js"></script>
-    <script src="../js/main.js"></script> -->
-
-
 </body>
 
 

@@ -14,6 +14,7 @@ import { ChapterComponent } from "../../chapter/chapter.component";
 import { TermsOfUseComponent } from "../../terms-of-use/terms-of-use.component";
 import { WelcomeComponent } from "../../welcome/welcome.component";
 import { CourseComponent } from "../../profile/components/course/course.component";
+import { ProfilesettingsComponent } from "../../profile/components/profile-settings/profilesettings.component";
 
 
 export const siteRoutes: Routes = [
@@ -33,4 +34,5 @@ export const siteRoutes: Routes = [
     {path:'terms-of-use',component:TermsOfUseComponent},
     {path:'welcome',component:WelcomeComponent},
     {path:'course/:applicantId',component:CourseComponent},
+    {path:'myprofileedit/:applicantId',component:ProfilesettingsComponent},
 ];
