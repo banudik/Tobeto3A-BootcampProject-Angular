@@ -273,16 +273,13 @@
             <div class="container">
                 <div class="edu-section-title">
                     <p class="sub-title" >Announcements!</p>
-                    <h2>Popular <span class="shape02" >Topics</span> To Learn </h2>
+                    <h2>Follow latest <span class="shape02" >Announcements</span></h2>
                 </div>
                 <div class="row justify-content-center">
 
                     <div *ngFor="let item of announcementList" class="col-lg-3 col-md-6 col-sm-12 cursor-pointer">
-                        <a class="topic-box">
+                        <a class="topic-box" (click)="openModal(item)">
                             <div class="single-topic-box lg-03">
-                                <div class="icon">
-                                    <img src="assets/homepageAssets/images/icon/t5.svg" alt="icon">
-                                </div>
                                 <div class="content">
                                     <h3>{{item.header}}</h3>
                                     <p>{{item.createdDate | date: "dd.MM.yyyy"}}</p>
@@ -290,10 +287,25 @@
                             </div>
                         </a>
                     </div>
-
                 </div>
             </div>
         </div>
+        <!-- Modal -->
+<div class="modal" [class.modal-open]="isModalOpen">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{ selectedAnnouncement?.header }}</h5>
+        </div>
+        <div class="modal-body">
+          <p>{{ selectedAnnouncement?.description }}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
         <!-- End EduMim Topics Area -->
 
         <!-- Start EduMim Counter Area -->

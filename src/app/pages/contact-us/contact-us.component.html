@@ -40,24 +40,25 @@
             </ul>
         </div>
         <div [ngClass]="{ 'dark-contactForm': darkModeService.darkModeSignal() === 'dark', 'light-contactForm': darkModeService.darkModeSignal() === 'light' }">
-            <form>
+            <form (ngSubmit)="submitForm()" #contactForm="ngForm">
                 <h2>Send Message</h2>
                 <div [ngClass]="{ 'dark-inputBox': darkModeService.darkModeSignal() === 'dark', 'light-inputBox': darkModeService.darkModeSignal() === 'light' }">
-                    <input type="text" name="" required="required">
-                    <span>Full Name</span>
+                  <input type="text" name="name" [(ngModel)]="formData.name" required>
+                  <span>Full Name</span>
                 </div>
                 <div [ngClass]="{ 'dark-inputBox': darkModeService.darkModeSignal() === 'dark', 'light-inputBox': darkModeService.darkModeSignal() === 'light' }">
-                    <input type="text" name="" required="required">
-                    <span>Email</span>
+                  <input type="email" name="email" [(ngModel)]="formData.email" required>
+                  <span>Email</span>
                 </div>
                 <div [ngClass]="{ 'dark-inputBox': darkModeService.darkModeSignal() === 'dark', 'light-inputBox': darkModeService.darkModeSignal() === 'light' }">
-                    <textarea required="required"></textarea>
-                    <span>Type your message..</span>
+                  <textarea name="message" [(ngModel)]="formData.message" required></textarea>
+                  <span>Type your message..</span>
                 </div>
                 <div [ngClass]="{ 'dark-inputBox': darkModeService.darkModeSignal() === 'dark', 'light-inputBox': darkModeService.darkModeSignal() === 'light' }">
-                    <input type="submit" value="Send">
+                  <input type="submit" value="Send">
                 </div>
-            </form>
+              </form>
+              
         </div>
     </div>
 </section>
