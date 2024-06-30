@@ -56,24 +56,24 @@
                                         
                                         <!-- Comment Section -->
                                     <div *ngIf="!isloading" class="overview-extra">
-                                        <section class="bg-white dark:bg-white py-8 lg:py-16 antialiased">
+                                        <section class="bg-white  py-8 lg:py-16 antialiased">
                                             <div class="max-w-2xl mx-auto px-4">
                                               <form class="mb-6" [formGroup]="commentForm" (ngSubmit)="addComment()">
-                                                  <div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-300 dark:bg-gray-300 dark:border-gray-300">
+                                                  <div class="py-2 px-4 mb-4 bg-gray-300 rounded-lg rounded-t-lg border border-gray-300 comment">
                                                       <label for="comment" class="sr-only">Your comment</label>
                                                       <textarea id="comment" rows="6"
-                                                          class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-black dark:placeholder-gray-500 dark:bg-gray-300"
+                                                          class="px-0 w-full text-sm  border-0 focus:ring-0 focus:outline-none text-black placeholder-gray-500 comment"
                                                           placeholder="Write a comment..." formControlName="context" required></textarea>
                                                   </div>
                                                   <button type="submit"
-                                                      class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+                                                      class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200  hover:bg-primary-800">
                                                       Post comment
                                                   </button>
                                               </form>
-                                              <article *ngFor="let items of commentList.items" class="p-6 text-base bg-white rounded-lg dark:bg-gray-300">
+                                              <article *ngFor="let items of commentList.items" class="p-6 text-base rounded-lg bg-gray-300">
                                                   <footer class="flex justify-between items-center mb-2">
                                                       <div class="flex items-center">
-                                                          <p class="inline-flex items-center mr-3 text-sm text-gray-300 dark:text-black font-semibold"><img
+                                                          <p class="inline-flex items-center mr-3 text-sm text-black font-semibold"><img
                                                                   class="mr-2 w-6 h-6 rounded-full"
                                                                   src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
                                                                   alt="Michael Gough">{{items.userFirstName +" "+items.userLastName}}</p>
@@ -81,7 +81,7 @@
                                                                   title="February 8th, 2022">{{items.createdDate | date:'dd.MM.yyyy'}}</time></p>
                                                       </div>
                                                   </footer>
-                                                  <p class="text-gray-500 dark:text-gray-400">{{items.context}}</p>
+                                                  <p class="text-gray-400 ">{{items.context}}</p>
                                               </article>
                                             </div>
                                           </section>
