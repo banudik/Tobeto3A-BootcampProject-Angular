@@ -6,7 +6,7 @@
 ![GitHub contributors](https://img.shields.io/github/contributors/banudik/Tobeto3A-BootcampProject-Angular)
 ![GitHub last commit](https://img.shields.io/github/last-commit/banudik/Tobeto3A-BootcampProject-Angular)
 
-[Backend API ReadMe](https://github.com/berkerertan/Tobeto3A-NArchitecture.BootcampProject)
+[Backend API ReadMe](https://github.com/banudik/Tobeto3A-NArchitecture.BootcampProject)
 
 ## Project Description
 This educational platform is designed to offer users online courses on various topics. The platform allows users to register, participate in courses, and track their progress.
