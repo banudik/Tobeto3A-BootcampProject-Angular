@@ -272,110 +272,17 @@
         <div class="edu-topics-area pt-100">
             <div class="container">
                 <div class="edu-section-title">
-                    <p class="sub-title" >Start Learning From Today</p>
-                    <h2>Popular <span class="shape02" >Topics</span> To Learn </h2>
+                    <p class="sub-title" >Announcements!</p>
+                    <h2>Follow latest <span class="shape02" >Announcements</span></h2>
                 </div>
                 <div class="row justify-content-center">
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <a href="#" class="topic-box">
-                            <div class="single-topic-box lg-01">
-                                <div class="icon">
-                                    <img src="assets/homepageAssets/images/icon/t1.svg" alt="icon">
-                                </div>
-                                <div class="content">
-                                    <h3>Data Science</h3>
-                                    <p>68 Courses</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <a href="#" class="topic-box">
-                            <div class="single-topic-box lg-02">
-                                <div class="icon">
-                                    <img src="assets/homepageAssets/images/icon/t2.svg" alt="icon">
-                                </div>
-                                <div class="content">
-                                    <h3>UI/UX Design</h3>
-                                    <p>44 Courses</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <a href="#" class="topic-box">
+
+                    <div *ngFor="let item of announcementList" class="col-lg-3 col-md-6 col-sm-12 cursor-pointer">
+                        <a class="topic-box" (click)="openModal(item)">
                             <div class="single-topic-box lg-03">
-                                <div class="icon">
-                                    <img src="assets/homepageAssets/images/icon/t3.svg" alt="icon">
-                                </div>
                                 <div class="content">
-                                    <h3>Modern Physics</h3>
-                                    <p>65 Courses</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <a href="#" class="topic-box">
-                            <div class="single-topic-box lg-02">
-                                <div class="icon">
-                                    <img src="assets/homepageAssets/images/icon/t4.svg" alt="icon">
-                                </div>
-                                <div class="content">
-                                    <h3>Music Production</h3>
-                                    <p>12 Courses</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <a href="#" class="topic-box">
-                            <div class="single-topic-box lg-03">
-                                <div class="icon">
-                                    <img src="assets/homepageAssets/images/icon/t5.svg" alt="icon">
-                                </div>
-                                <div class="content">
-                                    <h3>Data Science</h3>
-                                    <p>33 Courses</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <a href="#" class="topic-box">
-                            <div class="single-topic-box lg-04">
-                                <div class="icon">
-                                    <img src="assets/homepageAssets/images/icon/t6.svg" alt="icon">
-                                </div>
-                                <div class="content">
-                                    <h3>Finances</h3>
-                                    <p>22 Courses</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <a href="#" class="topic-box">
-                            <div class="single-topic-box lg-05">
-                                <div class="icon">
-                                    <img src="assets/homepageAssets/images/icon/t7.svg" alt="icon">
-                                </div>
-                                <div class="content">
-                                    <h3>Global Science</h3>
-                                    <p>47 Courses</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <a href="#" class="topic-box">
-                            <div class="single-topic-box lg-01">
-                                <div class="icon">
-                                    <img src="assets/homepageAssets/images/icon/t8.svg" alt="icon">
-                                </div>
-                                <div class="content">
-                                    <h3>Game Design</h3>
-                                    <p>56 Courses</p>
+                                    <h3>{{item.header}}</h3>
+                                    <p>{{item.createdDate | date: "dd.MM.yyyy"}}</p>
                                 </div>
                             </div>
                         </a>
@@ -383,6 +290,22 @@
                 </div>
             </div>
         </div>
+        <!-- Modal -->
+<div class="modal" [class.modal-open]="isModalOpen">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{ selectedAnnouncement?.header }}</h5>
+        </div>
+        <div class="modal-body">
+          <p>{{ selectedAnnouncement?.description }}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
         <!-- End EduMim Topics Area -->
 
         <!-- Start EduMim Counter Area -->
