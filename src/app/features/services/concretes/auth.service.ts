@@ -302,5 +302,15 @@ export class AuthService extends AuthBaseService implements OnDestroy {
       return false;
     }
   }
+
+  isApplicant(){
+    this.getRoles();
+    if(this.claims.includes("Applicant.ApplicantRole" && "ApplicantRole")){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
 }
 

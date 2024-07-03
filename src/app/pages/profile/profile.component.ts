@@ -1,7 +1,7 @@
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ApplicantService } from '../../features/services/concretes/applicant.service';
 import { GetByIdApplicantResponse } from '../../features/models/responses/applicant/get-by-id-applicant-response';
-import { DOCUMENT } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit, Renderer2 } from '@angular/core';
 
 
@@ -9,7 +9,7 @@ import { Component, Inject, OnInit, Renderer2 } from '@angular/core';
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule,CommonModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })

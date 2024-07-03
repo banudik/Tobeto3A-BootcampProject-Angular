@@ -9,6 +9,8 @@ import { PageRequest } from '../../core/models/page-request';
 import { BootcampService } from '../../features/services/concretes/bootcamp.service';
 import { InstructorService } from '../../features/services/concretes/instructor.service';
 import { InstructorListItemDto } from '../../features/models/responses/instructor/instructor-list-item-dto';
+import { AnnouncementService } from '../../features/services/concretes/announcement.service';
+import { GetListAnnouncementResponse } from '../../features/models/responses/announcement/get-list-announcement-response';
 
 
 
@@ -47,10 +49,15 @@ export class HomepageComponent implements OnInit{
     items: []
   };
   filteredBootcampList: BootcampListItemDto = this.bootcampList;
+  announcementList!:GetListAnnouncementResponse[];
+  isModalOpen = false;
+    selectedAnnouncement: GetListAnnouncementResponse | null = null;
+
     
 constructor(
     private instructorService: InstructorService,
     private activatedRoute: ActivatedRoute,
+    private announcementService:AnnouncementService,
     private bootcampService: BootcampService,
     private renderer2: Renderer2,
     @Inject(DOCUMENT) private _document:Document,
@@ -72,7 +79,9 @@ ngOnInit() {
     this.loadScript('assets/homepageAssets/js/main.js');
 
     this.getInstructors();
+    this.getAnnouncements();
     this.getList({ pageIndex: 0, pageSize: this.PAGE_SIZE });
+    
 }
 private loadScript(url: string) {
     const script = this.renderer2.createElement('script');
@@ -88,6 +97,15 @@ private loadScript(url: string) {
     });
   }
 
+  getAnnouncements(){
+    this.isLoading = true;
+    this.announcementService.getList({pageIndex:0,pageSize:8}).subscribe((response) =>{
+      this.announcementList = response.items;
+      this.isLoading = false;
+    })
+  }
+
+  
   isExpired(endDate: Date): boolean {
     return new Date(endDate) < new Date(); // endDate, geçmiş bir tarihe sahipse true döndürür
   }
@@ -125,30 +143,12 @@ private loadScript(url: string) {
     const nextPageIndex = this.bootcampList.index + 1;
     this.updateCurrentPageNumber();
     this.applyFilters({ pageIndex: nextPageIndex, pageSize: this.PAGE_SIZE });
-    // this.activatedRoute.params.subscribe(params => {
-    //   if (params['instructorId']) {
-    //     this.getBootcampListByInstructor({ page: nextPageIndex, pageSize: pageSize }, params['instructorId']);
-    //   } else {
-    //     this.getList({ page: nextPageIndex, pageSize: pageSize });
-    //   }
-    // });
-
-    
   }
 
   onPreviousPageClicked(): void {
     const previousPageIndex = this.bootcampList.index - 1;
     this.lowerCurrentPageNumber();
     this.applyFilters({ pageIndex: previousPageIndex, pageSize: this.PAGE_SIZE });
-    // this.activatedRoute.params.subscribe(params => {
-    //   if (params['instructorId']) {
-    //     this.getBootcampListByInstructor({ page: previousPageIndex, pageSize: pageSize }, params['instructorId']);
-    //   } else {
-    //     this.getList({ page: previousPageIndex, pageSize: pageSize });
-    //   }
-    // });
-
-    
   }
 
   updateCurrentPageNumber(): void {
@@ -209,4 +209,14 @@ private loadScript(url: string) {
     return this.bootcampList.items;
   }
 
+  openModal(announcement: GetListAnnouncementResponse) {
+    this.selectedAnnouncement = announcement;
+    this.isModalOpen = true;
 }
+
+closeModal() {
+    this.isModalOpen = false;
+    this.selectedAnnouncement = null;
+}
+}
+
